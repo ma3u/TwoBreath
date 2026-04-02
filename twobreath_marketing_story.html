@@ -1,0 +1,582 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --ink: #1a1714;
+    --warm-white: #f5f0e8;
+    --muted: #8a8075;
+    --accent-gold: #c9a84c;
+    --accent-teal: #2d9e8a;
+    --accent-rose: #c96b6b;
+    --section-gap: 80px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body-wrap {
+    display: block;
+    background: var(--ink);
+    color: var(--warm-white);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    padding-bottom: 60px;
+  }
+
+  .hero {
+    padding: 64px 40px 56px;
+    border-bottom: 0.5px solid rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(45,158,138,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .brand-pill {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    border: 0.5px solid var(--accent-teal);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin-bottom: 24px;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(36px, 7vw, 58px);
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    max-width: 520px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent-gold);
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(245,240,232,0.6);
+    max-width: 440px;
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+  }
+
+  .stat-item { }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--accent-gold);
+    display: block;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  section {
+    padding: 56px 40px;
+    border-bottom: 0.5px solid rgba(255,255,255,0.07);
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  h2 em { font-style: italic; color: var(--accent-teal); }
+
+  p {
+    font-size: 14.5px;
+    color: rgba(245,240,232,0.75);
+    line-height: 1.85;
+    margin-bottom: 16px;
+    max-width: 560px;
+  }
+
+  .problem-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 28px 0;
+  }
+
+  .problem-card {
+    background: rgba(255,255,255,0.04);
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 18px;
+  }
+
+  .problem-card .icon {
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .problem-card p {
+    font-size: 13px;
+    margin: 0;
+    color: rgba(245,240,232,0.65);
+    max-width: none;
+  }
+
+  .problem-card strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--warm-white);
+    margin-bottom: 6px;
+  }
+
+  .science-block {
+    background: rgba(45,158,138,0.07);
+    border-left: 2px solid var(--accent-teal);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 22px;
+    margin: 24px 0;
+  }
+
+  .science-block .sci-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .science-block p {
+    font-size: 13.5px;
+    margin: 0;
+    color: rgba(245,240,232,0.8);
+    max-width: none;
+  }
+
+  .science-block p strong {
+    color: var(--warm-white);
+    font-weight: 500;
+  }
+
+  .three-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+  }
+
+  @media (max-width: 480px) {
+    .three-pillars { grid-template-columns: 1fr; }
+  }
+
+  .pillar {
+    border: 0.5px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 22px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar.breath { border-color: rgba(45,158,138,0.5); }
+  .pillar.pray { border-color: rgba(201,168,76,0.5); }
+  .pillar.connect { border-color: rgba(201,107,107,0.5); }
+
+  .pillar-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .pillar.breath .pillar-num { color: var(--accent-teal); }
+  .pillar.pray .pillar-num { color: var(--accent-gold); }
+  .pillar.connect .pillar-num { color: var(--accent-rose); }
+
+  .pillar h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--warm-white);
+  }
+
+  .pillar p {
+    font-size: 12.5px;
+    color: rgba(245,240,232,0.55);
+    margin: 0;
+    max-width: none;
+    line-height: 1.7;
+  }
+
+  .pillar .duration {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 10px;
+    display: block;
+  }
+
+  .video-ref {
+    background: rgba(201,168,76,0.06);
+    border: 0.5px solid rgba(201,168,76,0.25);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin: 24px 0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .video-thumb {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 8px;
+    background: rgba(201,168,76,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.5px solid rgba(201,168,76,0.3);
+  }
+
+  .play-triangle {
+    width: 0; height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 14px solid var(--accent-gold);
+    margin-left: 3px;
+  }
+
+  .video-ref .vtext p {
+    font-size: 12.5px;
+    margin: 0;
+    max-width: none;
+    color: rgba(245,240,232,0.7);
+  }
+
+  .video-ref .vtext strong {
+    display: block;
+    font-size: 13.5px;
+    color: var(--accent-gold);
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  .tagline-block {
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    padding: 36px;
+    text-align: center;
+    margin: 0 0 28px;
+  }
+
+  .tagline-block .tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 4vw, 28px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--warm-white);
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .tagline-block .tagline-sub {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    max-width: none;
+    margin: 0;
+  }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  @media (max-width: 420px) {
+    .audience-grid { grid-template-columns: 1fr; }
+  }
+
+  .audience-card {
+    background: rgba(255,255,255,0.04);
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .audience-card .a-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .audience-card p {
+    font-size: 13px;
+    margin: 0;
+    max-width: none;
+    color: rgba(245,240,232,0.7);
+  }
+
+  .cta-section {
+    padding: 60px 40px;
+    text-align: center;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 400px; height: 300px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .cta-title em { font-style: italic; color: var(--accent-gold); }
+
+  .cta-sub {
+    font-size: 14px;
+    color: rgba(245,240,232,0.55);
+    max-width: 400px;
+    margin: 0 auto 32px;
+  }
+
+  .cta-badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+  }
+
+  .badge.primary {
+    background: var(--accent-teal);
+    color: #fff;
+    border: none;
+  }
+
+  .badge.outline {
+    border: 0.5px solid rgba(255,255,255,0.25);
+    color: rgba(245,240,232,0.7);
+    background: transparent;
+  }
+</style>
+
+<body-wrap>
+
+  <div class="hero">
+    <div class="brand-pill">TwoBreath · Brand Story</div>
+    <h1 class="hero-title">
+      One breath.<br>
+      <em>Two souls.</em><br>
+      Every day.
+    </h1>
+    <p class="hero-sub">
+      The world's first right-brain couple ritual app — combining synchronized breathing, short sacred clips, and guided meditation into a daily 5-minute practice that neurologically deepens your bond.
+    </p>
+    <div class="stat-row">
+      <div class="stat-item">
+        <span class="stat-num">5 min</span>
+        <span class="stat-label">Daily ritual</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3 acts</span>
+        <span class="stat-label">Breathe · Watch · Connect</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">Right brain</span>
+        <span class="stat-label">Science-backed approach</span>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <span class="section-tag">01 — The Problem</span>
+    <h2>Couples are physically <em>together</em><br>but neurologically apart</h2>
+    <p>
+      Modern life keeps you busy, productive, screen-addicted. You share a bed, a calendar, a life — but rarely a nervous system. You communicate constantly and connect rarely.
+    </p>
+    <div class="problem-cards">
+      <div class="problem-card">
+        <strong>Left-brain overload</strong>
+        <p>Work, logic, language — the analytical brain dominates your waking hours, leaving no room for emotional attunement.</p>
+      </div>
+      <div class="problem-card">
+        <strong>No shared ritual</strong>
+        <p>Most couples have no daily moment that is purely about being together — not doing, planning or talking, but co-existing.</p>
+      </div>
+      <div class="problem-card">
+        <strong>Disconnected breath</strong>
+        <p>Physiology drifts apart under stress. Without intentional synchrony, even proximity creates parallel isolation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="section-tag">02 — The Science</span>
+    <h2>Your right brain holds the <em>key</em></h2>
+    <p>
+      The right hemisphere is the seat of emotional attunement, embodied presence, spiritual experience, and nonverbal connection. It cannot be accessed through logic or conversation — only through the body, the breath, and shared rhythm.
+    </p>
+    <div class="science-block">
+      <span class="sci-label">Physiological synchrony — UC Davis, 2012</span>
+      <p>Partners' breathing naturally synchronizes just from being in the same space. <strong>Intentional breath practice accelerates this dramatically</strong> — aligning heart rate, cortisol rhythms, and brainwave patterns within minutes.</p>
+    </div>
+    <div class="science-block">
+      <span class="sci-label">Interbrain synchrony — Quanta Magazine, 2024</span>
+      <p>Neuroimaging shows romantic couples display <strong>brain-to-brain synchrony</strong> that simply doesn't occur between strangers — neural coordination in temporal-parietal structures linked to empathy and emotional regulation.</p>
+    </div>
+    <div class="science-block">
+      <span class="sci-label">Neurotheology — Dr. Andrew Newberg</span>
+      <p>As little as <strong>12 minutes of focused prayer daily</strong> measurably rewires the prefrontal cortex over 8 weeks. Prayer activates the same attachment-bonding regions as physical intimacy with a partner.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="section-tag">03 — The Inspiration</span>
+    <h2>It started with a couple who <em>just breathed</em></h2>
+    <div class="video-ref">
+      <div class="video-thumb">
+        <div class="play-triangle"></div>
+      </div>
+      <div class="vtext">
+        <strong>The YouTube short that sparked everything</strong>
+        <p>A real couple. No app, no guidance — just sitting together, breathing, watching a short sacred clip, and meditating. Simple, repeatable, profound. This is the ritual TwoBreath is built to unlock for every couple, every day.</p>
+      </div>
+    </div>
+    <p>
+      What makes this ritual so powerful isn't complexity — it's <em>consistency</em>. Two nervous systems meeting in the same rhythm, day after day, gradually rewiring how they experience each other. This is right-brain couple work. And it works.
+    </p>
+  </section>
+
+  <section>
+    <span class="section-tag">04 — The Product</span>
+    <h2>Three acts. <em>Five minutes.</em> Every day.</h2>
+    <div class="three-pillars">
+      <div class="pillar breath">
+        <span class="pillar-num">01</span>
+        <h3>Breathe</h3>
+        <p>Guided synchronized breathwork for two — in through the nose, out together. Your nervous systems begin to entrain.</p>
+        <span class="duration">2 minutes</span>
+      </div>
+      <div class="pillar pray">
+        <span class="pillar-num">02</span>
+        <h3>Watch</h3>
+        <p>A daily short clip — spiritual, reflective, or contemplative — curated to open the right brain and create shared inner space.</p>
+        <span class="duration">1–2 minutes</span>
+      </div>
+      <div class="pillar connect">
+        <span class="pillar-num">03</span>
+        <h3>Connect</h3>
+        <p>A single prompt to hold in shared silence or speak aloud — a moment of genuine presence before the day takes over.</p>
+        <span class="duration">1 minute</span>
+      </div>
+    </div>
+    <p>
+      No meditation experience needed. No philosophy required. Just two people, a phone, and the willingness to show up for each other for five minutes before the world demands you show up for everything else.
+    </p>
+  </section>
+
+  <section>
+    <span class="section-tag">05 — Positioning</span>
+    <h2>Not a wellness app. <em>A daily act of love.</em></h2>
+    <div class="tagline-block">
+      <div class="tagline">"The first five minutes that actually change the next twenty-three hours."</div>
+      <p class="tagline-sub">TwoBreath — The right-brain ritual for couples</p>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <span class="a-label">Primary audience</span>
+        <p>Spiritually open couples (28–45) who feel emotionally healthy but want more depth, presence, and sacredness in daily life.</p>
+      </div>
+      <div class="audience-card">
+        <span class="a-label">Secondary audience</span>
+        <p>Faith-based couples (Christian, interfaith, mindful) seeking a daily shared ritual that bridges prayer and neuroscience.</p>
+      </div>
+      <div class="audience-card">
+        <span class="a-label">Differentiator</span>
+        <p>Every other couples app is left-brain: quizzes, communication tools, task tracking. TwoBreath is purely nonverbal, embodied, and right-brain.</p>
+      </div>
+      <div class="audience-card">
+        <span class="a-label">Against the category</span>
+        <p>Not therapy. Not mindfulness. Not a relationship tracker. A daily micro-ritual that accumulates into a fundamentally different kind of closeness.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <h2 class="cta-title">Two breaths.<br><em>One bond.</em></h2>
+    <p class="cta-sub">Start with five minutes. Change everything slowly.</p>
+    <div class="cta-badges">
+      <span class="badge primary">Build TwoBreath</span>
+      <span class="badge outline">App store copy</span>
+      <span class="badge outline">Pitch deck</span>
+      <span class="badge outline">Onboarding flow</span>
+    </div>
+  </div>
+
+</body-wrap>
