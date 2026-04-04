@@ -793,6 +793,43 @@
       display: block;
     }
 
+    .yt-thumb-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .yt-thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .yt-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      background: rgba(255,0,0,0.85);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: #fff;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .yt-thumb-link:hover .yt-play-btn {
+      background: #ff0000;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
     .video-caption {
       max-width: 540px;
       margin: 28px auto 0;
@@ -1333,6 +1370,18 @@
       letter-spacing: 0.08em;
       border: 0.5px solid rgba(255,255,255,0.15);
       color: var(--warm-white-60);
+      text-decoration: none;
+    }
+
+    a.chain-lang-badge.tester-lang-link {
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+
+    a.chain-lang-badge.tester-lang-link:hover {
+      border-color: rgba(45,158,138,0.6);
+      color: var(--warm-white);
+      background: rgba(45,158,138,0.12);
     }
 
     /* ── Page Language Switcher ── */
@@ -1652,13 +1701,10 @@
       </div>
 
       <div class="video-container fade-in" style="max-width:360px; margin:40px auto 0;">
-        <iframe
-          src="https://www.youtube.com/embed/qINmxnioGOk?rel=0&modestbranding=1"
-          title="Dr. Arthur Brooks on love, happiness, and daily practices for couples"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
+        <a href="https://www.youtube.com/watch?v=qINmxnioGOk" target="_blank" rel="noopener" class="yt-thumb-link" aria-label="Watch Dr. Arthur Brooks on YouTube">
+          <img src="https://img.youtube.com/vi/qINmxnioGOk/hqdefault.jpg" alt="Dr. Arthur Brooks on love, happiness, and daily practices for couples" class="yt-thumb-img" loading="lazy">
+          <div class="yt-play-btn" aria-hidden="true">&#9654;</div>
+        </a>
       </div>
       <p class="video-caption fade-in" style="max-width:540px; margin:16px auto 0;" data-i18n="video_caption">
         Dr. Arthur Brooks &ndash; Harvard professor, PhD social scientist, and bestselling author &ndash; using cutting-edge science, ancient wisdom, and philosophy to help people build lasting love and happiness.
@@ -1786,12 +1832,11 @@
         <p data-i18n-html="chain_cta_p">
           For our app, we are looking for people who regularly measure their <strong>blood sugar via a CGM device</strong> or have their <strong>HbA1c &amp; cortisol</strong> determined via blood tests &ndash; to scientifically prove the effect. We are seeking testers in:
         </p>
-        <div class="chain-lang-badges">
-          <span class="chain-lang-badge">🇩🇪 Deutsch</span>
-          <span class="chain-lang-badge">🇬🇧 English</span>
-          <span class="chain-lang-badge">🇯🇵 日本語</span>
+        <div class="chain-lang-badges" id="testerLangBadges">
+          <a class="chain-lang-badge tester-lang-link" data-lang="de" href="mailto:info@twobreath.com">🇩🇪 Deutsch</a>
+          <a class="chain-lang-badge tester-lang-link" data-lang="en" href="mailto:info@twobreath.com">🇬🇧 English</a>
+          <a class="chain-lang-badge tester-lang-link" data-lang="ja" href="mailto:info@twobreath.com">🇯🇵 日本語</a>
         </div>
-        <a id="testerMailBtn" href="mailto:info@twobreath.com?subject=Tester%20Application" class="btn btn-primary" style="display:inline-flex; margin-top: 4px;" data-i18n="chain_cta_btn">Register as a Tester</a>
       </div>
 
     </div>
@@ -3000,9 +3045,10 @@
         b.classList.toggle('active', b.dataset.lang === lang);
         b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
       });
-      // Update tester mailto link for current language
-      const testerBtn = document.getElementById('testerMailBtn');
-      if (testerBtn) testerBtn.href = getTesterMailto(lang);
+      // Update each language badge to open its own language-specific mailto
+      document.querySelectorAll('.tester-lang-link').forEach(a => {
+        a.href = getTesterMailto(a.dataset.lang);
+      });
       // Persist preference
       try { localStorage.setItem('tb_lang', lang); } catch(e) {}
     }
