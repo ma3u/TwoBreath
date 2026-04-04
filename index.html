@@ -1791,7 +1791,7 @@
           <span class="chain-lang-badge">🇬🇧 English</span>
           <span class="chain-lang-badge">🇯🇵 日本語</span>
         </div>
-        <a href="mailto:info@twobreath.com?subject=Tester%20Application" class="btn btn-primary" style="display:inline-flex; margin-top: 4px;" data-i18n="chain_cta_btn">Register as a Tester</a>
+        <a id="testerMailBtn" href="mailto:info@twobreath.com?subject=Tester%20Application" class="btn btn-primary" style="display:inline-flex; margin-top: 4px;" data-i18n="chain_cta_btn">Register as a Tester</a>
       </div>
 
     </div>
@@ -3000,8 +3000,111 @@
         b.classList.toggle('active', b.dataset.lang === lang);
         b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
       });
+      // Update tester mailto link for current language
+      const testerBtn = document.getElementById('testerMailBtn');
+      if (testerBtn) testerBtn.href = getTesterMailto(lang);
       // Persist preference
       try { localStorage.setItem('tb_lang', lang); } catch(e) {}
+    }
+
+    // ── Tester mailto builder ───────────────────────────
+    function getTesterMailto(lang) {
+      const subjects = {
+        en: 'TwoBreath \u2013 Tester Application',
+        de: 'TwoBreath \u2013 Tester-Anmeldung',
+        ja: 'TwoBreath \u2013 \u30c6\u30b9\u30bf\u30fc\u767b\u9332',
+      };
+      const bodies = {
+        en:
+`Dear Dascha and Matthias,
+
+I would like to register as a tester for TwoBreath.
+
+MY LANGUAGE
+[ ] English
+[ ] German
+[ ] Japanese
+
+PURPOSE
+[ ] Improve my relationship through a daily ritual
+[ ] Scientific interest
+[ ] Health research
+[ ] Other: ________________________
+
+HOW I WANT TO MEASURE MY HEALTH
+[ ] Apple Watch (HRV, heart rate, breathing rate)
+[ ] Continuous Glucose Monitor (CGM)
+[ ] Blood tests (HbA1c, Cortisol)
+[ ] I don\u2019t measure yet, but I am open to it
+
+ABOUT ME
+Name:
+Country / City:
+Partner joining too? [ ] Yes  [ ] No
+
+Looking forward to hearing from you!`,
+
+        de:
+`Liebe Dascha und Matthias,
+
+ich m\u00f6chte mich als Tester f\u00fcr TwoBreath anmelden.
+
+MEINE SPRACHE
+[ ] Englisch
+[ ] Deutsch
+[ ] Japanisch
+
+ZWECK
+[ ] Beziehung durch ein t\u00e4gliches Ritual verbessern
+[ ] Wissenschaftliches Interesse
+[ ] Gesundheitsforschung
+[ ] Sonstiges: ________________________
+
+WIE ICH MEINE GESUNDHEIT MESSEN M\u00d6CHTE
+[ ] Apple Watch (HRV, Herzfrequenz, Atemfrequenz)
+[ ] Kontinuierlicher Glukosesensor (CGM)
+[ ] Bluttests (HbA1c, Cortisol)
+[ ] Ich messe noch nicht, bin aber offen daf\u00fcr
+
+\u00dcBER MICH
+Name:
+Ort / Stadt:
+Partner macht auch mit? [ ] Ja  [ ] Nein
+
+Ich freue mich auf eure R\u00fcckmeldung!`,
+
+        ja:
+`\u89aa\u611b\u306a\u308b\u30c0\u30fc\u30b7\u30e3\u3068\u30de\u30c6\u30a3\u30a2\u30b9\u3078\u3001
+
+TwoBreath\u306e\u30c6\u30b9\u30bf\u30fc\u3068\u3057\u3066\u767b\u9332\u3057\u305f\u3044\u3068\u601d\u3044\u307e\u3059\u3002
+
+\u4f7f\u7528\u8a00\u8a9e
+[ ] \u82f1\u8a9e
+[ ] \u30c9\u30a4\u30c4\u8a9e
+[ ] \u65e5\u672c\u8a9e
+
+\u76ee\u7684
+[ ] \u6bce\u65e5\u306e\u5100\u5f0f\u3092\u901a\u3058\u3066\u95a2\u4fc2\u3092\u6539\u5584\u3059\u308b
+[ ] \u79d1\u5b66\u7684\u306a\u95a2\u5fc3
+[ ] \u5065\u5eb7\u7814\u7a76
+[ ] \u305d\u306e\u4ed6\uff1a ________________________
+
+\u5065\u5eb7\u6e2c\u5b9a\u65b9\u6cd5
+[ ] Apple Watch\uff08HRV\u3001\u5fc3\u62cd\u6570\u3001\u547c\u5438\u6570\uff09
+[ ] \u6301\u7d9a\u8840\u7cd6\u6e2c\u5b9a\u5668\uff08CGM\uff09
+[ ] \u8840\u6db2\u691c\u67fb\uff08HbA1c\u3001\u30b3\u30eb\u30c1\u30be\u30fc\u30eb\uff09
+[ ] \u307e\u3060\u6e2c\u5b9a\u3057\u3066\u3044\u306a\u3044\u304c\u3001\u8a66\u3057\u3066\u307f\u305f\u3044
+
+\u81ea\u5df1\u7d39\u4ecb
+\u540d\u524d\uff1a
+\u5c45\u4f4f\u5730\uff1a
+\u30d1\u30fc\u30c8\u30ca\u30fc\u3082\u53c2\u52a0\u3057\u307e\u3059\u304b\uff1f [ ] \u306f\u3044  [ ] \u3044\u3044\u3048
+
+\u3054\u8fd4\u4fe1\u3092\u304a\u5f85\u3061\u3057\u3066\u3044\u307e\u3059\uff01`,
+      };
+      const sub  = encodeURIComponent(subjects[lang] || subjects.en);
+      const body = encodeURIComponent(bodies[lang]   || bodies.en);
+      return `mailto:info@twobreath.com?subject=${sub}&body=${body}`;
     }
 
     // ── Detect and init language ──
