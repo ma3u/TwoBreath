@@ -2451,6 +2451,11 @@
       stepOut.textContent  = t.steps[2];
       const overlayText = document.querySelector('.breath-overlay-text');
       if (overlayText) overlayText.textContent = t.overlay;
+      // Keep breathing overlay language buttons in sync with active language
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === lang);
+        b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
+      });
     }
 
     document.querySelectorAll('.lang-btn').forEach(btn => {
