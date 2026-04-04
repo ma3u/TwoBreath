@@ -3033,19 +3033,33 @@
     // Matthi & Dascha alternate section by section
     // ══════════════════════════════════════════
 
-    const NARRATION = [
-      { src: 'audio/narration/s00-hero.mp3',       voice: 'Matthi',  title: 'One Breath. Two Souls.',    target: 'hero' },
-      { src: 'audio/narration/s01-story.mp3',      voice: 'Dascha',  title: 'Our Story',                 target: 'story' },
-      { src: 'audio/narration/s02-shift.mp3',      voice: 'Matthi',  title: 'The 7-Year Shift',          target: 'problem' },
-      { src: 'audio/narration/s03-wisdom.mp3',     voice: 'Dascha',  title: 'Love as Practice',          target: 'brooks' },
-      { src: 'audio/narration/s04-rightbrain.mp3',  voice: 'Matthi',  title: 'The Right Brain',           target: 'rightbrain' },
-      { src: 'audio/narration/s05-research.mp3',   voice: 'Dascha',  title: 'The Research',              target: 'science' },
-      { src: 'audio/narration/s06-ritual.mp3',     voice: 'Matthi',  title: 'Our Daily Ritual',          target: 'ritual' },
-      { src: 'audio/narration/s07-measure.mp3',    voice: 'Dascha',  title: 'Measure the Bond',          target: 'measure' },
-      { src: 'audio/narration/s08-vision.mp3',     voice: 'Matthi',  title: 'The Vision',                target: 'vision' },
-      { src: 'audio/narration/s09-changes.mp3',    voice: 'Dascha',  title: 'What Changes',              target: 'benefits' },
-      { src: 'audio/narration/s10-cta.mp3',        voice: 'Matthi',  title: 'Two Breaths. One Bond.',    target: 'cta' },
+    // Narration track definitions — src is resolved per language at play time
+    const NARRATION_TRACKS = [
+      { key: 's00-hero',       voice: 'Matthi', titles: { en: 'One Breath. Two Souls.',  de: 'Ein Atem. Zwei Seelen.',    ja: '一つの息。二つの魂。'   }, target: 'hero'       },
+      { key: 's01-story',      voice: 'Dascha', titles: { en: 'Our Story',               de: 'Unsere Geschichte',         ja: '私たちの物語'            }, target: 'story'      },
+      { key: 's02-shift',      voice: 'Matthi', titles: { en: 'The 7-Year Shift',        de: 'Die 7-Jahres-Wende',        ja: '7年目の転換点'            }, target: 'problem'    },
+      { key: 's03-wisdom',     voice: 'Dascha', titles: { en: 'Love as Practice',        de: 'Liebe als Praxis',          ja: '愛の実践'                }, target: 'brooks'     },
+      { key: 's04-rightbrain', voice: 'Matthi', titles: { en: 'The Right Brain',         de: 'Die rechte Gehirnhälfte',   ja: '右脳'                    }, target: 'rightbrain' },
+      { key: 's05-research',   voice: 'Dascha', titles: { en: 'The Research',            de: 'Die Wissenschaft',          ja: '科学的研究'               }, target: 'science'    },
+      { key: 's06-ritual',     voice: 'Matthi', titles: { en: 'Our Daily Ritual',        de: 'Unser tägliches Ritual',    ja: '毎日の儀式'              }, target: 'ritual'     },
+      { key: 's07-measure',    voice: 'Dascha', titles: { en: 'Measure the Bond',        de: 'Die Verbindung messen',     ja: '絆を測る'                }, target: 'measure'    },
+      { key: 's08-vision',     voice: 'Matthi', titles: { en: 'The Vision',              de: 'Die Vision',                ja: 'ビジョン'                }, target: 'vision'     },
+      { key: 's09-changes',    voice: 'Dascha', titles: { en: 'What Changes',            de: 'Was sich verändert',        ja: '何が変わるか'             }, target: 'benefits'   },
+      { key: 's10-cta',        voice: 'Matthi', titles: { en: 'Two Breaths. One Bond.',  de: 'Zwei Atemzüge. Eine Verbindung.', ja: '二つの呼吸。一つの絆。' }, target: 'cta'    },
     ];
+
+    // Resolve narration src for current page language, falling back to English
+    function getNarrationSrc(key) {
+      const lang = document.documentElement.lang;
+      const folder = ['de','ja'].includes(lang) ? lang : 'en';
+      // de/ja live in audio/narration/{lang}/, english in audio/narration/
+      return folder === 'en'
+        ? `audio/narration/${key}.mp3`
+        : `audio/narration/${folder}/${key}.mp3`;
+    }
+
+    // Build NARRATION array dynamically (re-evaluated at play time via getNarrationSrc)
+    const NARRATION = NARRATION_TRACKS;
 
     const narFab = document.getElementById('narrationFab');
     const narBtn = document.getElementById('narBtn');
@@ -3073,22 +3087,23 @@
       narIndex = index;
       const section = NARRATION[index];
 
-      // Update UI
+      // Update UI — title in current page language
+      const lang = document.documentElement.lang;
       narVoice.textContent = section.voice;
-      narTitle.textContent = section.title;
+      narTitle.textContent = (section.titles && section.titles[lang]) || section.titles.en;
       narBar.style.width = '0%';
 
       // Scroll to section
       narScrollTo(section.target);
 
-      // Play audio
+      // Play audio — resolved for current page language
       if (narAudio) {
         narAudio.pause();
         narAudio.removeEventListener('ended', narOnEnded);
         narAudio.removeEventListener('timeupdate', narOnProgress);
       }
 
-      narAudio = new Audio(section.src);
+      narAudio = new Audio(getNarrationSrc(section.key));
       narAudio.addEventListener('timeupdate', narOnProgress);
       narAudio.addEventListener('ended', narOnEnded);
       narAudio.play().catch(() => {});
