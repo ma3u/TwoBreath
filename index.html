@@ -2318,11 +2318,13 @@
 
       // UI
       uiCount.textContent = remaining;
-      uiPhase.textContent = BREATH_I18N[activeLang].phases[index % PHASES.length];
+      // Read language directly from page at playback time — always in sync with page switcher
+      const playLang = LANGS.includes(document.documentElement.lang) ? document.documentElement.lang : 'en';
+      uiPhase.textContent = BREATH_I18N[playLang].phases[index % PHASES.length];
 
       // Voice – resolve from active voice + language
       if (soundEnabled) {
-        const audio = voices[activeVoice][activeLang][phase.voiceKey];
+        const audio = voices[activeVoice][playLang][phase.voiceKey];
         audio.currentTime = 0;
         audio.play().catch(() => {});
       }
