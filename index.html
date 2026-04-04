@@ -481,7 +481,7 @@
     /* Voice selector */
     .breath-voice-select {
       position: absolute;
-      bottom: 50px;
+      bottom: 46px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -1233,6 +1233,140 @@
     .timeline-item h3 { font-size: 16px; font-weight: 500; color: var(--warm-white); margin-bottom: 6px; }
     .timeline-item p { font-size: 14px; color: var(--warm-white-60); line-height: 1.7; }
 
+    /* ── Science Chain ── */
+    .chain-section {
+      background: linear-gradient(180deg, var(--ink) 0%, rgba(201,107,107,0.03) 25%, rgba(45,158,138,0.05) 70%, var(--ink) 100%);
+    }
+
+    .chain-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      margin: 48px auto 0;
+      max-width: 680px;
+    }
+
+    .chain-node {
+      background: rgba(255,255,255,0.03);
+      border: 0.5px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px 28px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .chain-node:hover { border-color: rgba(255,255,255,0.18); transform: translateX(4px); }
+
+    .chain-node-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .chain-node-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .chain-node-icon.rose-bg  { background: rgba(201,107,107,0.15); color: var(--accent-rose); }
+    .chain-node-icon.teal-bg  { background: rgba(45,158,138,0.15);  color: var(--accent-teal); }
+    .chain-node-icon.gold-bg  { background: rgba(201,168,76,0.15);  color: var(--accent-gold); }
+
+    .chain-node h3 { font-size: 16px; font-weight: 500; color: var(--warm-white); margin: 0; }
+    .chain-node p  { font-size: 14px; color: var(--warm-white-75); line-height: 1.8; }
+
+    .chain-arrow {
+      font-size: 20px;
+      color: var(--accent-teal);
+      opacity: 0.4;
+      padding: 6px 0;
+      line-height: 1;
+      align-self: center;
+    }
+
+    .chain-cta {
+      background: linear-gradient(135deg, rgba(45,158,138,0.08) 0%, rgba(201,168,76,0.05) 100%);
+      border: 0.5px solid rgba(45,158,138,0.25);
+      border-radius: 16px;
+      padding: 36px 40px;
+      text-align: center;
+      margin: 48px auto 0;
+      max-width: 680px;
+    }
+
+    .chain-cta h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--warm-white);
+      margin-bottom: 16px;
+    }
+
+    .chain-cta p {
+      font-size: 15px;
+      color: var(--warm-white-75);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .chain-lang-badges {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .chain-lang-badge {
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      border: 0.5px solid rgba(255,255,255,0.15);
+      color: var(--warm-white-60);
+    }
+
+    /* ── Breathing Language Selector ── */
+    .breath-lang-select {
+      position: absolute;
+      bottom: 76px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+      z-index: 4;
+    }
+
+    .lang-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 0.5px solid rgba(255,255,255,0.1);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .lang-btn.active {
+      color: var(--warm-white);
+      border-color: rgba(201,168,76,0.4);
+      background: rgba(201,168,76,0.1);
+    }
+
+    .lang-btn:hover { border-color: rgba(255,255,255,0.22); }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
       nav { padding: 12px 24px; }
@@ -1276,6 +1410,9 @@
       .audience-grid,
       .problem-cards,
       .vision-grid { grid-template-columns: 1fr; }
+
+      .chain-cta { padding: 28px 24px; }
+      .chain-node { padding: 20px 20px; }
 
       .video-container { max-width: 320px; }
       .brooks-card { padding: 32px 24px; }
@@ -1371,6 +1508,11 @@
                 <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
               </div>
               <span class="breath-overlay-text">Stamina Breathing</span>
+            </div>
+            <div class="breath-lang-select" id="breathLangSelect">
+              <button class="lang-btn" data-lang="de" aria-label="Deutsch" aria-pressed="false">DE</button>
+              <button class="lang-btn active" data-lang="en" aria-label="English" aria-pressed="true">EN</button>
+              <button class="lang-btn" data-lang="ja" aria-label="日本語" aria-pressed="false">JA</button>
             </div>
             <div class="breath-voice-select" id="breathVoiceSelect">
               <button class="voice-btn active" data-voice="matthi" aria-label="Use Matthi's voice" aria-pressed="true">Matthi</button>
@@ -1542,6 +1684,93 @@
           <p>When you achieve <a class="src-link" href="https://www.heartmath.org/research/science-of-the-heart/heart-rate-variability/" target="_blank" rel="noopener">heart coherence</a> through rhythmic breathing, your heart generates an electromagnetic field <strong>detectable several feet away</strong>. Partners breathing together in close proximity literally entrain each other's heart rhythms &mdash; creating what HeartMath calls <a class="src-link" href="https://www.heartmath.org/research/science-of-the-heart/energetic-communication/" target="_blank" rel="noopener">"physiological coherence."</a> This is the scientific basis for what we feel intuitively: that breathing hand in hand creates a shared state of calm and connection that transcends the individual.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Science Chain: From Stress to Calm -->
+  <section class="chain-section" id="chain">
+    <div class="section-inner">
+      <span class="section-tag fade-in">05b &mdash; Die Kette</span>
+      <h2 class="fade-in">Von Stress zu Ruhe &mdash;<br><em>die Wissenschaft hinter dem Atem</em></h2>
+      <p class="section-text fade-in">
+        Stress ist kein abstraktes Gefühl. Er ist eine biochemische Kaskade &mdash; messbar, umkehrbar, und direkt durch den Atem beeinflussbar. Diese Kette verbindet euren Alltag mit eurer Gesundheit.
+      </p>
+
+      <div class="chain-flow">
+
+        <div class="chain-node fade-in fade-in-delay-1">
+          <div class="chain-node-header">
+            <div class="chain-node-icon rose-bg"><span class="material-symbols-rounded" aria-hidden="true">sentiment_stressed</span></div>
+            <h3>Stress auf der Arbeit &amp; im Privaten</h3>
+          </div>
+          <p>Termindruck, Erschöpfung, ungelöste Konflikte. Das Nervensystem schaltet in Daueralarm. Die Folge: eine biochemische Kaskade, die euren gesamten Stoffwechsel beeinflusst.</p>
+        </div>
+
+        <div class="chain-arrow" aria-hidden="true">↓</div>
+
+        <div class="chain-node fade-in fade-in-delay-2">
+          <div class="chain-node-header">
+            <div class="chain-node-icon rose-bg"><span class="material-symbols-rounded" aria-hidden="true">science</span></div>
+            <h3>Cortisol-Kaskade</h3>
+          </div>
+          <p>Cortisol gehört zur <strong>Glukokortikoid-Klasse</strong> und erhöht den Blutzuckerspiegel, indem es die Glukoseproduktion aus Proteinen und Fetten in der Leber beschleunigt. Chronisch erhöhter Cortisol-Spiegel belastet Herzkreislauf, Immunsystem und Stoffwechsel gleichermaßen.</p>
+        </div>
+
+        <div class="chain-arrow" aria-hidden="true">↓</div>
+
+        <div class="chain-node fade-in fade-in-delay-3">
+          <div class="chain-node-header">
+            <div class="chain-node-icon teal-bg"><span class="material-symbols-rounded" aria-hidden="true">pulmonology</span></div>
+            <h3>Atem unterbricht die Kaskade</h3>
+          </div>
+          <p>Langsames Atmen bei <strong>6 Atemzügen pro Minute</strong> verbessert konsistent HRV, RMSSD und Vagaltonus &mdash; und reduziert nachweislich Cortisol und Entzündungsmarker. Der Atem ist der einzige Eingang ins autonome Nervensystem, den wir bewusst steuern können.</p>
+        </div>
+
+        <div class="chain-arrow" aria-hidden="true">↓</div>
+
+        <div class="chain-node fade-in fade-in-delay-4">
+          <div class="chain-node-header">
+            <div class="chain-node-icon gold-bg"><span class="material-symbols-rounded" aria-hidden="true">glucose</span></div>
+            <h3>Direkter Metabolismus-Effekt</h3>
+          </div>
+          <p>Coherent Breathing bei Menschen mit Typ-2-Diabetes <strong>erhöhte die HRV und senkte den HbA1c-Wert signifikant</strong> nach drei Monaten regelmäßiger Praxis. Kurze Atemsitzungen vor dem Essen verringern messbar den Blutzucker-Peak nach der Mahlzeit.</p>
+        </div>
+
+        <div class="chain-arrow" aria-hidden="true">↓</div>
+
+        <div class="chain-node fade-in fade-in-delay-1">
+          <div class="chain-node-header">
+            <div class="chain-node-icon teal-bg"><span class="material-symbols-rounded" aria-hidden="true">monitor_heart</span></div>
+            <h3>HRV &mdash; unser Schlüssel-Biomarker</h3>
+          </div>
+          <p>Messbar auf der <strong>Apple Watch</strong>. Höhere HRV spiegelt gleichzeitig Stressresilienz <em>und</em> metabolische Flexibilität wider. Der Vagusnerv ist die Brücke: er verbindet Atem, Herzrhythmus, Stoffwechsel und emotionale Regulation in einem einzigen Signal.</p>
+        </div>
+
+        <div class="chain-arrow" aria-hidden="true">↓</div>
+
+        <div class="chain-node fade-in fade-in-delay-2">
+          <div class="chain-node-header">
+            <div class="chain-node-icon gold-bg"><span class="material-symbols-rounded" aria-hidden="true">favorite</span></div>
+            <h3>Der Paar-Effekt</h3>
+          </div>
+          <p><a class="src-link" href="https://doi.org/10.1037/a0032279" target="_blank" rel="noopener">Ferrer (UC Davis, 2012)</a> zeigte: Partner-Cortisol-Rhythmen synchronisieren sich. Langsames Atmen aktiviert akut das parasympathische Nervensystem (nachgewiesen durch erhöhte HRV) und senkt Blutdruck sowie Cortisol, während es die Stimmung verbessert. Wenn ihr zusammen atmet, beruhigt ihr nicht nur euer eigenes Nervensystem &mdash; ihr <strong>reguliert das eures Partners gleich mit</strong>.</p>
+        </div>
+
+      </div>
+
+      <div class="chain-cta fade-in">
+        <h3>Wir suchen Tester</h3>
+        <p>
+          Für unsere App suchen wir Menschen, die regelmäßig ihren <strong>Blutzuckerspiegel über ein CGM-Gerät</strong> messen lassen oder ihren <strong>HbA1c &amp; Cortisol-Wert</strong> über Bluttests bestimmen &mdash; um den Effekt wissenschaftlich zu belegen. Wir suchen Tester in:
+        </p>
+        <div class="chain-lang-badges">
+          <span class="chain-lang-badge">🇩🇪 Deutsch</span>
+          <span class="chain-lang-badge">🇬🇧 English</span>
+          <span class="chain-lang-badge">🇯🇵 日本語</span>
+        </div>
+        <a href="#cta" class="btn btn-primary" style="display:inline-flex; margin-top: 4px;">Als Tester anmelden</a>
+      </div>
+
     </div>
   </section>
 
@@ -1852,20 +2081,30 @@
     const uiPhase = document.getElementById('breathUiPhase');
     const soundBtn = document.getElementById('breathSoundToggle');
 
-    // Voice audio (ElevenLabs - Matthi & Dascha)
-    const voices = {
-      matthi: {
-        in: new Audio('audio/matthi/breathe-in.mp3'),
-        hold: new Audio('audio/matthi/hold.mp3'),
-        out: new Audio('audio/matthi/breathe-out.mp3'),
-      },
-      dascha: {
-        in: new Audio('audio/dascha/breathe-in.mp3'),
-        hold: new Audio('audio/dascha/hold.mp3'),
-        out: new Audio('audio/dascha/breathe-out.mp3'),
-      },
-    };
-    Object.values(voices).forEach(v => Object.values(v).forEach(a => { a.volume = 0.8; }));
+    // Voice audio (ElevenLabs - Matthi & Dascha, multilingual)
+    // Returns the Audio object for the active voice + language combination.
+    // Falls back to English if the language-specific file hasn't been generated yet.
+    function makeVoiceSet(speaker, lang) {
+      const base  = (key) => `audio/${speaker}/${key}.mp3`;
+      const local = (key) => `audio/${speaker}/${lang}/${key}.mp3`;
+      const pick  = (key) => (lang === 'en') ? base(key) : local(key);
+      const audio = (key) => {
+        const a = new Audio(pick(key));
+        a.volume = 0.8;
+        a.onerror = () => { a.src = base(key); }; // fallback to English on error
+        return a;
+      };
+      return { in: audio('breathe-in'), hold: audio('hold'), out: audio('breathe-out') };
+    }
+
+    const SPEAKERS = ['matthi', 'dascha'];
+    const LANGS    = ['en', 'de', 'ja'];
+    // voices[speaker][lang] = { in, hold, out }
+    const voices = {};
+    SPEAKERS.forEach(sp => {
+      voices[sp] = {};
+      LANGS.forEach(lg => { voices[sp][lg] = makeVoiceSet(sp, lg); });
+    });
 
     let activeVoice = 'matthi'; // default voice
 
@@ -2072,11 +2311,11 @@
 
       // UI
       uiCount.textContent = remaining;
-      uiPhase.textContent = phase.name;
+      uiPhase.textContent = BREATH_I18N[activeLang].phases[index % PHASES.length];
 
-      // Voice — resolve from active voice
+      // Voice — resolve from active voice + language
       if (soundEnabled) {
-        const audio = voices[activeVoice][phase.voiceKey];
+        const audio = voices[activeVoice][activeLang][phase.voiceKey];
         audio.currentTime = 0;
         audio.play().catch(() => {});
       }
@@ -2173,6 +2412,50 @@
         });
         btn.classList.add('active');
         btn.setAttribute('aria-pressed', 'true');
+      });
+    });
+
+    // ── Language selector (DE / EN / JA) ──
+    const BREATH_I18N = {
+      en: {
+        phases: ['Breathe In', 'Hold', 'Breathe Out'],
+        steps:  ['4s In',      '4s Hold', '6s Out'],
+        overlay: 'Stamina Breathing',
+      },
+      de: {
+        phases: ['Einatmen', 'Halten', 'Ausatmen'],
+        steps:  ['4s Ein',   '4s Halt', '6s Aus'],
+        overlay: 'Atemübung',
+      },
+      ja: {
+        phases: ['吸う', '止める', '吐く'],
+        steps:  ['4s 吸う', '4s 止める', '6s 吐く'],
+        overlay: '呼吸練習',
+      },
+    };
+
+    let activeLang = 'en';
+
+    function applyLang(lang) {
+      activeLang = lang;
+      const t = BREATH_I18N[lang];
+      stepIn.textContent   = t.steps[0];
+      stepHold.textContent = t.steps[1];
+      stepOut.textContent  = t.steps[2];
+      const overlayText = document.querySelector('.breath-overlay-text');
+      if (overlayText) overlayText.textContent = t.overlay;
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelectorAll('.lang-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        applyLang(btn.dataset.lang);
       });
     });
 
