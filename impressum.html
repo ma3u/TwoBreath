@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TwoBreath — Impressum / Legal Notice / 特定商取引法に基づく表記</title>
+  <meta name="description" content="Legal notice and contact information for TwoBreath app by Matthias Buchhorn.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1a2e;
+      --warm-white: #faf8f5;
+      --accent-teal: #5bb5a2;
+      --accent-gold: #c9a84c;
+      --accent-rose: #d4707a;
+      --muted: #8e8e93;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--ink);
+      color: var(--warm-white);
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 32px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+    .back-link:hover { color: var(--accent-teal); }
+
+    /* Language tabs */
+    .lang-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .lang-tab {
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: 0.5px solid rgba(91,181,162,0.3);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-tab.active {
+      background: rgba(91,181,162,0.15);
+      border-color: var(--accent-teal);
+      color: var(--accent-teal);
+    }
+
+    .lang-tab:hover:not(.active) {
+      border-color: rgba(91,181,162,0.5);
+      color: var(--warm-white);
+    }
+
+    /* Sections */
+    .lang-section { display: none; }
+    .lang-section.active { display: block; }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.4rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--warm-white);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      color: var(--accent-teal);
+    }
+
+    p { margin-bottom: 12px; color: rgba(250,248,245,0.85); }
+
+    a { color: var(--accent-teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .info-block {
+      background: rgba(91,181,162,0.06);
+      border: 0.5px solid rgba(91,181,162,0.2);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 12px;
+    }
+
+    .info-row {
+      display: flex;
+      gap: 16px;
+      padding: 8px 0;
+      border-bottom: 0.5px solid rgba(255,255,255,0.05);
+    }
+
+    .info-row:last-child { border-bottom: none; }
+
+    .info-label {
+      min-width: 120px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .info-value {
+      color: var(--warm-white);
+      font-size: 0.9rem;
+    }
+
+    .disclaimer {
+      margin-top: 40px;
+      padding: 16px 20px;
+      background: rgba(201,168,76,0.08);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .disclaimer p {
+      margin-bottom: 0;
+      font-size: 0.9rem;
+      color: rgba(250,248,245,0.75);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(250,248,245,0.06);
+      margin-top: 40px;
+    }
+
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--accent-teal); }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      h2 { font-size: 1.2rem; }
+      .container { padding: 40px 18px 60px; }
+      .info-row { flex-direction: column; gap: 2px; }
+      .info-label { min-width: unset; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">&larr; Back to TwoBreath</a>
+
+    <div class="lang-tabs" role="tablist" aria-label="Language">
+      <button class="lang-tab active" role="tab" aria-selected="true"  onclick="switchLang('en', this)">English</button>
+      <button class="lang-tab"        role="tab" aria-selected="false" onclick="switchLang('de', this)">Deutsch</button>
+      <button class="lang-tab"        role="tab" aria-selected="false" onclick="switchLang('ja', this)">日本語</button>
+    </div>
+
+    <!-- ─── ENGLISH ─── -->
+    <section id="lang-en" class="lang-section active" lang="en">
+      <h1>Legal Notice</h1>
+      <p class="subtitle">Information according to § 5 TMG (German Telemedia Act)</p>
+
+      <h2>Responsible for Content</h2>
+      <div class="info-block">
+        <div class="info-row">
+          <span class="info-label">Name</span>
+          <span class="info-value">Matthias Buchhorn</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Address</span>
+          <span class="info-value">Germany</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Email</span>
+          <span class="info-value"><a href="mailto:twobreath@ma3u.com">twobreath@ma3u.com</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Website</span>
+          <span class="info-value"><a href="https://ma3u.github.io/TwoBreath/">ma3u.github.io/TwoBreath</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">VAT</span>
+          <span class="info-value">Not applicable (private individual, non-commercial)</span>
+        </div>
+      </div>
+
+      <h2>Responsible for Editorial Content</h2>
+      <p>Matthias Buchhorn (address as above)</p>
+
+      <h2>Dispute Resolution</h2>
+      <p>The European Commission provides a platform for online dispute resolution (ODR): <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. We are not obliged to participate in dispute resolution proceedings before a consumer arbitration board and do not do so.</p>
+
+      <h2>Liability for Content</h2>
+      <p>As a service provider, we are responsible for our own content on these pages in accordance with general laws. We are not obligated to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity.</p>
+
+      <h2>Liability for Links</h2>
+      <p>Our offer contains links to external third-party websites over whose content we have no influence. Therefore, we cannot assume any liability for these external contents. The respective provider or operator of the pages is always responsible for the content of the linked pages.</p>
+
+      <div class="disclaimer">
+        <p>TwoBreath is a wellness application and is <strong>not a medical device</strong>. It does not provide medical advice, diagnosis, or treatment.</p>
+      </div>
+    </section>
+
+    <!-- ─── DEUTSCH ─── -->
+    <section id="lang-de" class="lang-section" lang="de">
+      <h1>Impressum</h1>
+      <p class="subtitle">Angaben gemäß § 5 TMG</p>
+
+      <h2>Verantwortlich für den Inhalt</h2>
+      <div class="info-block">
+        <div class="info-row">
+          <span class="info-label">Name</span>
+          <span class="info-value">Matthias Buchhorn</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Anschrift</span>
+          <span class="info-value">Deutschland</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">E-Mail</span>
+          <span class="info-value"><a href="mailto:twobreath@ma3u.com">twobreath@ma3u.com</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Website</span>
+          <span class="info-value"><a href="https://ma3u.github.io/TwoBreath/">ma3u.github.io/TwoBreath</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">USt-IdNr.</span>
+          <span class="info-value">Nicht anwendbar (Privatperson, nicht kommerziell)</span>
+        </div>
+      </div>
+
+      <h2>Verantwortlich für den redaktionellen Inhalt</h2>
+      <p>Matthias Buchhorn (Anschrift s.o.)</p>
+
+      <h2>Streitschlichtung</h2>
+      <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+      <h2>Haftung für Inhalte</h2>
+      <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+
+      <h2>Haftung für Links</h2>
+      <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+
+      <h2>Urheberrecht</h2>
+      <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+
+      <div class="disclaimer">
+        <p>TwoBreath ist eine Wellness-Anwendung und <strong>kein Medizinprodukt</strong>. Die App ersetzt keine ärztliche Beratung, Diagnose oder Behandlung.</p>
+      </div>
+    </section>
+
+    <!-- ─── 日本語 ─── -->
+    <section id="lang-ja" class="lang-section" lang="ja">
+      <h1>特定商取引法に基づく表記</h1>
+      <p class="subtitle">電子メールアドレス等の提供</p>
+
+      <h2>販売業者</h2>
+      <div class="info-block">
+        <div class="info-row">
+          <span class="info-label">氏名</span>
+          <span class="info-value">Matthias Buchhorn（マティアス・ブッホルン）</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">所在地</span>
+          <span class="info-value">ドイツ</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">メールアドレス</span>
+          <span class="info-value"><a href="mailto:twobreath@ma3u.com">twobreath@ma3u.com</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">ウェブサイト</span>
+          <span class="info-value"><a href="https://ma3u.github.io/TwoBreath/">ma3u.github.io/TwoBreath</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">販売価格</span>
+          <span class="info-value">アプリは無料（基本機能）</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">返品・キャンセル</span>
+          <span class="info-value">デジタルコンテンツのため、App Storeの規約に準じます</span>
+        </div>
+      </div>
+
+      <h2>免責事項</h2>
+      <p>当サービスのコンテンツについては、正確性・完全性・有用性等の保証は行っておりません。掲載情報に基づくいかなる判断についても、当方は責任を負いかねます。</p>
+
+      <h2>リンクについて</h2>
+      <p>本ウェブサイトには外部リンクが含まれる場合があります。外部サイトの内容については、当方は一切の責任を負いかねます。</p>
+
+      <h2>著作権</h2>
+      <p>本ウェブサイトおよびアプリのコンテンツ（文章・画像・音声・デザイン等）の著作権は Matthias Buchhorn に帰属します。無断複製・転載は禁じます。</p>
+
+      <div class="disclaimer">
+        <p>TwoBreathはウェルネスアプリであり、<strong>医療機器ではありません</strong>。医療上のアドバイス、診断、治療に代わるものではありません。</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Matthias Buchhorn. TwoBreath. &nbsp;&middot;&nbsp; <a href="index.html">Home</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a></p>
+  </footer>
+
+  <script>
+    function switchLang(lang, btn) {
+      document.querySelectorAll('.lang-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.lang-tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      document.getElementById('lang-' + lang).classList.add('active');
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+    }
+  </script>
+</body>
+</html>
