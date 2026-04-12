@@ -1261,7 +1261,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
-      align-items: start;
+      align-items: center;
       margin-bottom: 48px;
     }
 
@@ -1514,20 +1514,20 @@
       <div class="hero-stats">
         <div>
           <span class="stat-num">15-25 min</span>
-          <span class="stat-label">Morning ritual</span>
+          <span class="stat-label" data-i18n="stat.duration">Morning ritual</span>
         </div>
         <div>
           <span class="stat-num">3 acts</span>
-          <span class="stat-label">Breathe &middot; Read &middot; Connect</span>
+          <span class="stat-label" data-i18n="stat.acts">Breathe &middot; Read &middot; Connect</span>
         </div>
         <div>
           <span class="stat-num">2 hearts</span>
-          <span class="stat-label">Measurably in sync</span>
+          <span class="stat-label" data-i18n="stat.sync">Measurably in sync</span>
         </div>
       </div>
     </div>
     <div class="hero-cta">
-      <a href="https://testflight.apple.com/join/ChJc5vVx" class="btn-beta" target="_blank" rel="noopener">
+      <a href="https://testflight.apple.com/join/ChJc5vVx" class="btn-beta" target="_blank" rel="noopener" data-i18n="hero.beta">
         Join Public Beta on TestFlight
       </a>
     </div>
@@ -1573,10 +1573,10 @@
         </div>
 
         <div class="story-content">
-          <p class="section-text fade-in fade-in-delay-1">
+          <p class="section-text fade-in fade-in-delay-1" data-i18n="story.p1">
             The first years were effortless. The oxytocin rush, the butterflies, the can't-stop-thinking-about-you phase. Science calls it "passionate love" &mdash; and neurochemistry research shows it peaks in the first 18 months, then gradually fades by year three to seven.
           </p>
-          <p class="section-text fade-in fade-in-delay-2">
+          <p class="section-text fade-in fade-in-delay-2" data-i18n="story.p2">
             By year seven, we were still deeply in love &mdash; but something had shifted. The automatic chemistry that once carried us had quieted. We realized: love wasn't going to sustain itself. We needed <strong>couple routines</strong>. We needed to choose connection, deliberately, daily.
           </p>
           <blockquote class="fade-in fade-in-delay-3" data-i18n="quote.story">
@@ -1624,13 +1624,13 @@
     <div class="section-inner">
       <span class="section-tag fade-in" data-i18n="sec.03">03 &mdash; The Wisdom</span>
       <h2 class="fade-in" data-i18n="h2.brooks">Love is not a feeling. <span class="gold"><em>Love is a practice.</em></span></h2>
-      <p class="section-text fade-in">
+      <p class="section-text fade-in" data-i18n="brooks.intro">
         Harvard professor <a class="src-link" href="https://www.arthurbrooks.com/" target="_blank" rel="noopener">Dr. Arthur Brooks</a> &mdash; social scientist, bestselling author, and columnist for <a class="src-link" href="https://www.theatlantic.com/projects/how-build-life/" target="_blank" rel="noopener">The Atlantic</a> &mdash; has spent years translating happiness research into actionable strategies. His work on love after the passion phase resonated deeply with our journey.
       </p>
       <div class="brooks-card fade-in fade-in-delay-1">
         <span class="brooks-name">Dr. Arthur Brooks &mdash; Harvard Business School &amp; Kennedy School</span>
-        <blockquote>"Falling in love is involuntary. Staying in love is a choice and a practice. The goal is not to recapture the high of early love. The goal is to build something better &mdash; deeper, more real, more chosen."</blockquote>
-        <p class="brooks-bio">
+        <blockquote data-i18n="brooks.quote">"Falling in love is involuntary. Staying in love is a choice and a practice. The goal is not to recapture the high of early love. The goal is to build something better &mdash; deeper, more real, more chosen."</blockquote>
+        <p class="brooks-bio" data-i18n="brooks.bio">
           Brooks identifies <strong>Family</strong> as one of four pillars of lasting happiness, alongside Faith, Friendship, and meaningful Work. He advocates for what he calls "happiness hygiene" &mdash; daily practices that maintain emotional health the way brushing teeth maintains dental health. For couples, he prescribes <strong>sacred rituals</strong>: small daily acts protected from the chaos of life. A morning breathing practice, a shared reflective moment, presence before productivity.
         </p>
       </div>
@@ -1639,14 +1639,14 @@
         <div class="science-card fade-in fade-in-delay-2">
           <div class="highlight-bar gold"></div>
           <span class="sci-source">From "Build the Life You Want" (2023)</span>
-          <h3>Love Improves With Practice</h3>
-          <p>"Love, like getting happier, is something you will get better with practice. It becomes more automatic with repetition. <strong>It becomes a habit over time.</strong>" Brooks compares the transition from passionate to companionate love to a startup becoming an established company &mdash; the skills needed change entirely.</p>
+          <h3 data-i18n="brooks.card1.title">Love Improves With Practice</h3>
+          <p data-i18n="brooks.card1.body">"Love, like getting happier, is something you will get better with practice. It becomes more automatic with repetition. <strong>It becomes a habit over time.</strong>" Brooks compares the transition from passionate to companionate love to a startup becoming an established company &mdash; the skills needed change entirely.</p>
         </div>
         <div class="science-card fade-in fade-in-delay-3">
           <div class="highlight-bar gold"></div>
           <span class="sci-source">From "From Strength to Strength" (2022)</span>
-          <h3>The Second Half of Love</h3>
-          <p>"The second half of life asks us to move from fluid intelligence to crystallized intelligence &mdash; from innovation to wisdom. <strong>The same applies to love.</strong>" Happy long-term couples treat their relationship like a practice: daily, disciplined, intentional.</p>
+          <h3 data-i18n="brooks.card2.title">The Second Half of Love</h3>
+          <p data-i18n="brooks.card2.body">"The second half of life asks us to move from fluid intelligence to crystallized intelligence &mdash; from innovation to wisdom. <strong>The same applies to love.</strong>" Happy long-term couples treat their relationship like a practice: daily, disciplined, intentional.</p>
         </div>
       </div>
     </div>
@@ -1669,15 +1669,12 @@
               loading="lazy">
             </iframe>
           </div>
-          <p class="rightbrain-video-caption fade-in fade-in-delay-1">
-            Dr. Arthur Brooks, Harvard professor, using science and philosophy to help couples build lasting love.
-          </p>
         </div>
         <div>
-          <p class="section-text fade-in">
+          <p class="section-text fade-in" data-i18n="rb.p1">
             Our concept is built on a fundamental insight from neuroscience and Dr. Arthur Brooks' work: <strong>the right hemisphere of your brain is the seat of emotional attunement, embodied presence, and nonverbal connection.</strong> It cannot be accessed through logic, language, or screens. Only through the body, the breath, and shared rhythm.
           </p>
-          <p class="section-text fade-in">
+          <p class="section-text fade-in" data-i18n="rb.p2">
             This is why TwoBreath prioritizes <strong>listening over screen time</strong>. The visual animation is there as a gentle guide, but the real practice happens with eyes closed, hand in hand, following the voice. When you breathe together without visual distraction, the right brain activates fully. The same hemisphere responsible for reading your partner's emotions, feeling their presence, and experiencing spiritual connection.
           </p>
         </div>
@@ -1687,20 +1684,20 @@
         <div class="science-card fade-in fade-in-delay-1">
           <div class="highlight-bar teal"></div>
           <span class="sci-source">Right Hemisphere &mdash; <a class="src-link" href="https://channelmcgilchrist.com/the-master-and-his-emissary/" target="_blank" rel="noopener">Iain McGilchrist, "The Master and His Emissary"</a></span>
-          <h3>The Right Brain Sees the Whole</h3>
-          <p>The left hemisphere analyzes, categorizes, and controls. The right hemisphere <strong>attends to the living, embodied, relational world</strong> &mdash; it reads faces, feels music, senses the unspoken. When couples breathe together with eyes closed, they shift from left-brain "doing mode" to right-brain "being mode."</p>
+          <h3 data-i18n="rb.card1.title">The Right Brain Sees the Whole</h3>
+          <p data-i18n="rb.card1.body">The left hemisphere analyzes, categorizes, and controls. The right hemisphere <strong>attends to the living, embodied, relational world</strong> &mdash; it reads faces, feels music, senses the unspoken. When couples breathe together with eyes closed, they shift from left-brain "doing mode" to right-brain "being mode."</p>
         </div>
         <div class="science-card fade-in fade-in-delay-2">
           <div class="highlight-bar gold"></div>
           <span class="sci-source"><a class="src-link" href="https://www.arthurbrooks.com/books" target="_blank" rel="noopener">Arthur Brooks &mdash; "Build the Life You Want" (2023)</a></span>
-          <h3>Sacred Rituals Bypass the Analytical Mind</h3>
-          <p>Brooks argues that the happiest couples create <strong>"sacred rituals" &mdash; daily practices protected from the chaos of life.</strong> These rituals work precisely because they don't require thinking, planning, or talking. They activate the right brain's capacity for presence, attunement, and felt connection.</p>
+          <h3 data-i18n="rb.card2.title">Sacred Rituals Bypass the Analytical Mind</h3>
+          <p data-i18n="rb.card2.body">Brooks argues that the happiest couples create <strong>"sacred rituals" &mdash; daily practices protected from the chaos of life.</strong> These rituals work precisely because they don't require thinking, planning, or talking. They activate the right brain's capacity for presence, attunement, and felt connection.</p>
         </div>
         <div class="science-card full-width fade-in fade-in-delay-3">
           <div class="highlight-bar rose"></div>
           <span class="sci-source">Why Audio-First, Not Screen-First</span>
-          <h3>Close Your Eyes. Listen. Feel.</h3>
-          <p>Screens activate the left brain &mdash; analyzing, reading, processing visual information. But when you close your eyes and simply follow a voice guiding your breath, <strong>the right hemisphere takes over</strong>. You become aware of your partner's breathing rhythm beside you. You feel the warmth of their hand. You sense their presence without seeing them. This is the neurological foundation of TwoBreath: <strong>we use audio guidance (Matthi or Dascha's voice) as the primary experience, with the visual flower animation as an optional secondary guide</strong> &mdash; because the deepest connection happens when you stop looking at a screen and start feeling the person beside you.</p>
+          <h3 data-i18n="rb.card3.title">Close Your Eyes. Listen. Feel.</h3>
+          <p data-i18n="rb.card3.body">Screens activate the left brain &mdash; analyzing, reading, processing visual information. But when you close your eyes and simply follow a voice guiding your breath, <strong>the right hemisphere takes over</strong>. You become aware of your partner's breathing rhythm beside you. You feel the warmth of their hand. You sense their presence without seeing them. This is the neurological foundation of TwoBreath: <strong>we use audio guidance (Matthi or Dascha's voice) as the primary experience, with the visual flower animation as an optional secondary guide</strong> &mdash; because the deepest connection happens when you stop looking at a screen and start feeling the person beside you.</p>
         </div>
       </div>
     </div>
@@ -1711,7 +1708,7 @@
     <div class="section-inner">
       <span class="section-tag fade-in" data-i18n="sec.05">05 &mdash; The Research</span>
       <h2 class="fade-in" data-i18n="h2.science">What happens when two people <em>breathe together</em></h2>
-      <p class="section-text fade-in">
+      <p class="section-text fade-in" data-i18n="sci.intro">
         The science is compelling: synchronized breathing between partners creates measurable physiological and neurological changes. This isn't wellness speculation &mdash; it's peer-reviewed research from leading universities.
       </p>
 
@@ -1719,38 +1716,38 @@
         <div class="science-card fade-in fade-in-delay-1">
           <div class="highlight-bar teal"></div>
           <span class="sci-source"><a class="src-link" href="https://doi.org/10.1037/a0032279" target="_blank" rel="noopener">Emilio Ferrer &mdash; UC Davis, 2012</a></span>
-          <h3>Partners' Bodies Synchronize Automatically</h3>
-          <p><a class="src-link" href="https://doi.org/10.1037/a0032279" target="_blank" rel="noopener">Ferrer's</a> lab demonstrated that romantic partners exhibit <strong>coregulation of heart rate and respiration</strong> just from proximity. Intentional breathing together accelerates this dramatically &mdash; aligning heart rate variability, cortisol rhythms, and brainwave patterns.</p>
-          <span class="science-stat">2 min</span>
-          <p>to measurable physiological alignment during intentional synchronized breathwork.</p>
+          <h3 data-i18n="sci.c1.title">Partners' Bodies Synchronize Automatically</h3>
+          <p data-i18n="sci.c1.body"><a class="src-link" href="https://doi.org/10.1037/a0032279" target="_blank" rel="noopener">Ferrer's</a> lab demonstrated that romantic partners exhibit <strong>coregulation of heart rate and respiration</strong> just from proximity. Intentional breathing together accelerates this dramatically &mdash; aligning heart rate variability, cortisol rhythms, and brainwave patterns.</p>
+          <span class="science-stat" data-i18n="sci.c1.stat">2 min</span>
+          <p data-i18n="sci.c1.stat.sub">to measurable physiological alignment during intentional synchronized breathwork.</p>
         </div>
 
         <div class="science-card fade-in fade-in-delay-2">
           <div class="highlight-bar gold"></div>
           <span class="sci-source"><a class="src-link" href="https://doi.org/10.1073/pnas.1703643115" target="_blank" rel="noopener">Pavel Goldstein &mdash; University of Haifa, 2018 (PNAS)</a></span>
-          <h3>Touch + Breath = Amplified Synchrony</h3>
-          <p>When partners held hands during synchronized breathing, their <strong>heart rates coupled more tightly</strong> and this was associated with measurable pain reduction. The <a class="src-link" href="https://doi.org/10.1073/pnas.1703643115" target="_blank" rel="noopener">"touch-empathy" effect</a> shows physical contact amplifies breath-based physiological synchrony.</p>
+          <h3 data-i18n="sci.c2.title">Touch + Breath = Amplified Synchrony</h3>
+          <p data-i18n="sci.c2.body">When partners held hands during synchronized breathing, their <strong>heart rates coupled more tightly</strong> and this was associated with measurable pain reduction. The <a class="src-link" href="https://doi.org/10.1073/pnas.1703643115" target="_blank" rel="noopener">"touch-empathy" effect</a> shows physical contact amplifies breath-based physiological synchrony.</p>
         </div>
 
         <div class="science-card fade-in fade-in-delay-3">
           <div class="highlight-bar rose"></div>
           <span class="sci-source"><a class="src-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3108032/" target="_blank" rel="noopener">Stephen Porges &mdash; Polyvagal Theory</a></span>
-          <h3>The Vagus Nerve: Your "Rest &amp; Connect" System</h3>
-          <p>Slow, deep breathing stimulates the vagus nerve, activating the <strong>parasympathetic "rest and connect" response</strong>. When two people breathe together, their <a class="src-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3108032/" target="_blank" rel="noopener">vagal tone synchronizes</a> &mdash; creating a shared state of safety and openness that Porges calls "co-regulation."</p>
+          <h3 data-i18n="sci.c3.title">The Vagus Nerve: Your "Rest &amp; Connect" System</h3>
+          <p data-i18n="sci.c3.body">Slow, deep breathing stimulates the vagus nerve, activating the <strong>parasympathetic "rest and connect" response</strong>. When two people breathe together, their <a class="src-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3108032/" target="_blank" rel="noopener">vagal tone synchronizes</a> &mdash; creating a shared state of safety and openness that Porges calls "co-regulation."</p>
         </div>
 
         <div class="science-card fade-in fade-in-delay-4">
           <div class="highlight-bar teal"></div>
           <span class="sci-source"><a class="src-link" href="https://www.quantamagazine.org/how-the-brain-distinguishes-memories-from-perceptions-20221214/" target="_blank" rel="noopener">Quanta Magazine, 2022 &mdash; Interbrain Research</a></span>
-          <h3>Brain-to-Brain Neural Coupling</h3>
-          <p>Neuroimaging reveals romantic couples display <strong><a class="src-link" href="https://doi.org/10.1016/j.neuroimage.2020.117352" target="_blank" rel="noopener">brain-to-brain synchrony</a></strong> in temporal-parietal structures linked to empathy and emotional regulation &mdash; neural coordination that simply doesn't occur between strangers.</p>
+          <h3 data-i18n="sci.c4.title">Brain-to-Brain Neural Coupling</h3>
+          <p data-i18n="sci.c4.body">Neuroimaging reveals romantic couples display <strong><a class="src-link" href="https://doi.org/10.1016/j.neuroimage.2020.117352" target="_blank" rel="noopener">brain-to-brain synchrony</a></strong> in temporal-parietal structures linked to empathy and emotional regulation &mdash; neural coordination that simply doesn't occur between strangers.</p>
         </div>
 
         <div class="science-card full-width fade-in">
           <div class="highlight-bar gold"></div>
           <span class="sci-source"><a class="src-link" href="https://www.heartmath.org/research/science-of-the-heart/energetic-communication/" target="_blank" rel="noopener">HeartMath Institute &mdash; Heart Coherence Research</a></span>
-          <h3>Your Heart's Electromagnetic Field Reaches Your Partner</h3>
-          <p>When you achieve <a class="src-link" href="https://www.heartmath.org/research/science-of-the-heart/heart-rate-variability/" target="_blank" rel="noopener">heart coherence</a> through rhythmic breathing, your heart generates an electromagnetic field <strong>detectable several feet away</strong>. Partners breathing together in close proximity literally entrain each other's heart rhythms &mdash; creating what HeartMath calls <a class="src-link" href="https://www.heartmath.org/research/science-of-the-heart/energetic-communication/" target="_blank" rel="noopener">"physiological coherence."</a> This is the scientific basis for what we feel intuitively: that breathing hand in hand creates a shared state of calm and connection that transcends the individual.</p>
+          <h3 data-i18n="sci.c5.title">Your Heart's Electromagnetic Field Reaches Your Partner</h3>
+          <p data-i18n="sci.c5.body">When you achieve <a class="src-link" href="https://www.heartmath.org/research/science-of-the-heart/heart-rate-variability/" target="_blank" rel="noopener">heart coherence</a> through rhythmic breathing, your heart generates an electromagnetic field <strong>detectable several feet away</strong>. Partners breathing together in close proximity literally entrain each other's heart rhythms &mdash; creating what HeartMath calls <a class="src-link" href="https://www.heartmath.org/research/science-of-the-heart/energetic-communication/" target="_blank" rel="noopener">"physiological coherence."</a> This is the scientific basis for what we feel intuitively: that breathing hand in hand creates a shared state of calm and connection that transcends the individual.</p>
         </div>
       </div>
     </div>
@@ -1799,35 +1796,35 @@
       <div class="measure-grid">
         <div class="measure-card fade-in fade-in-delay-1">
           <span class="m-icon material-symbols-rounded" aria-hidden="true">favorite</span>
-          <h3>Heart Rate Sync</h3>
+          <h3 data-i18n="mc.1.title">Heart Rate Sync</h3>
           <span class="m-value">BPM</span>
-          <p><a class="src-link" href="https://doi.org/10.1037/a0032279" target="_blank" rel="noopener">Ferrer (UC Davis)</a> and <a class="src-link" href="https://doi.org/10.1073/pnas.1703643115" target="_blank" rel="noopener">Goldstein (Haifa)</a> proved partners' heart rates couple during shared breathing. We want to see our Apple Watch heart rates converge in real time.</p>
+          <p data-i18n="mc.1.body"><a class="src-link" href="https://doi.org/10.1037/a0032279" target="_blank" rel="noopener">Ferrer (UC Davis)</a> and <a class="src-link" href="https://doi.org/10.1073/pnas.1703643115" target="_blank" rel="noopener">Goldstein (Haifa)</a> proved partners' heart rates couple during shared breathing. We want to see our Apple Watch heart rates converge in real time.</p>
         </div>
         <div class="measure-card fade-in fade-in-delay-2">
           <span class="m-icon material-symbols-rounded" aria-hidden="true">monitor_heart</span>
-          <h3>HRV Coherence</h3>
+          <h3 data-i18n="mc.2.title">HRV Coherence</h3>
           <span class="m-value">SDNN</span>
-          <p>Heart Rate Variability reflects autonomic nervous system balance. <a class="src-link" href="https://doi.org/10.1037/a0040496" target="_blank" rel="noopener">Bar-Kalifa's research (2016)</a> showed HRV synchronization between partners is a marker of emotional attunement.</p>
+          <p data-i18n="mc.2.body">Heart Rate Variability reflects autonomic nervous system balance. <a class="src-link" href="https://doi.org/10.1037/a0040496" target="_blank" rel="noopener">Bar-Kalifa's research (2016)</a> showed HRV synchronization between partners is a marker of emotional attunement.</p>
         </div>
         <div class="measure-card fade-in fade-in-delay-3">
           <span class="m-icon material-symbols-rounded" aria-hidden="true">pulmonology</span>
-          <h3>Respiratory Rate</h3>
+          <h3 data-i18n="mc.3.title">Respiratory Rate</h3>
           <span class="m-value">RPM</span>
-          <p>Apple Watch tracks respiratory rate during Mindfulness sessions. Coherent breathing at 5&ndash;6 breaths/minute maximizes vagal tone &mdash; the "sweet spot" identified by <a class="src-link" href="https://www.coherence.com/" target="_blank" rel="noopener">Stephen Elliott's research</a>.</p>
+          <p data-i18n="mc.3.body">Apple Watch tracks respiratory rate during Mindfulness sessions. Coherent breathing at 5&ndash;6 breaths/minute maximizes vagal tone &mdash; the "sweet spot" identified by <a class="src-link" href="https://www.coherence.com/" target="_blank" rel="noopener">Stephen Elliott's research</a>.</p>
         </div>
         <div class="measure-card fade-in fade-in-delay-4">
           <span class="m-icon material-symbols-rounded" aria-hidden="true">cardiology</span>
-          <h3>Cardio Fitness</h3>
+          <h3 data-i18n="mc.4.title">Cardio Fitness</h3>
           <span class="m-value">VO2</span>
-          <p>While VO2Max is measured during activity, improved HRV through daily breathwork correlates with better cardiovascular fitness markers over time (Brown &amp; Gerbarg research).</p>
+          <p data-i18n="mc.4.body">While VO2Max is measured during activity, improved HRV through daily breathwork correlates with better cardiovascular fitness markers over time (Brown &amp; Gerbarg research).</p>
         </div>
       </div>
 
       <div class="science-card full-width fade-in" style="margin-top: 32px;">
         <div class="highlight-bar teal"></div>
         <span class="sci-source">The Research Foundation for Wearable Couple Measurement</span>
-        <h3>What Science Already Knows</h3>
-        <p><a class="src-link" href="https://doi.org/10.1111/psyp.13500" target="_blank" rel="noopener">Sels et al. (2020, KU Leuven)</a> used wearable sensors to measure autonomic synchrony in couples during daily life and confirmed heart rate synchrony in real-world settings. <a class="src-link" href="https://doi.org/10.1037/emo0000099" target="_blank" rel="noopener">Timmons, Margolin &amp; Saxbe (USC, 2015)</a> found partners showed <strong>correlated respiratory sinus arrhythmia (RSA)</strong> &mdash; a key HRV component &mdash; throughout the day, with stronger linkage during shared activities. <a class="src-link" href="https://doi.org/10.3390/s18082619" target="_blank" rel="noopener">Hernando et al. (2018)</a> validated that <strong>Apple Watch PPG-based HRV measurements correlate highly (r&nbsp;=&nbsp;0.7&ndash;0.9)</strong> with clinical-grade ECG for time-domain metrics. The hardware is ready. The science is clear. We just need the app to connect the data from two watches during a shared breathing session.</p>
+        <h3 data-i18n="mc.research.title">What Science Already Knows</h3>
+        <p data-i18n="mc.research.body"><a class="src-link" href="https://doi.org/10.1111/psyp.13500" target="_blank" rel="noopener">Sels et al. (2020, KU Leuven)</a> used wearable sensors to measure autonomic synchrony in couples during daily life and confirmed heart rate synchrony in real-world settings. <a class="src-link" href="https://doi.org/10.1037/emo0000099" target="_blank" rel="noopener">Timmons, Margolin &amp; Saxbe (USC, 2015)</a> found partners showed <strong>correlated respiratory sinus arrhythmia (RSA)</strong> &mdash; a key HRV component &mdash; throughout the day, with stronger linkage during shared activities. <a class="src-link" href="https://doi.org/10.3390/s18082619" target="_blank" rel="noopener">Hernando et al. (2018)</a> validated that <strong>Apple Watch PPG-based HRV measurements correlate highly (r&nbsp;=&nbsp;0.7&ndash;0.9)</strong> with clinical-grade ECG for time-domain metrics. The hardware is ready. The science is clear. We just need the app to connect the data from two watches during a shared breathing session.</p>
       </div>
     </div>
   </section>
@@ -1846,19 +1843,19 @@
 
       <div class="vision-grid-3">
         <div class="vision-card fade-in fade-in-delay-1">
-          <h3>Side by Side with Health Insights</h3>
-          <p>Our current practice: open the window, hold hands, and breathe. An app that reads both Apple Watches simultaneously and shows a live sync score. How closely our heart rates, HRV, and breathing align. The invisible bond made visible.</p>
-          <span class="v-tag now">What we do now</span>
+          <h3 data-i18n="vc.1.title">Side by Side with Health Insights</h3>
+          <p data-i18n="vc.1.body">Our current practice: open the window, hold hands, and breathe. An app that reads both Apple Watches simultaneously and shows a live sync score. How closely our heart rates, HRV, and breathing align. The invisible bond made visible.</p>
+          <span class="v-tag now" data-i18n="vc.1.tag">What we do now</span>
         </div>
         <div class="vision-card fade-in fade-in-delay-2">
-          <h3>Breathing Together from Anywhere</h3>
-          <p>For mornings apart: a shared breathing session where each partner feels the other's rhythm through gentle haptic feedback on the Apple Watch. <a class="src-link" href="https://psycnet.apa.org/doiLanding?doi=10.1037%2Fa0032010" target="_blank" rel="noopener">Barbara Fredrickson</a> defines love as micro-moments of positivity resonance. We want to make these possible for every couple, regardless of distance.</p>
-          <span class="v-tag future">The dream</span>
+          <h3 data-i18n="vc.2.title">Breathing Together from Anywhere</h3>
+          <p data-i18n="vc.2.body">For mornings apart: a shared breathing session where each partner feels the other's rhythm through gentle haptic feedback on the Apple Watch. <a class="src-link" href="https://psycnet.apa.org/doiLanding?doi=10.1037%2Fa0032010" target="_blank" rel="noopener">Barbara Fredrickson</a> defines love as micro-moments of positivity resonance. We want to make these possible for every couple, regardless of distance.</p>
+          <span class="v-tag future" data-i18n="vc.2.tag">The dream</span>
         </div>
         <div class="vision-card vision-card-intimate fade-in fade-in-delay-3">
-          <h3>Breathing for Intimacy</h3>
-          <p>Conscious breathing deepens every dimension of closeness. Slower, deeper breath cycles extend presence and heighten sensation. Tantra breathing traditions have known this for centuries. With synthesized couple voices guiding longer intimacy sessions, TwoBreath can become a foundation for physical and emotional closeness, mental clarity, and a richer experience of being fully together.</p>
-          <span class="v-tag future">Coming soon</span>
+          <h3 data-i18n="vc.3.title">Breathing for Intimacy</h3>
+          <p data-i18n="vc.3.body">Conscious breathing deepens every dimension of closeness. Slower, deeper breath cycles extend presence and heighten sensation. Tantra breathing traditions have known this for centuries. With synthesized couple voices guiding longer intimacy sessions, TwoBreath can become a foundation for physical and emotional closeness, mental clarity, and a richer experience of being fully together.</p>
+          <span class="v-tag future" data-i18n="vc.3.tag">Coming soon</span>
         </div>
       </div>
     </div>
@@ -1873,47 +1870,47 @@
       <div class="benefits-grid">
         <div class="benefit-card fade-in fade-in-delay-1">
           <div class="b-icon teal-bg"><span class="material-symbols-rounded" aria-hidden="true">shield_with_heart</span></div>
-          <h3>Nervous System Co-Regulation</h3>
-          <p>Synchronized breathing activates the parasympathetic system in both partners simultaneously. <a class="src-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3108032/" target="_blank" rel="noopener">Porges' Polyvagal Theory</a> shows this creates a shared state of safety &mdash; the biological foundation for emotional openness.</p>
+          <h3 data-i18n="bc.1.title">Nervous System Co-Regulation</h3>
+          <p data-i18n="bc.1.body">Synchronized breathing activates the parasympathetic system in both partners simultaneously. <a class="src-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3108032/" target="_blank" rel="noopener">Porges' Polyvagal Theory</a> shows this creates a shared state of safety &mdash; the biological foundation for emotional openness.</p>
         </div>
         <div class="benefit-card fade-in fade-in-delay-2">
           <div class="b-icon gold-bg"><span class="material-symbols-rounded" aria-hidden="true">neurology</span></div>
-          <h3>Interbrain Neural Synchrony</h3>
-          <p>Regular shared practice strengthens brain-to-brain coupling in regions responsible for empathy and emotional regulation. <a class="src-link" href="https://doi.org/10.1093/scan/nsq092" target="_blank" rel="noopener">Acevedo &amp; Aron (Stony Brook, 2011)</a> showed long-term couples can maintain intense love &mdash; without the anxiety of early passion.</p>
+          <h3 data-i18n="bc.2.title">Interbrain Neural Synchrony</h3>
+          <p data-i18n="bc.2.body">Regular shared practice strengthens brain-to-brain coupling in regions responsible for empathy and emotional regulation. <a class="src-link" href="https://doi.org/10.1093/scan/nsq092" target="_blank" rel="noopener">Acevedo &amp; Aron (Stony Brook, 2011)</a> showed long-term couples can maintain intense love &mdash; without the anxiety of early passion.</p>
         </div>
         <div class="benefit-card fade-in fade-in-delay-3">
           <div class="b-icon rose-bg"><span class="material-symbols-rounded" aria-hidden="true">ecg_heart</span></div>
-          <h3>Heart Coherence Between Partners</h3>
-          <p><a class="src-link" href="https://www.heartmath.org/research/science-of-the-heart/" target="_blank" rel="noopener">HeartMath research</a> shows rhythmic breathing creates measurable heart coherence. <a class="src-link" href="https://doi.org/10.1073/pnas.1703643115" target="_blank" rel="noopener">Goldstein (2018, PNAS)</a> proved that hand-holding amplifies this synchrony and is associated with reduced pain and increased empathy.</p>
+          <h3 data-i18n="bc.3.title">Heart Coherence Between Partners</h3>
+          <p data-i18n="bc.3.body"><a class="src-link" href="https://www.heartmath.org/research/science-of-the-heart/" target="_blank" rel="noopener">HeartMath research</a> shows rhythmic breathing creates measurable heart coherence. <a class="src-link" href="https://doi.org/10.1073/pnas.1703643115" target="_blank" rel="noopener">Goldstein (2018, PNAS)</a> proved that hand-holding amplifies this synchrony and is associated with reduced pain and increased empathy.</p>
         </div>
         <div class="benefit-card fade-in fade-in-delay-4">
           <div class="b-icon white-bg"><span class="material-symbols-rounded" aria-hidden="true">diversity_1</span></div>
-          <h3>Gottman's "Magic Six Hours"</h3>
-          <p><a class="src-link" href="https://www.gottman.com/about/research/" target="_blank" rel="noopener">John Gottman</a> found that just 6 hours per week of intentional connection rituals sustains strong relationships. Our 15 minute morning practice accounts for nearly two of those hours &mdash; the single highest-impact investment.</p>
+          <h3 data-i18n="bc.4.title">Gottman's "Magic Six Hours"</h3>
+          <p data-i18n="bc.4.body"><a class="src-link" href="https://www.gottman.com/about/research/" target="_blank" rel="noopener">John Gottman</a> found that just 6 hours per week of intentional connection rituals sustains strong relationships. Our 15 minute morning practice accounts for nearly two of those hours &mdash; the single highest-impact investment.</p>
         </div>
       </div>
 
       <div class="timeline fade-in" style="margin-top: 64px;">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 400; margin-bottom: 32px;">Our journey, breath by breath</h3>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 400; margin-bottom: 32px;" data-i18n="tl.heading">Our journey, breath by breath</h3>
         <div class="timeline-item fade-in">
           <span class="tl-icon material-symbols-rounded" aria-hidden="true" style="color:var(--accent-gold)">lightbulb</span>
-          <h3>The Realization</h3>
-          <p>The oxytocin rush had settled into something quieter. We were still in love, but the effortless chemistry had become... effort. We knew we needed something new &mdash; not therapy, not a trip, but a daily practice.</p>
+          <h3 data-i18n="tl.1.title">The Realization</h3>
+          <p data-i18n="tl.1.body">The oxytocin rush had settled into something quieter. We were still in love, but the effortless chemistry had become... effort. We knew we needed something new &mdash; not therapy, not a trip, but a daily practice.</p>
         </div>
         <div class="timeline-item fade-in">
           <span class="tl-icon material-symbols-rounded" aria-hidden="true" style="color:var(--accent-teal)">eco</span>
-          <h3>The Awkwardness</h3>
-          <p>Sitting together in silence, breathing deliberately &mdash; it felt strange at first. But by day 4, the silence became comfortable. By day 7, we started to crave it.</p>
+          <h3 data-i18n="tl.2.title">The Awkwardness</h3>
+          <p data-i18n="tl.2.body">Sitting together in silence, breathing deliberately &mdash; it felt strange at first. But by day 4, the silence became comfortable. By day 7, we started to crave it.</p>
         </div>
         <div class="timeline-item fade-in">
           <span class="tl-icon material-symbols-rounded" aria-hidden="true" style="color:var(--accent-rose)">psychiatry</span>
-          <h3>The Shift</h3>
-          <p>We started noticing each other differently throughout the day. Small gestures landed deeper. Arguments de-escalated faster. The morning ritual became an anchor &mdash; the one thing that was purely ours.</p>
+          <h3 data-i18n="tl.3.title">The Shift</h3>
+          <p data-i18n="tl.3.body">We started noticing each other differently throughout the day. Small gestures landed deeper. Arguments de-escalated faster. The morning ritual became an anchor &mdash; the one thing that was purely ours.</p>
         </div>
         <div class="timeline-item fade-in">
           <span class="tl-icon material-symbols-rounded" aria-hidden="true" style="color:var(--accent-gold)">favorite</span>
-          <h3>The Practice</h3>
-          <p>As Dr. Brooks says: "Love becomes a habit over time." The breathing is now automatic. Some mornings we catch ourselves in sync even before we sit down. Friends ask what changed. We can't explain it in words &mdash; because the change isn't cognitive. It's embodied.</p>
+          <h3 data-i18n="tl.4.title">The Practice</h3>
+          <p data-i18n="tl.4.body">As Dr. Brooks says: "Love becomes a habit over time." The breathing is now automatic. Some mornings we catch ourselves in sync even before we sit down. Friends ask what changed. We can't explain it in words &mdash; because the change isn't cognitive. It's embodied.</p>
         </div>
       </div>
     </div>

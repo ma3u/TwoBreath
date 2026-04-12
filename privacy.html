@@ -8,31 +8,89 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #1a1a2e;
-      --warm-white: #faf8f5;
-      --accent-teal: #5bb5a2;
+      --ink: #1a1714;
+      --ink-light: #2a2520;
+      --warm-white: #f5f0e8;
+      --warm-white-75: rgba(245,240,232,0.75);
+      --warm-white-60: rgba(245,240,232,0.6);
+      --muted: #8a8075;
+      --accent-teal: #2d9e8a;
       --accent-gold: #c9a84c;
-      --accent-rose: #d4707a;
-      --muted: #8e8e93;
+      --accent-rose: #c96b6b;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
       background: var(--ink);
       color: var(--warm-white);
-      line-height: 1.7;
-      padding: 0;
+      font-weight: 300;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
     }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(26,23,20,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--warm-white);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo span { color: var(--accent-teal); }
+    .nav-logo img { height: 28px; width: auto; }
+
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--warm-white-60);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--warm-white); }
+
+    .nav-home-btn {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      border: 0.5px solid rgba(255,255,255,0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .nav-home-btn:hover { color: var(--warm-white); border-color: rgba(255,255,255,0.3); }
 
     .container {
       max-width: 720px;
       margin: 0 auto;
-      padding: 60px 24px 80px;
+      padding: 100px 24px 80px;
     }
 
     h1 {
@@ -66,12 +124,12 @@
       color: var(--warm-white);
     }
 
-    p { margin-bottom: 14px; color: rgba(250,248,245,0.85); }
+    p { margin-bottom: 14px; color: rgba(245,240,232,0.85); }
 
     ul, ol {
       margin-bottom: 14px;
       padding-left: 24px;
-      color: rgba(250,248,245,0.85);
+      color: rgba(245,240,232,0.85);
     }
 
     li { margin-bottom: 6px; }
@@ -86,16 +144,16 @@
     th {
       text-align: left;
       padding: 10px 12px;
-      background: rgba(91,181,162,0.15);
+      background: rgba(45,158,138,0.15);
       color: var(--accent-teal);
       font-weight: 600;
-      border-bottom: 1px solid rgba(250,248,245,0.1);
+      border-bottom: 1px solid rgba(245,240,232,0.1);
     }
 
     td {
       padding: 10px 12px;
-      border-bottom: 1px solid rgba(250,248,245,0.06);
-      color: rgba(250,248,245,0.8);
+      border-bottom: 1px solid rgba(245,240,232,0.06);
+      color: rgba(245,240,232,0.8);
     }
 
     a {
@@ -106,7 +164,7 @@
     a:hover { text-decoration: underline; }
 
     .highlight {
-      background: rgba(91,181,162,0.1);
+      background: rgba(45,158,138,0.1);
       border-left: 3px solid var(--accent-teal);
       padding: 16px 20px;
       border-radius: 0 8px 8px 0;
@@ -115,22 +173,15 @@
 
     .highlight p { margin-bottom: 0; }
 
-    .back-link {
-      display: inline-block;
-      margin-bottom: 32px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .back-link:hover { color: var(--accent-teal); }
-
     footer {
       text-align: center;
       padding: 40px 24px;
       color: var(--muted);
       font-size: 0.85rem;
-      border-top: 1px solid rgba(250,248,245,0.06);
+      border-top: 0.5px solid rgba(245,240,232,0.06);
     }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent-teal); }
 
     @media (max-width: 600px) {
       h1 { font-size: 1.8rem; }
@@ -142,8 +193,20 @@
   </style>
 </head>
 <body>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="images/twobreath_icon.svg" alt="">Two<span>Breath</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#story">Our Story</a></li>
+      <li><a href="index.html#science">Science</a></li>
+      <li><a href="index.html#ritual">The Ritual</a></li>
+      <li><a href="index.html#vision">Vision</a></li>
+    </ul>
+    <a href="index.html" class="nav-home-btn">← Home</a>
+  </nav>
+
   <div class="container">
-    <a href="index.html" class="back-link">&larr; Back to TwoBreath</a>
 
     <h1>Privacy Policy</h1>
     <p class="subtitle">Last updated: April 2, 2026</p>

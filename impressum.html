@@ -9,40 +9,90 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #1a1a2e;
-      --warm-white: #faf8f5;
-      --accent-teal: #5bb5a2;
+      --ink: #1a1714;
+      --ink-light: #2a2520;
+      --warm-white: #f5f0e8;
+      --warm-white-75: rgba(245,240,232,0.75);
+      --warm-white-60: rgba(245,240,232,0.6);
+      --muted: #8a8075;
+      --accent-teal: #2d9e8a;
       --accent-gold: #c9a84c;
-      --accent-rose: #d4707a;
-      --muted: #8e8e93;
+      --accent-rose: #c96b6b;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
       background: var(--ink);
       color: var(--warm-white);
-      line-height: 1.7;
+      font-weight: 300;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
     }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(26,23,20,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--warm-white);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo span { color: var(--accent-teal); }
+    .nav-logo img { height: 28px; width: auto; }
+
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--warm-white-60);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--warm-white); }
+
+    .nav-home-btn {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      border: 0.5px solid rgba(255,255,255,0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .nav-home-btn:hover { color: var(--warm-white); border-color: rgba(255,255,255,0.3); }
 
     .container {
       max-width: 720px;
       margin: 0 auto;
-      padding: 60px 24px 80px;
+      padding: 100px 24px 80px;
     }
-
-    .back-link {
-      display: inline-block;
-      margin-bottom: 32px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      text-decoration: none;
-    }
-    .back-link:hover { color: var(--accent-teal); }
 
     /* Language tabs */
     .lang-tabs {
@@ -53,25 +103,25 @@
     }
 
     .lang-tab {
-      padding: 8px 20px;
+      padding: 7px 18px;
       border-radius: 50px;
-      border: 0.5px solid rgba(91,181,162,0.3);
+      border: 0.5px solid rgba(45,158,138,0.3);
       background: transparent;
       color: var(--muted);
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem;
+      font-size: 13px;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .lang-tab.active {
-      background: rgba(91,181,162,0.15);
+      background: rgba(45,158,138,0.15);
       border-color: var(--accent-teal);
       color: var(--accent-teal);
     }
 
     .lang-tab:hover:not(.active) {
-      border-color: rgba(91,181,162,0.5);
+      border-color: rgba(45,158,138,0.5);
       color: var(--warm-white);
     }
 
@@ -102,14 +152,14 @@
       color: var(--accent-teal);
     }
 
-    p { margin-bottom: 12px; color: rgba(250,248,245,0.85); }
+    p { margin-bottom: 12px; color: rgba(245,240,232,0.85); }
 
     a { color: var(--accent-teal); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     .info-block {
-      background: rgba(91,181,162,0.06);
-      border: 0.5px solid rgba(91,181,162,0.2);
+      background: rgba(45,158,138,0.06);
+      border: 0.5px solid rgba(45,158,138,0.2);
       border-radius: 12px;
       padding: 24px;
       margin-top: 12px;
@@ -146,7 +196,7 @@
     .disclaimer p {
       margin-bottom: 0;
       font-size: 0.9rem;
-      color: rgba(250,248,245,0.75);
+      color: rgba(245,240,232,0.75);
     }
 
     footer {
@@ -154,11 +204,11 @@
       padding: 40px 24px;
       color: var(--muted);
       font-size: 0.85rem;
-      border-top: 1px solid rgba(250,248,245,0.06);
+      border-top: 0.5px solid rgba(245,240,232,0.06);
       margin-top: 40px;
     }
 
-    footer a { color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { color: var(--accent-teal); }
 
     @media (max-width: 600px) {
@@ -171,8 +221,20 @@
   </style>
 </head>
 <body>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="images/twobreath_icon.svg" alt="">Two<span>Breath</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#story">Our Story</a></li>
+      <li><a href="index.html#science">Science</a></li>
+      <li><a href="index.html#ritual">The Ritual</a></li>
+      <li><a href="index.html#vision">Vision</a></li>
+    </ul>
+    <a href="index.html" class="nav-home-btn">← Home</a>
+  </nav>
+
   <div class="container">
-    <a href="index.html" class="back-link">&larr; Back to TwoBreath</a>
 
     <div class="lang-tabs" role="tablist" aria-label="Language">
       <button class="lang-tab active" role="tab" aria-selected="true"  onclick="switchLang('en', this)">English</button>
