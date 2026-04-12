@@ -1226,38 +1226,34 @@
       border-color: rgba(255,255,255,0.25);
     }
 
-    /* ── Narration FAB label ── */
-    .narration-label {
-      position: absolute;
-      bottom: 100%;
-      right: 0;
-      margin-bottom: 8px;
+    /* ── Narration FAB intro card (always visible before playing) ── */
+    .narration-intro {
       background: rgba(26,23,20,0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 0.5px solid rgba(255,255,255,0.12);
-      border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 11px;
-      color: var(--warm-white-75);
-      white-space: nowrap;
+      border-radius: 12px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-width: 220px;
       pointer-events: none;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      text-align: right;
     }
 
-    .narration-fab:hover .narration-label {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .narration-fab.playing .narration-intro { display: none; }
 
-    .narration-label .nar-title-line {
-      display: block;
+    .nar-intro-title {
+      font-size: 11px;
       font-weight: 500;
       color: var(--warm-white);
-      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+
+    .nar-intro-sub {
+      font-size: 10px;
+      color: var(--warm-white-75);
+      line-height: 1.3;
     }
 
     /* ── Section 04 Brooks+Video layout ── */
@@ -1274,8 +1270,10 @@
       overflow: hidden;
       position: relative;
       width: 100%;
-      aspect-ratio: 16/9;
+      aspect-ratio: 9/16;
       background: rgba(0,0,0,0.3);
+      max-width: 280px;
+      margin: 0 auto;
     }
 
     .rightbrain-video iframe {
@@ -1543,8 +1541,8 @@
   <!-- Our Story -->
   <section class="story-section" id="story">
     <div class="section-inner">
-      <span class="section-tag fade-in">01 &mdash; Our Story</span>
-      <h2 class="fade-in">Seven years of love.<br>Then the <em>real work</em> began.</h2>
+      <span class="section-tag fade-in" data-i18n="sec.01">01 &mdash; Our Story</span>
+      <h2 class="fade-in" data-i18n="h2.story">Seven years of love.<br>Then the <em>real work</em> began.</h2>
 
       <div class="story-grid">
         <div class="story-visual fade-in fade-in-delay-1">
@@ -1581,7 +1579,7 @@
           <p class="section-text fade-in fade-in-delay-2">
             By year seven, we were still deeply in love &mdash; but something had shifted. The automatic chemistry that once carried us had quieted. We realized: love wasn't going to sustain itself. We needed <strong>couple routines</strong>. We needed to choose connection, deliberately, daily.
           </p>
-          <blockquote class="fade-in fade-in-delay-3">
+          <blockquote class="fade-in fade-in-delay-3" data-i18n="quote.story">
             "Every morning we open the window, welcome the day together, and start breathing &mdash; hand in hand. The first positive routine of the day. Our nervous systems align before the world pulls us apart."
           </blockquote>
           <p class="section-text fade-in fade-in-delay-4" data-i18n="story.experiment">
@@ -1595,27 +1593,27 @@
   <!-- The Problem -->
   <section class="problem-section" id="problem">
     <div class="section-inner">
-      <span class="section-tag fade-in">02 &mdash; The 7-Year Shift</span>
-      <h2 class="fade-in">After the oxytocin fades,<br><em>what carries you?</em></h2>
-      <p class="section-text fade-in">
+      <span class="section-tag fade-in" data-i18n="sec.02">02 &mdash; The 7-Year Shift</span>
+      <h2 class="fade-in" data-i18n="h2.problem">After the oxytocin fades,<br><em>what carries you?</em></h2>
+      <p class="section-text fade-in" data-i18n="p.problem">
         <a class="src-link" href="https://helenfisher.com/category/scientific-articles/" target="_blank" rel="noopener">Helen Fisher's</a> fMRI research at Rutgers shows the dopamine-driven "high" of early love lasts 12&ndash;18 months. <a class="src-link" href="https://www.gottman.com/about/research/" target="_blank" rel="noopener">John Gottman's</a> longitudinal studies confirm: the first seven years are the highest-risk period for relationships. Not because love dies &mdash; but because the automatic chemistry that sustained it does.
       </p>
 
       <div class="problem-cards">
         <div class="problem-card fade-in fade-in-delay-1">
           <span class="card-icon material-symbols-rounded" aria-hidden="true">science</span>
-          <h3>The neurochemistry fades</h3>
-          <p>Passionate love &mdash; driven by dopamine, norepinephrine, and serotonin drops &mdash; has an expiration date. <a class="src-link" href="https://doi.org/10.1037/0022-3514.51.6.1173" target="_blank" rel="noopener">Elaine Hatfield's</a> research shows it peaks in years 1&ndash;2 and declines significantly by year 3&ndash;7.</p>
+          <h3 data-i18n="card.neuro.title">The neurochemistry fades</h3>
+          <p data-i18n="card.neuro.body">Passionate love &mdash; driven by dopamine, norepinephrine, and serotonin drops &mdash; has an expiration date. <a class="src-link" href="https://doi.org/10.1037/0022-3514.51.6.1173" target="_blank" rel="noopener">Elaine Hatfield's</a> research shows it peaks in years 1&ndash;2 and declines significantly by year 3&ndash;7.</p>
         </div>
         <div class="problem-card fade-in fade-in-delay-2">
           <span class="card-icon material-symbols-rounded" aria-hidden="true">handshake</span>
-          <h3>Companionate love must be built</h3>
-          <p>The deeper love &mdash; based on trust, intimacy, and commitment &mdash; doesn't arrive automatically. <a class="src-link" href="https://doi.org/10.1037/0033-295X.93.2.119" target="_blank" rel="noopener">Robert Sternberg's</a> triangular theory shows it requires deliberate cultivation. It's a practice, not a feeling.</p>
+          <h3 data-i18n="card.companion.title">Companionate love must be built</h3>
+          <p data-i18n="card.companion.body">The deeper love &mdash; based on trust, intimacy, and commitment &mdash; doesn't arrive automatically. <a class="src-link" href="https://doi.org/10.1037/0033-295X.93.2.119" target="_blank" rel="noopener">Robert Sternberg's</a> triangular theory shows it requires deliberate cultivation. It's a practice, not a feeling.</p>
         </div>
         <div class="problem-card fade-in fade-in-delay-3">
           <span class="card-icon material-symbols-rounded" aria-hidden="true">schedule</span>
-          <h3>Without rituals, you drift</h3>
-          <p><a class="src-link" href="https://www.gottman.com/about/research/" target="_blank" rel="noopener">Gottman's</a> data is stark: couples who "turn toward" each other's bids for connection 86% of the time stay together. Those who divorce? Only 33%. Daily rituals make the difference.</p>
+          <h3 data-i18n="card.ritual.title">Without rituals, you drift</h3>
+          <p data-i18n="card.ritual.body"><a class="src-link" href="https://www.gottman.com/about/research/" target="_blank" rel="noopener">Gottman's</a> data is stark: couples who "turn toward" each other's bids for connection 86% of the time stay together. Those who divorce? Only 33%. Daily rituals make the difference.</p>
         </div>
       </div>
     </div>
@@ -1624,8 +1622,8 @@
   <!-- Dr. Arthur Brooks -->
   <section class="brooks-section" id="brooks">
     <div class="section-inner">
-      <span class="section-tag fade-in">03 &mdash; The Wisdom</span>
-      <h2 class="fade-in">Love is not a feeling. <span class="gold"><em>Love is a practice.</em></span></h2>
+      <span class="section-tag fade-in" data-i18n="sec.03">03 &mdash; The Wisdom</span>
+      <h2 class="fade-in" data-i18n="h2.brooks">Love is not a feeling. <span class="gold"><em>Love is a practice.</em></span></h2>
       <p class="section-text fade-in">
         Harvard professor <a class="src-link" href="https://www.arthurbrooks.com/" target="_blank" rel="noopener">Dr. Arthur Brooks</a> &mdash; social scientist, bestselling author, and columnist for <a class="src-link" href="https://www.theatlantic.com/projects/how-build-life/" target="_blank" rel="noopener">The Atlantic</a> &mdash; has spent years translating happiness research into actionable strategies. His work on love after the passion phase resonated deeply with our journey.
       </p>
@@ -1657,8 +1655,8 @@
   <!-- Right Brain Hemisphere -->
   <section class="benefits-section" id="rightbrain">
     <div class="section-inner">
-      <span class="section-tag fade-in">04 &mdash; The Right Brain</span>
-      <h2 class="fade-in">Why we close our eyes, <em>not open an app</em></h2>
+      <span class="section-tag fade-in" data-i18n="sec.04">04 &mdash; The Right Brain</span>
+      <h2 class="fade-in" data-i18n="h2.rightbrain">Why we close our eyes, <em>not open an app</em></h2>
 
       <div class="rightbrain-grid">
         <div>
@@ -1711,8 +1709,8 @@
   <!-- Science -->
   <section class="science-section" id="science">
     <div class="section-inner">
-      <span class="section-tag fade-in">05 &mdash; The Research</span>
-      <h2 class="fade-in">What happens when two people <em>breathe together</em></h2>
+      <span class="section-tag fade-in" data-i18n="sec.05">05 &mdash; The Research</span>
+      <h2 class="fade-in" data-i18n="h2.science">What happens when two people <em>breathe together</em></h2>
       <p class="section-text fade-in">
         The science is compelling: synchronized breathing between partners creates measurable physiological and neurological changes. This isn't wellness speculation &mdash; it's peer-reviewed research from leading universities.
       </p>
@@ -1761,8 +1759,8 @@
   <!-- The Ritual -->
   <section class="ritual-section" id="ritual">
     <div class="section-inner">
-      <span class="section-tag fade-in">06 &mdash; Our Daily Ritual</span>
-      <h2 class="fade-in">Side by side in the morning light. <span class="gold"><em>Eyes closed. Hands intertwined.</em></span></h2>
+      <span class="section-tag fade-in" data-i18n="sec.06">06 &mdash; Our Daily Ritual</span>
+      <h2 class="fade-in" data-i18n="h2.ritual">Side by side in the morning light. <span class="gold"><em>Eyes closed. Hands intertwined.</em></span></h2>
       <p class="section-text fade-in" data-i18n="ritual.intro">
         We lay side by side in our warm and cozy bed. The room is still quiet. One of us reaches over and opens the window just enough to let in the cool morning air. We hold hands. Close our eyes. And begin. Before the phone. Before the news. Before the world. This moment is ours alone.
       </p>
@@ -1792,9 +1790,9 @@
   <!-- Measure with Apple Watch -->
   <section class="measure-section" id="measure">
     <div class="section-inner">
-      <span class="section-tag fade-in">07 &mdash; Measure the Bond</span>
-      <h2 class="fade-in">Can we prove it? <em>We want to find out.</em></h2>
-      <p class="section-text fade-in">
+      <span class="section-tag fade-in" data-i18n="sec.07">07 &mdash; Measure the Bond</span>
+      <h2 class="fade-in" data-i18n="h2.measure">Can we prove it? <em>We want to find out.</em></h2>
+      <p class="section-text fade-in" data-i18n="p.measure">
         We wear our Apple Watches during every morning session. The question that drives us: <strong>do our hearts actually synchronize?</strong> Can we measure the effect of TwoBreath on our physiology &mdash; heartbeat, HRV, and beyond? Research says yes. We want to see it in our own data.
       </p>
 
@@ -1837,12 +1835,12 @@
   <!-- Vision: Long-distance -->
   <section class="vision-section" id="vision">
     <div class="section-inner">
-      <span class="section-tag fade-in">08 &mdash; The Vision</span>
-      <h2 class="fade-in">Where this practice <span class="rose"><em>can take you.</em></span></h2>
-      <p class="section-text fade-in" style="max-width: 620px; margin: 0 auto 20px;">
+      <span class="section-tag fade-in" data-i18n="sec.08">08 &mdash; The Vision</span>
+      <h2 class="fade-in" data-i18n="h2.vision">Where this practice <span class="rose"><em>can take you.</em></span></h2>
+      <p class="section-text fade-in" style="max-width: 620px; margin: 0 auto 20px;" data-i18n="p.vision.intro">
         Some mornings, travel or life separates us. But the ritual does not have to stop. Our vision is a way for couples to connect through synchronized breathing. Feeling each other's presence through shared rhythm, even across time zones.
       </p>
-      <p class="section-text fade-in" style="max-width: 620px; margin: 0 auto 0;">
+      <p class="section-text fade-in" style="max-width: 620px; margin: 0 auto 0;" data-i18n="p.vision.sub">
         And beyond distance. Breathing together is the foundation of everything that makes two people feel truly close.
       </p>
 
@@ -1869,8 +1867,8 @@
   <!-- Benefits & Journey -->
   <section class="benefits-section" id="benefits">
     <div class="section-inner">
-      <span class="section-tag fade-in">09 &mdash; What Changes</span>
-      <h2 class="fade-in">What daily breathing together <span class="rose"><em>actually does</em></span></h2>
+      <span class="section-tag fade-in" data-i18n="sec.09">09 &mdash; What Changes</span>
+      <h2 class="fade-in" data-i18n="h2.benefits">What daily breathing together <span class="rose"><em>actually does</em></span></h2>
 
       <div class="benefits-grid">
         <div class="benefit-card fade-in fade-in-delay-1">
@@ -1924,8 +1922,8 @@
   <!-- Positioning -->
   <section class="positioning-section" id="positioning">
     <div class="section-inner">
-      <span class="section-tag fade-in">10 &mdash; What This Is</span>
-      <h2 class="fade-in">Couples want more depth. <span class="gold"><em>Here is where it begins.</em></span></h2>
+      <span class="section-tag fade-in" data-i18n="sec.10">10 &mdash; What This Is</span>
+      <h2 class="fade-in" data-i18n="h2.position">Couples want more depth. <span class="gold"><em>Here is where it begins.</em></span></h2>
 
       <div class="tagline-box fade-in">
         <div class="tagline" data-i18n="pos.tagline">"The first fifteen minutes that actually change the next twenty-three hours."</div>
@@ -1956,7 +1954,7 @@
   <!-- CTA -->
   <section class="cta-section" id="cta">
     <div class="section-inner">
-      <h2 class="fade-in">Two breaths.<br><em>One bond.</em></h2>
+      <h2 class="fade-in" data-i18n="h2.cta">Two breaths.<br><em>One bond.</em></h2>
       <p class="cta-sub fade-in" data-i18n="cta.sub">Open the window tomorrow morning. Sit side by side. Hold hands. Breathe. See what changes.</p>
       <div class="cta-buttons fade-in fade-in-delay-1">
         <a href="https://testflight.apple.com/join/ChJc5vVx" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="cta.beta">Join Public Beta on TestFlight</a>
@@ -1968,9 +1966,9 @@
 
   <!-- Floating Narration Player -->
   <div class="narration-fab" id="narrationFab">
-    <div class="narration-label">
-      <span class="nar-title-line" data-i18n="nar.label.title">Hear our story in our own voices</span>
-      <span data-i18n="nar.label.sub">Matthi and Dascha narrate every section</span>
+    <div class="narration-intro" id="narrationIntro">
+      <span class="nar-intro-title" data-i18n="nar.label.title">Hear our story in our own voices</span>
+      <span class="nar-intro-sub" data-i18n="nar.label.sub">Matthi and Dascha narrate every section</span>
     </div>
     <div class="narration-info">
       <div class="narration-meta">
@@ -2387,19 +2385,28 @@
     // Matthi & Dascha alternate section by section
     // ══════════════════════════════════════════
 
-    const NARRATION = [
-      { src: 'audio/narration/s00-hero.mp3',       voice: 'Matthi',  title: 'One Breath. Two Souls.',    target: 'hero' },
-      { src: 'audio/narration/s01-story.mp3',      voice: 'Dascha',  title: 'Our Story',                 target: 'story' },
-      { src: 'audio/narration/s02-shift.mp3',      voice: 'Matthi',  title: 'The 7-Year Shift',          target: 'problem' },
-      { src: 'audio/narration/s03-wisdom.mp3',     voice: 'Dascha',  title: 'Love as Practice',          target: 'brooks' },
-      { src: 'audio/narration/s04-rightbrain.mp3',  voice: 'Matthi',  title: 'The Right Brain',           target: 'rightbrain' },
-      { src: 'audio/narration/s05-research.mp3',   voice: 'Dascha',  title: 'The Research',              target: 'science' },
-      { src: 'audio/narration/s06-ritual.mp3',     voice: 'Matthi',  title: 'Our Daily Ritual',          target: 'ritual' },
-      { src: 'audio/narration/s07-measure.mp3',    voice: 'Dascha',  title: 'Measure the Bond',          target: 'measure' },
-      { src: 'audio/narration/s08-vision.mp3',     voice: 'Matthi',  title: 'The Vision',                target: 'vision' },
-      { src: 'audio/narration/s09-changes.mp3',    voice: 'Dascha',  title: 'What Changes',              target: 'benefits' },
-      { src: 'audio/narration/s10-cta.mp3',        voice: 'Matthi',  title: 'Two Breaths. One Bond.',    target: 'cta' },
+    const NARRATION_TRACKS = [
+      { key: 's00-hero',       voice: 'Matthi',  title: 'One Breath. Two Souls.',    target: 'hero' },
+      { key: 's01-story',      voice: 'Dascha',  title: 'Our Story',                 target: 'story' },
+      { key: 's02-shift',      voice: 'Matthi',  title: 'The 7-Year Shift',          target: 'problem' },
+      { key: 's03-wisdom',     voice: 'Dascha',  title: 'Love as Practice',          target: 'brooks' },
+      { key: 's04-rightbrain', voice: 'Matthi',  title: 'The Right Brain',           target: 'rightbrain' },
+      { key: 's05-research',   voice: 'Dascha',  title: 'The Research',              target: 'science' },
+      { key: 's06-ritual',     voice: 'Matthi',  title: 'Our Daily Ritual',          target: 'ritual' },
+      { key: 's07-measure',    voice: 'Dascha',  title: 'Measure the Bond',          target: 'measure' },
+      { key: 's08-vision',     voice: 'Matthi',  title: 'The Vision',                target: 'vision' },
+      { key: 's09-changes',    voice: 'Dascha',  title: 'What Changes',              target: 'benefits' },
+      { key: 's10-cta',        voice: 'Matthi',  title: 'Two Breaths. One Bond.',    target: 'cta' },
     ];
+
+    function getNarration(lang) {
+      return NARRATION_TRACKS.map(t => ({
+        ...t,
+        src: `audio/narration/${lang}/${t.key}.mp3`
+      }));
+    }
+
+    let NARRATION = getNarration('en');
 
     const narFab = document.getElementById('narrationFab');
     const narBtn = document.getElementById('narBtn');
@@ -2502,6 +2509,38 @@
         'nav.ritual': 'The Ritual',
         'nav.measure': 'Measure',
         'nav.vision': 'Vision',
+        'sec.01': '01 \u2014 Our Story',
+        'sec.02': '02 \u2014 The 7-Year Shift',
+        'sec.03': '03 \u2014 The Wisdom',
+        'sec.04': '04 \u2014 The Right Brain',
+        'sec.05': '05 \u2014 The Research',
+        'sec.06': '06 \u2014 Our Daily Ritual',
+        'sec.07': '07 \u2014 Measure the Bond',
+        'sec.08': '08 \u2014 The Vision',
+        'sec.09': '09 \u2014 What Changes',
+        'sec.10': '10 \u2014 What This Is',
+        'h2.story': 'Seven years of love.<br>Then the <em>real work</em> began.',
+        'h2.problem': 'After the oxytocin fades,<br><em>what carries you?</em>',
+        'h2.brooks': 'Love is not a feeling. <span class="gold"><em>Love is a practice.</em></span>',
+        'h2.rightbrain': 'Why we close our eyes, <em>not open an app</em>',
+        'h2.science': 'What happens when two people <em>breathe together</em>',
+        'h2.ritual': 'Side by side in the morning light. <span class="gold"><em>Eyes closed. Hands intertwined.</em></span>',
+        'h2.measure': 'Can we prove it? <em>We want to find out.</em>',
+        'h2.vision': 'Where this practice <span class="rose"><em>can take you.</em></span>',
+        'h2.benefits': 'What daily breathing together <span class="rose"><em>actually does</em></span>',
+        'h2.position': 'Couples want more depth. <span class="gold"><em>Here is where it begins.</em></span>',
+        'h2.cta': 'Two breaths.<br><em>One bond.</em>',
+        'quote.story': '"Every morning we open the window, welcome the day together, and start breathing \u2014 hand in hand. The first positive routine of the day. Our nervous systems align before the world pulls us apart."',
+        'p.problem': '<a class="src-link" href="https://helenfisher.com/category/scientific-articles/" target="_blank" rel="noopener">Helen Fisher\'s</a> fMRI research at Rutgers shows the dopamine-driven \u201chigh\u201d of early love lasts 12\u201318 months. <a class="src-link" href="https://www.gottman.com/about/research/" target="_blank" rel="noopener">John Gottman\'s</a> longitudinal studies confirm: the first seven years are the highest-risk period for relationships. Not because love dies \u2014 but because the automatic chemistry that sustained it does.',
+        'card.neuro.title': 'The neurochemistry fades',
+        'card.neuro.body': 'Passionate love \u2014 driven by dopamine, norepinephrine, and serotonin drops \u2014 has an expiration date. <a class="src-link" href="https://doi.org/10.1037/0022-3514.51.6.1173" target="_blank" rel="noopener">Elaine Hatfield\'s</a> research shows it peaks in years 1\u20132 and declines significantly by year 3\u20137.',
+        'card.companion.title': 'Companionate love must be built',
+        'card.companion.body': 'The deeper love \u2014 based on trust, intimacy, and commitment \u2014 doesn\'t arrive automatically. <a class="src-link" href="https://doi.org/10.1037/0033-295X.93.2.119" target="_blank" rel="noopener">Robert Sternberg\'s</a> triangular theory shows it requires deliberate cultivation. It\'s a practice, not a feeling.',
+        'card.ritual.title': 'Without rituals, you drift',
+        'card.ritual.body': '<a class="src-link" href="https://www.gottman.com/about/research/" target="_blank" rel="noopener">Gottman\'s</a> data is stark: couples who \u201cturn toward\u201d each other\'s bids for connection 86% of the time stay together. Those who divorce? Only 33%. Daily rituals make the difference.',
+        'p.measure': 'We wear our Apple Watches during every morning session. The question that drives us: <strong>do our hearts actually synchronize?</strong> Can we measure the effect of TwoBreath on our physiology \u2014 heartbeat, HRV, and beyond? Research says yes. We want to see it in our own data.',
+        'p.vision.intro': 'Some mornings, travel or life separates us. But the ritual does not have to stop. Our vision is a way for couples to connect through synchronized breathing. Feeling each other\'s presence through shared rhythm, even across time zones.',
+        'p.vision.sub': 'And beyond distance. Breathing together is the foundation of everything that makes two people feel truly close.',
         'story.experiment': 'What started as a quiet experiment on a Sunday morning became the most precious part of our day. We now look forward to it more than coffee. More than checking our phones. More than anything that follows. Fifteen minutes that belong only to us.',
         'ritual.intro': 'We lay side by side in our warm and cozy bed. The room is still quiet. One of us reaches over and opens the window just enough to let in the cool morning air. We hold hands. Close our eyes. And begin. Before the phone. Before the news. Before the world. This moment is ours alone.',
         'ritual.breathe.title': 'Breathe Together',
@@ -2537,6 +2576,38 @@
         'nav.ritual': 'Das Ritual',
         'nav.measure': 'Messen',
         'nav.vision': 'Vision',
+        'sec.01': '01 \u2014 Unsere Geschichte',
+        'sec.02': '02 \u2014 Die 7-Jahres-Wende',
+        'sec.03': '03 \u2014 Die Weisheit',
+        'sec.04': '04 \u2014 Die Rechte Gehirnh\u00e4lfte',
+        'sec.05': '05 \u2014 Die Forschung',
+        'sec.06': '06 \u2014 Unser Tagesritual',
+        'sec.07': '07 \u2014 Die Verbindung messen',
+        'sec.08': '08 \u2014 Die Vision',
+        'sec.09': '09 \u2014 Was sich ver\u00e4ndert',
+        'sec.10': '10 \u2014 Was das ist',
+        'h2.story': 'Sieben Jahre Liebe. Dann begann die echte Arbeit.',
+        'h2.problem': 'Wenn das Oxytocin nachl\u00e4sst, was tr\u00e4gt euch dann?',
+        'h2.brooks': 'Liebe ist kein Gef\u00fchl. <span class="gold"><em>Liebe ist eine Praxis.</em></span>',
+        'h2.rightbrain': 'Warum wir die Augen schlie\u00dfen, <em>statt eine App zu \u00f6ffnen</em>',
+        'h2.science': 'Was passiert, wenn zwei Menschen <em>gemeinsam atmen</em>',
+        'h2.ritual': 'Seite an Seite im Morgenlicht. <span class="gold"><em>Augen geschlossen. H\u00e4nde verschr\u00e4nkt.</em></span>',
+        'h2.measure': 'K\u00f6nnen wir es beweisen? <em>Wir wollen es herausfinden.</em>',
+        'h2.vision': 'Wohin diese Praxis <span class="rose"><em>euch f\u00fchren kann.</em></span>',
+        'h2.benefits': 'Was t\u00e4gliches gemeinsames Atmen <span class="rose"><em>wirklich bewirkt</em></span>',
+        'h2.position': 'Paare wollen mehr Tiefe. <span class="gold"><em>Hier beginnt es.</em></span>',
+        'h2.cta': 'Zwei Atemz\u00fcge.<br><em>Eine Verbindung.</em>',
+        'quote.story': '\u201eJeden Morgen \u00f6ffnen wir das Fenster, begr\u00fc\u00dfen gemeinsam den Tag und beginnen zu atmen. Hand in Hand. Die erste positive Routine des Tages. Bevor die Welt uns auseinanderzieht.\u201c',
+        'p.problem': 'Helen Fishers fMRT-Forschung an der Rutgers University zeigt, dass der dopamingesteuerte Rausch der fr\u00fchen Liebe 12 bis 18 Monate anh\u00e4lt. John Gottmans L\u00e4ngsschnittstudien best\u00e4tigen: Die ersten sieben Jahre sind die risikoreichste Zeit f\u00fcr Beziehungen. Nicht weil die Liebe stirbt, sondern weil die automatische Chemie, die sie getragen hat, nachl\u00e4sst.',
+        'card.neuro.title': 'Die Neurochemie l\u00e4sst nach',
+        'card.neuro.body': 'Leidenschaftliche Liebe, angetrieben durch Dopamin, Noradrenalin und Serotonin, hat ein Verfallsdatum. Elaine Hatfields Forschung zeigt, dass sie in den Jahren 1 bis 2 ihren H\u00f6hepunkt erreicht und bis Jahr 3 bis 7 erheblich abnimmt.',
+        'card.companion.title': 'Kameradschaftliche Liebe muss aufgebaut werden',
+        'card.companion.body': 'Die tiefere Liebe, basierend auf Vertrauen, Intimit\u00e4t und Engagement, kommt nicht automatisch. Robert Sternbergs Dreieck der Liebe zeigt: Sie erfordert bewusste Kultivierung. Es ist eine Praxis, kein Gef\u00fchl.',
+        'card.ritual.title': 'Ohne Rituale driftet ihr auseinander',
+        'card.ritual.body': 'Gottmans Daten sind eindeutig: Paare, die 86 Prozent der Zeit auf die Verbindungsversuche des Partners eingehen, bleiben zusammen. Bei denjenigen, die sich scheiden lassen? Nur 33 Prozent. T\u00e4gliche Rituale machen den Unterschied.',
+        'p.measure': 'Wir tragen unsere Apple Watches bei jeder Morgensession. Die Frage, die uns antreibt: Synchronisieren sich unsere Herzen tats\u00e4chlich? K\u00f6nnen wir den Effekt auf unsere Physiologie messen, Herzschlag, HRV und mehr? Die Forschung sagt Ja. Wir wollen es in unseren eigenen Daten sehen.',
+        'p.vision.intro': 'Manche Morgen trennt uns Reise oder das Leben. Aber das Ritual muss nicht aufh\u00f6ren. Unsere Vision ist ein Weg f\u00fcr Paare, sich durch synchrones Atmen zu verbinden. Die Gegenwart des anderen durch gemeinsamen Rhythmus sp\u00fcren, auch \u00fcber Zeitzonen hinweg.',
+        'p.vision.sub': 'Und dar\u00fcber hinaus. Gemeinsames Atmen ist die Grundlage von allem, was zwei Menschen wirklich nah f\u00fchlen l\u00e4sst.',
         'story.experiment': 'Was als ruhiges Experiment an einem Sonntagmorgen begann, wurde zum wertvollsten Teil unseres Tages. Wir freuen uns jetzt mehr darauf als auf Kaffee. Mehr als aufs Telefonschauen. Mehr als auf alles, was danach kommt. F\u00fcnfzehn Minuten, die geh\u00f6ren nur uns.',
         'ritual.intro': 'Wir liegen nebeneinander in unserem warmen, gem\u00fctlichen Bett. Es ist noch ruhig im Raum. Einer von uns greift hinauf und \u00f6ffnet das Fenster einen Spalt, damit die k\u00fchle Morgenluft hereinstr\u00f6mt. Wir halten uns an den H\u00e4nden. Schlie\u00dfen die Augen. Und beginnen. Vor dem Handy. Vor den Nachrichten. Vor der Welt. Dieser Moment geh\u00f6rt nur uns.',
         'ritual.breathe.title': 'Gemeinsam atmen',
@@ -2572,6 +2643,38 @@
         'nav.ritual': 'リチュアル',
         'nav.measure': '測定',
         'nav.vision': 'ビジョン',
+        'sec.01': '01 \u2014 私たちのストーリー',
+        'sec.02': '02 \u2014 7年目の変化',
+        'sec.03': '03 \u2014 智慧',
+        'sec.04': '04 \u2014 右脳',
+        'sec.05': '05 \u2014 研究',
+        'sec.06': '06 \u2014 私たちの朝のリチュアル',
+        'sec.07': '07 \u2014 絆を測る',
+        'sec.08': '08 \u2014 ビジョン',
+        'sec.09': '09 \u2014 変わること',
+        'sec.10': '10 \u2014 これは何か',
+        'h2.story': '7年間の愛。そして、本当の作業が始まった。',
+        'h2.problem': 'オキシトシンが消えた後、<em>何があなたたちを支えるのか？</em>',
+        'h2.brooks': '愛は感情ではない。<span class="gold"><em>愛は実践だ。</em></span>',
+        'h2.rightbrain': 'なぜ私たちは目を閉じるのか。<em>アプリを開くのではなく。</em>',
+        'h2.science': '二人が一緒に息をするとき、<em>何が起きるのか</em>',
+        'h2.ritual': '朝の光の中、並んで。<span class="gold"><em>目を閉じて。手をつないで。</em></span>',
+        'h2.measure': '証明できるのか？<em>私たちは確かめたい。</em>',
+        'h2.vision': 'この実践がふたりを<span class="rose"><em>どこへ連れて行くか。</em></span>',
+        'h2.benefits': '毎日一緒に呼吸すると、<span class="rose"><em>実際に何が変わるのか</em></span>',
+        'h2.position': 'カップルはもっと深みを求めている。<span class="gold"><em>ここから始まる。</em></span>',
+        'h2.cta': '二つの呼吸。<br><em>一つの絆。</em>',
+        'quote.story': '「毎朝、窓を開けて、一緒に一日を迎え、呼吸を始めます。手と手を重ねて。その日最初のポジティブなルーティン。世界が私たちを引き離す前に。」',
+        'p.problem': 'ラトガース大学でのヘレン・フィッシャーのfMRI研究は、初期の愛のドーパミン主導の高揚感が12から18ヶ月続くことを示しています。ジョン・ゴットマンの縦断研究が確認しています。最初の7年間が関係にとって最もリスクの高い時期です。愛が死ぬからではなく、それを支えていた自動的な化学反応が消えるからです。',
+        'card.neuro.title': '神経化学が薄れる',
+        'card.neuro.body': 'ドーパミン、ノルエピネフリン、セロトニンの低下によって駆動される情熱的な愛には有効期限があります。エレイン・ハットフィールドの研究は、1〜2年目にピークを迎え、3〜7年で著しく低下することを示しています。',
+        'card.companion.title': '友愛は築かれなければならない',
+        'card.companion.body': '信頼、親密さ、コミットメントに基づく深い愛は自動的には生まれません。ロバート・スタンバーグの三角形理論は、意図的な培養が必要であることを示しています。それは感情ではなく実践です。',
+        'card.ritual.title': 'リチュアルがなければ漂流する',
+        'card.ritual.body': 'ゴットマンのデータは明確です。パートナーのつながりの求めに86パーセントの時間で応えるカップルは一緒にいられます。離婚するカップルは？33パーセントのみ。毎日のリチュアルが違いを生みます。',
+        'p.measure': '毎朝のセッションでApple Watchをつけています。私たちを動かす問い。心臓は本当に同期するのか？TwoBreathの生理的影響、心拍、HRVなどを測定できるのか？研究はYesと言っています。私たち自身のデータで確かめたいのです。',
+        'p.vision.intro': '旅行や生活で離れる朝もあります。でも儀式を止める必要はありません。私たちのビジョンは、カップルが同期した呼吸を通じてつながる方法です。タイムゾーンを超えても、共有リズムを通じてお互いの存在を感じること。',
+        'p.vision.sub': 'そしてそれを超えて。共に呼吸することは、二人を本当に近く感じさせるすべてのものの基盤です。',
         'story.experiment': 'ある日曜日の朝に始めた小さな実験が、今では一日の中で最も大切な時間になりました。コーヒーよりも、スマホを見ることよりも、この後に続くどんなことよりも待ち遠しい。ふたりだけの15分間。',
         'ritual.intro': '温かくて居心地のいいベッドに並んで横たわります。部屋はまだ静かです。どちらかが手を伸ばし、朝の涼しい空気が入るよう窓を少し開けます。手をつなぎます。目を閉じます。そして始めます。スマホより先に。ニュースより先に。世界より先に。この瞬間はふたりだけのもの。',
         'ritual.breathe.title': '一緒に呼吸する',
@@ -2640,6 +2743,10 @@
         });
 
         applyTranslations(lang);
+
+        // Rebuild narration paths for new language; stop any active playback
+        NARRATION = getNarration(lang);
+        if (narPlaying) narStop();
       });
     });
 

@@ -69,8 +69,9 @@ Partners show coregulation of heart rate and respiration. Pain tolerance increas
     },
     {
       key: 's06-ritual', voice: 'matthi',
-      text: `Every morning, before the world demands our attention, we sit side by side. We open the window, let the fresh air in — and begin.
-Hand in hand. Breath by breath. Four seconds in. Four seconds hold. Six seconds out. The first positive routine of the day. Before email. Before news. Before anything.`,
+      text: `We lay side by side in our warm, cozy bed. The room is still quiet. One of us reaches over and opens the window just enough to let in the cool morning air.
+We hold hands. Close our eyes. And begin. Before the phone. Before the news. Before the world.
+A romantic poem, a philosophical thought, spoken aloud. Then deep eye contact — the kind you shared when you first fell in love. Three to fifteen minutes of breath. One to three minutes of reading. One to three minutes of pure presence.`,
     },
     {
       key: 's07-measure', voice: 'dascha',
@@ -129,8 +130,9 @@ Partner zeigen eine Ko-Regulation von Herzfrequenz und Atmung. Die Schmerztolera
     },
     {
       key: 's06-ritual', voice: 'matthi',
-      text: `Jeden Morgen, bevor die Welt unsere Aufmerksamkeit fordert, setzen wir uns nebeneinander. Wir öffnen das Fenster, lassen die frische Luft herein — und beginnen.
-Hand in Hand. Atemzug für Atemzug. Vier Sekunden ein. Vier Sekunden halten. Sechs Sekunden aus. Die erste positive Routine des Tages. Vor den E-Mails. Vor den Nachrichten. Vor allem anderen.`,
+      text: `Wir liegen nebeneinander in unserem warmen, gemütlichen Bett. Es ist noch ruhig. Einer von uns öffnet das Fenster einen Spalt, damit die kühle Morgenluft hereinströmt.
+Wir halten uns an den Händen. Schließen die Augen. Und beginnen. Vor dem Handy. Vor den Nachrichten. Vor der Welt.
+Ein romantisches Gedicht, ein philosophischer Gedanke, laut vorgelesen. Dann tiefer Augenkontakt, so wie damals, als ihr euch verliebt habt. Drei bis fünfzehn Minuten Atmen. Ein bis drei Minuten Lesen. Ein bis drei Minuten reines Präsentsein.`,
     },
     {
       key: 's07-measure', voice: 'dascha',
@@ -189,8 +191,9 @@ Schaut, was sich verändert.`,
     },
     {
       key: 's06-ritual', voice: 'matthi',
-      text: `毎朝、世界が私たちの注意を要求する前に、並んで座ります。窓を開けて、新鮮な空気を入れます、そして始めます。
-手をつないで。一呼吸一呼吸。4秒吸って。4秒止めて。6秒吐いて。その日最初のポジティブなルーティン。メールの前。ニュースの前。何もかもの前に。`,
+      text: `温かくて居心地のいいベッドに並んで横たわります。部屋はまだ静かです。どちらかが手を伸ばし、朝の涼しい空気が入るよう窓を少し開けます。
+手をつなぎます。目を閉じます。そして始めます。スマホより先に。ニュースより先に。世界より先に。
+ロマンティックな詩、哲学的な言葉を声に出して読みます。それから深いアイコンタクト。最初に恋に落ちた頃のような。3〜15分の呼吸。1〜3分の朗読。1〜3分の純粋な存在。`,
     },
     {
       key: 's07-measure', voice: 'dascha',
