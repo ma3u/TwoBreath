@@ -418,19 +418,22 @@
 
     .story-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: auto 1fr;
       gap: 60px;
-      align-items: center;
+      align-items: start;
       margin-top: 48px;
     }
 
     .story-visual {
       position: relative;
-      aspect-ratio: 4/3;
-      border-radius: 16px;
+      aspect-ratio: 9/16;
+      max-width: 280px;
+      width: 100%;
+      border-radius: 24px;
       overflow: hidden;
       background: rgba(45,158,138,0.08);
       border: 0.5px solid rgba(45,158,138,0.2);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
     }
 
     /* ── Breathing Canvas Animation ── */
@@ -1190,6 +1193,139 @@
     .btn-outline { border: 0.5px solid rgba(255,255,255,0.2); color: var(--warm-white-75); background: transparent; }
     .btn-outline:hover { border-color: rgba(255,255,255,0.4); color: var(--warm-white); transform: translateY(-2px); }
 
+    /* ── Language Switcher ── */
+    .lang-switcher {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      margin-left: 20px;
+    }
+
+    .lang-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 10px;
+      border: 0.5px solid rgba(255,255,255,0.1);
+      background: transparent;
+      color: var(--warm-white-60);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      color: var(--warm-white);
+      border-color: rgba(45,158,138,0.5);
+      background: rgba(45,158,138,0.12);
+    }
+
+    .lang-btn:hover:not(.active) {
+      color: var(--warm-white);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    /* ── Narration FAB label ── */
+    .narration-label {
+      position: absolute;
+      bottom: 100%;
+      right: 0;
+      margin-bottom: 8px;
+      background: rgba(26,23,20,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 0.5px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 11px;
+      color: var(--warm-white-75);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      text-align: right;
+    }
+
+    .narration-fab:hover .narration-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .narration-label .nar-title-line {
+      display: block;
+      font-weight: 500;
+      color: var(--warm-white);
+      margin-bottom: 2px;
+    }
+
+    /* ── Section 04 Brooks+Video layout ── */
+    .rightbrain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-bottom: 48px;
+    }
+
+    .rightbrain-video {
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: rgba(0,0,0,0.3);
+    }
+
+    .rightbrain-video iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .rightbrain-video-caption {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 10px;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Vision grid 3-col ── */
+    .vision-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .vision-card-intimate {
+      background: linear-gradient(135deg, rgba(201,107,107,0.08) 0%, rgba(201,168,76,0.04) 100%);
+      border: 0.5px solid rgba(201,107,107,0.25);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .vision-card-intimate h3 { color: var(--accent-rose); }
+
+    /* ── CTA release date ── */
+    .release-date {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-top: 16px;
+      display: block;
+    }
+
+    /* ── Responsive adjustments ── */
+    @media (max-width: 900px) {
+      .rightbrain-grid { grid-template-columns: 1fr; }
+      .vision-grid-3 { grid-template-columns: 1fr; }
+    }
+
     /* ── Footer ── */
     footer {
       padding: 40px;
@@ -1304,6 +1440,7 @@
       }
 
       .nav-toggle { display: block; z-index: 201; position: relative; }
+      .lang-switcher { margin-left: 8px; }
 
       .hero { padding: 100px 24px 60px; min-height: 90vh; }
       .hero-sub { font-size: 16px; }
@@ -1317,7 +1454,12 @@
       .benefits-grid,
       .audience-grid,
       .problem-cards,
-      .vision-grid { grid-template-columns: 1fr; }
+      .vision-grid,
+      .vision-grid-3,
+      .rightbrain-grid { grid-template-columns: 1fr; }
+
+      .story-grid { justify-items: center; }
+      .story-visual { max-width: 200px; }
 
       .video-container { max-width: 320px; }
       .brooks-card { padding: 32px 24px; }
@@ -1343,11 +1485,15 @@
     <ul class="nav-links" id="navLinks" role="list">
       <li><a href="#story" onclick="closeNav()">Our Story</a></li>
       <li><a href="#science" onclick="closeNav()">Science</a></li>
-      <li><a href="#video" onclick="closeNav()">Watch</a></li>
       <li><a href="#ritual" onclick="closeNav()">The Ritual</a></li>
       <li><a href="#measure" onclick="closeNav()">Measure</a></li>
       <li><a href="#vision" onclick="closeNav()">Vision</a></li>
     </ul>
+    <div class="lang-switcher" role="group" aria-label="Language selector">
+      <button class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+      <button class="lang-btn" data-lang="de" aria-pressed="false">DE</button>
+      <button class="lang-btn" data-lang="ja" aria-pressed="false">JA</button>
+    </div>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
@@ -1364,8 +1510,8 @@
         <em>Two souls.</em><br>
         Every morning.
       </h1>
-      <p class="hero-sub">
-        After seven years together, we realized we needed more than love &mdash; we needed a ritual. Every morning we open the window, welcome the day, and start breathing together, hand in hand. Synchronizing our breath, our hearts, our souls.
+      <p class="hero-sub" data-i18n="hero.sub">
+        After seven years together, we realized we needed more than love. We needed a ritual. Every morning we open the window, welcome the day, and start breathing together, hand in hand. Synchronizing our breath, our hearts, our souls.
       </p>
       <div class="hero-stats">
         <div>
@@ -1438,8 +1584,8 @@
           <blockquote class="fade-in fade-in-delay-3">
             "Every morning we open the window, welcome the day together, and start breathing &mdash; hand in hand. The first positive routine of the day. Our nervous systems align before the world pulls us apart."
           </blockquote>
-          <p class="section-text fade-in fade-in-delay-4">
-            What started as an experiment became the thing we look forward to most. 10&ndash;15 minutes of synchronized breathing, a short reflective moment, and shared silence. Simple. Repeatable. Transformative.
+          <p class="section-text fade-in fade-in-delay-4" data-i18n="story.experiment">
+            What started as a quiet experiment on a Sunday morning became the most precious part of our day. We now look forward to it more than coffee. More than checking our phones. More than anything that follows. Fifteen minutes that belong only to us.
           </p>
         </div>
       </div>
@@ -1513,12 +1659,31 @@
     <div class="section-inner">
       <span class="section-tag fade-in">04 &mdash; The Right Brain</span>
       <h2 class="fade-in">Why we close our eyes, <em>not open an app</em></h2>
-      <p class="section-text fade-in">
-        Our concept is built on a fundamental insight from neuroscience and Dr. Arthur Brooks' work: <strong>the right hemisphere of your brain is the seat of emotional attunement, embodied presence, and nonverbal connection.</strong> It cannot be accessed through logic, language, or screens &mdash; only through the body, the breath, and shared rhythm.
-      </p>
-      <p class="section-text fade-in">
-        This is why TwoBreath prioritizes <strong>listening over screen time</strong>. The visual animation is there as a gentle guide, but the real practice happens with eyes closed, hand in hand, following the voice. When you breathe together without visual distraction, the right brain activates fully &mdash; the same hemisphere responsible for reading your partner's emotions, feeling their presence, and experiencing spiritual connection.
-      </p>
+
+      <div class="rightbrain-grid">
+        <div>
+          <div class="rightbrain-video fade-in">
+            <iframe
+              src="https://www.youtube.com/embed/qINmxnioGOk?rel=0&modestbranding=1"
+              title="Dr. Arthur Brooks on love, happiness, and daily practices for couples"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+          <p class="rightbrain-video-caption fade-in fade-in-delay-1">
+            Dr. Arthur Brooks, Harvard professor, using science and philosophy to help couples build lasting love.
+          </p>
+        </div>
+        <div>
+          <p class="section-text fade-in">
+            Our concept is built on a fundamental insight from neuroscience and Dr. Arthur Brooks' work: <strong>the right hemisphere of your brain is the seat of emotional attunement, embodied presence, and nonverbal connection.</strong> It cannot be accessed through logic, language, or screens. Only through the body, the breath, and shared rhythm.
+          </p>
+          <p class="section-text fade-in">
+            This is why TwoBreath prioritizes <strong>listening over screen time</strong>. The visual animation is there as a gentle guide, but the real practice happens with eyes closed, hand in hand, following the voice. When you breathe together without visual distraction, the right brain activates fully. The same hemisphere responsible for reading your partner's emotions, feeling their presence, and experiencing spiritual connection.
+          </p>
+        </div>
+      </div>
 
       <div class="science-grid" style="margin-top: 32px;">
         <div class="science-card fade-in fade-in-delay-1">
@@ -1593,60 +1758,34 @@
     </div>
   </section>
 
-  <!-- Video -->
-  <section class="video-section" id="video">
-    <div class="section-inner">
-      <span class="section-tag fade-in">05 &mdash; The Inspiration</span>
-      <h2 class="fade-in">The moment that <em>changed our mornings</em></h2>
-      <p class="section-text fade-in" style="max-width: 600px; margin: 0 auto 0;">
-        This short clip captures the essence of what we practice every morning. Dr. Arthur Brooks uses the highest levels of science and philosophy to show how daily practices &mdash; small, intentional, repeated &mdash; bring people together and improve happiness for all.
-      </p>
-
-      <div class="video-container fade-in fade-in-delay-1">
-        <iframe
-          src="https://www.youtube.com/embed/qINmxnioGOk?rel=0&modestbranding=1"
-          title="Dr. Arthur Brooks on love, happiness, and daily practices for couples"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-      </div>
-      <p class="video-caption fade-in fade-in-delay-2">
-        Dr. Arthur Brooks &mdash; Harvard professor, PhD social scientist, and bestselling author &mdash; using cutting-edge science, ancient wisdom, and philosophy to help people build lasting love and happiness.
-      </p>
-    </div>
-  </section>
-
   <!-- The Ritual -->
   <section class="ritual-section" id="ritual">
     <div class="section-inner">
       <span class="section-tag fade-in">06 &mdash; Our Daily Ritual</span>
-      <h2 class="fade-in">Open the window. Welcome the day. <span class="gold"><em>Breathe together.</em></span></h2>
-      <p class="section-text fade-in">
-        Every morning before the world demands our attention, we sit side by side, open the window, let the fresh air in &mdash; and begin. Hand in hand. Breath by breath. The first positive routine of the day.
+      <h2 class="fade-in">Side by side in the morning light. <span class="gold"><em>Eyes closed. Hands intertwined.</em></span></h2>
+      <p class="section-text fade-in" data-i18n="ritual.intro">
+        We lay side by side in our warm and cozy bed. The room is still quiet. One of us reaches over and opens the window just enough to let in the cool morning air. We hold hands. Close our eyes. And begin. Before the phone. Before the news. Before the world. This moment is ours alone.
       </p>
       <div class="pillars">
         <div class="pillar breathe fade-in fade-in-delay-1">
           <span class="pillar-number">01</span>
-          <h3>Breathe Together</h3>
-          <p>Synchronized breathwork, hand in hand. Eyes closed, following Matthi or Dascha's voice. In through the nose, hold, out together. Your nervous systems entrain &mdash; heart rates align, cortisol drops, the vagus nerve activates. The right brain awakens.</p>
-          <span class="duration">7&ndash;15 minutes</span>
+          <h3 data-i18n="ritual.breathe.title">Breathe Together</h3>
+          <p data-i18n="ritual.breathe.body">Synchronized breathwork, hand in hand. Eyes closed, following Matthi or Dascha's voice. In through the nose, hold, out together. Your nervous systems entrain. Heart rates align. Cortisol drops. The vagus nerve activates. The right brain awakens to presence.</p>
+          <span class="duration" data-i18n="ritual.breathe.duration">3&ndash;15 minutes</span>
         </div>
         <div class="pillar watch fade-in fade-in-delay-2">
           <span class="pillar-number">02</span>
-          <h3>Read Together</h3>
-          <p>A psalm, a poem, or a sacred reading &mdash; spoken aloud by one partner while the other listens with closed eyes. Not a discussion. Not analysis. A shared experience of language that opens the heart and deepens the connection you just built through breath.</p>
-          <span class="duration">3&ndash;5 minutes</span>
+          <h3 data-i18n="ritual.read.title">Read Together</h3>
+          <p data-i18n="ritual.read.body">A romantic poem, a philosophical thought, or a sacred passage. Spoken aloud by one partner while the other listens with closed eyes. Not a discussion. Not analysis. A shared experience of language and beauty that opens the heart and deepens the connection built through breath.</p>
+          <span class="duration" data-i18n="ritual.read.duration">1&ndash;3 minutes</span>
         </div>
         <div class="pillar connect fade-in fade-in-delay-3">
           <span class="pillar-number">03</span>
-          <h3>Deep Connection</h3>
-          <p>Open your eyes. Look at each other. Deep, sustained eye contact &mdash; the kind you haven't shared since falling in love. Hold hands, embrace, feel each other's warmth. No words. Just two people fully present, fully seen, before the day begins.</p>
-          <span class="duration">2&ndash;5 minutes</span>
+          <h3 data-i18n="ritual.connect.title">Deep Connection</h3>
+          <p data-i18n="ritual.connect.body">Open your eyes. Look at each other. Deep, sustained eye contact. The kind you shared when you first fell in love. Hold hands, embrace, feel each other's warmth. No words needed. Just two people fully present, fully seen, before the day begins.</p>
+          <span class="duration" data-i18n="ritual.connect.duration">1&ndash;3 minutes</span>
         </div>
       </div>
-
-      <!-- Breathing exercise removed — use the canvas animation in story section instead -->
     </div>
   </section>
 
@@ -1699,34 +1838,29 @@
   <section class="vision-section" id="vision">
     <div class="section-inner">
       <span class="section-tag fade-in">08 &mdash; The Vision</span>
-      <h2 class="fade-in">When we can't wake up together &mdash;<br><span class="rose"><em>we still breathe together.</em></span></h2>
+      <h2 class="fade-in">Where this practice <span class="rose"><em>can take you.</em></span></h2>
       <p class="section-text fade-in" style="max-width: 620px; margin: 0 auto 20px;">
-        Some mornings, travel or life separates us. But the ritual doesn't have to stop. Our vision: a way for couples to connect remotely through synchronized breathing &mdash; feeling each other's presence through shared rhythm, even across time zones.
+        Some mornings, travel or life separates us. But the ritual does not have to stop. Our vision is a way for couples to connect through synchronized breathing. Feeling each other's presence through shared rhythm, even across time zones.
       </p>
       <p class="section-text fade-in" style="max-width: 620px; margin: 0 auto 0;">
-        For every long-distance couple who knows that a phone call isn't the same as <em>being together</em> &mdash; this is for you.
+        And beyond distance. Breathing together is the foundation of everything that makes two people feel truly close.
       </p>
 
-      <div class="vision-grid">
+      <div class="vision-grid-3">
         <div class="vision-card fade-in fade-in-delay-1">
-          <h3>Side by Side</h3>
-          <p>Our current practice: open the window, sit together, hold hands, and breathe. Apple Watch captures both heart rates simultaneously. The morning ritual that starts every day with connection.</p>
+          <h3>Side by Side with Health Insights</h3>
+          <p>Our current practice: open the window, hold hands, and breathe. An app that reads both Apple Watches simultaneously and shows a live sync score. How closely our heart rates, HRV, and breathing align. The invisible bond made visible.</p>
           <span class="v-tag now">What we do now</span>
         </div>
         <div class="vision-card fade-in fade-in-delay-2">
-          <h3>Real-Time Sync Dashboard</h3>
-          <p>An app that reads both Apple Watches during the breathing session and shows a live "sync score" &mdash; how closely our heart rates, HRV, and breathing are aligned. Making the invisible bond visible.</p>
-          <span class="v-tag next">Building next</span>
-        </div>
-        <div class="vision-card fade-in fade-in-delay-3">
-          <h3>Remote Breathing Together</h3>
-          <p>For mornings apart or long-distance couples: a shared breathing session where each partner feels the other's rhythm through gentle haptic feedback on the Apple Watch. Breathing together, from anywhere in the world.</p>
+          <h3>Breathing Together from Anywhere</h3>
+          <p>For mornings apart: a shared breathing session where each partner feels the other's rhythm through gentle haptic feedback on the Apple Watch. <a class="src-link" href="https://psycnet.apa.org/doiLanding?doi=10.1037%2Fa0032010" target="_blank" rel="noopener">Barbara Fredrickson</a> defines love as micro-moments of positivity resonance. We want to make these possible for every couple, regardless of distance.</p>
           <span class="v-tag future">The dream</span>
         </div>
-        <div class="vision-card fade-in fade-in-delay-4">
-          <h3>Long-Distance Love</h3>
-          <p><a class="src-link" href="https://psycnet.apa.org/doiLanding?doi=10.1037%2Fa0032010" target="_blank" rel="noopener">Barbara Fredrickson (UNC Chapel Hill)</a> defines love as "micro-moments of positivity resonance" &mdash; shared positive emotion and biological synchrony. Our vision: making these micro-moments possible for every couple, regardless of distance.</p>
-          <span class="v-tag future">For all couples</span>
+        <div class="vision-card vision-card-intimate fade-in fade-in-delay-3">
+          <h3>Breathing for Intimacy</h3>
+          <p>Conscious breathing deepens every dimension of closeness. Slower, deeper breath cycles extend presence and heighten sensation. Tantra breathing traditions have known this for centuries. With synthesized couple voices guiding longer intimacy sessions, TwoBreath can become a foundation for physical and emotional closeness, mental clarity, and a richer experience of being fully together.</p>
+          <span class="v-tag future">Coming soon</span>
         </div>
       </div>
     </div>
@@ -1791,29 +1925,29 @@
   <section class="positioning-section" id="positioning">
     <div class="section-inner">
       <span class="section-tag fade-in">10 &mdash; What This Is</span>
-      <h2 class="fade-in">Not a wellness app. <span class="gold"><em>A daily act of love.</em></span></h2>
+      <h2 class="fade-in">Couples want more depth. <span class="gold"><em>Here is where it begins.</em></span></h2>
 
       <div class="tagline-box fade-in">
-        <div class="tagline">"The first fifteen minutes that actually change the next twenty-three hours."</div>
+        <div class="tagline" data-i18n="pos.tagline">"The first fifteen minutes that actually change the next twenty-three hours."</div>
         <p class="tagline-sub">TwoBreath &mdash; The couple breathing ritual</p>
       </div>
 
       <div class="audience-grid">
         <div class="audience-card fade-in fade-in-delay-1">
-          <span class="a-label">Who it's for</span>
-          <p>Couples past the honeymoon phase who want more depth, presence, and intentional connection. You don't need to be in crisis &mdash; you just want to keep choosing each other, daily.</p>
+          <span class="a-label" data-i18n="pos.for.label">Who it is for</span>
+          <p data-i18n="pos.for.body">Couples past the honeymoon phase who want more depth, presence, and intentional connection. You do not need to be in crisis. You just want to keep choosing each other, daily.</p>
         </div>
         <div class="audience-card fade-in fade-in-delay-2">
-          <span class="a-label">What makes it different</span>
-          <p>Every other couples tool is left-brain: quizzes, communication exercises, task tracking. TwoBreath is nonverbal, embodied, and right-brain. Hand in hand, breath by breath.</p>
+          <span class="a-label" data-i18n="pos.diff.label">What makes it different</span>
+          <p data-i18n="pos.diff.body">Every other couples tool is left-brain: quizzes, communication exercises, task tracking. TwoBreath is nonverbal, embodied, and right-brain. Hand in hand, breath by breath.</p>
         </div>
         <div class="audience-card fade-in fade-in-delay-3">
-          <span class="a-label">What it isn't</span>
-          <p>Not therapy. Not mindfulness. Not a relationship tracker. A daily morning ritual that accumulates into a fundamentally different kind of closeness &mdash; measurable with your Apple Watch.</p>
+          <span class="a-label" data-i18n="pos.not.label">What it is not</span>
+          <p data-i18n="pos.not.body">Not therapy. Not mindfulness. Not a relationship tracker. A daily morning ritual that accumulates into a fundamentally different kind of closeness, measurable with your Apple Watch.</p>
         </div>
         <div class="audience-card fade-in fade-in-delay-4">
-          <span class="a-label">The commitment</span>
-          <p>15&ndash;25 minutes each morning. Open a window. Sit together. Hold hands. Breathe for 7&ndash;15 minutes. Read a psalm or poem aloud. Then look into each other's eyes. No meditation experience needed. Just two people and the willingness to show up.</p>
+          <span class="a-label" data-i18n="pos.commit.label">How to begin</span>
+          <p data-i18n="pos.commit.body">Five to fifteen minutes each morning. Open a window. Be together. Hold hands. Breathe for three to ten minutes. Read a poem aloud. Then look into each other's eyes. No meditation experience needed. Just two people and the willingness to show up.</p>
         </div>
       </div>
     </div>
@@ -1823,16 +1957,21 @@
   <section class="cta-section" id="cta">
     <div class="section-inner">
       <h2 class="fade-in">Two breaths.<br><em>One bond.</em></h2>
-      <p class="cta-sub fade-in">Open the window tomorrow morning. Sit side by side. Hold hands. Breathe. See what changes.</p>
+      <p class="cta-sub fade-in" data-i18n="cta.sub">Open the window tomorrow morning. Sit side by side. Hold hands. Breathe. See what changes.</p>
       <div class="cta-buttons fade-in fade-in-delay-1">
-        <a href="#ritual" class="btn btn-primary">Start Your Ritual</a>
-        <a href="#science" class="btn btn-outline">Read the Science</a>
+        <a href="https://testflight.apple.com/join/ChJc5vVx" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="cta.beta">Join Public Beta on TestFlight</a>
+        <a href="#science" class="btn btn-outline" data-i18n="cta.science">Read the Science</a>
       </div>
+      <span class="release-date fade-in fade-in-delay-2" data-i18n="cta.release">Coming to the App Store on July 1, 2026</span>
     </div>
   </section>
 
   <!-- Floating Narration Player -->
   <div class="narration-fab" id="narrationFab">
+    <div class="narration-label">
+      <span class="nar-title-line" data-i18n="nar.label.title">Hear our story in our own voices</span>
+      <span data-i18n="nar.label.sub">Matthi and Dascha narrate every section</span>
+    </div>
     <div class="narration-info">
       <div class="narration-meta">
         <span class="narration-voice" id="narVoice"></span>
@@ -1840,7 +1979,7 @@
         <div class="narration-progress"><div class="bar" id="narBar"></div></div>
       </div>
     </div>
-    <button class="narration-btn" id="narBtn" aria-label="Play narration — Matthi and Dascha read the full page">
+    <button class="narration-btn" id="narBtn" aria-label="Listen to Matthi and Dascha narrate this page in their own voices — not the breathing exercise">
       <svg class="play-icon" viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
       <svg class="pause-icon" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
     </button>
@@ -2349,6 +2488,161 @@
     }
 
     narBtn.addEventListener('click', narToggle);
+
+    // ══════════════════════════════════════════
+    // ── Language Switcher (EN / DE / JA) ──
+    // ══════════════════════════════════════════
+
+    const TRANSLATIONS = {
+      en: {
+        'hero.pill': 'A Couple\'s Daily Breathing Ritual',
+        'hero.sub': 'After seven years together, we realized we needed more than love. We needed a ritual. Every morning we open the window, welcome the day, and start breathing together, hand in hand. Synchronizing our breath, our hearts, our souls.',
+        'nav.story': 'Our Story',
+        'nav.science': 'Science',
+        'nav.ritual': 'The Ritual',
+        'nav.measure': 'Measure',
+        'nav.vision': 'Vision',
+        'story.experiment': 'What started as a quiet experiment on a Sunday morning became the most precious part of our day. We now look forward to it more than coffee. More than checking our phones. More than anything that follows. Fifteen minutes that belong only to us.',
+        'ritual.intro': 'We lay side by side in our warm and cozy bed. The room is still quiet. One of us reaches over and opens the window just enough to let in the cool morning air. We hold hands. Close our eyes. And begin. Before the phone. Before the news. Before the world. This moment is ours alone.',
+        'ritual.breathe.title': 'Breathe Together',
+        'ritual.breathe.body': 'Synchronized breathwork, hand in hand. Eyes closed, following Matthi or Dascha\'s voice. In through the nose, hold, out together. Your nervous systems entrain. Heart rates align. Cortisol drops. The vagus nerve activates. The right brain awakens to presence.',
+        'ritual.breathe.duration': '3\u201315 minutes',
+        'ritual.read.title': 'Read Together',
+        'ritual.read.body': 'A romantic poem, a philosophical thought, or a sacred passage. Spoken aloud by one partner while the other listens with closed eyes. Not a discussion. Not analysis. A shared experience of language and beauty that opens the heart and deepens the connection built through breath.',
+        'ritual.read.duration': '1\u20133 minutes',
+        'ritual.connect.title': 'Deep Connection',
+        'ritual.connect.body': 'Open your eyes. Look at each other. Deep, sustained eye contact. The kind you shared when you first fell in love. Hold hands, embrace, feel each other\'s warmth. No words needed. Just two people fully present, fully seen, before the day begins.',
+        'ritual.connect.duration': '1\u20133 minutes',
+        'pos.tagline': '"The first fifteen minutes that actually change the next twenty-three hours."',
+        'pos.for.label': 'Who it is for',
+        'pos.for.body': 'Couples past the honeymoon phase who want more depth, presence, and intentional connection. You do not need to be in crisis. You just want to keep choosing each other, daily.',
+        'pos.diff.label': 'What makes it different',
+        'pos.diff.body': 'Every other couples tool is left-brain: quizzes, communication exercises, task tracking. TwoBreath is nonverbal, embodied, and right-brain. Hand in hand, breath by breath.',
+        'pos.not.label': 'What it is not',
+        'pos.not.body': 'Not therapy. Not mindfulness. Not a relationship tracker. A daily morning ritual that accumulates into a fundamentally different kind of closeness, measurable with your Apple Watch.',
+        'pos.commit.label': 'How to begin',
+        'pos.commit.body': 'Five to fifteen minutes each morning. Open a window. Be together. Hold hands. Breathe for three to ten minutes. Read a poem aloud. Then look into each other\'s eyes. No meditation experience needed. Just two people and the willingness to show up.',
+        'cta.sub': 'Open the window tomorrow morning. Sit side by side. Hold hands. Breathe. See what changes.',
+        'cta.beta': 'Join Public Beta on TestFlight',
+        'cta.science': 'Read the Science',
+        'cta.release': 'Coming to the App Store on July 1, 2026',
+        'nar.label.title': 'Hear our story in our own voices',
+        'nar.label.sub': 'Matthi and Dascha narrate every section',
+      },
+      de: {
+        'hero.pill': 'Das t\u00e4gliche Atemritual f\u00fcr Paare',
+        'hero.sub': 'Nach sieben Jahren gemeinsam erkannten wir, dass wir mehr als Liebe brauchten. Wir brauchten ein Ritual. Jeden Morgen \u00f6ffnen wir das Fenster, begr\u00fc\u00dfen den Tag und beginnen gemeinsam zu atmen, Hand in Hand. Wir synchronisieren unseren Atem, unsere Herzen, unsere Seelen.',
+        'nav.story': 'Unsere Geschichte',
+        'nav.science': 'Wissenschaft',
+        'nav.ritual': 'Das Ritual',
+        'nav.measure': 'Messen',
+        'nav.vision': 'Vision',
+        'story.experiment': 'Was als ruhiges Experiment an einem Sonntagmorgen begann, wurde zum wertvollsten Teil unseres Tages. Wir freuen uns jetzt mehr darauf als auf Kaffee. Mehr als aufs Telefonschauen. Mehr als auf alles, was danach kommt. F\u00fcnfzehn Minuten, die geh\u00f6ren nur uns.',
+        'ritual.intro': 'Wir liegen nebeneinander in unserem warmen, gem\u00fctlichen Bett. Es ist noch ruhig im Raum. Einer von uns greift hinauf und \u00f6ffnet das Fenster einen Spalt, damit die k\u00fchle Morgenluft hereinstr\u00f6mt. Wir halten uns an den H\u00e4nden. Schlie\u00dfen die Augen. Und beginnen. Vor dem Handy. Vor den Nachrichten. Vor der Welt. Dieser Moment geh\u00f6rt nur uns.',
+        'ritual.breathe.title': 'Gemeinsam atmen',
+        'ritual.breathe.body': 'Synchronisiertes Atmen, Hand in Hand. Augen geschlossen, gef\u00fchrt von Matthis oder Daschas Stimme. Durch die Nase einatmen, halten, gemeinsam ausatmen. Eure Nervensysteme stimmen sich aufeinander ein. Die Herzfrequenzen angleichen sich. Cortisol sinkt. Der Vagusnerv aktiviert sich. Das rechte Gehirn erwacht zur Pr\u00e4senz.',
+        'ritual.breathe.duration': '3\u201315 Minuten',
+        'ritual.read.title': 'Gemeinsam lesen',
+        'ritual.read.body': 'Ein romantisches Gedicht, ein philosophischer Gedanke oder ein ber\u00fchrender Text. Von einem Partner laut vorgelesen, w\u00e4hrend der andere mit geschlossenen Augen zuh\u00f6rt. Keine Diskussion. Keine Analyse. Eine gemeinsame Erfahrung von Sprache und Sch\u00f6nheit, die das Herz \u00f6ffnet und die durch den Atem aufgebaute Verbindung vertieft.',
+        'ritual.read.duration': '1\u20133 Minuten',
+        'ritual.connect.title': 'Tiefe Verbindung',
+        'ritual.connect.body': '\u00d6ffnet die Augen. Schaut euch an. Tiefer, anhaltender Augenkontakt. So wie damals, als ihr euch verliebt habt. H\u00e4nde halten, umarmen, die W\u00e4rme des anderen sp\u00fcren. Keine Worte n\u00f6tig. Nur zwei Menschen, vollst\u00e4ndig pr\u00e4sent, vollst\u00e4ndig gesehen, bevor der Tag beginnt.',
+        'ritual.connect.duration': '1\u20133 Minuten',
+        'pos.tagline': '\"Die ersten f\u00fcnfzehn Minuten, die die n\u00e4chsten dreiundzwanzig Stunden wirklich ver\u00e4ndern.\"',
+        'pos.for.label': 'F\u00fcr wen es ist',
+        'pos.for.body': 'Paare, die die erste Verliebtheitsphase hinter sich haben und mehr Tiefe, Pr\u00e4senz und bewusste Verbundenheit suchen. Ihr m\u00fcsst keine Krise durchmachen. Ihr wollt einfach t\u00e4glich f\u00fcreinander entscheiden.',
+        'pos.diff.label': 'Was es einzigartig macht',
+        'pos.diff.body': 'Jedes andere Paar-Tool ist linksgehirnig: Tests, Kommunikations\u00fcbungen, Aufgabenverfolgung. TwoBreath ist nonverbal, verk\u00f6rpert und rechtshirnig. Hand in Hand, Atemzug f\u00fcr Atemzug.',
+        'pos.not.label': 'Was es nicht ist',
+        'pos.not.body': 'Keine Therapie. Keine Achtsamkeits-App. Kein Beziehungs-Tracker. Ein t\u00e4gliches Morgenritual, das sich zu einer grundlegend anderen Art von N\u00e4he aufsummiert, messbar mit der Apple Watch.',
+        'pos.commit.label': 'Wie ihr anfangt',
+        'pos.commit.body': 'F\u00fcnf bis f\u00fcnfzehn Minuten jeden Morgen. Ein Fenster \u00f6ffnen. Zusammen sein. H\u00e4nde halten. Drei bis zehn Minuten atmen. Ein Gedicht laut vorlesen. Dann in die Augen des anderen schauen. Keine Meditationserfahrung n\u00f6tig. Nur zwei Menschen und die Bereitschaft, da zu sein.',
+        'cta.sub': 'Morgen fr\u00fch das Fenster \u00f6ffnen. Nebeneinander setzen. H\u00e4nde halten. Atmen. Erleben, was sich ver\u00e4ndert.',
+        'cta.beta': 'Jetzt dem Public Beta auf TestFlight beitreten',
+        'cta.science': 'Die Wissenschaft lesen',
+        'cta.release': 'Ab 1. Juli 2026 im App Store erh\u00e4ltlich',
+        'nar.label.title': 'H\u00f6rt unsere Geschichte in unseren eigenen Stimmen',
+        'nar.label.sub': 'Matthi und Dascha erz\u00e4hlen jeden Abschnitt',
+      },
+      ja: {
+        'hero.pill': 'カップルのための毎朝の呼吸リチュアル',
+        'hero.sub': '7年間共に過ごして気づきました。愛だけでは足りない。リチュアルが必要だと。毎朝、窓を開け、一日を迎え、手をつないで一緒に息をします。呼吸を、心を、魂を同期させながら。',
+        'nav.story': '私たちのストーリー',
+        'nav.science': '科学',
+        'nav.ritual': 'リチュアル',
+        'nav.measure': '測定',
+        'nav.vision': 'ビジョン',
+        'story.experiment': 'ある日曜日の朝に始めた小さな実験が、今では一日の中で最も大切な時間になりました。コーヒーよりも、スマホを見ることよりも、この後に続くどんなことよりも待ち遠しい。ふたりだけの15分間。',
+        'ritual.intro': '温かくて居心地のいいベッドに並んで横たわります。部屋はまだ静かです。どちらかが手を伸ばし、朝の涼しい空気が入るよう窓を少し開けます。手をつなぎます。目を閉じます。そして始めます。スマホより先に。ニュースより先に。世界より先に。この瞬間はふたりだけのもの。',
+        'ritual.breathe.title': '一緒に呼吸する',
+        'ritual.breathe.body': '手をつないで行う同期呼吸。目を閉じて、MatthiまたはDaschaの声に導かれます。鼻から吸って、止めて、一緒に吐く。神経系が調和し、心拍数が合い、コルチゾールが下がり、迷走神経が活性化し、右脳が目覚めます。',
+        'ritual.breathe.duration': '3〜15分',
+        'ritual.read.title': '一緒に読む',
+        'ritual.read.body': 'ロマンティックな詩、哲学的な言葉、または心に響く文章。一方のパートナーが声に出して読み、もう一方は目を閉じて耳を傾けます。議論でも分析でもありません。言葉と美を共に体験することで、呼吸で築いた繋がりがさらに深まります。',
+        'ritual.read.duration': '1〜3分',
+        'ritual.connect.title': '深い繋がり',
+        'ritual.connect.body': '目を開けます。互いを見つめます。深く、持続したアイコンタクト。最初に恋に落ちた頃のような。手をつなぎ、抱き合い、相手の温もりを感じます。言葉は必要ありません。一日が始まる前に、ただふたりが完全に存在し、完全に見つめ合う。',
+        'ritual.connect.duration': '1〜3分',
+        'pos.tagline': '"最初の15分が、残りの23時間を本当に変える。"',
+        'pos.for.label': '誰のためのアプリか',
+        'pos.for.body': 'ハネムーン期を過ぎ、より深い繋がり、存在感、意識的なつながりを求めるカップルのために。危機的な状況にある必要はありません。ただ、毎日、互いを選び続けたいと思うふたりのために。',
+        'pos.diff.label': '何が違うのか',
+        'pos.diff.body': '他のカップルツールはすべて左脳的です。テスト、コミュニケーション演習、タスク管理。TwoBreathは非言語的で、体で感じ、右脳的です。手と手を重ね、呼吸ひとつひとつで。',
+        'pos.not.label': '何ではないか',
+        'pos.not.body': 'セラピーではありません。マインドフルネスでもありません。関係性トラッカーでもありません。毎朝のリチュアルが積み重なり、Apple Watchで測れる、根本的に違う種類の親密さになります。',
+        'pos.commit.label': '始め方',
+        'pos.commit.body': '毎朝5〜15分。窓を開ける。一緒にいる。手をつなぐ。3〜10分呼吸する。詩を声に出して読む。そして互いの目を見つめる。瞑想の経験は必要ありません。必要なのは、ふたりとその場にいる意志だけ。',
+        'cta.sub': '明日の朝、窓を開けてみてください。並んで座って、手をつないで、呼吸してみてください。何が変わるか感じてみてください。',
+        'cta.beta': 'TestFlightでパブリックベータに参加',
+        'cta.science': '科学を読む',
+        'cta.release': '2026年7月1日にApp Storeで公開予定',
+        'nar.label.title': '私たちの声で物語を聞いてください',
+        'nar.label.sub': 'MatthiとDaschaがすべてのセクションをナレーション',
+      }
+    };
+
+    let currentLang = 'en';
+
+    function applyTranslations(lang) {
+      const t = TRANSLATIONS[lang];
+      if (!t) return;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+
+      // Update nav links with translations
+      const navItems = document.querySelectorAll('.nav-links a');
+      const navKeys = ['nav.story', 'nav.science', 'nav.ritual', 'nav.measure', 'nav.vision'];
+      navItems.forEach((a, i) => {
+        if (navKeys[i] && t[navKeys[i]]) a.textContent = t[navKeys[i]];
+      });
+
+      // Update hero pill
+      const heroP = document.querySelector('.hero-pill');
+      if (heroP && t['hero.pill']) heroP.textContent = t['hero.pill'];
+
+      document.documentElement.lang = lang;
+    }
+
+    // Language switcher buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+        if (lang === currentLang) return;
+        currentLang = lang;
+
+        // Update button states
+        document.querySelectorAll('.lang-btn').forEach(b => {
+          const isActive = b.getAttribute('data-lang') === lang;
+          b.classList.toggle('active', isActive);
+          b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        applyTranslations(lang);
+      });
+    });
+
   </script>
 
 </body>
