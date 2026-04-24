@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="A phone glowing in the dark at night, Tokyo scene">
+  <defs>
+    <radialGradient id="h1-glow" cx="50%" cy="48%" r="40%">
+      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="h1-screen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3dbfaa" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="h1-lamp" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Lamp glow (warm) -->
+  <ellipse cx="340" cy="100" rx="70" ry="85" fill="url(#h1-lamp)"/>
+  <!-- Screen glow -->
+  <ellipse cx="200" cy="210" rx="130" ry="95" fill="url(#h1-glow)"/>
+  <!-- Phone body -->
+  <rect x="160" y="140" width="80" height="150" rx="10" fill="#1a1714" stroke="#3dbfaa" stroke-width="0.8" opacity="0.9"/>
+  <!-- Screen -->
+  <rect x="166" y="150" width="68" height="128" rx="4" fill="url(#h1-screen)" opacity="0.85"/>
+  <!-- Text lines on screen -->
+  <rect x="172" y="164" width="40" height="2" fill="#f5f0e8" opacity="0.6"/>
+  <rect x="172" y="170" width="52" height="2" fill="#f5f0e8" opacity="0.45"/>
+  <rect x="172" y="180" width="24" height="1.5" fill="#f5f0e8" opacity="0.35"/>
+  <rect x="172" y="200" width="50" height="1.5" fill="#f5f0e8" opacity="0.4"/>
+  <rect x="172" y="206" width="44" height="1.5" fill="#f5f0e8" opacity="0.4"/>
+  <rect x="172" y="212" width="36" height="1.5" fill="#f5f0e8" opacity="0.4"/>
+  <!-- Clock text "23:47" stylized -->
+  <text x="200" y="332" font-family="'JetBrains Mono', monospace" font-size="13" fill="#c96b6b" text-anchor="middle" letter-spacing="3" opacity="0.85">23:47</text>
+  <!-- Paper lantern bokeh -->
+  <circle cx="340" cy="100" r="8" fill="#c9a84c" opacity="0.35"/>
+  <circle cx="340" cy="100" r="3" fill="#dabe6a" opacity="0.6"/>
+  <circle cx="70" cy="130" r="4" fill="#c9a84c" opacity="0.18"/>
+  <circle cx="90" cy="300" r="3" fill="#c9a84c" opacity="0.15"/>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Two breath rings intertwined">
+  <defs>
+    <radialGradient id="h0-bg" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="h0-ring1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="h0-ring2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#h0-bg)"/>
+  <!-- Ring 1 (Matthi) -->
+  <circle cx="165" cy="200" r="90" fill="none" stroke="url(#h0-ring1)" stroke-width="1.5" opacity="0.85"/>
+  <circle cx="165" cy="200" r="70" fill="none" stroke="#c9a84c" stroke-width="0.8" opacity="0.45"/>
+  <circle cx="165" cy="200" r="50" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.25"/>
+  <!-- Ring 2 (Dascha) -->
+  <circle cx="235" cy="200" r="90" fill="none" stroke="url(#h0-ring2)" stroke-width="1.5" opacity="0.85"/>
+  <circle cx="235" cy="200" r="70" fill="none" stroke="#2d9e8a" stroke-width="0.8" opacity="0.45"/>
+  <circle cx="235" cy="200" r="50" fill="none" stroke="#2d9e8a" stroke-width="0.5" opacity="0.25"/>
+  <!-- Central dot (overlap) -->
+  <circle cx="200" cy="200" r="2.5" fill="#f5f0e8"/>
+  <!-- Tiny stars -->
+  <g fill="#f5f0e8" opacity="0.6">
+    <circle cx="80" cy="90" r="0.8"/>
+    <circle cx="340" cy="110" r="0.8"/>
+    <circle cx="60" cy="310" r="1"/>
+    <circle cx="330" cy="320" r="0.8"/>
+    <circle cx="120" cy="60" r="0.5"/>
+    <circle cx="280" cy="340" r="0.5"/>
+  </g>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Sunrise over two silhouetted figures breathing together">
+  <defs>
+    <linearGradient id="h6-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a1714" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#c9a84c" stop-opacity="0.18"/>
+      <stop offset="60%" stop-color="#c96b6b" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#1a1714" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="h6-sun" cx="50%" cy="60%" r="22%">
+      <stop offset="0%" stop-color="#dabe6a" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#c9a84c" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#h6-sky)"/>
+
+  <!-- Sun halo -->
+  <circle cx="200" cy="240" r="90" fill="url(#h6-sun)"/>
+  <circle cx="200" cy="240" r="24" fill="#dabe6a" opacity="0.85"/>
+  <circle cx="200" cy="240" r="36" fill="none" stroke="#c9a84c" stroke-width="0.4" opacity="0.3"/>
+
+  <!-- Horizon line -->
+  <line x1="0" y1="280" x2="400" y2="280" stroke="#f5f0e8" stroke-width="0.3" opacity="0.25"/>
+
+  <!-- Two silhouettes sitting side by side, backlit -->
+  <!-- Left figure (Dascha) -->
+  <g fill="#1a1714" opacity="0.95">
+    <ellipse cx="155" cy="258" rx="14" ry="16"/>
+    <path d="M 140,275 Q 155,268 170,275 L 175,320 L 135,320 Z"/>
+  </g>
+  <!-- Right figure (Matthi) -->
+  <g fill="#1a1714" opacity="0.95">
+    <ellipse cx="245" cy="258" rx="14" ry="16"/>
+    <path d="M 230,275 Q 245,268 260,275 L 265,320 L 225,320 Z"/>
+  </g>
+  <!-- Hands held in middle -->
+  <circle cx="200" cy="310" r="4" fill="#1a1714"/>
+  <line x1="175" y1="320" x2="225" y2="320" stroke="#1a1714" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Breath rings rising between them -->
+  <g fill="none" stroke="#f5f0e8" stroke-width="0.6" opacity="0.3">
+    <ellipse cx="200" cy="205" rx="22" ry="6"/>
+    <ellipse cx="200" cy="180" rx="18" ry="4" opacity="0.7"/>
+    <ellipse cx="200" cy="160" rx="14" ry="3" opacity="0.5"/>
+    <ellipse cx="200" cy="145" rx="10" ry="2" opacity="0.3"/>
+  </g>
+
+  <!-- Stars fading -->
+  <g fill="#f5f0e8" opacity="0.5">
+    <circle cx="80" cy="60" r="0.8"/>
+    <circle cx="340" cy="80" r="0.6"/>
+    <circle cx="60" cy="120" r="0.5"/>
+    <circle cx="120" cy="40" r="0.5"/>
+    <circle cx="320" cy="50" r="0.7"/>
+  </g>
+
+  <!-- Caption at bottom -->
+  <text x="200" y="370" font-family="'Playfair Display',serif" font-style="italic" font-size="14" fill="#dabe6a" text-anchor="middle" opacity="0.85">
+    One breath. Two souls.
+  </text>
+</svg>

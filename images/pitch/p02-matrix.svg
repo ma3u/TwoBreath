@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="AnswerAtlas 3x4 matrix of visibility cells">
+  <defs>
+    <radialGradient id="h2-bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#h2-bg)"/>
+  <g transform="translate(50,80)">
+    <!-- Row labels -->
+    <text x="-8" y="42" font-family="'JetBrains Mono',monospace" font-size="10" fill="#8a8075" text-anchor="end" letter-spacing="1">US</text>
+    <text x="-8" y="112" font-family="'JetBrains Mono',monospace" font-size="10" fill="#8a8075" text-anchor="end" letter-spacing="1">JP</text>
+    <text x="-8" y="182" font-family="'JetBrains Mono',monospace" font-size="10" fill="#8a8075" text-anchor="end" letter-spacing="1">DE</text>
+    <!-- Column labels -->
+    <text x="35" y="-8" font-family="'JetBrains Mono',monospace" font-size="9" fill="#8a8075" text-anchor="middle" letter-spacing="1">iPhone</text>
+    <text x="110" y="-8" font-family="'JetBrains Mono',monospace" font-size="9" fill="#8a8075" text-anchor="middle" letter-spacing="1">iPad</text>
+    <text x="185" y="-8" font-family="'JetBrains Mono',monospace" font-size="9" fill="#8a8075" text-anchor="middle" letter-spacing="1">Watch</text>
+    <text x="260" y="-8" font-family="'JetBrains Mono',monospace" font-size="9" fill="#8a8075" text-anchor="middle" letter-spacing="1">Eco</text>
+
+    <!-- Row 1: US (amber, red, amber, red) -->
+    <rect x="10" y="10" width="50" height="50" rx="5" fill="#2a2520" stroke="#c9a84c" stroke-width="0.6" opacity="0.9"/>
+    <rect x="10" y="10" width="50" height="3" rx="1" fill="#c9a84c"/>
+    <rect x="85" y="10" width="50" height="50" rx="5" fill="#2a2520" stroke="#e06363" stroke-width="0.6" opacity="0.9"/>
+    <rect x="85" y="10" width="50" height="3" rx="1" fill="#e06363"/>
+    <rect x="160" y="10" width="50" height="50" rx="5" fill="#2a2520" stroke="#c9a84c" stroke-width="0.6" opacity="0.9"/>
+    <rect x="160" y="10" width="50" height="3" rx="1" fill="#c9a84c"/>
+    <rect x="235" y="10" width="50" height="50" rx="5" fill="#2a2520" stroke="#e06363" stroke-width="0.6" opacity="0.9"/>
+    <rect x="235" y="10" width="50" height="3" rx="1" fill="#e06363"/>
+
+    <!-- Row 2: JP (all red) -->
+    <rect x="10" y="80" width="50" height="50" rx="5" fill="#2a2520" stroke="#e06363" stroke-width="0.6" opacity="0.9"/>
+    <rect x="10" y="80" width="50" height="3" rx="1" fill="#e06363"/>
+    <rect x="85" y="80" width="50" height="50" rx="5" fill="#2a2520" stroke="#e06363" stroke-width="0.6" opacity="0.9"/>
+    <rect x="85" y="80" width="50" height="3" rx="1" fill="#e06363"/>
+    <rect x="160" y="80" width="50" height="50" rx="5" fill="#2a2520" stroke="#e06363" stroke-width="0.6" opacity="0.9"/>
+    <rect x="160" y="80" width="50" height="3" rx="1" fill="#e06363"/>
+    <rect x="235" y="80" width="50" height="50" rx="5" fill="#2a2520" stroke="#e06363" stroke-width="0.6" opacity="0.9"/>
+    <rect x="235" y="80" width="50" height="3" rx="1" fill="#e06363"/>
+
+    <!-- Row 3: DE (amber, red, amber, red) -->
+    <rect x="10" y="150" width="50" height="50" rx="5" fill="#2a2520" stroke="#c9a84c" stroke-width="0.6" opacity="0.9"/>
+    <rect x="10" y="150" width="50" height="3" rx="1" fill="#c9a84c"/>
+    <rect x="85" y="150" width="50" height="50" rx="5" fill="#2a2520" stroke="#e06363" stroke-width="0.6" opacity="0.9"/>
+    <rect x="85" y="150" width="50" height="3" rx="1" fill="#e06363"/>
+    <rect x="160" y="150" width="50" height="50" rx="5" fill="#2a2520" stroke="#c9a84c" stroke-width="0.6" opacity="0.9"/>
+    <rect x="160" y="150" width="50" height="3" rx="1" fill="#c9a84c"/>
+    <rect x="235" y="150" width="50" height="50" rx="5" fill="#2a2520" stroke="#e06363" stroke-width="0.6" opacity="0.9"/>
+    <rect x="235" y="150" width="50" height="3" rx="1" fill="#e06363"/>
+
+    <!-- Zero marks -->
+    <g font-family="'Playfair Display',serif" font-size="20" fill="#f5f0e8" text-anchor="middle" opacity="0.6">
+      <text x="35" y="45">0</text>
+      <text x="110" y="45">0</text>
+      <text x="185" y="45">1</text>
+      <text x="260" y="45">0</text>
+      <text x="35" y="115">0</text>
+      <text x="110" y="115">0</text>
+      <text x="185" y="115">0</text>
+      <text x="260" y="115">0</text>
+      <text x="35" y="185">1</text>
+      <text x="110" y="185">0</text>
+      <text x="185" y="185">0</text>
+      <text x="260" y="185">0</text>
+    </g>
+  </g>
+</svg>
