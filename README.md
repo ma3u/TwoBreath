@@ -110,8 +110,9 @@ After three years of breathing together, we built the app no one else made — f
 
 ### Links
 
-- Site: https://www.twobreath.com
+- [TwoBreathBig Berlin Hack Pitch Video](https://www.youtube.com/watch?v=oaaEZBEuCL0) 1:20min
 - Pitch: https://www.twobreath.com/pitch.html
+- Site: https://www.twobreath.com
 - [LinkedIn post](https://www.linkedin.com/feed/update/urn:li:activity:7453877649409568768/)
 - Visibility plan + log: `plans/peec-ai-visibility-plan.md`
 
