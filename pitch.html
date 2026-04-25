@@ -2,46 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <title>TwoBreath · AnswerAtlas — The Visibility Problem</title>
-  <meta name="description" content="Hidden pitch page. Big Berlin Hack 2026 · Peec AI track.">
+  <meta name="theme-color" content="#0f0d0b">
+  <title>TwoBreath · Pitch</title>
+  <meta name="description" content="One breath. Two souls. The twobreath pitch — voice-guided, in our own voices.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Preload all audio so playback never stutters between chapters -->
+  <link rel="preload" href="audio/narration/pitch/p00-hero.mp3"    as="audio" type="audio/mpeg">
+  <link rel="preload" href="audio/narration/pitch/p01-problem.mp3" as="audio" type="audio/mpeg">
+  <link rel="preload" href="audio/narration/pitch/p02-matrix.mp3"  as="audio" type="audio/mpeg">
+  <link rel="preload" href="audio/narration/pitch/p03-market.mp3"  as="audio" type="audio/mpeg">
+  <link rel="preload" href="audio/narration/pitch/p04-trends.mp3"  as="audio" type="audio/mpeg">
+  <link rel="preload" href="audio/narration/pitch/p05-tools.mp3"   as="audio" type="audio/mpeg">
+  <link rel="preload" href="audio/narration/pitch/p06-close.mp3"   as="audio" type="audio/mpeg">
+
   <style>
     :root {
-      --ink: #1a1714;
-      --ink-light: #2a2520;
-      --ink-deep: #0f0d0b;
-      --warm-white: #f5f0e8;
-      --warm-white-90: rgba(245,240,232,0.9);
-      --warm-white-75: rgba(245,240,232,0.75);
-      --warm-white-60: rgba(245,240,232,0.6);
-      --warm-white-40: rgba(245,240,232,0.4);
-      --warm-white-20: rgba(245,240,232,0.15);
-      --muted: #8a8075;
-      --accent-teal: #2d9e8a;
-      --accent-teal-light: #3dbfaa;
-      --accent-gold: #c9a84c;
-      --accent-gold-light: #dabe6a;
-      --accent-rose: #c96b6b;
-      --accent-rose-light: #d98888;
-      --danger: #e06363;
-      --danger-soft: rgba(224,99,99,0.12);
+      --ink:        #0f0d0b;
+      --ink-light:  #1a1714;
+      --warm:       #f5f0e8;
+      --warm-60:    rgba(245,240,232,0.6);
+      --warm-40:    rgba(245,240,232,0.4);
+      --warm-20:    rgba(245,240,232,0.2);
+      --teal:       #2d9e8a;
+      --teal-light: #3dbfaa;
+      --gold:       #c9a84c;
+      --gold-light: #dabe6a;
+      --rose:       #c96b6b;
+      --muted:      #8a8075;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
 
-    body {
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
       background: var(--ink);
-      color: var(--warm-white);
+      color: var(--warm);
       font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
       font-weight: 300;
-      line-height: 1.75;
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -49,1380 +54,796 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
-      .fade-in { opacity: 1 !important; transform: none !important; }
     }
 
-    :focus-visible {
-      outline: 2px solid var(--accent-teal);
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    /* ── Minimal top bar ── */
-    .topbar {
+    /* Background ambient gradient — drifts gently */
+    .ambient {
       position: fixed;
-      top: 0; left: 0; right: 0;
-      padding: 18px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-      background: rgba(15,13,11,0.6);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 0.5px solid rgba(255,255,255,0.06);
+      inset: -10%;
+      pointer-events: none;
+      z-index: 0;
     }
-    .topbar .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      color: var(--warm-white);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-    }
-    .topbar .logo span { color: var(--accent-teal); }
-    .topbar .tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--warm-white-60);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .topbar .tag .dot {
-      display: inline-block;
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--accent-rose);
-      margin-right: 8px;
-      vertical-align: 1px;
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.2); }
-    }
-
-    /* ── Sections ── */
-    section {
-      padding: 100px 40px;
-      max-width: 1180px;
-      margin: 0 auto;
-      position: relative;
-    }
-    section.narrow { max-width: 820px; }
-    section.tight { padding: 60px 40px; }
-
-    .eyebrow {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--accent-teal);
-      margin-bottom: 28px;
-      padding: 5px 14px;
-      border: 0.5px solid rgba(45,158,138,0.35);
-      border-radius: 20px;
-    }
-    .eyebrow.gold { color: var(--accent-gold); border-color: rgba(201,168,76,0.35); }
-    .eyebrow.rose { color: var(--accent-rose); border-color: rgba(201,107,107,0.35); }
-
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
-    h1 { font-size: clamp(42px, 7vw, 84px); margin-bottom: 28px; }
-    h1 em { font-style: italic; color: var(--accent-gold); }
-    h2 { font-size: clamp(32px, 4.5vw, 54px); margin-bottom: 28px; }
-    h2 em { font-style: italic; color: var(--accent-gold); }
-    h3 { font-size: 24px; margin-bottom: 14px; }
-
-    p { color: var(--warm-white-75); max-width: 72ch; font-size: 17px; }
-    p + p { margin-top: 18px; }
-    p em { font-style: italic; color: var(--warm-white-90); }
-
-    .lead {
-      font-size: 20px;
-      line-height: 1.7;
-      color: var(--warm-white-90);
-      max-width: 66ch;
-    }
-
-    /* ── Hero ── */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 120px;
-      position: relative;
-    }
-    .hero::before {
+    .ambient::before, .ambient::after {
       content: '';
       position: absolute;
-      top: 10%; right: -200px;
-      width: 700px; height: 700px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(45,158,138,0.12) 0%, transparent 65%);
-      pointer-events: none;
-      animation: drift 12s ease-in-out infinite;
+      filter: blur(80px);
+      opacity: 0.5;
     }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -100px; left: -150px;
-      width: 550px; height: 550px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 65%);
-      pointer-events: none;
-      animation: drift 14s ease-in-out infinite reverse;
+    .ambient::before {
+      width: 60vmin; height: 60vmin;
+      top: -10%; right: -10%;
+      background: radial-gradient(circle, rgba(45,158,138,0.5) 0%, transparent 70%);
+      animation: drift 20s ease-in-out infinite;
+    }
+    .ambient::after {
+      width: 60vmin; height: 60vmin;
+      bottom: -10%; left: -10%;
+      background: radial-gradient(circle, rgba(201,168,76,0.4) 0%, transparent 70%);
+      animation: drift 24s ease-in-out infinite reverse;
     }
     @keyframes drift {
-      0%, 100% { transform: translate(0,0); }
-      50% { transform: translate(40px, -30px); }
+      0%, 100% { transform: translate(0,0) scale(1); }
+      50%      { transform: translate(40px,-30px) scale(1.1); }
     }
 
-    .hero-inner { position: relative; z-index: 2; }
-
-    .hero-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 36px;
-    }
-    .hero-tag .sep { margin: 0 14px; color: var(--warm-white-20); }
-
-    .hero-quote {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 22px;
-      color: var(--accent-gold-light);
-      margin-bottom: 48px;
-      padding-left: 20px;
-      border-left: 2px solid rgba(201,168,76,0.4);
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      margin-top: 64px;
-      padding-top: 40px;
-      border-top: 0.5px solid rgba(255,255,255,0.1);
-    }
-    .hero-stat {
-      padding: 0 20px;
-      border-left: 0.5px solid rgba(255,255,255,0.08);
-    }
-    .hero-stat:first-child { border-left: none; padding-left: 0; }
-    .hero-stat .num {
-      font-family: 'Playfair Display', serif;
-      font-size: 40px;
-      color: var(--accent-gold);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .hero-stat .lbl {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── Fade-in ── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── Problem section ── */
-    .problem {
-      background: linear-gradient(180deg, transparent 0%, rgba(201,107,107,0.03) 50%, transparent 100%);
-    }
-
-    .scene {
-      background: var(--ink-light);
-      border: 0.5px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 36px 40px;
-      margin: 48px 0;
-      position: relative;
-    }
-    .scene::before {
-      content: '';
-      position: absolute;
-      top: 36px; left: 0;
-      width: 3px; height: calc(100% - 72px);
-      background: var(--accent-rose);
-      border-radius: 0 2px 2px 0;
-    }
-    .scene .when {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--accent-rose);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .scene .dialog {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 22px;
-      color: var(--warm-white-90);
-      line-height: 1.5;
-      margin-bottom: 14px;
-    }
-    .scene .dialog .ja {
-      display: block;
-      color: var(--accent-gold-light);
-      font-size: 18px;
-      margin-top: 6px;
-    }
-    .scene .outcome {
-      font-size: 15px;
-      color: var(--warm-white-60);
-      font-family: 'DM Sans', sans-serif;
-      font-style: normal;
-    }
-
-    /* ── AnswerAtlas matrix ── */
-    .matrix-section {
-      padding: 120px 40px;
-      background: var(--ink-deep);
-      border-top: 0.5px solid rgba(255,255,255,0.05);
-      border-bottom: 0.5px solid rgba(255,255,255,0.05);
-    }
-    .matrix-wrap { max-width: 1180px; margin: 0 auto; }
-
-    .matrix-legend {
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-      margin-top: 24px;
-      margin-bottom: 40px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--warm-white-60);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .matrix-legend .key { display: inline-flex; align-items: center; gap: 10px; }
-    .matrix-legend .swatch {
-      width: 14px; height: 14px; border-radius: 3px;
-    }
-    .swatch.red { background: var(--danger); }
-    .swatch.amber { background: var(--accent-gold); opacity: 0.7; }
-    .swatch.teal { background: var(--accent-teal); }
-
-    .matrix {
-      display: grid;
-      grid-template-columns: 180px repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 24px;
-    }
-    .matrix .col-head, .matrix .row-head {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--warm-white-60);
-      padding: 14px 10px;
-    }
-    .matrix .col-head { text-align: center; border-bottom: 0.5px solid rgba(255,255,255,0.1); }
-    .matrix .row-head {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-right: 0.5px solid rgba(255,255,255,0.1);
-    }
-    .matrix .row-head .flag { font-size: 22px; line-height: 1; }
-    .matrix .row-head .region {
-      display: block;
-      color: var(--warm-white);
-      font-size: 13px;
-      letter-spacing: 0.05em;
-    }
-    .matrix .row-head .weeks {
-      display: block;
-      font-size: 9px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .cell {
-      position: relative;
-      background: var(--ink-light);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 10px;
-      padding: 18px 14px;
-      min-height: 128px;
+    /* ── Start overlay ── */
+    .start-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15,13,11,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       cursor: pointer;
-      overflow: hidden;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
     }
-    .cell:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255,255,255,0.18);
-    }
-    .cell::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--danger);
+    .start-overlay.hidden {
       opacity: 0;
-      transition: opacity 0.6s ease;
+      visibility: hidden;
     }
-    .cell.lit.red::before { opacity: 1; background: var(--danger); }
-    .cell.lit.amber::before { opacity: 1; background: var(--accent-gold); }
-    .cell.lit.teal::before { opacity: 1; background: var(--accent-teal); }
-    .cell.lit.red { background: linear-gradient(180deg, var(--danger-soft) 0%, var(--ink-light) 60%); }
-    .cell.lit.amber { background: linear-gradient(180deg, rgba(201,168,76,0.08) 0%, var(--ink-light) 60%); }
-    .cell.lit.teal { background: linear-gradient(180deg, rgba(45,158,138,0.08) 0%, var(--ink-light) 60%); }
-
-    .cell .score {
+    .start-overlay .brand {
       font-family: 'Playfair Display', serif;
-      font-size: 32px;
-      line-height: 1;
-      color: var(--warm-white);
-    }
-    .cell.lit.red .score { color: var(--danger); }
-    .cell.lit.amber .score { color: var(--accent-gold-light); }
-    .cell.lit.teal .score { color: var(--accent-teal-light); }
-
-    .cell .label {
-      font-size: 11px;
-      color: var(--warm-white-60);
-      letter-spacing: 0.04em;
-      line-height: 1.4;
-    }
-    .cell .meta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-top: 8px;
-    }
-
-    /* ── Numbers grid ── */
-    .numbers {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin: 56px 0;
-    }
-    .number-card {
-      background: var(--ink-light);
-      border: 0.5px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 32px 28px;
-      transition: border-color 0.3s ease, transform 0.3s ease;
-    }
-    .number-card:hover {
-      border-color: rgba(201,168,76,0.3);
-      transform: translateY(-3px);
-    }
-    .number-card .big {
-      font-family: 'Playfair Display', serif;
-      font-size: 56px;
-      line-height: 1;
-      color: var(--accent-gold);
-      margin-bottom: 8px;
+      font-size: clamp(28px, 5vw, 44px);
       letter-spacing: -0.02em;
+      margin-bottom: 16px;
     }
-    .number-card .big em {
-      font-style: italic;
-      font-size: 32px;
-      color: var(--warm-white-60);
-      vertical-align: 4px;
-    }
-    .number-card .lbl {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--accent-teal);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .number-card p {
-      font-size: 14px;
-      color: var(--warm-white-60);
-      line-height: 1.6;
-    }
-    .number-card .src {
-      display: block;
-      margin-top: 14px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* ── Trends list ── */
-    .trends {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 40px;
-    }
-    .trend {
-      padding: 24px 28px;
-      background: rgba(245,240,232,0.02);
-      border-left: 2px solid var(--accent-teal);
-      border-radius: 0 10px 10px 0;
-    }
-    .trend h3 {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 16px;
-      margin-bottom: 8px;
-      color: var(--warm-white);
-    }
-    .trend p { font-size: 14px; margin: 0; }
-    .trend .tag {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      color: var(--accent-gold);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    /* ── Tooling recommendation ── */
-    .tool-row {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 40px;
-      padding: 32px 0;
-      border-bottom: 0.5px solid rgba(255,255,255,0.07);
-    }
-    .tool-row:last-child { border-bottom: none; }
-    .tool-row .tool-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--accent-teal);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-    .tool-row h3 { margin-bottom: 6px; }
-    .tool-row .pick {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--accent-gold);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      background: rgba(201,168,76,0.08);
-      border: 0.5px solid rgba(201,168,76,0.3);
-      padding: 3px 10px;
-      border-radius: 12px;
-      margin-bottom: 14px;
-    }
-    .tool-row ul {
-      list-style: none;
-      margin-top: 12px;
-    }
-    .tool-row li {
-      font-size: 14px;
-      color: var(--warm-white-60);
-      padding-left: 20px;
-      position: relative;
-      margin-bottom: 8px;
-      line-height: 1.6;
-    }
-    .tool-row li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent-teal);
-    }
-    .tool-row li strong {
-      color: var(--warm-white-90);
-      font-weight: 500;
-    }
-
-    /* ── Close/CTA ── */
-    .close {
-      padding: 140px 40px 120px;
-      text-align: center;
-      background: radial-gradient(ellipse at center, rgba(45,158,138,0.06) 0%, transparent 60%);
-    }
-    .close h2 { margin-bottom: 24px; }
-    .close .tagline {
+    .start-overlay .brand span { color: var(--teal); }
+    .start-overlay .quote {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: 28px;
-      color: var(--accent-gold-light);
-      margin-top: 28px;
+      font-size: clamp(20px, 3vw, 28px);
+      color: var(--gold-light);
+      margin-bottom: 56px;
     }
-    .close .meta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-top: 40px;
-    }
-    .close .meta span { color: var(--accent-teal); }
-
-    /* ── Chapter header (illustration + play button + meta) ── */
-    .chapter-head {
-      display: grid;
-      grid-template-columns: 120px 1fr auto;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 40px;
-    }
-    .chapter-illus {
-      width: 120px;
-      height: 120px;
-      border-radius: 14px;
-      background: var(--ink-light);
-      border: 0.5px solid rgba(255,255,255,0.08);
-      padding: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.4s ease, border-color 0.4s ease;
-    }
-    .chapter-head:hover .chapter-illus {
-      transform: translateY(-2px);
-      border-color: rgba(201,168,76,0.3);
-    }
-    .chapter-illus img, .chapter-illus svg { width: 100%; height: 100%; }
-    .chapter-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .chapter-meta .label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .chapter-meta .voice {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent-teal);
-    }
-    .chapter-meta .voice.gold { color: var(--accent-gold); }
-
-    .play-btn {
-      width: 52px;
-      height: 52px;
-      min-width: 52px;
+    .start-btn {
+      width: clamp(96px, 12vw, 132px);
+      height: clamp(96px, 12vw, 132px);
       border-radius: 50%;
-      border: 0.5px solid rgba(201,168,76,0.4);
-      background: rgba(201,168,76,0.08);
-      color: var(--accent-gold);
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
-      position: relative;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 0 0 rgba(201,168,76,0.4);
+      animation: breath 4s ease-in-out infinite;
     }
-    .play-btn:hover {
-      background: rgba(201,168,76,0.18);
-      transform: scale(1.05);
+    @keyframes breath {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201,168,76,0.45); }
+      50%      { transform: scale(1.04); box-shadow: 0 0 0 22px rgba(201,168,76,0); }
     }
-    .play-btn.playing {
-      background: var(--accent-gold);
-      color: var(--ink);
-      box-shadow: 0 0 0 8px rgba(201,168,76,0.12);
+    .start-btn svg {
+      width: 38%;
+      height: 38%;
+      margin-left: 6%;
     }
-    .play-btn svg { width: 20px; height: 20px; }
-    .play-btn .play-icon { margin-left: 3px; }
-    .play-btn .pause-icon { display: none; }
-    .play-btn.playing .play-icon { display: none; }
-    .play-btn.playing .pause-icon { display: block; }
-    .play-btn .progress-ring {
-      position: absolute;
-      top: -1px; left: -1px;
-      width: 52px;
-      height: 52px;
-      transform: rotate(-90deg);
+    .start-btn:hover { transform: scale(1.06) !important; }
+    .start-overlay .meta {
+      margin-top: 36px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--warm-40);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .start-overlay .meta span { color: var(--gold); }
+    .start-overlay .hint {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--warm-60);
+      font-style: italic;
+    }
+
+    /* ── Slides ── */
+    .deck {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .slide {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(40px, 6vh, 80px) clamp(24px, 6vw, 80px) clamp(120px, 18vh, 200px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1.2s ease, visibility 1.2s ease;
       pointer-events: none;
     }
-    .play-btn .progress-ring circle {
-      fill: none;
-      stroke: var(--accent-gold);
-      stroke-width: 1.5;
-      stroke-dasharray: 157;
-      stroke-dashoffset: 157;
-      transition: stroke-dashoffset 0.2s linear;
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
     }
 
-    /* ── Floating Narration FAB ── */
-    .nar-fab {
+    .slide-chapter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(10px, 1vw, 12px);
+      color: var(--warm-40);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: clamp(20px, 3vh, 36px);
+      opacity: 0;
+      transform: translateY(-12px);
+      transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+    }
+    .slide-chapter .voice { color: var(--gold); }
+    .slide-chapter .voice.teal { color: var(--teal); }
+    .slide.active .slide-chapter { opacity: 1; transform: translateY(0); }
+
+    .slide-illus {
+      width: min(70vw, 50vh);
+      height: min(70vw, 50vh);
+      max-width: 580px;
+      max-height: 580px;
+      flex: 0 0 auto;
+      opacity: 0;
+      transform: scale(0.94);
+      transition: opacity 1.4s ease 0.3s, transform 1.6s ease 0.3s;
+    }
+    .slide.active .slide-illus { opacity: 1; transform: scale(1); }
+    .slide-illus img, .slide-illus svg { width: 100%; height: 100%; }
+
+    .slide-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 6vw, 76px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-align: center;
+      margin-top: clamp(28px, 4vh, 48px);
+      max-width: 18ch;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s ease 0.7s, transform 1.2s ease 0.7s;
+    }
+    .slide.active .slide-headline { opacity: 1; transform: translateY(0); }
+    .slide-headline em { font-style: italic; color: var(--gold-light); }
+    .slide-headline strong {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--teal-light);
+    }
+
+    .slide-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(15px, 1.6vw, 19px);
+      color: var(--warm-60);
+      text-align: center;
+      margin-top: clamp(16px, 2.4vh, 28px);
+      max-width: 38ch;
+      opacity: 0;
+      transition: opacity 1.2s ease 1.0s;
+    }
+    .slide.active .slide-sub { opacity: 1; }
+
+    /* ── Controls bar ── */
+    .controls {
       position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 90;
+      bottom: clamp(20px, 3vh, 36px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
       display: flex;
       align-items: center;
       gap: 14px;
+      padding: 10px 18px;
+      background: rgba(15,13,11,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 0.5px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease 0.4s;
     }
-    .nar-info {
-      display: none;
-      background: rgba(26,23,20,0.92);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 0.5px solid rgba(255,255,255,0.1);
+    .deck.live .controls {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .ctrl-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--warm-60);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+    }
+    .ctrl-btn:hover { background: rgba(255,255,255,0.08); color: var(--warm); }
+    .ctrl-btn svg { width: 20px; height: 20px; }
+    .ctrl-btn.primary {
+      background: var(--gold);
+      color: var(--ink);
+      width: 48px;
+      height: 48px;
+    }
+    .ctrl-btn.primary:hover { background: var(--gold-light); }
+    .ctrl-btn.primary .pause-icon { display: none; }
+    .deck.playing .ctrl-btn.primary .play-icon { display: none; }
+    .deck.playing .ctrl-btn.primary .pause-icon { display: block; }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+      padding: 0 8px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      padding: 0;
+    }
+    .dot:hover { background: rgba(255,255,255,0.4); }
+    .dot.active {
+      background: var(--gold);
+      width: 24px;
+      border-radius: 4px;
+    }
+    .dot.played:not(.active) { background: rgba(201,168,76,0.5); }
+
+    /* Progress bar inside the active dot — fills as audio plays */
+    .progress-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: var(--gold);
+      width: 0%;
+      z-index: 40;
+      transition: width 0.2s linear;
+    }
+
+    /* ── Subtitles (the spoken caption) ── */
+    .caption {
+      position: fixed;
+      bottom: clamp(80px, 10vh, 120px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      max-width: min(90vw, 720px);
+      padding: 12px 22px;
+      background: rgba(15,13,11,0.6);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 0.5px solid rgba(255,255,255,0.08);
       border-radius: 14px;
-      padding: 12px 18px;
-      max-width: 280px;
-      animation: slideIn 0.4s ease forwards;
+      font-size: clamp(13px, 1.4vw, 15px);
+      color: var(--warm);
+      text-align: center;
+      line-height: 1.5;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
     }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .nar-fab.playing .nar-info { display: flex; flex-direction: column; gap: 6px; }
-    .nar-fab .nar-voice {
+    .deck.live.show-caption .caption { opacity: 1; }
+    .caption .speaker {
+      display: block;
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--accent-teal);
+      color: var(--gold);
+      margin-bottom: 4px;
     }
-    .nar-fab .nar-title {
-      font-size: 13px;
-      color: var(--warm-white);
-      font-weight: 400;
-      line-height: 1.3;
-    }
-    .nar-fab .nar-progress {
-      width: 100%;
-      height: 2px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 1px;
-      margin-top: 4px;
-      overflow: hidden;
-    }
-    .nar-fab .nar-bar {
-      height: 100%;
-      width: 0%;
-      background: var(--accent-gold);
-      transition: width 0.2s linear;
-    }
-    .nar-fab .intro {
-      background: rgba(26,23,20,0.92);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 0.5px solid rgba(255,255,255,0.1);
-      border-radius: 14px;
-      padding: 10px 16px;
-      max-width: 260px;
-      font-size: 12px;
-      color: var(--warm-white-75);
-      line-height: 1.4;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .nar-fab .intro em {
-      color: var(--accent-gold);
-      font-style: italic;
-    }
-    .nar-fab.playing .intro { display: none; }
-    .nar-main-btn {
-      width: 58px;
-      height: 58px;
-      min-width: 58px;
-      border-radius: 50%;
-      border: none;
-      background: var(--accent-gold);
-      color: var(--ink);
-      cursor: pointer;
+
+    /* ── Top bar (brand + counter) ── */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px clamp(20px, 4vw, 40px);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.6s ease 0.4s;
+    }
+    .deck.live .topbar { opacity: 1; }
+    .topbar .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+      pointer-events: auto;
+    }
+    .topbar .brand a { color: var(--warm); text-decoration: none; }
+    .topbar .brand span { color: var(--teal); }
+    .topbar .counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: var(--warm-60);
+    }
+
+    /* ── End / restart card ── */
+    .end-card {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      background: rgba(15,13,11,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+    .end-card.shown { opacity: 1; visibility: visible; }
+    .end-card .tag {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(28px, 4.5vw, 48px);
+      color: var(--gold-light);
+      margin-bottom: 16px;
+    }
+    .end-card .meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm-40);
+      margin-bottom: 56px;
+    }
+    .end-card .meta a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .end-actions {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .end-btn {
+      padding: 14px 30px;
+      border-radius: 999px;
+      border: 0.5px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: var(--warm);
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
-    .nar-main-btn:hover {
-      transform: scale(1.06);
-      box-shadow: 0 6px 28px rgba(201,168,76,0.45);
+    .end-btn:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.4);
     }
-    .nar-fab.playing .nar-main-btn { background: var(--accent-teal); color: var(--warm-white); box-shadow: 0 4px 20px rgba(45,158,138,0.35); }
-    .nar-main-btn svg { width: 22px; height: 22px; }
-    .nar-main-btn .play-icon { margin-left: 3px; }
-    .nar-main-btn .pause-icon { display: none; }
-    .nar-fab.playing .nar-main-btn .play-icon { display: none; }
-    .nar-fab.playing .nar-main-btn .pause-icon { display: block; }
+    .end-btn.primary {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+    }
+    .end-btn.primary:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+    }
 
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      section { padding: 80px 24px; }
-      .hero { padding-top: 100px; }
-      .topbar { padding: 14px 20px; }
-      .hero-stats { grid-template-columns: repeat(2, 1fr); }
-      .hero-stat { padding: 20px; border-left: none; border-top: 0.5px solid rgba(255,255,255,0.08); }
-      .hero-stat:first-child, .hero-stat:nth-child(2) { border-top: none; padding-top: 0; }
-      .numbers { grid-template-columns: 1fr; }
-      .trends { grid-template-columns: 1fr; }
-      .matrix { grid-template-columns: 1fr; gap: 10px; }
-      .matrix .col-head { display: none; }
-      .matrix .row-head { justify-content: flex-start; padding: 18px 0 6px; border-right: none; border-bottom: 0.5px solid rgba(255,255,255,0.08); }
-      .cell::after {
-        content: attr(data-device);
-        position: absolute;
-        top: 12px; right: 14px;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 9px;
-        color: var(--muted);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-      .tool-row { grid-template-columns: 1fr; gap: 12px; }
-      .chapter-head { grid-template-columns: 72px 1fr auto; gap: 14px; margin-bottom: 28px; }
-      .chapter-illus { width: 72px; height: 72px; }
-      .nar-fab { bottom: 16px; right: 16px; gap: 10px; }
-      .nar-info, .nar-fab .intro { max-width: 180px; font-size: 11px; padding: 10px 12px; }
-      .nar-main-btn { width: 50px; height: 50px; min-width: 50px; }
+    /* ── Mobile tweaks ── */
+    @media (max-width: 600px) {
+      .slide { padding: 70px 20px 140px; }
+      .slide-illus { width: 75vw; height: 50vh; }
+      .controls { gap: 8px; padding: 8px 12px; }
+      .ctrl-btn { width: 36px; height: 36px; }
+      .ctrl-btn.primary { width: 44px; height: 44px; }
+      .dot { width: 6px; height: 6px; }
+      .dot.active { width: 18px; }
+      .caption { bottom: 96px; padding: 10px 16px; }
+    }
+
+    /* Hidden by default — only revealed on focus for screen readers */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
     }
   </style>
 </head>
 <body>
 
-  <header class="topbar">
-    <a href="/" class="logo">two<span>breath</span></a>
-    <span class="tag"><span class="dot"></span>Hidden · Big Berlin Hack 2026</span>
-  </header>
+  <div class="ambient" aria-hidden="true"></div>
 
-  <!-- ═══════════════════ HERO ═══════════════════ -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-tag fade-in">
-        Peec AI Track <span class="sep">·</span> Submission Sunday 13:30 <span class="sep">·</span> Matthi &amp; Dascha
-      </div>
+  <!-- ── Start overlay ── -->
+  <div class="start-overlay" id="startOverlay" role="button" tabindex="0" aria-label="Begin the pitch">
+    <div class="brand">two<span>breath</span></div>
+    <div class="quote">One breath. Two souls.</div>
+    <button class="start-btn" id="startBtn" aria-label="Begin the pitch in our voices">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <div class="hint">Tap to begin. Voices by Matthi &amp; Dascha.</div>
+    <div class="meta">Big Berlin Hack 2026 <span>·</span> Peec AI Track</div>
+  </div>
 
-      <div class="chapter-head fade-in" data-section="0">
-        <div class="chapter-illus"><img src="images/pitch/p00-hero.svg" alt="Two breath rings intertwined" loading="lazy"></div>
-        <div class="chapter-meta">
-          <span class="label">Chapter 01 · Opening</span>
-          <span class="voice gold">Voice · Matthi (cloned)</span>
-        </div>
-        <button class="play-btn" data-play="0" aria-label="Play chapter: Opening">
-          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-          <svg class="progress-ring" viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/></svg>
-        </button>
-      </div>
+  <!-- ── Top bar ── -->
+  <div class="topbar">
+    <div class="brand"><a href="/">two<span>breath</span></a></div>
+    <div class="counter" id="counter">01 / 07</div>
+  </div>
 
-      <h1 class="fade-in">AnswerAtlas<br><em>for twobreath.</em></h1>
+  <!-- ── Deck ── -->
+  <div class="deck" id="deck">
 
-      <p class="lead fade-in">
-        In 2026 a couple's first impression of us is not our App Store page.
-        It is what <em>ChatGPT</em> says about us — in English, in Japanese, in German —
-        at 11:47 at night, when one of them just had a hard day.
-      </p>
+    <!-- Slide 1 — Hero -->
+    <section class="slide" data-slide="0" data-chapter="p00-hero" data-voice="matthi">
+      <div class="slide-chapter">Chapter 01 <span class="voice">Matthi</span></div>
+      <div class="slide-illus"><img src="images/pitch/p00-hero.svg" alt="Two figures on a couch in morning light"></div>
+      <h1 class="slide-headline">One breath.<br><em>Two souls.</em></h1>
+      <p class="slide-sub">Three years ago, something in our relationship got quiet.</p>
+    </section>
 
-      <div class="hero-quote fade-in">
-        "One breath. Two souls."<br>
-        — twobreath.com, launching July 1, 2026
-      </div>
+    <!-- Slide 2 — Problem -->
+    <section class="slide" data-slide="1" data-chapter="p01-problem" data-voice="dascha">
+      <div class="slide-chapter">Chapter 02 <span class="voice teal">Dascha</span></div>
+      <div class="slide-illus"><img src="images/pitch/p01-problem.svg" alt="Tokyo apartment at 23:47"></div>
+      <h1 class="slide-headline"><em>23:47</em><br>in Tokyo.</h1>
+      <p class="slide-sub">She types into ChatGPT: a breathing app we can do together.</p>
+    </section>
 
-      <div class="hero-stats fade-in">
-        <div class="hero-stat">
-          <div class="num">2,500<em>+</em></div>
-          <div class="lbl">Meditation apps since 2015</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num">0</div>
-          <div class="lbl">Built for two</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num">$600</div>
-          <div class="lbl">We paid over 3 years</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num">$6.7<em>B</em></div>
-          <div class="lbl">Meditation market, 2026</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Slide 3 — Three cities -->
+    <section class="slide" data-slide="2" data-chapter="p02-matrix" data-voice="matthi">
+      <div class="slide-chapter">Chapter 03 <span class="voice">Matthi</span></div>
+      <div class="slide-illus"><img src="images/pitch/p02-matrix.svg" alt="Three cities, three couples, the same silence"></div>
+      <h1 class="slide-headline">Three cities.<br><em>The same silence.</em></h1>
+      <p class="slide-sub">AnswerAtlas, powered by Peec AI.</p>
+    </section>
 
-  <!-- ═══════════════════ THE PROBLEM ═══════════════════ -->
-  <section class="problem">
-    <div class="chapter-head fade-in" data-section="1">
-      <div class="chapter-illus"><img src="images/pitch/p01-problem.svg" alt="Phone glowing at 23:47 in the dark" loading="lazy"></div>
-      <div class="chapter-meta">
-        <span class="label">Chapter 02 · The Problem</span>
-        <span class="voice">Voice · Dascha (cloned)</span>
-      </div>
-      <button class="play-btn" data-play="1" aria-label="Play chapter: The Problem">
-        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-        <svg class="progress-ring" viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/></svg>
-      </button>
-    </div>
-    <div class="eyebrow rose fade-in">The visibility problem</div>
-    <h2 class="fade-in">A couple in Tokyo,<br><em>Tuesday night, 11:47pm.</em></h2>
+    <!-- Slide 4 — Market -->
+    <section class="slide" data-slide="3" data-chapter="p03-market" data-voice="dascha">
+      <div class="slide-chapter">Chapter 04 <span class="voice teal">Dascha</span></div>
+      <div class="slide-illus"><img src="images/pitch/p03-market.svg" alt="A crowd of solo meditators with one couple lit at the center"></div>
+      <h1 class="slide-headline">Apps for one.<br><em>None for two.</em></h1>
+      <p class="slide-sub">Until us.</p>
+    </section>
 
-    <div class="scene fade-in">
-      <div class="when">Tokyo · 23:47 JST · Tuesday</div>
-      <div class="dialog">
-        She types into ChatGPT:
-        <span class="ja">二人でできる呼吸のアプリは？</span>
-        <span style="display:block; font-size:15px; font-style:normal; color:var(--warm-white-60); margin-top:6px;">
-          ("a breathing app we can do together")
-        </span>
-      </div>
-      <div class="outcome">
-        ChatGPT answers in perfect Japanese. It recommends <strong style="color:var(--warm-white-90)">Calm, Headspace, Breathe</strong>.
-        <em style="color:var(--accent-rose-light); font-style:italic;">None of them were built for two.</em>
-        They close the app.
-      </div>
-    </div>
+    <!-- Slide 5 — Trends -->
+    <section class="slide" data-slide="4" data-chapter="p04-trends" data-voice="matthi">
+      <div class="slide-chapter">Chapter 05 <span class="voice">Matthi</span></div>
+      <div class="slide-illus"><img src="images/pitch/p04-trends.svg" alt="Two heart-rate waves merging into one"></div>
+      <h1 class="slide-headline">Two waves.<br><em>One rhythm.</em></h1>
+      <p class="slide-sub">The first longevity protocol for couples.</p>
+    </section>
 
-    <p class="lead fade-in" style="margin-top:40px;">
-      Our app is ready. The science is settled. The ritual works.
-      <em>But across three markets × four Apple device classes, AI answers recommend us exactly zero times.</em>
-      That is the gap AnswerAtlas closes.
-    </p>
-  </section>
+    <!-- Slide 6 — Stack -->
+    <section class="slide" data-slide="5" data-chapter="p05-tools" data-voice="dascha">
+      <div class="slide-chapter">Chapter 06 <span class="voice teal">Dascha</span></div>
+      <div class="slide-illus"><img src="images/pitch/p05-tools.svg" alt="A constellation of production tools held by two cupped hands"></div>
+      <h1 class="slide-headline">Built by hand.<br><em>Held by craft.</em></h1>
+      <p class="slide-sub">My voice — cloned. The story — ours.</p>
+    </section>
 
-  <!-- ═══════════════════ ANSWERATLAS MATRIX ═══════════════════ -->
-  <section class="matrix-section">
-    <div class="matrix-wrap">
-      <div class="chapter-head fade-in" data-section="2">
-        <div class="chapter-illus"><img src="images/pitch/p02-matrix.svg" alt="AnswerAtlas 3x4 grid of visibility cells" loading="lazy"></div>
-        <div class="chapter-meta">
-          <span class="label">Chapter 03 · The Atlas</span>
-          <span class="voice gold">Voice · Matthi (cloned)</span>
-        </div>
-        <button class="play-btn" data-play="2" aria-label="Play chapter: The Atlas">
-          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-          <svg class="progress-ring" viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/></svg>
-        </button>
-      </div>
-      <div class="eyebrow gold fade-in">AnswerAtlas · powered by Peec AI</div>
-      <h2 class="fade-in">The 3×4 matrix,<br><em>lit up live.</em></h2>
-      <p class="fade-in" style="max-width:60ch; margin-top:14px;">
-        Three markets (US, Japan, Germany) × four Apple device classes (iPhone, iPad, Apple Watch, Apple ecosystem).
-        Each cell shows AI-answer visibility for the prompt territory "breathing app for couples."
-        <em>Red = zero citations. Amber = contested. Teal = defensible.</em>
-      </p>
+    <!-- Slide 7 — Close -->
+    <section class="slide" data-slide="6" data-chapter="p06-close" data-voice="matthi">
+      <div class="slide-chapter">Chapter 07 <span class="voice">Matthi</span></div>
+      <div class="slide-illus"><img src="images/pitch/p06-close.svg" alt="Sunrise over two figures holding hands"></div>
+      <h1 class="slide-headline">Oxytocin fades.<br><em>We build the morning</em><br>that brings it back.</h1>
+      <p class="slide-sub">One breath. Two souls.</p>
+    </section>
 
-      <div class="matrix-legend fade-in">
-        <span class="key"><span class="swatch red"></span> Zero visibility</span>
-        <span class="key"><span class="swatch amber"></span> Contested</span>
-        <span class="key"><span class="swatch teal"></span> Uncontested &amp; reachable</span>
-      </div>
+  </div>
 
-      <div class="matrix fade-in" id="matrix">
-        <div></div>
-        <div class="col-head">iPhone</div>
-        <div class="col-head">iPad</div>
-        <div class="col-head">Apple Watch</div>
-        <div class="col-head">Ecosystem</div>
+  <!-- ── Caption box ── -->
+  <div class="caption" id="caption" aria-live="polite">
+    <span class="speaker" id="captionSpeaker">Matthi</span>
+    <span id="captionText">…</span>
+  </div>
 
-        <!-- Row 1: US -->
-        <div class="row-head">
-          <span class="flag">🇺🇸</span>
-          <span>
-            <span class="region">United States</span>
-            <span class="weeks">Weeks 1–4</span>
-          </span>
-        </div>
-        <div class="cell" data-device="iPhone" data-level="amber" data-delay="100">
-          <div><div class="score">0 / 10</div><div class="label">Calm &amp; Headspace dominate. Couples prompt still thin.</div></div>
-          <div class="meta">r/PeterAttia · Wirecutter</div>
-        </div>
-        <div class="cell" data-device="iPad" data-level="red" data-delay="160">
-          <div><div class="score">0 / 10</div><div class="label">Shared-screen ritual unclaimed by any app.</div></div>
-          <div class="meta">Empty citation graph</div>
-        </div>
-        <div class="cell" data-device="Apple Watch" data-level="amber" data-delay="220">
-          <div><div class="score">1 / 10</div><div class="label">HRV mentioned — "couple sync" nowhere.</div></div>
-          <div class="meta">Huberman · Attia orbit</div>
-        </div>
-        <div class="cell" data-device="Ecosystem" data-level="red" data-delay="280">
-          <div><div class="score">0 / 10</div><div class="label">"Longevity protocol for couples" uncontested.</div></div>
-          <div class="meta">Blue ocean</div>
-        </div>
-
-        <!-- Row 2: Japan -->
-        <div class="row-head">
-          <span class="flag">🇯🇵</span>
-          <span>
-            <span class="region">Japan</span>
-            <span class="weeks">Weeks 3–6</span>
-          </span>
-        </div>
-        <div class="cell" data-device="iPhone" data-level="red" data-delay="340">
-          <div><div class="score">0 / 10</div><div class="label">English wellness apps barely cross to JP AI answers.</div></div>
-          <div class="meta">Note.com · 5ch</div>
-        </div>
-        <div class="cell" data-device="iPad" data-level="red" data-delay="400">
-          <div><div class="score">0 / 10</div><div class="label">夫婦 朝 ルーティン アプリ — empty.</div></div>
-          <div class="meta">Zero incumbents</div>
-        </div>
-        <div class="cell" data-device="Apple Watch" data-level="red" data-delay="460">
-          <div><div class="score">0 / 10</div><div class="label">パートナー HRV 同期 — unindexed territory.</div></div>
-          <div class="meta">Moat candidate</div>
-        </div>
-        <div class="cell" data-device="Ecosystem" data-level="red" data-delay="520">
-          <div><div class="score">0 / 10</div><div class="label">長寿 カップル 習慣 — open field.</div></div>
-          <div class="meta">First-in-JP moat</div>
-        </div>
-
-        <!-- Row 3: Germany -->
-        <div class="row-head">
-          <span class="flag">🇩🇪</span>
-          <span>
-            <span class="region">Germany</span>
-            <span class="weeks">Weeks 5–9</span>
-          </span>
-        </div>
-        <div class="cell" data-device="iPhone" data-level="amber" data-delay="580">
-          <div><div class="score">1 / 10</div><div class="label">Atem-App für Paare — partially contested.</div></div>
-          <div class="meta">heise · t3n</div>
-        </div>
-        <div class="cell" data-device="iPad" data-level="red" data-delay="640">
-          <div><div class="score">0 / 10</div><div class="label">Gemeinsames Atem-Ritual — untouched.</div></div>
-          <div class="meta">Krankenkasse adjacent</div>
-        </div>
-        <div class="cell" data-device="Apple Watch" data-level="amber" data-delay="700">
-          <div><div class="score">0 / 10</div><div class="label">HRV Partner Apple Watch — gap.</div></div>
-          <div class="meta">Spektrum · Atemtherapie</div>
-        </div>
-        <div class="cell" data-device="Ecosystem" data-level="red" data-delay="760">
-          <div><div class="score">0 / 10</div><div class="label">Stressbewältigung gemeinsam — defensible.</div></div>
-          <div class="meta">Regulated, reachable</div>
-        </div>
-      </div>
-
-      <p class="fade-in" style="margin-top:48px; font-size:15px; color:var(--warm-white-60);">
-        <strong style="color:var(--warm-white-90); font-weight:500;">Read this grid like a compass.</strong>
-        The red cells aren't losses — they're the exact coordinates Peec AI tells us to attack first.
-        Japan is 12 of 12 empty. That is a moat no US-first competitor can copy.
-      </p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ MARKET SIZE ═══════════════════ -->
-  <section>
-    <div class="chapter-head fade-in" data-section="3">
-      <div class="chapter-illus"><img src="images/pitch/p03-market.svg" alt="2500 meditation apps with one built for two highlighted" loading="lazy"></div>
-      <div class="chapter-meta">
-        <span class="label">Chapter 04 · The Market</span>
-        <span class="voice">Voice · Dascha (cloned)</span>
-      </div>
-      <button class="play-btn" data-play="3" aria-label="Play chapter: The Market">
-        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-        <svg class="progress-ring" viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/></svg>
-      </button>
-    </div>
-    <div class="eyebrow fade-in">Market reality check</div>
-    <h2 class="fade-in">How many breathing apps?<br><em>And do couples even search?</em></h2>
-    <p class="lead fade-in">
-      We pulled the numbers. The meditation-app shelf is overbuilt. The couple-app shelf is empty.
-      <em>The overlap is a category we can own.</em>
-    </p>
-
-    <div class="numbers">
-      <div class="number-card fade-in">
-        <div class="lbl">Supply side</div>
-        <div class="big">2,500<em>+</em></div>
-        <p>Meditation &amp; breathing apps launched since 2015. Calm alone holds <strong style="color:var(--warm-white-90)">30%+</strong> global market share. Zero of the top 10 are built for two people breathing together.</p>
-        <span class="src">Statista · Appinventiv 2026</span>
-      </div>
-
-      <div class="number-card fade-in">
-        <div class="lbl">Market size</div>
-        <div class="big">$6.7<em>B</em></div>
-        <p>Projected 2026 meditation-app revenue. Growing <strong style="color:var(--warm-white-90)">13.4% CAGR</strong>. Wellness apps total reaches <strong style="color:var(--warm-white-90)">$45.6B by 2034</strong>.</p>
-        <span class="src">Statista · Precedence Research</span>
-      </div>
-
-      <div class="number-card fade-in">
-        <div class="lbl">Demand signal</div>
-        <div class="big">13.4<em>%</em></div>
-        <p>CAGR of shared / couple wellness category. Top 2026 relationship trend: <strong style="color:var(--warm-white-90)">"deeper bonding, emotional depth, intentional intimacy"</strong> — couples are actively searching for rituals.</p>
-        <span class="src">Psychology Today · SoulMatcher 2026</span>
-      </div>
-    </div>
-
-    <div class="chapter-head fade-in" data-section="4" style="margin-top:64px;">
-      <div class="chapter-illus"><img src="images/pitch/p04-trends.svg" alt="Two heart waves synchronizing" loading="lazy"></div>
-      <div class="chapter-meta">
-        <span class="label">Chapter 05 · The Trends</span>
-        <span class="voice gold">Voice · Matthi (cloned)</span>
-      </div>
-      <button class="play-btn" data-play="4" aria-label="Play chapter: The Trends">
-        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-        <svg class="progress-ring" viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/></svg>
-      </button>
-    </div>
-
-    <h3 class="fade-in" style="font-family:'Playfair Display',serif; font-size:28px; font-style:italic; color:var(--warm-white-90);">
-      What couples are searching for in 2026
-    </h3>
-
-    <div class="trends">
-      <div class="trend fade-in">
-        <div class="tag">Trend 01 · Intentionality</div>
-        <h3>From dating → deepening</h3>
-        <p>"A new wave of apps focuses less on dating and more on <em style="color:var(--accent-gold-light)">deepening existing relationships</em>." Couples actively seek paired rituals — the category twobreath creates.</p>
-      </div>
-      <div class="trend fade-in">
-        <div class="tag">Trend 02 · Emotional depth</div>
-        <h3>Oxytocin-aware couples</h3>
-        <p>2026's #1 relationship trend is "growing emphasis on emotional connection." Our thesis — <em>oxytocin fades after 12–18 months</em> — is now a mass-market awareness, not niche.</p>
-      </div>
-      <div class="trend fade-in">
-        <div class="tag">Trend 03 · Embodied practice</div>
-        <h3>Counter to digital overload</h3>
-        <p>"Physical closeness, touch, breath — a counterbalance to screens." Shared breathwork is the fastest-growing subcategory. We launch at the peak of this wave.</p>
-      </div>
-      <div class="trend fade-in">
-        <div class="tag">Trend 04 · Longevity meets love</div>
-        <h3>The first couple-protocol</h3>
-        <p>Every longevity intervention (Zone 2, fasting, HRV) is <em>individual</em>. Harvard's 86-year study shows relationships predict lifespan. We are the first relationship protocol for the longevity community.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ VIDEO & IMAGE TOOLS ═══════════════════ -->
-  <section>
-    <div class="chapter-head fade-in" data-section="5">
-      <div class="chapter-illus"><img src="images/pitch/p05-tools.svg" alt="Production stack orbit diagram" loading="lazy"></div>
-      <div class="chapter-meta">
-        <span class="label">Chapter 06 · The Stack</span>
-        <span class="voice">Voice · Dascha (cloned)</span>
-      </div>
-      <button class="play-btn" data-play="5" aria-label="Play chapter: The Stack">
-        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-        <svg class="progress-ring" viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/></svg>
-      </button>
-    </div>
-    <div class="eyebrow gold fade-in">Production stack — Sunday delivery</div>
-    <h2 class="fade-in">Which tools we use<br><em>for the 2-minute film.</em></h2>
-    <p class="lead fade-in">Two questions: what video tool, and which image tools does Claude provide? Honest answer below.</p>
-
-    <div style="margin-top:64px;">
-
-      <div class="tool-row fade-in">
-        <div>
-          <div class="tool-label">Video · Primary</div>
-        </div>
-        <div>
-          <span class="pick">Our pick</span>
-          <h3>CapCut Desktop (Pro) + Descript</h3>
-          <ul>
-            <li><strong>CapCut Desktop Pro</strong> — edits our handheld footage, auto-captions in EN/JA/DE, zero learning curve, free tier covers the full 2-minute deliverable. Keyframe animation is good enough for the AnswerAtlas matrix reveal.</li>
-            <li><strong>Descript</strong> — "text-based" video editing. We paste the script, it edits the video to match. Critical for Sunday-morning re-cuts after jury feedback.</li>
-            <li><strong>ElevenLabs</strong> (already in stack) delivers the voice clones. We drop the JA/DE audio into CapCut as separate tracks.</li>
-            <li><strong>Why not Runway / Sora?</strong> — the footage that matters is <em>our real faces on our couch</em>. AI-generated video would undercut the founder-market-fit story.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="tool-row fade-in">
-        <div>
-          <div class="tool-label">Video · Backup AI</div>
-        </div>
-        <div>
-          <span class="pick" style="color:var(--accent-teal); border-color:rgba(45,158,138,0.3); background:rgba(45,158,138,0.08);">Only if needed</span>
-          <h3>Runway Gen-4 · Kling 2.0 · Sora</h3>
-          <ul>
-            <li><strong>Runway Gen-4</strong> — best for the Tokyo b-roll if no real couple available. 10-second clips, strong low-light.</li>
-            <li><strong>Kling 2.0</strong> — best quality for Asian faces in dim lighting (the Tokyo scene). Free tier generous enough for hackathon.</li>
-            <li>Use these <em>only</em> for the Tokyo cutaway (0:55–1:15). Everything else stays real footage.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="tool-row fade-in">
-        <div>
-          <div class="tool-label">Images · Via Claude</div>
-        </div>
-        <div>
-          <span class="pick">Honest answer</span>
-          <h3>Claude does not generate images natively</h3>
-          <ul>
-            <li><strong>Claude cannot produce images</strong> — it can <em>read and analyze</em> images you paste in, and it can write prompts, HTML/SVG, or Mermaid diagrams that render visually. That is what built this page.</li>
-            <li><strong>Best image tools to pair with Claude:</strong> <strong>Nano Banana 2</strong> (Google Gemini 3 image) for the Tokyo couple shot — fastest, best Asian-face fidelity in April 2026. <strong>Seedream 4.0</strong> for editorial warmth. <strong>Midjourney v7</strong> for the cinematic product beats.</li>
-            <li><strong>Workflow:</strong> ask Claude for the prompt → paste into Nano Banana 2 → bring the render back to Claude to critique or revise the prompt. This is the pitch-doc sourcing chain already.</li>
-            <li><strong>For the AnswerAtlas dashboard visuals:</strong> we build directly in <strong>Lovable</strong> (already in the partner stack) — screen-record the actual dashboard. No AI image needed.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="tool-row fade-in">
-        <div>
-          <div class="tool-label">Voice · Differentiator</div>
-        </div>
-        <div>
-          <span class="pick">The craft move</span>
-          <h3>ElevenLabs Voice Clone + Multilingual v2</h3>
-          <ul>
-            <li>Clone Matthi's and Dascha's real voices Saturday evening (3 min of clean audio each).</li>
-            <li>Generate the JA line — <em>「朝、私たちは十五分、一緒に息をします」</em> — in Matthi's actual voice. Every other team does English TTS. We speak the mother tongue of the couple we're reaching.</li>
-            <li>Same clones power the app itself post-launch. Production doubles as product asset.</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════ CLOSE ═══════════════════ -->
-  <section class="close">
-    <div class="chapter-head fade-in" data-section="6" style="justify-items:center; text-align:left;">
-      <div class="chapter-illus"><img src="images/pitch/p06-close.svg" alt="Sunrise over two figures breathing together" loading="lazy"></div>
-      <div class="chapter-meta">
-        <span class="label">Chapter 07 · The Close</span>
-        <span class="voice gold">Voice · Matthi (cloned)</span>
-      </div>
-      <button class="play-btn" data-play="6" aria-label="Play chapter: The Close">
-        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-        <svg class="progress-ring" viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/></svg>
-      </button>
-    </div>
-    <div class="eyebrow fade-in">The close</div>
-    <h2 class="fade-in">Oxytocin fades.<br><em>We build the morning that brings it back.</em></h2>
-    <p class="lead fade-in" style="margin:32px auto 0; text-align:center;">
-      We are not here to sell another $200 subscription. We lived that for three years.
-      We are here to build a community — of couples, in three languages — who breathe together on purpose.
-      <em>Every morning.</em>
-    </p>
-
-    <div class="tagline fade-in">One breath. Two souls.</div>
-
-    <div class="meta fade-in">
-      twobreath.com <span>·</span> Launch July 1, 2026 <span>·</span> TestFlight beta live now
-    </div>
-  </section>
-
-  <!-- ═══════════════════ FLOATING NARRATION FAB ═══════════════════ -->
-  <div class="nar-fab" id="narFab" role="region" aria-label="Pitch narration player">
-    <div class="intro" id="narIntro">
-      Listen to the pitch in <em>our real voices</em> — cloned via ElevenLabs.
-    </div>
-    <div class="nar-info">
-      <span class="nar-voice" id="narVoice">Matthi</span>
-      <span class="nar-title" id="narTitle">Opening</span>
-      <div class="nar-progress"><div class="nar-bar" id="narBar"></div></div>
-    </div>
-    <button class="nar-main-btn" id="narMainBtn" aria-label="Play full pitch narration">
+  <!-- ── Controls ── -->
+  <nav class="controls" aria-label="Presentation controls">
+    <button class="ctrl-btn" id="prevBtn" aria-label="Previous chapter">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.42z"/></svg>
+    </button>
+    <button class="ctrl-btn primary" id="playPauseBtn" aria-label="Play / Pause">
       <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
       <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
     </button>
+    <button class="ctrl-btn" id="nextBtn" aria-label="Next chapter">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.58L13.17 12 8.59 7.42 10 6l6 6-6 6-1.41-1.42z"/></svg>
+    </button>
+    <div class="dots" id="dots" role="tablist" aria-label="Jump to chapter">
+      <button class="dot" data-jump="0" aria-label="Chapter 1"></button>
+      <button class="dot" data-jump="1" aria-label="Chapter 2"></button>
+      <button class="dot" data-jump="2" aria-label="Chapter 3"></button>
+      <button class="dot" data-jump="3" aria-label="Chapter 4"></button>
+      <button class="dot" data-jump="4" aria-label="Chapter 5"></button>
+      <button class="dot" data-jump="5" aria-label="Chapter 6"></button>
+      <button class="dot" data-jump="6" aria-label="Chapter 7"></button>
+    </div>
+    <button class="ctrl-btn" id="muteBtn" aria-label="Mute audio">
+      <svg id="muteIconOn" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+      <svg id="muteIconOff" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.17v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+    </button>
+  </nav>
+
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- ── End / restart card ── -->
+  <div class="end-card" id="endCard">
+    <div class="tag">Thank you.</div>
+    <div class="meta"><a href="https://www.twobreath.com">twobreath.com</a> &middot; Launch July 1, 2026</div>
+    <div class="end-actions">
+      <button class="end-btn primary" id="restartBtn">↻ Watch again</button>
+      <a class="end-btn" href="/">← Visit twobreath.com</a>
+      <a class="end-btn" href="https://github.com/ma3u/TwoBreath" target="_blank" rel="noopener">⌘ Source</a>
+    </div>
   </div>
 
+  <span class="sr-only" id="srAnnounce" aria-live="polite"></span>
+
   <script>
-    // ── Fade-in on scroll ──
-    const fadeEls = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-    fadeEls.forEach(el => observer.observe(el));
+  (function() {
+    'use strict';
 
-    // ── Matrix cell progressive light-up ──
-    const matrix = document.getElementById('matrix');
-    const cells = matrix.querySelectorAll('.cell');
-    const matrixObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          cells.forEach(cell => {
-            const delay = parseInt(cell.dataset.delay, 10) || 0;
-            const level = cell.dataset.level;
-            setTimeout(() => {
-              cell.classList.add('lit', level);
-            }, delay);
-          });
-          matrixObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.25 });
-    matrixObserver.observe(matrix);
-
-    // ── Cell hover: show detail in label momentarily ──
-    cells.forEach(cell => {
-      cell.addEventListener('click', () => {
-        cell.style.transform = 'scale(0.98)';
-        setTimeout(() => { cell.style.transform = ''; }, 140);
-      });
-    });
-
-    // ════════════════════════════════════════════════════════
-    // ── Chapter narration playback ──
-    // ════════════════════════════════════════════════════════
-
+    // ── Chapter metadata ──
     const CHAPTERS = [
-      { key: 'p00-hero',    voice: 'Matthi', title: 'Opening' },
-      { key: 'p01-problem', voice: 'Dascha', title: 'The Problem · Tokyo 11:47' },
-      { key: 'p02-matrix',  voice: 'Matthi', title: 'The Atlas · 3×4 matrix' },
-      { key: 'p03-market',  voice: 'Dascha', title: 'The Market · 2,500 apps' },
-      { key: 'p04-trends',  voice: 'Matthi', title: 'The Trends · couples search' },
-      { key: 'p05-tools',   voice: 'Dascha', title: 'The Stack · production' },
-      { key: 'p06-close',   voice: 'Matthi', title: 'The Close · one breath' },
+      { key: 'p00-hero',    voice: 'Matthi', caption: 'One breath. Two souls. Three years ago, something in our relationship got quiet. So we started breathing together — every morning, for fifteen minutes, for three years. We tried every breathing app on the iPhone. None of them were built for two. So we built our own.' },
+      { key: 'p01-problem', voice: 'Dascha', caption: 'A couple in Tokyo. Tuesday night, 11:47 pm. She types into ChatGPT: a breathing app we can do together. ChatGPT answers in perfect Japanese — and recommends Calm, Headspace, Breathe. None of them were built for two.' },
+      { key: 'p02-matrix',  voice: 'Matthi', caption: 'So we built AnswerAtlas, powered by Peec AI. Three markets. Four Apple device classes. Twelve cells. Each shows how often AI answers recommend a breathing app built for two. Japan: twelve of twelve empty. Read this grid like a compass.' },
+      { key: 'p03-market',  voice: 'Dascha', caption: 'The meditation app shelf is overbuilt. The couple app shelf is empty. Of the top ten meditation apps — zero are built for two people breathing together. That is the gap. And that is what we fill.' },
+      { key: 'p04-trends',  voice: 'Matthi', caption: 'Couples are searching. Every longevity intervention today — Zone 2, fasting, cold plunge — is individual. But Harvard’s eighty-six-year study shows relationship quality predicts lifespan more than almost anything. We are the first longevity protocol for couples.' },
+      { key: 'p05-tools',   voice: 'Dascha', caption: 'Our production stack: ElevenLabs for voice — the voice you are hearing right now is mine, cloned. Peec AI is the compass. Lovable, Gemini, Tavily, ai-coustics, Entire — and Matthi, who in the demo speaks Japanese in his own voice, even though he doesn’t speak Japanese.' },
+      { key: 'p06-close',   voice: 'Matthi', caption: 'We are not here to sell another two hundred dollar subscription. We lived that for three years. We are here to build a community of couples — in three languages — who breathe together on purpose. Oxytocin fades. We can build the morning that brings it back. One breath. Two souls. Join us.' },
     ];
 
-    const narFab = document.getElementById('narFab');
-    const narMainBtn = document.getElementById('narMainBtn');
-    const narVoice = document.getElementById('narVoice');
-    const narTitle = document.getElementById('narTitle');
-    const narBar = document.getElementById('narBar');
-    const narIntro = document.getElementById('narIntro');
+    // ── DOM refs ──
+    const startOverlay = document.getElementById('startOverlay');
+    const startBtn     = document.getElementById('startBtn');
+    const deck         = document.getElementById('deck');
+    const slides       = document.querySelectorAll('.slide');
+    const dots         = document.querySelectorAll('.dot');
+    const counter      = document.getElementById('counter');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn      = document.getElementById('prevBtn');
+    const nextBtn      = document.getElementById('nextBtn');
+    const muteBtn      = document.getElementById('muteBtn');
+    const muteIconOn   = document.getElementById('muteIconOn');
+    const muteIconOff  = document.getElementById('muteIconOff');
+    const captionEl    = document.getElementById('caption');
+    const captionSpeaker = document.getElementById('captionSpeaker');
+    const captionText  = document.getElementById('captionText');
+    const progressBar  = document.getElementById('progressBar');
+    const endCard      = document.getElementById('endCard');
+    const restartBtn   = document.getElementById('restartBtn');
+    const srAnnounce   = document.getElementById('srAnnounce');
 
-    const playBtns = document.querySelectorAll('.play-btn[data-play]');
-    const chapterHeads = document.querySelectorAll('.chapter-head[data-section]');
-
+    // ── State ──
+    let current = 0;
     let audio = null;
-    let currentIndex = -1;
-    let autoAdvance = false;  // true when FAB started a full-pitch playthrough
+    let isPlaying = false;
+    let isMuted = false;
 
     function srcFor(i) {
-      return `audio/narration/pitch/${CHAPTERS[i].key}.mp3`;
+      return 'audio/narration/pitch/' + CHAPTERS[i].key + '.mp3';
     }
 
-    function updateButtonsUI() {
-      playBtns.forEach(btn => {
-        const i = parseInt(btn.dataset.play, 10);
-        const ring = btn.querySelector('.progress-ring circle');
-        if (i === currentIndex && audio && !audio.paused) {
-          btn.classList.add('playing');
-        } else {
-          btn.classList.remove('playing');
-          if (ring) ring.style.strokeDashoffset = 157;
-        }
+    function announce(msg) { srAnnounce.textContent = msg; }
+
+    // ── Slide rendering ──
+    function showSlide(i) {
+      current = Math.max(0, Math.min(CHAPTERS.length - 1, i));
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === current);
       });
-      if (currentIndex >= 0 && audio && !audio.paused) {
-        narFab.classList.add('playing');
-        narVoice.textContent = CHAPTERS[currentIndex].voice;
-        narTitle.textContent = CHAPTERS[currentIndex].title;
-      } else {
-        narFab.classList.remove('playing');
-      }
+      dots.forEach((d, idx) => {
+        d.classList.toggle('active', idx === current);
+        d.classList.toggle('played', idx < current);
+      });
+      counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(CHAPTERS.length).padStart(2, '0');
+      captionSpeaker.textContent = CHAPTERS[current].voice;
+      captionText.textContent = CHAPTERS[current].caption;
+      announce('Chapter ' + (current + 1) + ': ' + CHAPTERS[current].voice);
     }
 
-    function scrollToChapter(i) {
-      const head = document.querySelector(`.chapter-head[data-section="${i}"]`);
-      if (head) {
-        const y = head.getBoundingClientRect().top + window.scrollY - 90;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    }
-
-    function playChapter(i, opts = {}) {
-      if (i < 0 || i >= CHAPTERS.length) {
-        stopAll();
-        return;
-      }
+    // ── Audio ──
+    function loadAudio(i) {
       if (audio) {
         audio.pause();
         audio.removeEventListener('timeupdate', onProgress);
         audio.removeEventListener('ended', onEnded);
+        audio.removeEventListener('error', onError);
       }
-      currentIndex = i;
-      autoAdvance = !!opts.autoAdvance;
-
       audio = new Audio(srcFor(i));
+      audio.muted = isMuted;
       audio.addEventListener('timeupdate', onProgress);
       audio.addEventListener('ended', onEnded);
-      audio.play().catch(err => {
-        console.warn('audio play blocked:', err);
-      });
-      updateButtonsUI();
-      if (opts.scroll !== false) scrollToChapter(i);
+      audio.addEventListener('error', onError);
     }
 
     function onProgress() {
       if (!audio || !audio.duration) return;
-      const pct = audio.currentTime / audio.duration;
-      narBar.style.width = (pct * 100) + '%';
-      const btn = document.querySelector(`.play-btn[data-play="${currentIndex}"]`);
-      if (btn) {
-        const ring = btn.querySelector('.progress-ring circle');
-        if (ring) ring.style.strokeDashoffset = 157 - (157 * pct);
-      }
+      progressBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
     }
 
     function onEnded() {
-      if (autoAdvance && currentIndex + 1 < CHAPTERS.length) {
-        playChapter(currentIndex + 1, { autoAdvance: true });
+      progressBar.style.width = '100%';
+      if (current + 1 < CHAPTERS.length) {
+        goTo(current + 1, { autoplay: true });
       } else {
-        stopAll();
+        finish();
       }
     }
 
-    function stopAll() {
-      if (audio) {
-        audio.pause();
-        audio.removeEventListener('timeupdate', onProgress);
-        audio.removeEventListener('ended', onEnded);
-      }
-      audio = null;
-      currentIndex = -1;
-      autoAdvance = false;
-      narBar.style.width = '0%';
-      updateButtonsUI();
-    }
-
-    function toggleChapter(i) {
-      if (currentIndex === i && audio && !audio.paused) {
-        stopAll();
+    function onError(e) {
+      console.warn('audio error on chapter', current, e);
+      // Skip to next on error rather than freezing
+      if (current + 1 < CHAPTERS.length) {
+        setTimeout(() => goTo(current + 1, { autoplay: true }), 600);
       } else {
-        playChapter(i, { autoAdvance: false });
+        finish();
       }
     }
 
-    function toggleFullPitch() {
-      if (audio && !audio.paused) {
-        stopAll();
-      } else {
-        playChapter(0, { autoAdvance: true });
-      }
+    function play() {
+      if (!audio) loadAudio(current);
+      audio.play().then(() => {
+        isPlaying = true;
+        deck.classList.add('playing', 'live', 'show-caption');
+      }).catch(err => {
+        console.warn('play blocked:', err);
+        isPlaying = false;
+        deck.classList.remove('playing');
+      });
     }
 
-    // Wire up per-chapter play buttons
-    playBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const i = parseInt(btn.dataset.play, 10);
-        toggleChapter(i);
+    function pause() {
+      if (audio) audio.pause();
+      isPlaying = false;
+      deck.classList.remove('playing');
+    }
+
+    function togglePlay() {
+      if (isPlaying) pause();
+      else play();
+    }
+
+    function goTo(i, opts) {
+      opts = opts || {};
+      current = Math.max(0, Math.min(CHAPTERS.length - 1, i));
+      showSlide(current);
+      progressBar.style.width = '0%';
+      loadAudio(current);
+      if (opts.autoplay !== false) play();
+      else pause();
+    }
+
+    function next() {
+      if (current + 1 < CHAPTERS.length) goTo(current + 1);
+      else finish();
+    }
+    function prev() {
+      if (current > 0) goTo(current - 1);
+    }
+
+    function finish() {
+      pause();
+      endCard.classList.add('shown');
+    }
+
+    function restart() {
+      endCard.classList.remove('shown');
+      goTo(0, { autoplay: true });
+    }
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      if (audio) audio.muted = isMuted;
+      muteIconOn.style.display = isMuted ? 'none' : 'block';
+      muteIconOff.style.display = isMuted ? 'block' : 'none';
+      muteBtn.setAttribute('aria-label', isMuted ? 'Unmute audio' : 'Mute audio');
+    }
+
+    // ── Boot ──
+    function begin() {
+      startOverlay.classList.add('hidden');
+      deck.classList.add('live');
+      showSlide(0);
+      // Tiny delay so the fade looks intentional
+      setTimeout(() => goTo(0, { autoplay: true }), 700);
+    }
+
+    startBtn.addEventListener('click', begin);
+    startOverlay.addEventListener('click', e => {
+      if (e.target === startOverlay) begin();
+    });
+    startOverlay.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); begin(); }
+    });
+
+    playPauseBtn.addEventListener('click', togglePlay);
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    muteBtn.addEventListener('click', toggleMute);
+    restartBtn.addEventListener('click', restart);
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const i = parseInt(dot.dataset.jump, 10);
+        goTo(i);
       });
     });
 
-    // Wire up FAB main button
-    narMainBtn.addEventListener('click', toggleFullPitch);
+    // Keyboard shortcuts
+    document.addEventListener('keydown', e => {
+      if (startOverlay.classList.contains('hidden') === false) return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      switch (e.key) {
+        case ' ':
+        case 'k':
+          e.preventDefault(); togglePlay(); break;
+        case 'ArrowRight':
+        case 'l':
+          e.preventDefault(); next(); break;
+        case 'ArrowLeft':
+        case 'h':
+          e.preventDefault(); prev(); break;
+        case 'm':
+          e.preventDefault(); toggleMute(); break;
+        case 'Escape':
+          if (endCard.classList.contains('shown')) endCard.classList.remove('shown');
+          break;
+      }
+    });
 
-    // Hide intro pill after 8s on first load
-    setTimeout(() => {
-      if (narIntro) narIntro.style.transition = 'opacity 0.6s ease';
-      if (narIntro) narIntro.style.opacity = '0.5';
-    }, 8000);
+    // Initial render so slide 0 is visible behind the start overlay
+    showSlide(0);
+
+  })();
   </script>
+
 </body>
 </html>
