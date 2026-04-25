@@ -666,12 +666,17 @@
       </div>
     </section>
 
-    <!-- Slide 3 — Three cities -->
-    <section class="slide" data-slide="2" data-chapter="p02-matrix" data-voice="matthi">
-      <div class="slide-chapter">Chapter 03 <span class="voice">Matthi</span></div>
-      <div class="slide-illus"><img src="images/pitch/p02-matrix.svg" alt="Three cities, three couples, the same silence"></div>
-      <h1 class="slide-headline">Three cities.<br><em>The same silence.</em></h1>
-      <p class="slide-sub">AnswerAtlas, powered by Peec AI.</p>
+    <!-- Slide 3 — Three cities (full-bleed photo) -->
+    <section class="slide bg-photo" data-slide="2" data-chapter="p02-matrix" data-voice="matthi">
+      <div class="photo-bg" style="background-image: url('images/pitch/p02-matrix.jpg');" role="img" aria-label="Three cities at once: Berlin's Tiergarten and Victory Column at dawn, Tokyo's Shibuya and Tokyo Tower at night, and Santa Monica beach with its pier — three places, three couples, the same silence"></div>
+      <div class="photo-overlay"></div>
+      <div class="photo-text">
+        <div class="slide-chapter">Chapter 03 <span class="voice">Matthi</span></div>
+        <div class="photo-bottom">
+          <h1 class="slide-headline">Three cities.<br><em>The same silence.</em></h1>
+          <p class="slide-sub">AnswerAtlas, powered by Peec AI.</p>
+        </div>
+      </div>
     </section>
 
     <!-- Slide 4 — Market -->
@@ -706,15 +711,15 @@
       <p class="slide-sub">One breath. Two souls.</p>
     </section>
 
-  </div>
+    <!-- ── Hidden side navigation (revealed on mouse move) ── -->
+    <button class="side-nav left" id="sideNavPrev" aria-label="Previous chapter" tabindex="-1">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.42z"/></svg>
+    </button>
+    <button class="side-nav right" id="sideNavNext" aria-label="Next chapter" tabindex="-1">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.58L13.17 12 8.59 7.42 10 6l6 6-6 6-1.41-1.42z"/></svg>
+    </button>
 
-  <!-- ── Hidden side navigation (revealed on mouse move) ── -->
-  <button class="side-nav left" id="sideNavPrev" aria-label="Previous chapter" tabindex="-1">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.42z"/></svg>
-  </button>
-  <button class="side-nav right" id="sideNavNext" aria-label="Next chapter" tabindex="-1">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.58L13.17 12 8.59 7.42 10 6l6 6-6 6-1.41-1.42z"/></svg>
-  </button>
+  </div>
 
   <!-- ── Caption box ── -->
   <div class="caption" id="caption" aria-live="polite">
