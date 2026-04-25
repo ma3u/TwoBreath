@@ -1,82 +1,104 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Production stack — orbiting tool nodes">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="A pair of hands cupping a constellation of production tools">
   <defs>
-    <radialGradient id="h5-bg" cx="50%" cy="50%" r="55%">
-      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.14"/>
+    <radialGradient id="hp5-bg" cx="50%" cy="55%" r="55%">
+      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.18"/>
       <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0"/>
     </radialGradient>
+    <radialGradient id="hp5-glow" cx="50%" cy="42%" r="32%">
+      <stop offset="0%" stop-color="#dabe6a" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="400" height="400" fill="url(#h5-bg)"/>
-  <!-- Orbital rings -->
-  <circle cx="200" cy="200" r="130" fill="none" stroke="#f5f0e8" stroke-width="0.4" opacity="0.15" stroke-dasharray="3 6"/>
-  <circle cx="200" cy="200" r="85"  fill="none" stroke="#f5f0e8" stroke-width="0.4" opacity="0.2" stroke-dasharray="3 6"/>
-  <circle cx="200" cy="200" r="45"  fill="none" stroke="#f5f0e8" stroke-width="0.4" opacity="0.25"/>
+  <rect width="400" height="400" fill="url(#hp5-bg)"/>
 
+  <!-- Two hands cupping the tools -->
+  <g fill="#1a1714" opacity="0.95">
+    <!-- Left hand (palm up, curving from below-left) -->
+    <path d="M 60,330 Q 50,305 70,275 Q 90,250 130,238 Q 165,235 195,250 L 200,260 L 195,275 Q 160,280 135,295 Q 110,310 95,330 Q 80,345 60,330 Z"/>
+    <!-- Right hand (palm up, curving from below-right) -->
+    <path d="M 340,330 Q 350,305 330,275 Q 310,250 270,238 Q 235,235 205,250 L 200,260 L 205,275 Q 240,280 265,295 Q 290,310 305,330 Q 320,345 340,330 Z"/>
+  </g>
+
+  <!-- Warm glow above the cupped hands -->
+  <ellipse cx="200" cy="180" rx="120" ry="70" fill="url(#hp5-glow)"/>
+
+  <!-- Constellation of tools floating above -->
   <!-- Center: TwoBreath -->
-  <circle cx="200" cy="200" r="28" fill="#1a1714" stroke="#c9a84c" stroke-width="1.2"/>
-  <text x="200" y="196" font-family="'Playfair Display',serif" font-size="10" fill="#f5f0e8" text-anchor="middle">two</text>
-  <text x="200" y="210" font-family="'Playfair Display',serif" font-size="10" fill="#2d9e8a" text-anchor="middle">breath</text>
-
-  <!-- Inner nodes (core stack) -->
-  <!-- Peec AI -->
-  <g transform="translate(200,115)">
-    <circle r="18" fill="#2a2520" stroke="#c9a84c" stroke-width="1"/>
-    <text y="3" font-family="'JetBrains Mono',monospace" font-size="8" fill="#c9a84c" text-anchor="middle" letter-spacing="0.5">Peec AI</text>
-  </g>
-  <!-- ElevenLabs -->
-  <g transform="translate(285,200)">
-    <circle r="18" fill="#2a2520" stroke="#2d9e8a" stroke-width="1"/>
-    <text y="-1" font-family="'JetBrains Mono',monospace" font-size="7" fill="#2d9e8a" text-anchor="middle">11Labs</text>
-    <text y="8" font-family="'JetBrains Mono',monospace" font-size="6" fill="#8a8075" text-anchor="middle">voice</text>
-  </g>
-  <!-- Gemini -->
-  <g transform="translate(200,285)">
-    <circle r="18" fill="#2a2520" stroke="#2d9e8a" stroke-width="1"/>
-    <text y="3" font-family="'JetBrains Mono',monospace" font-size="8" fill="#2d9e8a" text-anchor="middle">Gemini 3</text>
-  </g>
-  <!-- Lovable -->
-  <g transform="translate(115,200)">
-    <circle r="18" fill="#2a2520" stroke="#c9a84c" stroke-width="1"/>
-    <text y="3" font-family="'JetBrains Mono',monospace" font-size="8" fill="#c9a84c" text-anchor="middle">Lovable</text>
+  <g transform="translate(200,180)">
+    <circle r="22" fill="#1a1714" stroke="#c9a84c" stroke-width="1.2"/>
+    <text y="-2" font-family="'Playfair Display',serif" font-size="9" fill="#f5f0e8" text-anchor="middle">two</text>
+    <text y="9" font-family="'Playfair Display',serif" font-size="9" fill="#2d9e8a" text-anchor="middle">breath</text>
   </g>
 
-  <!-- Outer nodes -->
-  <!-- Tavily -->
-  <g transform="translate(292,120)">
-    <circle r="14" fill="#2a2520" stroke="#8a8075" stroke-width="0.8"/>
-    <text y="3" font-family="'JetBrains Mono',monospace" font-size="7" fill="#f5f0e8" text-anchor="middle" opacity="0.85">Tavily</text>
+  <!-- Inner ring -->
+  <!-- Peec AI (top) -->
+  <g transform="translate(200,110)">
+    <circle r="16" fill="#2a2520" stroke="#c9a84c" stroke-width="1"/>
+    <text y="3" font-family="'JetBrains Mono',monospace" font-size="7" fill="#c9a84c" text-anchor="middle" letter-spacing="0.5">Peec AI</text>
   </g>
-  <!-- Nano Banana -->
-  <g transform="translate(330,265)">
-    <circle r="14" fill="#2a2520" stroke="#8a8075" stroke-width="0.8"/>
-    <text y="-1" font-family="'JetBrains Mono',monospace" font-size="6" fill="#f5f0e8" text-anchor="middle" opacity="0.85">Nano</text>
-    <text y="6" font-family="'JetBrains Mono',monospace" font-size="6" fill="#f5f0e8" text-anchor="middle" opacity="0.85">Banana</text>
+  <!-- ElevenLabs (right) -->
+  <g transform="translate(275,180)">
+    <circle r="16" fill="#2a2520" stroke="#2d9e8a" stroke-width="1"/>
+    <text y="-1" font-family="'JetBrains Mono',monospace" font-size="6" fill="#2d9e8a" text-anchor="middle">11Labs</text>
+    <text y="7" font-family="'JetBrains Mono',monospace" font-size="5" fill="#8a8075" text-anchor="middle">voice</text>
   </g>
-  <!-- CapCut -->
-  <g transform="translate(108,320)">
-    <circle r="14" fill="#2a2520" stroke="#8a8075" stroke-width="0.8"/>
-    <text y="3" font-family="'JetBrains Mono',monospace" font-size="7" fill="#f5f0e8" text-anchor="middle" opacity="0.85">CapCut</text>
+  <!-- Gemini (bottom-right) -->
+  <g transform="translate(255,235)">
+    <circle r="14" fill="#2a2520" stroke="#2d9e8a" stroke-width="0.8"/>
+    <text y="2" font-family="'JetBrains Mono',monospace" font-size="6" fill="#2d9e8a" text-anchor="middle">Gemini</text>
   </g>
-  <!-- ai|coustics -->
-  <g transform="translate(70,265)">
-    <circle r="14" fill="#2a2520" stroke="#8a8075" stroke-width="0.8"/>
-    <text y="-1" font-family="'JetBrains Mono',monospace" font-size="6" fill="#f5f0e8" text-anchor="middle" opacity="0.85">ai|</text>
-    <text y="6" font-family="'JetBrains Mono',monospace" font-size="6" fill="#f5f0e8" text-anchor="middle" opacity="0.85">coustics</text>
+  <!-- Lovable (left) -->
+  <g transform="translate(125,180)">
+    <circle r="16" fill="#2a2520" stroke="#c9a84c" stroke-width="1"/>
+    <text y="3" font-family="'JetBrains Mono',monospace" font-size="7" fill="#c9a84c" text-anchor="middle">Lovable</text>
   </g>
-  <!-- Entire -->
-  <g transform="translate(68,140)">
-    <circle r="14" fill="#2a2520" stroke="#8a8075" stroke-width="0.8"/>
-    <text y="3" font-family="'JetBrains Mono',monospace" font-size="7" fill="#f5f0e8" text-anchor="middle" opacity="0.85">Entire</text>
+  <!-- CapCut (bottom-left) -->
+  <g transform="translate(145,235)">
+    <circle r="14" fill="#2a2520" stroke="#c9a84c" stroke-width="0.8"/>
+    <text y="2" font-family="'JetBrains Mono',monospace" font-size="6" fill="#c9a84c" text-anchor="middle">CapCut</text>
   </g>
 
-  <!-- Connecting lines from center -->
-  <g stroke="#c9a84c" stroke-width="0.4" opacity="0.45">
-    <line x1="200" y1="172" x2="200" y2="133"/>
+  <!-- Outer satellites -->
+  <g opacity="0.85">
+    <g transform="translate(280,115)">
+      <circle r="11" fill="#2a2520" stroke="#8a8075" stroke-width="0.6"/>
+      <text y="2" font-family="'JetBrains Mono',monospace" font-size="5" fill="#f5f0e8" text-anchor="middle">Tavily</text>
+    </g>
+    <g transform="translate(120,115)">
+      <circle r="11" fill="#2a2520" stroke="#8a8075" stroke-width="0.6"/>
+      <text y="2" font-family="'JetBrains Mono',monospace" font-size="5" fill="#f5f0e8" text-anchor="middle">Entire</text>
+    </g>
+    <g transform="translate(310,160)">
+      <circle r="11" fill="#2a2520" stroke="#8a8075" stroke-width="0.6"/>
+      <text y="-1" font-family="'JetBrains Mono',monospace" font-size="5" fill="#f5f0e8" text-anchor="middle">Nano</text>
+      <text y="5" font-family="'JetBrains Mono',monospace" font-size="5" fill="#f5f0e8" text-anchor="middle">Banana</text>
+    </g>
+    <g transform="translate(90,160)">
+      <circle r="11" fill="#2a2520" stroke="#8a8075" stroke-width="0.6"/>
+      <text y="-1" font-family="'JetBrains Mono',monospace" font-size="5" fill="#f5f0e8" text-anchor="middle">ai|</text>
+      <text y="5" font-family="'JetBrains Mono',monospace" font-size="5" fill="#f5f0e8" text-anchor="middle">coust</text>
+    </g>
   </g>
-  <g stroke="#2d9e8a" stroke-width="0.4" opacity="0.45">
-    <line x1="228" y1="200" x2="267" y2="200"/>
-    <line x1="200" y1="228" x2="200" y2="267"/>
+
+  <!-- Connecting lines (subtle) -->
+  <g stroke="#c9a84c" stroke-width="0.3" opacity="0.4">
+    <line x1="200" y1="158" x2="200" y2="126"/>
   </g>
-  <g stroke="#c9a84c" stroke-width="0.4" opacity="0.45">
-    <line x1="172" y1="200" x2="133" y2="200"/>
+  <g stroke="#2d9e8a" stroke-width="0.3" opacity="0.4">
+    <line x1="222" y1="180" x2="259" y2="180"/>
   </g>
+  <g stroke="#c9a84c" stroke-width="0.3" opacity="0.4">
+    <line x1="178" y1="180" x2="141" y2="180"/>
+  </g>
+
+  <!-- Stars -->
+  <g fill="#f5f0e8" opacity="0.5">
+    <circle cx="60" cy="80" r="0.7"/>
+    <circle cx="340" cy="60" r="0.6"/>
+    <circle cx="80" cy="50" r="0.5"/>
+    <circle cx="320" cy="100" r="0.5"/>
+  </g>
+
+  <!-- Caption -->
+  <text x="200" y="50" font-family="'Playfair Display',serif" font-style="italic" font-size="13" fill="#dabe6a" text-anchor="middle" opacity="0.85">held by craft</text>
 </svg>

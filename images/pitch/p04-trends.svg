@@ -1,48 +1,80 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Two heart-rate waves synchronizing">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="A couple holding hands; two heart-rate waves above them converging into one">
   <defs>
-    <radialGradient id="h4-bg" cx="50%" cy="50%" r="55%">
-      <stop offset="0%" stop-color="#c96b6b" stop-opacity="0.1"/>
+    <radialGradient id="hp4-bg" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#c96b6b" stop-opacity="0.12"/>
       <stop offset="100%" stop-color="#c96b6b" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="h4-wave1" x1="0%" y1="0%" x2="100%" y2="0%">
+    <linearGradient id="hp4-w1" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.2"/>
       <stop offset="50%" stop-color="#c9a84c" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.4"/>
     </linearGradient>
-    <linearGradient id="h4-wave2" x1="0%" y1="0%" x2="100%" y2="0%">
+    <linearGradient id="hp4-w2" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.2"/>
       <stop offset="50%" stop-color="#2d9e8a" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="hp4-merged" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#dabe6a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#dabe6a" stop-opacity="1"/>
     </linearGradient>
   </defs>
-  <rect width="400" height="400" fill="url(#h4-bg)"/>
-  <!-- Wave 1 (Matthi / gold) - starts desynced, converges -->
-  <path d="M 20,160 Q 50,160 60,150 T 80,130 T 100,160 T 130,170 T 160,150 T 200,155 T 240,175 T 280,150 T 320,155 T 380,155"
-        fill="none" stroke="url(#h4-wave1)" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
-  <!-- Wave 2 (Dascha / teal) - converges to match -->
-  <path d="M 20,250 Q 50,240 60,260 T 90,275 T 120,250 T 150,240 T 180,230 T 210,230 T 240,240 T 280,235 T 320,240 T 380,245"
-        fill="none" stroke="url(#h4-wave2)" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
-  <!-- Converging lines (sync moment) -->
-  <g stroke="#f5f0e8" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.35">
-    <line x1="200" y1="155" x2="200" y2="240"/>
-    <line x1="240" y1="175" x2="240" y2="240"/>
-    <line x1="280" y1="150" x2="280" y2="235"/>
-    <line x1="320" y1="155" x2="320" y2="240"/>
+  <rect width="400" height="400" fill="url(#hp4-bg)"/>
+
+  <!-- Wave 1 (Matthi/gold) — desynced left, converging right -->
+  <path d="M 20,90 Q 40,90 50,75 T 75,55 T 100,90 T 125,105 T 150,80 T 175,95 T 200,100"
+        fill="none" stroke="url(#hp4-w1)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Wave 2 (Dascha/teal) — desynced left, converging right -->
+  <path d="M 20,160 Q 40,150 55,170 T 80,180 T 105,160 T 130,145 T 155,135 T 180,135 T 200,140"
+        fill="none" stroke="url(#hp4-w2)" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Merge zone — single unified wave -->
+  <path d="M 200,120 Q 220,110 240,120 T 280,120 T 320,120 T 380,120"
+        fill="none" stroke="url(#hp4-merged)" stroke-width="2.4" stroke-linecap="round"/>
+
+  <!-- Convergence "arrows" -->
+  <g stroke="#f5f0e8" stroke-width="0.5" opacity="0.4">
+    <line x1="195" y1="100" x2="200" y2="118"/>
+    <line x1="195" y1="140" x2="200" y2="122"/>
   </g>
-  <!-- Heart at sync point -->
-  <g transform="translate(200,200)">
-    <path d="M 0,0 C -4,-6 -12,-6 -12,2 C -12,8 0,16 0,16 C 0,16 12,8 12,2 C 12,-6 4,-6 0,0 Z"
+
+  <!-- Heart at convergence -->
+  <g transform="translate(200,120)">
+    <path d="M 0,1 C -4,-5 -10,-5 -10,3 C -10,9 0,16 0,16 C 0,16 10,9 10,3 C 10,-5 4,-5 0,1 Z"
           fill="#c96b6b" opacity="0.9"/>
   </g>
-  <!-- Small heart echoes -->
-  <g fill="#c96b6b" opacity="0.35">
-    <circle cx="150" cy="198" r="2"/>
-    <circle cx="250" cy="198" r="2"/>
-    <circle cx="110" cy="200" r="1.2"/>
-    <circle cx="290" cy="200" r="1.2"/>
+
+  <!-- Couple silhouettes, holding hands at center bottom -->
+  <g fill="#1a1714">
+    <!-- Left figure -->
+    <ellipse cx="160" cy="270" rx="14" ry="16"/>
+    <path d="M 144,280 Q 138,330 154,360 L 178,360 L 180,280 Z"/>
+    <!-- Right figure -->
+    <ellipse cx="240" cy="270" rx="14" ry="16"/>
+    <path d="M 256,280 Q 262,330 246,360 L 222,360 L 220,280 Z"/>
   </g>
-  <!-- Axis labels -->
-  <text x="200" y="50" font-family="'Playfair Display',serif" font-style="italic" font-size="13" fill="#f5f0e8" text-anchor="middle" opacity="0.65">synchronizing</text>
-  <text x="30" y="385" font-family="'JetBrains Mono',monospace" font-size="9" fill="#8a8075" letter-spacing="2">T=0</text>
-  <text x="380" y="385" font-family="'JetBrains Mono',monospace" font-size="9" fill="#8a8075" letter-spacing="2" text-anchor="end">T=15min</text>
+  <!-- Hands held in middle -->
+  <ellipse cx="200" cy="345" rx="14" ry="6" fill="#1a1714"/>
+  <line x1="180" y1="345" x2="220" y2="345" stroke="#1a1714" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Breath rings rising between them, syncing -->
+  <g fill="none" stroke="#dabe6a" stroke-width="0.8" opacity="0.45">
+    <ellipse cx="200" cy="245" rx="22" ry="6"/>
+    <ellipse cx="200" cy="225" rx="18" ry="5" opacity="0.7"/>
+    <ellipse cx="200" cy="208" rx="14" ry="4" opacity="0.5"/>
+    <ellipse cx="200" cy="195" rx="10" ry="3" opacity="0.3"/>
+  </g>
+
+  <!-- Captions -->
+  <text x="100" y="48" font-family="'Playfair Display',serif" font-style="italic" font-size="11" fill="#c9a84c" text-anchor="middle" opacity="0.7">two waves</text>
+  <text x="290" y="48" font-family="'Playfair Display',serif" font-style="italic" font-size="11" fill="#dabe6a" text-anchor="middle" opacity="0.85">one rhythm</text>
+  <text x="20" y="200" font-family="'JetBrains Mono',monospace" font-size="9" fill="#8a8075" letter-spacing="2">T=0</text>
+  <text x="380" y="200" font-family="'JetBrains Mono',monospace" font-size="9" fill="#8a8075" text-anchor="end" letter-spacing="2">T=15min</text>
+
+  <!-- Tiny heart echoes -->
+  <g fill="#c96b6b" opacity="0.5">
+    <circle cx="240" cy="120" r="1.4"/>
+    <circle cx="280" cy="120" r="1.2"/>
+    <circle cx="330" cy="120" r="1"/>
+  </g>
 </svg>

@@ -1,61 +1,92 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Sunrise over two silhouetted figures breathing together">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Sunrise over a balcony — two figures sitting close, breathing, holding hands">
   <defs>
-    <linearGradient id="h6-sky" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#1a1714" stop-opacity="0"/>
-      <stop offset="45%" stop-color="#c9a84c" stop-opacity="0.18"/>
-      <stop offset="60%" stop-color="#c96b6b" stop-opacity="0.14"/>
+    <linearGradient id="hp6-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a1714" stop-opacity="1"/>
+      <stop offset="35%" stop-color="#5a3a2c" stop-opacity="0.4"/>
+      <stop offset="55%" stop-color="#c9a84c" stop-opacity="0.3"/>
+      <stop offset="68%" stop-color="#dabe6a" stop-opacity="0.2"/>
       <stop offset="100%" stop-color="#1a1714" stop-opacity="0"/>
     </linearGradient>
-    <radialGradient id="h6-sun" cx="50%" cy="60%" r="22%">
+    <radialGradient id="hp6-sun" cx="50%" cy="62%" r="20%">
       <stop offset="0%" stop-color="#dabe6a" stop-opacity="1"/>
-      <stop offset="50%" stop-color="#c9a84c" stop-opacity="0.6"/>
+      <stop offset="40%" stop-color="#c9a84c" stop-opacity="0.7"/>
       <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
     </radialGradient>
+    <linearGradient id="hp6-water" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a1714" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0f0d0b" stop-opacity="1"/>
+    </linearGradient>
   </defs>
-  <rect width="400" height="400" fill="url(#h6-sky)"/>
 
-  <!-- Sun halo -->
-  <circle cx="200" cy="240" r="90" fill="url(#h6-sun)"/>
-  <circle cx="200" cy="240" r="24" fill="#dabe6a" opacity="0.85"/>
-  <circle cx="200" cy="240" r="36" fill="none" stroke="#c9a84c" stroke-width="0.4" opacity="0.3"/>
+  <!-- Sky -->
+  <rect width="400" height="400" fill="url(#hp6-sky)"/>
 
-  <!-- Horizon line -->
-  <line x1="0" y1="280" x2="400" y2="280" stroke="#f5f0e8" stroke-width="0.3" opacity="0.25"/>
+  <!-- Sun + halo, on the horizon -->
+  <circle cx="200" cy="248" r="100" fill="url(#hp6-sun)"/>
+  <circle cx="200" cy="248" r="28" fill="#dabe6a" opacity="0.95"/>
+  <circle cx="200" cy="248" r="40" fill="none" stroke="#c9a84c" stroke-width="0.4" opacity="0.4"/>
+  <circle cx="200" cy="248" r="55" fill="none" stroke="#c9a84c" stroke-width="0.3" opacity="0.25"/>
 
-  <!-- Two silhouettes sitting side by side, backlit -->
-  <!-- Left figure (Dascha) -->
-  <g fill="#1a1714" opacity="0.95">
-    <ellipse cx="155" cy="258" rx="14" ry="16"/>
-    <path d="M 140,275 Q 155,268 170,275 L 175,320 L 135,320 Z"/>
-  </g>
-  <!-- Right figure (Matthi) -->
-  <g fill="#1a1714" opacity="0.95">
-    <ellipse cx="245" cy="258" rx="14" ry="16"/>
-    <path d="M 230,275 Q 245,268 260,275 L 265,320 L 225,320 Z"/>
-  </g>
-  <!-- Hands held in middle -->
-  <circle cx="200" cy="310" r="4" fill="#1a1714"/>
-  <line x1="175" y1="320" x2="225" y2="320" stroke="#1a1714" stroke-width="6" stroke-linecap="round"/>
-
-  <!-- Breath rings rising between them -->
-  <g fill="none" stroke="#f5f0e8" stroke-width="0.6" opacity="0.3">
-    <ellipse cx="200" cy="205" rx="22" ry="6"/>
-    <ellipse cx="200" cy="180" rx="18" ry="4" opacity="0.7"/>
-    <ellipse cx="200" cy="160" rx="14" ry="3" opacity="0.5"/>
-    <ellipse cx="200" cy="145" rx="10" ry="2" opacity="0.3"/>
+  <!-- Horizon -->
+  <line x1="0" y1="270" x2="400" y2="270" stroke="#dabe6a" stroke-width="0.3" opacity="0.3"/>
+  <!-- Water/foreground -->
+  <rect y="270" width="400" height="130" fill="url(#hp6-water)"/>
+  <!-- Water shimmer -->
+  <g stroke="#dabe6a" stroke-width="0.3" opacity="0.4">
+    <line x1="180" y1="278" x2="220" y2="278"/>
+    <line x1="160" y1="285" x2="240" y2="285"/>
+    <line x1="170" y1="292" x2="230" y2="292"/>
+    <line x1="180" y1="300" x2="220" y2="300"/>
   </g>
 
   <!-- Stars fading -->
-  <g fill="#f5f0e8" opacity="0.5">
-    <circle cx="80" cy="60" r="0.8"/>
-    <circle cx="340" cy="80" r="0.6"/>
-    <circle cx="60" cy="120" r="0.5"/>
-    <circle cx="120" cy="40" r="0.5"/>
-    <circle cx="320" cy="50" r="0.7"/>
+  <g fill="#f5f0e8" opacity="0.55">
+    <circle cx="60" cy="50" r="0.8"/>
+    <circle cx="340" cy="40" r="0.6"/>
+    <circle cx="100" cy="80" r="0.5"/>
+    <circle cx="300" cy="65" r="0.5"/>
+    <circle cx="80" cy="120" r="0.4"/>
+    <circle cx="80" cy="20" r="0.5"/>
   </g>
 
-  <!-- Caption at bottom -->
-  <text x="200" y="370" font-family="'Playfair Display',serif" font-style="italic" font-size="14" fill="#dabe6a" text-anchor="middle" opacity="0.85">
+  <!-- Balcony rail (faint) -->
+  <rect x="0" y="335" width="400" height="2" fill="#3a322a" opacity="0.5"/>
+  <line x1="80" y1="337" x2="80" y2="380" stroke="#3a322a" stroke-width="0.5" opacity="0.5"/>
+  <line x1="320" y1="337" x2="320" y2="380" stroke="#3a322a" stroke-width="0.5" opacity="0.5"/>
+
+  <!-- Two figures, sitting on the floor of the balcony, side by side, backlit -->
+  <!-- Left figure (Dascha) — leaning slightly toward partner -->
+  <g fill="#0a0908">
+    <ellipse cx="160" cy="295" rx="14" ry="16"/>
+    <!-- Shoulders/torso -->
+    <path d="M 144,305 Q 136,348 152,375 Q 162,378 174,375 Q 178,340 178,308 Z"/>
+    <!-- Hair flowing back -->
+    <path d="M 146,288 Q 142,275 162,272 Q 178,278 175,290 Q 172,283 162,282 Q 152,283 146,288 Z"/>
+  </g>
+  <!-- Right figure (Matthi) -->
+  <g fill="#0a0908">
+    <ellipse cx="240" cy="295" rx="14" ry="16"/>
+    <path d="M 256,305 Q 264,348 248,375 Q 238,378 226,375 Q 222,340 222,308 Z"/>
+    <!-- Hair short -->
+    <path d="M 226,288 Q 224,275 240,273 Q 256,275 254,288 Q 251,282 240,281 Q 229,282 226,288 Z"/>
+  </g>
+
+  <!-- Hands held — clearly between them -->
+  <ellipse cx="200" cy="358" rx="14" ry="6" fill="#0a0908"/>
+  <line x1="178" y1="365" x2="222" y2="365" stroke="#0a0908" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Their breath rising as soft glowing rings between them -->
+  <g fill="none" stroke="#dabe6a" stroke-width="0.7" opacity="0.55">
+    <ellipse cx="200" cy="245" rx="22" ry="6"/>
+    <ellipse cx="200" cy="220" rx="18" ry="5" opacity="0.7"/>
+    <ellipse cx="200" cy="200" rx="14" ry="4" opacity="0.5"/>
+    <ellipse cx="200" cy="183" rx="10" ry="3" opacity="0.3"/>
+    <ellipse cx="200" cy="170" rx="7" ry="2" opacity="0.2"/>
+  </g>
+
+  <!-- Tagline -->
+  <text x="200" y="50" font-family="'Playfair Display',serif" font-style="italic" font-size="16" fill="#dabe6a" text-anchor="middle" opacity="0.9">
     One breath. Two souls.
   </text>
+  <text x="200" y="392" font-family="'JetBrains Mono',monospace" font-size="9" fill="#c9a84c" text-anchor="middle" letter-spacing="3" opacity="0.75">LAUNCH JULY 1 · 2026</text>
 </svg>

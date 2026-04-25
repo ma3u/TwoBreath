@@ -1,111 +1,74 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="2500 meditation app icons, one highlighted as built for two">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="A crowd of solo meditators with one couple breathing together at the center">
   <defs>
-    <radialGradient id="h3-bg" cx="50%" cy="50%" r="55%">
-      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="h3-spot" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.55"/>
+    <radialGradient id="hp3-bg" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.18"/>
       <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0"/>
     </radialGradient>
+    <radialGradient id="hp3-spot" cx="50%" cy="55%" r="22%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="400" height="400" fill="url(#h3-bg)"/>
-  <!-- Grid of faded app icons -->
-  <g opacity="0.35">
-    <!-- 9 cols × 9 rows of tiny squircles -->
-    <g fill="#8a8075">
-      <!-- Row generation -->
+  <rect width="400" height="400" fill="url(#hp3-bg)"/>
+
+  <!-- Crowd of solo meditators (faded) -->
+  <g fill="#5a5048" opacity="0.55">
+    <!-- Row 1 -->
+    <g transform="translate(50,80)"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(105,75)"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(160,82)"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(238,78)"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(295,82)"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(348,78)"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <!-- Row 2 -->
+    <g transform="translate(28,150)" opacity="0.85"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(82,148)" opacity="0.85"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(135,152)" opacity="0.85"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(265,150)" opacity="0.85"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(318,148)" opacity="0.85"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(370,150)" opacity="0.85"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <!-- Row 4 (below the central spotlight) -->
+    <g transform="translate(40,290)" opacity="0.5"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(95,295)" opacity="0.5"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(150,290)" opacity="0.5"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(250,290)" opacity="0.5"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(305,295)" opacity="0.5"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(360,290)" opacity="0.5"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <!-- Row 5 (bottom) -->
+    <g transform="translate(60,355)" opacity="0.35"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(120,358)" opacity="0.35"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(180,355)" opacity="0.35"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(220,358)" opacity="0.35"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(280,355)" opacity="0.35"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+    <g transform="translate(340,358)" opacity="0.35"><ellipse rx="6" ry="7" cy="0"/><path d="M -10,7 Q -10,24 0,24 Q 10,24 10,7 Z"/></g>
+  </g>
+
+  <!-- Center spotlight -->
+  <circle cx="200" cy="220" r="100" fill="url(#hp3-spot)"/>
+
+  <!-- THE COUPLE — center, lit, breathing together -->
+  <g>
+    <!-- Heart-rate breath ring -->
+    <ellipse cx="200" cy="200" rx="48" ry="14" fill="none" stroke="#c9a84c" stroke-width="0.6" opacity="0.45"/>
+    <ellipse cx="200" cy="200" rx="36" ry="10" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.6"/>
+    <!-- Two figures, leaning slightly together -->
+    <g fill="#1a1714">
+      <!-- Left figure -->
+      <ellipse cx="186" cy="200" rx="9" ry="11"/>
+      <path d="M 172,210 Q 168,235 178,250 L 200,250 L 200,210 Z"/>
+      <!-- Right figure -->
+      <ellipse cx="214" cy="200" rx="9" ry="11"/>
+      <path d="M 228,210 Q 232,235 222,250 L 200,250 L 200,210 Z"/>
+    </g>
+    <!-- Their hands meeting -->
+    <circle cx="200" cy="245" r="3" fill="#c9a84c"/>
+    <!-- Heart between them -->
+    <g transform="translate(200,180)">
+      <path d="M 0,2 C -3,-3 -8,-3 -8,3 C -8,7 0,12 0,12 C 0,12 8,7 8,3 C 8,-3 3,-3 0,2 Z" fill="#c96b6b" opacity="0.9"/>
     </g>
   </g>
-  <!-- Programmatically placed grid -->
-  <g fill="#8a8075" opacity="0.32">
-    <rect x="40"  y="40"  width="22" height="22" rx="5"/>
-    <rect x="72"  y="40"  width="22" height="22" rx="5"/>
-    <rect x="104" y="40"  width="22" height="22" rx="5"/>
-    <rect x="136" y="40"  width="22" height="22" rx="5"/>
-    <rect x="168" y="40"  width="22" height="22" rx="5"/>
-    <rect x="232" y="40"  width="22" height="22" rx="5"/>
-    <rect x="264" y="40"  width="22" height="22" rx="5"/>
-    <rect x="296" y="40"  width="22" height="22" rx="5"/>
-    <rect x="328" y="40"  width="22" height="22" rx="5"/>
-    <rect x="40"  y="72"  width="22" height="22" rx="5"/>
-    <rect x="72"  y="72"  width="22" height="22" rx="5"/>
-    <rect x="104" y="72"  width="22" height="22" rx="5"/>
-    <rect x="136" y="72"  width="22" height="22" rx="5"/>
-    <rect x="168" y="72"  width="22" height="22" rx="5"/>
-    <rect x="200" y="72"  width="22" height="22" rx="5"/>
-    <rect x="232" y="72"  width="22" height="22" rx="5"/>
-    <rect x="264" y="72"  width="22" height="22" rx="5"/>
-    <rect x="296" y="72"  width="22" height="22" rx="5"/>
-    <rect x="328" y="72"  width="22" height="22" rx="5"/>
-    <rect x="40"  y="104" width="22" height="22" rx="5"/>
-    <rect x="72"  y="104" width="22" height="22" rx="5"/>
-    <rect x="104" y="104" width="22" height="22" rx="5"/>
-    <rect x="136" y="104" width="22" height="22" rx="5"/>
-    <rect x="168" y="104" width="22" height="22" rx="5"/>
-    <rect x="200" y="104" width="22" height="22" rx="5"/>
-    <rect x="232" y="104" width="22" height="22" rx="5"/>
-    <rect x="264" y="104" width="22" height="22" rx="5"/>
-    <rect x="296" y="104" width="22" height="22" rx="5"/>
-    <rect x="328" y="104" width="22" height="22" rx="5"/>
-    <rect x="40"  y="136" width="22" height="22" rx="5"/>
-    <rect x="72"  y="136" width="22" height="22" rx="5"/>
-    <rect x="104" y="136" width="22" height="22" rx="5"/>
-    <rect x="136" y="136" width="22" height="22" rx="5"/>
-    <rect x="168" y="136" width="22" height="22" rx="5"/>
-    <rect x="232" y="136" width="22" height="22" rx="5"/>
-    <rect x="264" y="136" width="22" height="22" rx="5"/>
-    <rect x="296" y="136" width="22" height="22" rx="5"/>
-    <rect x="328" y="136" width="22" height="22" rx="5"/>
-    <rect x="40"  y="232" width="22" height="22" rx="5"/>
-    <rect x="72"  y="232" width="22" height="22" rx="5"/>
-    <rect x="104" y="232" width="22" height="22" rx="5"/>
-    <rect x="136" y="232" width="22" height="22" rx="5"/>
-    <rect x="168" y="232" width="22" height="22" rx="5"/>
-    <rect x="200" y="232" width="22" height="22" rx="5"/>
-    <rect x="232" y="232" width="22" height="22" rx="5"/>
-    <rect x="264" y="232" width="22" height="22" rx="5"/>
-    <rect x="296" y="232" width="22" height="22" rx="5"/>
-    <rect x="328" y="232" width="22" height="22" rx="5"/>
-    <rect x="40"  y="264" width="22" height="22" rx="5"/>
-    <rect x="72"  y="264" width="22" height="22" rx="5"/>
-    <rect x="104" y="264" width="22" height="22" rx="5"/>
-    <rect x="136" y="264" width="22" height="22" rx="5"/>
-    <rect x="168" y="264" width="22" height="22" rx="5"/>
-    <rect x="200" y="264" width="22" height="22" rx="5"/>
-    <rect x="232" y="264" width="22" height="22" rx="5"/>
-    <rect x="264" y="264" width="22" height="22" rx="5"/>
-    <rect x="296" y="264" width="22" height="22" rx="5"/>
-    <rect x="328" y="264" width="22" height="22" rx="5"/>
-    <rect x="40"  y="296" width="22" height="22" rx="5"/>
-    <rect x="72"  y="296" width="22" height="22" rx="5"/>
-    <rect x="104" y="296" width="22" height="22" rx="5"/>
-    <rect x="136" y="296" width="22" height="22" rx="5"/>
-    <rect x="168" y="296" width="22" height="22" rx="5"/>
-    <rect x="200" y="296" width="22" height="22" rx="5"/>
-    <rect x="232" y="296" width="22" height="22" rx="5"/>
-    <rect x="264" y="296" width="22" height="22" rx="5"/>
-    <rect x="296" y="296" width="22" height="22" rx="5"/>
-    <rect x="328" y="296" width="22" height="22" rx="5"/>
-    <rect x="40"  y="328" width="22" height="22" rx="5"/>
-    <rect x="72"  y="328" width="22" height="22" rx="5"/>
-    <rect x="104" y="328" width="22" height="22" rx="5"/>
-    <rect x="136" y="328" width="22" height="22" rx="5"/>
-    <rect x="168" y="328" width="22" height="22" rx="5"/>
-    <rect x="200" y="328" width="22" height="22" rx="5"/>
-    <rect x="232" y="328" width="22" height="22" rx="5"/>
-    <rect x="264" y="328" width="22" height="22" rx="5"/>
-    <rect x="296" y="328" width="22" height="22" rx="5"/>
-    <rect x="328" y="328" width="22" height="22" rx="5"/>
-  </g>
-  <!-- Center spotlight -->
-  <circle cx="200" cy="200" r="90" fill="url(#h3-spot)"/>
-  <!-- Highlighted "built for two" app icon -->
-  <rect x="184" y="184" width="32" height="32" rx="8" fill="#2d9e8a" stroke="#f5f0e8" stroke-width="1"/>
-  <!-- Two interlocked circles inside -->
-  <circle cx="196" cy="200" r="5" fill="none" stroke="#f5f0e8" stroke-width="1.2"/>
-  <circle cx="204" cy="200" r="5" fill="none" stroke="#f5f0e8" stroke-width="1.2"/>
-  <!-- Label line -->
-  <text x="200" y="240" font-family="'JetBrains Mono',monospace" font-size="9" fill="#c9a84c" text-anchor="middle" letter-spacing="2">BUILT FOR TWO</text>
-  <text x="200" y="174" font-family="'JetBrains Mono',monospace" font-size="8" fill="#8a8075" text-anchor="middle" letter-spacing="2">2,500+ APPS</text>
+
+  <!-- Caption -->
+  <text x="200" y="50" font-family="'Playfair Display',serif" font-style="italic" font-size="14" fill="#c9a84c" text-anchor="middle" opacity="0.8">2,500 apps for one</text>
+  <text x="200" y="380" font-family="'JetBrains Mono',monospace" font-size="10" fill="#dabe6a" text-anchor="middle" letter-spacing="3" opacity="0.85">ZERO BUILT FOR TWO</text>
 </svg>

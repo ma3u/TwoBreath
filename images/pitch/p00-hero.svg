@@ -1,36 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Two breath rings intertwined">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Two figures sitting close together on a couch in morning light, breathing">
   <defs>
-    <radialGradient id="h0-bg" cx="50%" cy="50%" r="55%">
-      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.18"/>
+    <linearGradient id="hp0-room" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.18"/>
+      <stop offset="60%" stop-color="#1a1714" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="hp0-window" cx="78%" cy="32%" r="35%">
+      <stop offset="0%" stop-color="#dabe6a" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#c9a84c" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hp0-couch" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a2520"/>
+      <stop offset="100%" stop-color="#0f0d0b"/>
+    </linearGradient>
+    <radialGradient id="hp0-breath1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.5"/>
       <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="h0-ring1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.2"/>
-    </linearGradient>
-    <linearGradient id="h0-ring2" x1="100%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0.2"/>
-    </linearGradient>
+    <radialGradient id="hp0-breath2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <circle cx="200" cy="200" r="180" fill="url(#h0-bg)"/>
-  <!-- Ring 1 (Matthi) -->
-  <circle cx="165" cy="200" r="90" fill="none" stroke="url(#h0-ring1)" stroke-width="1.5" opacity="0.85"/>
-  <circle cx="165" cy="200" r="70" fill="none" stroke="#c9a84c" stroke-width="0.8" opacity="0.45"/>
-  <circle cx="165" cy="200" r="50" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.25"/>
-  <!-- Ring 2 (Dascha) -->
-  <circle cx="235" cy="200" r="90" fill="none" stroke="url(#h0-ring2)" stroke-width="1.5" opacity="0.85"/>
-  <circle cx="235" cy="200" r="70" fill="none" stroke="#2d9e8a" stroke-width="0.8" opacity="0.45"/>
-  <circle cx="235" cy="200" r="50" fill="none" stroke="#2d9e8a" stroke-width="0.5" opacity="0.25"/>
-  <!-- Central dot (overlap) -->
-  <circle cx="200" cy="200" r="2.5" fill="#f5f0e8"/>
-  <!-- Tiny stars -->
-  <g fill="#f5f0e8" opacity="0.6">
-    <circle cx="80" cy="90" r="0.8"/>
-    <circle cx="340" cy="110" r="0.8"/>
-    <circle cx="60" cy="310" r="1"/>
-    <circle cx="330" cy="320" r="0.8"/>
-    <circle cx="120" cy="60" r="0.5"/>
-    <circle cx="280" cy="340" r="0.5"/>
+  <!-- Room ambient -->
+  <rect width="400" height="400" fill="url(#hp0-room)"/>
+  <!-- Window light spill -->
+  <rect width="400" height="400" fill="url(#hp0-window)"/>
+  <!-- Window frame -->
+  <rect x="270" y="50" width="90" height="120" fill="none" stroke="#dabe6a" stroke-width="0.6" opacity="0.5"/>
+  <line x1="315" y1="50" x2="315" y2="170" stroke="#dabe6a" stroke-width="0.4" opacity="0.4"/>
+  <line x1="270" y1="110" x2="360" y2="110" stroke="#dabe6a" stroke-width="0.4" opacity="0.4"/>
+
+  <!-- Couch silhouette -->
+  <path d="M 30,300 Q 30,280 60,280 L 340,280 Q 370,280 370,300 L 370,360 L 30,360 Z" fill="url(#hp0-couch)"/>
+  <rect x="20" y="290" width="20" height="65" rx="6" fill="#0f0d0b"/>
+  <rect x="360" y="290" width="20" height="65" rx="6" fill="#0f0d0b"/>
+
+  <!-- Breath halos behind heads (suggesting their breathing rhythm) -->
+  <circle cx="155" cy="195" r="55" fill="url(#hp0-breath2)"/>
+  <circle cx="245" cy="195" r="55" fill="url(#hp0-breath1)"/>
+
+  <!-- Two figures, side by side, leaning slightly toward each other -->
+  <!-- Figure 1 (Dascha, left) -->
+  <g fill="#1a1714">
+    <!-- Body -->
+    <path d="M 130,290 Q 125,250 140,225 Q 155,210 170,225 Q 180,250 175,290 Z"/>
+    <!-- Head -->
+    <ellipse cx="155" cy="200" rx="17" ry="20"/>
+    <!-- Hair tousled -->
+    <path d="M 138,194 Q 135,180 145,177 Q 160,172 172,181 Q 175,193 170,200 Q 165,185 155,184 Q 145,186 142,200 Z" fill="#0f0d0b"/>
+  </g>
+
+  <!-- Figure 2 (Matthi, right) -->
+  <g fill="#1a1714">
+    <path d="M 230,290 Q 225,248 240,224 Q 255,209 270,224 Q 282,250 277,290 Z"/>
+    <ellipse cx="252" cy="198" rx="18" ry="21"/>
+    <!-- Hair short -->
+    <path d="M 234,192 Q 232,178 252,176 Q 272,178 270,192 Q 268,184 252,182 Q 236,184 234,192 Z" fill="#0f0d0b"/>
+  </g>
+
+  <!-- Hand bridge — they're holding hands -->
+  <ellipse cx="200" cy="280" rx="14" ry="6" fill="#1a1714"/>
+  <path d="M 178,275 Q 200,272 222,275" stroke="#0f0d0b" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Coffee cups on a low table (table line implied) -->
+  <line x1="60" y1="362" x2="340" y2="362" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
+  <ellipse cx="80" cy="370" rx="9" ry="3" fill="#c9a84c" opacity="0.3"/>
+  <rect x="73" y="360" width="14" height="11" rx="1" fill="#1a1714" stroke="#c9a84c" stroke-width="0.5" opacity="0.6"/>
+  <ellipse cx="320" cy="370" rx="9" ry="3" fill="#c9a84c" opacity="0.3"/>
+  <rect x="313" y="360" width="14" height="11" rx="1" fill="#1a1714" stroke="#c9a84c" stroke-width="0.5" opacity="0.6"/>
+
+  <!-- Steam wisps -->
+  <path d="M 80,358 Q 78,348 80,340" stroke="#f5f0e8" stroke-width="0.5" fill="none" opacity="0.35"/>
+  <path d="M 320,358 Q 322,348 320,340" stroke="#f5f0e8" stroke-width="0.5" fill="none" opacity="0.35"/>
+
+  <!-- Tiny dust motes in window beam -->
+  <g fill="#dabe6a" opacity="0.6">
+    <circle cx="280" cy="120" r="0.7"/>
+    <circle cx="305" cy="155" r="0.6"/>
+    <circle cx="295" cy="195" r="0.5"/>
+    <circle cx="320" cy="140" r="0.5"/>
+    <circle cx="270" cy="180" r="0.4"/>
   </g>
 </svg>
