@@ -230,6 +230,18 @@
     .slide.active .slide-illus { opacity: 1; transform: scale(1); }
     .slide-illus img, .slide-illus svg { width: 100%; height: 100%; }
 
+    /* Chapter 6 stack diagram needs more presence for audience legibility in a pitch room. Larger illus, slightly trimmed headline so the image grows without crowding the text below. */
+    .slide[data-chapter="p05-tools"] .slide-illus {
+      width: min(82vw, 62vh);
+      height: min(82vw, 62vh);
+      max-width: 760px;
+      max-height: 760px;
+    }
+    .slide[data-chapter="p05-tools"] .slide-headline {
+      font-size: clamp(28px, 4.5vw, 56px);
+      margin-top: clamp(18px, 2.5vh, 32px);
+    }
+
     .slide-headline {
       font-family: 'Playfair Display', serif;
       font-size: clamp(36px, 6vw, 76px);
