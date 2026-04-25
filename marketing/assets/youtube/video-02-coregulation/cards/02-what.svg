@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <rect width="1920" height="1080" fill="#1a1714"/>
+  <!-- breath circles, top-left accent -->
+  <circle cx="180" cy="170" r="46" fill="none" stroke="#2d9e8a" stroke-width="2.4" opacity="0.75"/>
+  <circle cx="234" cy="170" r="46" fill="none" stroke="#c9a84c" stroke-width="2.4" opacity="0.75"/>
+  <ellipse cx="207" cy="170" rx="20" ry="40" fill="#f5f0e8" opacity="0.06"/>
+  <!-- eyebrow -->
+  <text x="960" y="420" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="24" letter-spacing="6" fill="#8a8075">VIDEO 2 · 0:20</text>
+  <!-- title -->
+  <text x="960" y="540" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="80" fill="#f5f0e8">What is co-regulation?</text>
+  <text x="960" y="640" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="80" fill="#f5f0e8" font-style="italic">Porges &amp; polyvagal theory</text>
+  <!-- divider -->
+  <line x1="860" y1="900" x2="1060" y2="900" stroke="#8a8075" stroke-width="0.6" opacity="0.35"/>
+  <!-- wordmark -->
+  <text x="960" y="960" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="34" fill="#f5f0e8" letter-spacing="4">TwoBreath</text>
+  <text x="960" y="1000" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="14" letter-spacing="6" fill="#8a8075">TWO BREATHS · ONE BOND</text>
+</svg>
