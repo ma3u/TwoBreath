@@ -272,6 +272,15 @@
       opacity: 1;
       transform: scale(1);
     }
+    /* Reveal layer: same slide, second photo-bg that crossfades in 10s after the slide activates. Used in chapter 3 to overlay the Peec AI dashboard on the 3-cities triptych. */
+    .slide.bg-photo .photo-bg-reveal {
+      transform: scale(1);
+      transition: opacity 1.8s ease;
+      z-index: 1;
+    }
+    .slide.bg-photo.active .photo-bg-reveal {
+      transition: opacity 1.8s ease 10s;
+    }
     .slide.bg-photo .photo-overlay {
       position: absolute;
       inset: 0;
@@ -815,7 +824,8 @@
 
     <!-- Slide 3 — Three cities (full-bleed photo) -->
     <section class="slide bg-photo" data-slide="2" data-chapter="p02-matrix" data-voice="matthi">
-      <div class="photo-bg" style="background-image: url('images/pitch/p02-matrix-peec.jpg');" role="img" aria-label="Three cities at once — Berlin's Tiergarten and Victory Column at dawn, Tokyo's Shibuya and Tokyo Tower at night, and Santa Monica beach with its pier — overlaid with a translucent Peec AI brand-visibility dashboard showing TwoBreath at 0% visibility, invisible across AI search engines"></div>
+      <div class="photo-bg" style="background-image: url('images/pitch/p02-matrix.jpg');" role="img" aria-label="Three cities at once: Berlin's Tiergarten and Victory Column at dawn, Tokyo's Shibuya and Tokyo Tower at night, and Santa Monica beach with its pier — three places, three couples, the same silence"></div>
+      <div class="photo-bg photo-bg-reveal" style="background-image: url('images/pitch/p02-matrix-peec.jpg');" aria-hidden="true"></div>
       <div class="photo-overlay"></div>
       <div class="photo-text">
         <div class="slide-chapter">Chapter 03 <span class="voice">Matthi</span></div>
