@@ -98,12 +98,25 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: rgba(15,13,11,0.95);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background:
+        linear-gradient(180deg,
+          rgba(15,13,11,0.55) 0%,
+          rgba(15,13,11,0.35) 35%,
+          rgba(15,13,11,0.55) 65%,
+          rgba(15,13,11,0.85) 100%),
+        url('images/pitch/p00-hero.jpg') center/cover no-repeat;
       cursor: pointer;
       transition: opacity 0.8s ease, visibility 0.8s ease;
     }
+    .start-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      pointer-events: none;
+    }
+    .start-overlay > * { position: relative; z-index: 1; }
     .start-overlay.hidden {
       opacity: 0;
       visibility: hidden;
@@ -398,6 +411,40 @@
     }
     .dot.played:not(.active) { background: rgba(201,168,76,0.5); }
 
+    /* ── Hidden side navigation (reveal on mouse move / click) ── */
+    .side-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 60;
+      width: clamp(48px, 5vw, 64px);
+      height: clamp(48px, 5vw, 64px);
+      border-radius: 50%;
+      border: 0.5px solid rgba(255,255,255,0.18);
+      background: rgba(15,13,11,0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: var(--warm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease, background 0.25s ease, transform 0.25s ease;
+    }
+    .side-nav.left  { left: clamp(12px, 2.5vw, 32px); }
+    .side-nav.right { right: clamp(12px, 2.5vw, 32px); }
+    .side-nav svg { width: 50%; height: 50%; }
+    .side-nav:hover {
+      background: rgba(15,13,11,0.78);
+      transform: translateY(-50%) scale(1.06);
+    }
+    .deck.live.show-nav .side-nav {
+      opacity: 1;
+      visibility: visible;
+    }
+
     /* Progress bar inside the active dot — fills as audio plays */
     .progress-bar {
       position: fixed;
@@ -661,6 +708,14 @@
 
   </div>
 
+  <!-- ── Hidden side navigation (revealed on mouse move) ── -->
+  <button class="side-nav left" id="sideNavPrev" aria-label="Previous chapter" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.42z"/></svg>
+  </button>
+  <button class="side-nav right" id="sideNavNext" aria-label="Next chapter" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.58L13.17 12 8.59 7.42 10 6l6 6-6 6-1.41-1.42z"/></svg>
+  </button>
+
   <!-- ── Caption box ── -->
   <div class="caption" id="caption" aria-live="polite">
     <span class="speaker" id="captionSpeaker">Matthi</span>
@@ -734,6 +789,8 @@
     const playPauseBtn = document.getElementById('playPauseBtn');
     const prevBtn      = document.getElementById('prevBtn');
     const nextBtn      = document.getElementById('nextBtn');
+    const sideNavPrev  = document.getElementById('sideNavPrev');
+    const sideNavNext  = document.getElementById('sideNavNext');
     const muteBtn      = document.getElementById('muteBtn');
     const muteIconOn   = document.getElementById('muteIconOn');
     const muteIconOff  = document.getElementById('muteIconOff');
@@ -891,8 +948,22 @@
     playPauseBtn.addEventListener('click', togglePlay);
     prevBtn.addEventListener('click', prev);
     nextBtn.addEventListener('click', next);
+    sideNavPrev.addEventListener('click', prev);
+    sideNavNext.addEventListener('click', next);
     muteBtn.addEventListener('click', toggleMute);
     restartBtn.addEventListener('click', restart);
+
+    // ── Reveal side nav on mouse move / click, auto-hide after idle ──
+    let navHideTimer = null;
+    function revealNav() {
+      if (!deck.classList.contains('live')) return;
+      deck.classList.add('show-nav');
+      clearTimeout(navHideTimer);
+      navHideTimer = setTimeout(() => deck.classList.remove('show-nav'), 2200);
+    }
+    document.addEventListener('mousemove', revealNav, { passive: true });
+    document.addEventListener('mousedown', revealNav, { passive: true });
+    document.addEventListener('touchstart', revealNav, { passive: true });
 
     dots.forEach(dot => {
       dot.addEventListener('click', () => {
