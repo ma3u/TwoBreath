@@ -398,6 +398,59 @@
       margin: clamp(14px, 2vh, 22px) auto 0;
     }
 
+    /* Stat eyebrow above the headline (chapter 4) */
+    .stat-eyebrow {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(11px, 1.1vw, 13px);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+      margin-bottom: clamp(14px, 2vh, 22px);
+    }
+    .stat-eyebrow strong { color: #fff; font-weight: 500; }
+
+    /* Split mode: video constrained left, text column right (desktop only) */
+    @media (min-width: 760px) {
+      .slide.bg-video.split .video-fg {
+        width: 55%;
+        left: 0;
+        right: auto;
+      }
+      .slide.bg-video.split .photo-text {
+        justify-content: center;
+        padding: clamp(70px, 9vh, 110px) clamp(40px, 5vw, 80px) clamp(70px, 9vh, 110px);
+      }
+      .slide.bg-video.split .slide-chapter {
+        position: absolute;
+        top: clamp(28px, 4vh, 56px);
+        left: clamp(32px, 5vw, 80px);
+        margin: 0;
+      }
+      .slide.bg-video.split .photo-bottom {
+        margin-left: auto;
+        width: 42%;
+        max-width: 540px;
+        text-align: right;
+      }
+      .slide.bg-video.split .stat-eyebrow {
+        text-align: right;
+        max-width: 32ch;
+        margin-left: auto;
+      }
+      .slide.bg-video.split .slide-headline {
+        text-align: right;
+        margin: 0 0 0 auto;
+        max-width: 14ch;
+      }
+      .slide.bg-video.split .slide-sub {
+        text-align: right;
+        margin: clamp(14px, 2vh, 22px) 0 0 auto;
+        max-width: 38ch;
+      }
+    }
+
     .slide-sub {
       font-family: 'Playfair Display', serif;
       font-style: italic;
@@ -752,8 +805,8 @@
       </div>
     </section>
 
-    <!-- Slide 4 — Market (full-bleed iPhone screen recording) -->
-    <section class="slide bg-video" data-slide="3" data-chapter="p03-market" data-voice="dascha">
+    <!-- Slide 4 — Market (full-bleed iPhone screen recording, split layout) -->
+    <section class="slide bg-video split" data-slide="3" data-chapter="p03-market" data-voice="dascha">
       <video class="video-backdrop" src="images/pitch/p03-market.mp4" poster="images/pitch/p03-market.jpg"
              muted playsinline loop preload="auto" aria-hidden="true"></video>
       <video class="video-fg" src="images/pitch/p03-market.mp4" poster="images/pitch/p03-market.jpg"
@@ -763,6 +816,7 @@
       <div class="photo-text">
         <div class="slide-chapter">Chapter 04 <span class="voice teal">Dascha</span></div>
         <div class="photo-bottom">
+          <span class="stat-eyebrow"><strong>#XXX</strong> Breathing apps in the App Store …</span>
           <h1 class="slide-headline">Apps for one.<br><em>None for two.</em></h1>
           <p class="slide-sub">Until us.</p>
         </div>
