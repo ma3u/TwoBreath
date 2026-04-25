@@ -1,103 +1,112 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="A constellation showing Claude Code, DeepMind MCP, and Peec AI MCP orbiting TwoBreath, each connected to one of four marketing outcomes: tracked competitors, 150 prompts, site schema, and marketing videos for YouTube, Instagram, TikTok and Reddit">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Claude Code orchestrates three integrations: GitHub deploys twobreath.com on GitHub Pages, Peec AI MCP produces the marketing plan, and Google DeepMind MCP produces social media content for YouTube, Instagram, TikTok and Reddit">
   <defs>
-    <radialGradient id="hp5-bg" cx="50%" cy="50%" r="55%">
-      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.16"/>
+    <radialGradient id="hp5-bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.14"/>
       <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="hp5-glow" cx="50%" cy="50%" r="22%">
+    <radialGradient id="hp5-glow" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#dabe6a" stop-opacity="0.55"/>
       <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
     </radialGradient>
+    <linearGradient id="hp5-line" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dabe6a" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#8a8075" stop-opacity="0.35"/>
+    </linearGradient>
   </defs>
-  <rect width="400" height="400" fill="url(#hp5-bg)"/>
 
-  <!-- Caption -->
-  <text x="200" y="46" font-family="'Playfair Display',serif" font-style="italic" font-size="13" fill="#dabe6a" text-anchor="middle" opacity="0.85">from invisible to indexed</text>
+  <rect width="800" height="500" fill="url(#hp5-bg)"/>
+
+  <!-- Eyebrow caption -->
+  <text x="400" y="34" font-family="'Playfair Display',serif" font-style="italic" font-size="16" fill="#dabe6a" text-anchor="middle" opacity="0.85">from invisible to indexed</text>
 
   <!-- Stars -->
   <g fill="#f5f0e8" opacity="0.4">
-    <circle cx="60" cy="80" r="0.7"/>
-    <circle cx="340" cy="60" r="0.6"/>
-    <circle cx="80" cy="350" r="0.5"/>
-    <circle cx="320" cy="350" r="0.5"/>
-    <circle cx="50" cy="200" r="0.4"/>
-    <circle cx="350" cy="200" r="0.4"/>
+    <circle cx="80" cy="120" r="0.9"/>
+    <circle cx="720" cy="100" r="0.7"/>
+    <circle cx="60" cy="380" r="0.7"/>
+    <circle cx="740" cy="400" r="0.6"/>
+    <circle cx="400" cy="60" r="0.5"/>
+    <circle cx="200" cy="460" r="0.5"/>
+    <circle cx="600" cy="460" r="0.5"/>
   </g>
 
-  <!-- Subtle MCP ring -->
-  <circle cx="200" cy="200" r="58" fill="none" stroke="#c9a84c" stroke-width="0.3" opacity="0.25"/>
+  <!-- Center glow behind Claude Code -->
+  <ellipse cx="400" cy="120" rx="120" ry="70" fill="url(#hp5-glow)" opacity="0.7"/>
 
-  <!-- Center glow -->
-  <ellipse cx="200" cy="200" rx="80" ry="80" fill="url(#hp5-glow)"/>
-
-  <!-- Connecting lines: each MCP → its outcome(s) -->
-  <g stroke="#8a8075" stroke-width="0.35" opacity="0.45">
-    <!-- Claude Code (top) → site schema (top-left) and 150 prompts (top-right) -->
-    <line x1="200" y1="148" x2="118" y2="108"/>
-    <line x1="200" y1="148" x2="282" y2="108"/>
-    <!-- Peec AI MCP (left) → competitors (bottom-left) and 150 prompts (top-right) -->
-    <line x1="148" y1="200" x2="98" y2="295"/>
-    <line x1="148" y1="200" x2="282" y2="108"/>
-    <!-- DeepMind MCP (right) → marketing videos (bottom-right) -->
-    <line x1="252" y1="200" x2="302" y2="295"/>
-    <!-- Claude Code → site schema (already drawn) and orchestrates videos -->
-    <line x1="200" y1="148" x2="302" y2="295" stroke-dasharray="1,2" opacity="0.35"/>
+  <!-- ─── Connecting lines: Claude Code → 3 integrations ─── -->
+  <g stroke="#c9a84c" stroke-width="0.9" opacity="0.55" fill="none">
+    <!-- to GitHub -->
+    <path d="M 360 145 Q 280 180 180 215"/>
+    <!-- to Peec AI MCP -->
+    <line x1="400" y1="160" x2="400" y2="215"/>
+    <!-- to DeepMind MCP -->
+    <path d="M 440 145 Q 520 180 620 215"/>
   </g>
 
-  <!-- Inner ring: 3 MCPs -->
-  <!-- Claude Code (top) -->
-  <g transform="translate(200,148)">
-    <circle r="22" fill="#2a2520" stroke="#c9a84c" stroke-width="1.3"/>
-    <text y="-2" font-family="'JetBrains Mono',monospace" font-size="6.8" fill="#c9a84c" text-anchor="middle" letter-spacing="0.3">Claude</text>
-    <text y="7" font-family="'JetBrains Mono',monospace" font-size="6.8" fill="#c9a84c" text-anchor="middle" letter-spacing="0.3">Code</text>
+  <!-- ─── Connecting lines: integrations → outcomes (vertical, dashed) ─── -->
+  <g stroke="#8a8075" stroke-width="0.7" opacity="0.55" stroke-dasharray="4,4" fill="none">
+    <line x1="180" y1="295" x2="180" y2="380"/>
+    <line x1="400" y1="295" x2="400" y2="380"/>
+    <line x1="620" y1="295" x2="620" y2="380"/>
   </g>
+
+  <!-- ─── Top: Claude Code (orchestrator) ─── -->
+  <g transform="translate(400,120)">
+    <circle r="44" fill="#1a1714" stroke="#c9a84c" stroke-width="1.8"/>
+    <circle r="44" fill="none" stroke="#dabe6a" stroke-width="0.5" opacity="0.5"/>
+    <text y="-4" font-family="'JetBrains Mono',monospace" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="0.4">Claude</text>
+    <text y="14" font-family="'JetBrains Mono',monospace" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="0.4">Code</text>
+    <text y="32" font-family="'JetBrains Mono',monospace" font-size="8" fill="#dabe6a" text-anchor="middle" opacity="0.85" letter-spacing="0.2">orchestrator</text>
+  </g>
+
+  <!-- ─── Middle row: 3 integrations ─── -->
+
+  <!-- GitHub (left) -->
+  <g transform="translate(180,255)">
+    <circle r="40" fill="#1a1714" stroke="#c9a84c" stroke-width="1.4"/>
+    <text y="3" font-family="'JetBrains Mono',monospace" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="0.3">GitHub</text>
+    <text y="22" font-family="'JetBrains Mono',monospace" font-size="8" fill="#dabe6a" text-anchor="middle" opacity="0.8">repo · CI · Pages</text>
+  </g>
+
+  <!-- Peec AI MCP (center) -->
+  <g transform="translate(400,255)">
+    <circle r="40" fill="#1a1714" stroke="#c9a84c" stroke-width="1.4"/>
+    <text y="-4" font-family="'JetBrains Mono',monospace" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="0.3">Peec AI</text>
+    <text y="13" font-family="'JetBrains Mono',monospace" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="0.3">MCP</text>
+    <text y="30" font-family="'JetBrains Mono',monospace" font-size="8" fill="#dabe6a" text-anchor="middle" opacity="0.8">AI search compass</text>
+  </g>
+
   <!-- DeepMind MCP (right) -->
-  <g transform="translate(252,200)">
-    <circle r="22" fill="#2a2520" stroke="#2d9e8a" stroke-width="1.3"/>
-    <text y="-2" font-family="'JetBrains Mono',monospace" font-size="6" fill="#2d9e8a" text-anchor="middle">DeepMind</text>
-    <text y="7" font-family="'JetBrains Mono',monospace" font-size="6" fill="#2d9e8a" text-anchor="middle">MCP</text>
-  </g>
-  <!-- Peec AI MCP (left) -->
-  <g transform="translate(148,200)">
-    <circle r="22" fill="#2a2520" stroke="#c9a84c" stroke-width="1.3"/>
-    <text y="-2" font-family="'JetBrains Mono',monospace" font-size="6.8" fill="#c9a84c" text-anchor="middle">Peec AI</text>
-    <text y="7" font-family="'JetBrains Mono',monospace" font-size="6.8" fill="#c9a84c" text-anchor="middle">MCP</text>
+  <g transform="translate(620,255)">
+    <circle r="40" fill="#1a1714" stroke="#2d9e8a" stroke-width="1.4"/>
+    <text y="-4" font-family="'JetBrains Mono',monospace" font-size="11" fill="#2d9e8a" text-anchor="middle" letter-spacing="0.2">DeepMind</text>
+    <text y="13" font-family="'JetBrains Mono',monospace" font-size="13" fill="#2d9e8a" text-anchor="middle" letter-spacing="0.3">MCP</text>
+    <text y="30" font-family="'JetBrains Mono',monospace" font-size="8" fill="#3dbfaa" text-anchor="middle" opacity="0.85">Veo · Imagen · TTS</text>
   </g>
 
-  <!-- Center: TwoBreath -->
-  <g transform="translate(200,200)">
-    <circle r="22" fill="#1a1714" stroke="#c9a84c" stroke-width="1.4"/>
-    <text y="-2" font-family="'Playfair Display',serif" font-size="9" fill="#f5f0e8" text-anchor="middle">two</text>
-    <text y="9" font-family="'Playfair Display',serif" font-size="9" fill="#2d9e8a" text-anchor="middle">breath</text>
+  <!-- ─── Bottom row: 3 outcomes ─── -->
+
+  <!-- twobreath.com on GitHub Pages -->
+  <g transform="translate(180,425)">
+    <rect x="-72" y="-30" width="144" height="60" rx="8" fill="#0f0d0b" stroke="#c9a84c" stroke-width="1.2"/>
+    <text y="-8" font-family="'Playfair Display',serif" font-size="13" fill="#f5f0e8" text-anchor="middle">twobreath.com</text>
+    <text y="10" font-family="'JetBrains Mono',monospace" font-size="8" fill="#dabe6a" text-anchor="middle" opacity="0.85">live on GitHub Pages</text>
+    <text y="22" font-family="'JetBrains Mono',monospace" font-size="7" fill="#8a8075" text-anchor="middle" opacity="0.7">site · schema · FAQ</text>
   </g>
 
-  <!-- Outer satellites: 4 phases -->
-  <!-- Site schema (top-left) -->
-  <g transform="translate(98,98)">
-    <circle r="26" fill="#1a1714" stroke="#8a8075" stroke-width="0.6" opacity="0.95"/>
-    <text y="-4" font-family="'JetBrains Mono',monospace" font-size="6" fill="#f5f0e8" text-anchor="middle">site</text>
-    <text y="4" font-family="'JetBrains Mono',monospace" font-size="6" fill="#f5f0e8" text-anchor="middle">schema</text>
-    <text y="12" font-family="'JetBrains Mono',monospace" font-size="6" fill="#dabe6a" text-anchor="middle">+ FAQ</text>
+  <!-- Marketing Plan -->
+  <g transform="translate(400,425)">
+    <rect x="-72" y="-30" width="144" height="60" rx="8" fill="#0f0d0b" stroke="#c9a84c" stroke-width="1.2"/>
+    <text y="-8" font-family="'Playfair Display',serif" font-size="13" fill="#f5f0e8" text-anchor="middle">Marketing Plan</text>
+    <text y="10" font-family="'JetBrains Mono',monospace" font-size="8" fill="#dabe6a" text-anchor="middle" opacity="0.85">150 prompts · 3 markets</text>
+    <text y="22" font-family="'JetBrains Mono',monospace" font-size="7" fill="#8a8075" text-anchor="middle" opacity="0.7">7 competitors tracked</text>
   </g>
-  <!-- 150 prompts (top-right) -->
-  <g transform="translate(302,98)">
-    <circle r="26" fill="#1a1714" stroke="#8a8075" stroke-width="0.6" opacity="0.95"/>
-    <text y="-4" font-family="'JetBrains Mono',monospace" font-size="6" fill="#f5f0e8" text-anchor="middle">150</text>
-    <text y="4" font-family="'JetBrains Mono',monospace" font-size="6" fill="#f5f0e8" text-anchor="middle">prompts</text>
-    <text y="12" font-family="'JetBrains Mono',monospace" font-size="5.5" fill="#dabe6a" text-anchor="middle">EN · DE · JP</text>
-  </g>
-  <!-- Competitors (bottom-left) -->
-  <g transform="translate(98,302)">
-    <circle r="26" fill="#1a1714" stroke="#8a8075" stroke-width="0.6" opacity="0.95"/>
-    <text y="-4" font-family="'JetBrains Mono',monospace" font-size="6" fill="#f5f0e8" text-anchor="middle">7</text>
-    <text y="4" font-family="'JetBrains Mono',monospace" font-size="6" fill="#f5f0e8" text-anchor="middle">competitors</text>
-    <text y="12" font-family="'JetBrains Mono',monospace" font-size="6" fill="#dabe6a" text-anchor="middle">tracked</text>
-  </g>
-  <!-- Marketing videos (bottom-right) -->
-  <g transform="translate(302,302)">
-    <circle r="26" fill="#1a1714" stroke="#8a8075" stroke-width="0.6" opacity="0.95"/>
-    <text y="-6" font-family="'JetBrains Mono',monospace" font-size="6" fill="#f5f0e8" text-anchor="middle">videos</text>
-    <text y="3" font-family="'JetBrains Mono',monospace" font-size="5.5" fill="#dabe6a" text-anchor="middle">YT · IG</text>
-    <text y="11" font-family="'JetBrains Mono',monospace" font-size="5.5" fill="#dabe6a" text-anchor="middle">TT · RD</text>
+
+  <!-- Social Media -->
+  <g transform="translate(620,425)">
+    <rect x="-72" y="-30" width="144" height="60" rx="8" fill="#0f0d0b" stroke="#2d9e8a" stroke-width="1.2"/>
+    <text y="-8" font-family="'Playfair Display',serif" font-size="13" fill="#f5f0e8" text-anchor="middle">Social Media</text>
+    <text y="10" font-family="'JetBrains Mono',monospace" font-size="8" fill="#3dbfaa" text-anchor="middle" opacity="0.9">video · image · voice</text>
+    <text y="22" font-family="'JetBrains Mono',monospace" font-size="7" fill="#8a8075" text-anchor="middle" opacity="0.7">YT · IG · TT · RD</text>
   </g>
 </svg>
