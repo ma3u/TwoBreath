@@ -272,14 +272,14 @@
       opacity: 1;
       transform: scale(1);
     }
-    /* Reveal layer: same slide, second photo-bg that crossfades in 10s after the slide activates. Used in chapter 3 to overlay the Peec AI dashboard on the 3-cities triptych. */
+    /* Reveal layer: same slide, second photo-bg that crossfades over 2s after a short hold on the cities. Used in chapter 3 to overlay the Peec AI dashboard on the 3-cities triptych as the narration says "powered by Peec AI". */
     .slide.bg-photo .photo-bg-reveal {
       transform: scale(1);
-      transition: opacity 1.8s ease;
+      transition: opacity 2s ease;
       z-index: 1;
     }
     .slide.bg-photo.active .photo-bg-reveal {
-      transition: opacity 1.8s ease 10s;
+      transition: opacity 2s ease 2s;
     }
     .slide.bg-photo .photo-overlay {
       position: absolute;
