@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Claude Code orchestrates three integrations: GitHub deploys twobreath.com on GitHub Pages, Peec AI MCP produces the marketing plan, and Google DeepMind MCP produces social media content for YouTube, Instagram, TikTok and Reddit">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Claude Code orchestrates GitHub, Peec AI MCP, and DeepMind MCP to ship twobreath.com, a marketing plan, and social media content. Right panel: today's hackathon progress — market analysis, website SEO, YouTube videos, Instagram Reels, Reddit posts.">
   <defs>
-    <radialGradient id="hp5-bg" cx="50%" cy="50%" r="60%">
+    <radialGradient id="hp5-bg" cx="33%" cy="50%" r="60%">
       <stop offset="0%" stop-color="#2d9e8a" stop-opacity="0.14"/>
       <stop offset="100%" stop-color="#2d9e8a" stop-opacity="0"/>
     </radialGradient>
@@ -14,9 +14,9 @@
     </linearGradient>
   </defs>
 
-  <rect width="800" height="500" fill="url(#hp5-bg)"/>
+  <rect width="1200" height="500" fill="url(#hp5-bg)"/>
 
-  <!-- Eyebrow caption -->
+  <!-- Eyebrow caption (over diagram) -->
   <text x="400" y="34" font-family="'Playfair Display',serif" font-style="italic" font-size="16" fill="#dabe6a" text-anchor="middle" opacity="0.85">from invisible to indexed</text>
 
   <!-- Stars -->
@@ -28,6 +28,8 @@
     <circle cx="400" cy="60" r="0.5"/>
     <circle cx="200" cy="460" r="0.5"/>
     <circle cx="600" cy="460" r="0.5"/>
+    <circle cx="1110" cy="80" r="0.6"/>
+    <circle cx="880" cy="450" r="0.5"/>
   </g>
 
   <!-- Center glow behind Claude Code -->
@@ -35,19 +37,16 @@
 
   <!-- ─── Connecting lines: Claude Code → 3 integrations ─── -->
   <g stroke="#c9a84c" stroke-width="0.9" opacity="0.55" fill="none">
-    <!-- to GitHub -->
     <path d="M 360 145 Q 280 180 180 215"/>
-    <!-- to Peec AI MCP -->
     <line x1="400" y1="160" x2="400" y2="215"/>
-    <!-- to DeepMind MCP -->
     <path d="M 440 145 Q 520 180 620 215"/>
   </g>
 
   <!-- ─── Connecting lines: integrations → outcomes (vertical, dashed) ─── -->
   <g stroke="#8a8075" stroke-width="0.7" opacity="0.55" stroke-dasharray="4,4" fill="none">
-    <line x1="180" y1="295" x2="180" y2="380"/>
-    <line x1="400" y1="295" x2="400" y2="380"/>
-    <line x1="620" y1="295" x2="620" y2="380"/>
+    <line x1="180" y1="325" x2="180" y2="380"/>
+    <line x1="400" y1="325" x2="400" y2="380"/>
+    <line x1="620" y1="325" x2="620" y2="380"/>
   </g>
 
   <!-- ─── Top: Claude Code (orchestrator) ─── -->
@@ -56,7 +55,7 @@
     <circle r="44" fill="none" stroke="#dabe6a" stroke-width="0.5" opacity="0.5"/>
     <text y="-4" font-family="'JetBrains Mono',monospace" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="0.4">Claude</text>
     <text y="14" font-family="'JetBrains Mono',monospace" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="0.4">Code</text>
-    <text y="32" font-family="'JetBrains Mono',monospace" font-size="8" fill="#dabe6a" text-anchor="middle" opacity="0.85" letter-spacing="0.2">orchestrator</text>
+    <text y="60" font-family="'JetBrains Mono',monospace" font-size="8" fill="#dabe6a" text-anchor="middle" opacity="0.85" letter-spacing="0.2">orchestrator</text>
   </g>
 
   <!-- ─── Middle row: 3 integrations ─── -->
@@ -65,7 +64,7 @@
   <g transform="translate(180,255)">
     <circle r="40" fill="#1a1714" stroke="#c9a84c" stroke-width="1.4"/>
     <text y="3" font-family="'JetBrains Mono',monospace" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="0.3">GitHub</text>
-    <text y="22" font-family="'JetBrains Mono',monospace" font-size="8" fill="#dabe6a" text-anchor="middle" opacity="0.8">repo · CI · Pages</text>
+    <text y="58" font-family="'JetBrains Mono',monospace" font-size="8" fill="#dabe6a" text-anchor="middle" opacity="0.8">repo · CI · Pages</text>
   </g>
 
   <!-- Peec AI MCP (center) -->
@@ -73,7 +72,7 @@
     <circle r="40" fill="#1a1714" stroke="#c9a84c" stroke-width="1.4"/>
     <text y="-4" font-family="'JetBrains Mono',monospace" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="0.3">Peec AI</text>
     <text y="13" font-family="'JetBrains Mono',monospace" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="0.3">MCP</text>
-    <text y="30" font-family="'JetBrains Mono',monospace" font-size="8" fill="#dabe6a" text-anchor="middle" opacity="0.8">AI search compass</text>
+    <text y="58" font-family="'JetBrains Mono',monospace" font-size="8" fill="#dabe6a" text-anchor="middle" opacity="0.8">AI search compass</text>
   </g>
 
   <!-- DeepMind MCP (right) -->
@@ -81,7 +80,7 @@
     <circle r="40" fill="#1a1714" stroke="#2d9e8a" stroke-width="1.4"/>
     <text y="-4" font-family="'JetBrains Mono',monospace" font-size="11" fill="#2d9e8a" text-anchor="middle" letter-spacing="0.2">DeepMind</text>
     <text y="13" font-family="'JetBrains Mono',monospace" font-size="13" fill="#2d9e8a" text-anchor="middle" letter-spacing="0.3">MCP</text>
-    <text y="30" font-family="'JetBrains Mono',monospace" font-size="8" fill="#3dbfaa" text-anchor="middle" opacity="0.85">Veo · Imagen · TTS</text>
+    <text y="58" font-family="'JetBrains Mono',monospace" font-size="8" fill="#3dbfaa" text-anchor="middle" opacity="0.85">Veo · Imagen · TTS</text>
   </g>
 
   <!-- ─── Bottom row: 3 outcomes ─── -->
@@ -109,4 +108,62 @@
     <text y="10" font-family="'JetBrains Mono',monospace" font-size="8" fill="#3dbfaa" text-anchor="middle" opacity="0.9">video · image · voice</text>
     <text y="22" font-family="'JetBrains Mono',monospace" font-size="7" fill="#8a8075" text-anchor="middle" opacity="0.7">YT · IG · TT · RD</text>
   </g>
+
+  <!-- ─── Vertical divider ─── -->
+  <line x1="820" y1="50" x2="820" y2="460" stroke="#8a8075" stroke-width="0.5" opacity="0.35" stroke-dasharray="2,4"/>
+
+  <!-- ─── Right panel: Hackathon Day 1 ─── -->
+
+  <!-- Eyebrow -->
+  <text x="1010" y="34" font-family="'Playfair Display',serif" font-style="italic" font-size="16" fill="#3dbfaa" text-anchor="middle" opacity="0.9">today's progress</text>
+
+  <!-- Title -->
+  <text x="1010" y="92" font-family="'Playfair Display',serif" font-size="24" fill="#f5f0e8" text-anchor="middle">Hackathon · Day 1</text>
+  <text x="1010" y="114" font-family="'JetBrains Mono',monospace" font-size="9" fill="#dabe6a" text-anchor="middle" opacity="0.7" letter-spacing="0.4">2026 · 04 · 25</text>
+
+  <!-- Achievement items -->
+  <g font-family="'Playfair Display',serif">
+    <!-- 1. Market analysis -->
+    <g transform="translate(870,170)">
+      <circle cx="0" cy="-5" r="9" fill="#0f1f1c" stroke="#3dbfaa" stroke-width="1.4"/>
+      <path d="M -4 -5 L -1 -2 L 5 -9" stroke="#3dbfaa" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="20" y="-1" font-size="15" fill="#f5f0e8">Market analysis</text>
+      <text x="20" y="16" font-family="'JetBrains Mono',monospace" font-size="9" fill="#dabe6a" opacity="0.78">100 prompts · EN/DE/JP · 7 competitors</text>
+    </g>
+
+    <!-- 2. Website SEO -->
+    <g transform="translate(870,225)">
+      <circle cx="0" cy="-5" r="9" fill="#0f1f1c" stroke="#3dbfaa" stroke-width="1.4"/>
+      <path d="M -4 -5 L -1 -2 L 5 -9" stroke="#3dbfaa" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="20" y="-1" font-size="15" fill="#f5f0e8">Website SEO</text>
+      <text x="20" y="16" font-family="'JetBrains Mono',monospace" font-size="9" fill="#dabe6a" opacity="0.78">live · JSON-LD · 8 FAQs · canonical</text>
+    </g>
+
+    <!-- 3. YouTube videos -->
+    <g transform="translate(870,280)">
+      <circle cx="0" cy="-5" r="9" fill="#0f1f1c" stroke="#3dbfaa" stroke-width="1.4"/>
+      <path d="M -4 -5 L -1 -2 L 5 -9" stroke="#3dbfaa" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="20" y="-1" font-size="15" fill="#f5f0e8">YouTube videos</text>
+      <text x="20" y="16" font-family="'JetBrains Mono',monospace" font-size="9" fill="#dabe6a" opacity="0.78">3 scripts · EN/DE/JA voiceover</text>
+    </g>
+
+    <!-- 4. Instagram Reels -->
+    <g transform="translate(870,335)">
+      <circle cx="0" cy="-5" r="9" fill="#0f1f1c" stroke="#3dbfaa" stroke-width="1.4"/>
+      <path d="M -4 -5 L -1 -2 L 5 -9" stroke="#3dbfaa" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="20" y="-1" font-size="15" fill="#f5f0e8">Instagram Reels</text>
+      <text x="20" y="16" font-family="'JetBrains Mono',monospace" font-size="9" fill="#dabe6a" opacity="0.78">5 Reel scripts · captions · hashtags</text>
+    </g>
+
+    <!-- 5. Reddit posts -->
+    <g transform="translate(870,390)">
+      <circle cx="0" cy="-5" r="9" fill="#0f1f1c" stroke="#3dbfaa" stroke-width="1.4"/>
+      <path d="M -4 -5 L -1 -2 L 5 -9" stroke="#3dbfaa" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="20" y="-1" font-size="15" fill="#f5f0e8">Reddit posts</text>
+      <text x="20" y="16" font-family="'JetBrains Mono',monospace" font-size="9" fill="#dabe6a" opacity="0.78">5 posts · 5 target subs · playbook</text>
+    </g>
+  </g>
+
+  <!-- Bottom tagline -->
+  <text x="1010" y="455" font-family="'Playfair Display',serif" font-style="italic" font-size="13" fill="#dabe6a" text-anchor="middle" opacity="0.75">five rails shipped in one day</text>
 </svg>
