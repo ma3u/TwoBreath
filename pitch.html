@@ -325,21 +325,25 @@
       margin: clamp(14px, 2vh, 22px) auto 0;
     }
 
-    /* ── Full-bleed video slide (portrait phone recording) ── */
-    .slide.bg-video {
+    /* ── Full-bleed portrait media (video or screenshot) ── */
+    .slide.bg-video,
+    .slide.bg-shot {
       padding: 0;
       align-items: stretch;
       justify-content: stretch;
       background: #000;
     }
-    .slide.bg-video .video-backdrop,
-    .slide.bg-video .video-fg {
+    .slide.bg-video .media-backdrop,
+    .slide.bg-video .media-fg,
+    .slide.bg-shot  .media-backdrop,
+    .slide.bg-shot  .media-fg {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
     }
-    .slide.bg-video .video-backdrop {
+    .slide.bg-video .media-backdrop,
+    .slide.bg-shot  .media-backdrop {
       object-fit: cover;
       filter: blur(28px) saturate(1.1) brightness(0.55);
       transform: scale(1.18);
@@ -347,15 +351,19 @@
       opacity: 0;
       transition: opacity 1.6s ease 0.2s;
     }
-    .slide.bg-video .video-fg {
+    .slide.bg-video .media-fg,
+    .slide.bg-shot  .media-fg {
       object-fit: contain;
       z-index: 1;
       opacity: 0;
       transition: opacity 1.4s ease 0.4s;
     }
-    .slide.bg-video.active .video-backdrop,
-    .slide.bg-video.active .video-fg { opacity: 1; }
-    .slide.bg-video .photo-overlay {
+    .slide.bg-video.active .media-backdrop,
+    .slide.bg-video.active .media-fg,
+    .slide.bg-shot.active  .media-backdrop,
+    .slide.bg-shot.active  .media-fg { opacity: 1; }
+    .slide.bg-video .photo-overlay,
+    .slide.bg-shot  .photo-overlay {
       position: absolute;
       inset: 0;
       background:
@@ -367,7 +375,8 @@
       z-index: 2;
       pointer-events: none;
     }
-    .slide.bg-video .photo-text {
+    .slide.bg-video .photo-text,
+    .slide.bg-shot  .photo-text {
       position: absolute;
       inset: 0;
       z-index: 3;
@@ -377,21 +386,26 @@
       padding: clamp(70px, 9vh, 110px) clamp(28px, 6vw, 80px) clamp(120px, 18vh, 200px);
       pointer-events: none;
     }
-    .slide.bg-video .slide-chapter {
+    .slide.bg-video .slide-chapter,
+    .slide.bg-shot  .slide-chapter {
       align-self: flex-start;
       color: rgba(255,255,255,0.7);
       text-shadow: 0 2px 12px rgba(0,0,0,0.6);
     }
-    .slide.bg-video .slide-chapter .voice { color: var(--gold-light); }
-    .slide.bg-video .slide-chapter .voice.teal { color: var(--teal-light); }
-    .slide.bg-video .slide-headline {
+    .slide.bg-video .slide-chapter .voice,
+    .slide.bg-shot  .slide-chapter .voice { color: var(--gold-light); }
+    .slide.bg-video .slide-chapter .voice.teal,
+    .slide.bg-shot  .slide-chapter .voice.teal { color: var(--teal-light); }
+    .slide.bg-video .slide-headline,
+    .slide.bg-shot  .slide-headline {
       max-width: 16ch;
       margin: 0 auto;
       color: #fff;
       text-shadow: 0 4px 24px rgba(0,0,0,0.7);
       font-size: clamp(40px, 7vw, 88px);
     }
-    .slide.bg-video .slide-sub {
+    .slide.bg-video .slide-sub,
+    .slide.bg-shot  .slide-sub {
       color: rgba(255,255,255,0.85);
       text-shadow: 0 2px 12px rgba(0,0,0,0.7);
       max-width: 42ch;
@@ -411,40 +425,47 @@
     }
     .stat-eyebrow strong { color: #fff; font-weight: 500; }
 
-    /* Split mode: video constrained left, text column right (desktop only) */
+    /* Split mode: portrait media constrained left, text column right (desktop only) */
     @media (min-width: 760px) {
-      .slide.bg-video.split .video-fg {
+      .slide.bg-video.split .media-fg,
+      .slide.bg-shot.split  .media-fg {
         width: 55%;
         left: 0;
         right: auto;
       }
-      .slide.bg-video.split .photo-text {
+      .slide.bg-video.split .photo-text,
+      .slide.bg-shot.split  .photo-text {
         justify-content: center;
         padding: clamp(70px, 9vh, 110px) clamp(40px, 5vw, 80px) clamp(70px, 9vh, 110px);
       }
-      .slide.bg-video.split .slide-chapter {
+      .slide.bg-video.split .slide-chapter,
+      .slide.bg-shot.split  .slide-chapter {
         position: absolute;
         top: clamp(28px, 4vh, 56px);
         left: clamp(32px, 5vw, 80px);
         margin: 0;
       }
-      .slide.bg-video.split .photo-bottom {
+      .slide.bg-video.split .photo-bottom,
+      .slide.bg-shot.split  .photo-bottom {
         margin-left: auto;
         width: 42%;
         max-width: 540px;
         text-align: right;
       }
-      .slide.bg-video.split .stat-eyebrow {
+      .slide.bg-video.split .stat-eyebrow,
+      .slide.bg-shot.split  .stat-eyebrow {
         text-align: right;
         max-width: 32ch;
         margin-left: auto;
       }
-      .slide.bg-video.split .slide-headline {
+      .slide.bg-video.split .slide-headline,
+      .slide.bg-shot.split  .slide-headline {
         text-align: right;
         margin: 0 0 0 auto;
         max-width: 14ch;
       }
-      .slide.bg-video.split .slide-sub {
+      .slide.bg-video.split .slide-sub,
+      .slide.bg-shot.split  .slide-sub {
         text-align: right;
         margin: clamp(14px, 2vh, 22px) 0 0 auto;
         max-width: 38ch;
@@ -807,28 +828,36 @@
 
     <!-- Slide 4 — Market (full-bleed iPhone screen recording, split layout) -->
     <section class="slide bg-video split" data-slide="3" data-chapter="p03-market" data-voice="dascha">
-      <video class="video-backdrop" src="images/pitch/p03-market.mp4" poster="images/pitch/p03-market.jpg"
+      <video class="media-backdrop" src="images/pitch/p03-market.mp4" poster="images/pitch/p03-market.jpg"
              muted playsinline loop preload="auto" aria-hidden="true"></video>
-      <video class="video-fg" src="images/pitch/p03-market.mp4" poster="images/pitch/p03-market.jpg"
+      <video class="media-fg" src="images/pitch/p03-market.mp4" poster="images/pitch/p03-market.jpg"
              muted playsinline loop preload="auto"
              aria-label="Screen recording of the TwoBreath iPhone app, showing the synchronized breathing experience for two"></video>
       <div class="photo-overlay"></div>
       <div class="photo-text">
         <div class="slide-chapter">Chapter 04 <span class="voice teal">Dascha</span></div>
         <div class="photo-bottom">
-          <span class="stat-eyebrow"><strong>#XXX</strong> Breathing apps in the App Store …</span>
-          <h1 class="slide-headline">Apps for one.<br><em>None for two.</em></h1>
-          <p class="slide-sub">Until us.</p>
+          <span class="stat-eyebrow">Hundreds of breathing apps. <strong>Zero for two.</strong></span>
+          <h1 class="slide-headline">All for me.<br><em>None for us.</em></h1>
+          <p class="slide-sub">We're the first.</p>
         </div>
       </div>
     </section>
 
-    <!-- Slide 5 — Trends -->
-    <section class="slide" data-slide="4" data-chapter="p04-trends" data-voice="matthi">
-      <div class="slide-chapter">Chapter 05 <span class="voice">Matthi</span></div>
-      <div class="slide-illus"><img src="images/pitch/p04-trends.svg" alt="Two heart-rate waves merging into one"></div>
-      <h1 class="slide-headline">Two waves.<br><em>One rhythm.</em></h1>
-      <p class="slide-sub">The first longevity protocol for couples.</p>
+    <!-- Slide 5 — Trends (Health Dashboard screenshot, split layout) -->
+    <section class="slide bg-shot split" data-slide="4" data-chapter="p04-trends" data-voice="matthi">
+      <img class="media-backdrop" src="images/pitch/p04-trends.jpg" alt="" aria-hidden="true">
+      <img class="media-fg" src="images/pitch/p04-trends.jpg"
+           alt="The TwoBreath Health Dashboard on iPhone — two heart-rate waves drifting into a shared rhythm">
+      <div class="photo-overlay"></div>
+      <div class="photo-text">
+        <div class="slide-chapter">Chapter 05 <span class="voice">Matthi</span></div>
+        <div class="photo-bottom">
+          <span class="stat-eyebrow">Harvard's 86-year study: <strong>relationships predict lifespan.</strong></span>
+          <h1 class="slide-headline">Two waves.<br><em>One rhythm.</em></h1>
+          <p class="slide-sub">The first longevity protocol for couples.</p>
+        </div>
+      </div>
     </section>
 
     <!-- Slide 6 — Stack -->
