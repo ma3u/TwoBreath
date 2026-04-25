@@ -1,8 +1,0 @@
-file 'seg-01-hook.mp4'
-file 'seg-02-coherent.mp4'
-file 'seg-03-box.mp4'
-file 'seg-04-478.mp4'
-file 'seg-05-demo.mp4'
-file 'seg-06-decision.mp4'
-file 'seg-07-app.mp4'
-file 'seg-08-cta.mp4'
