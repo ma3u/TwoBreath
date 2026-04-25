@@ -238,6 +238,80 @@
       color: var(--teal-light);
     }
 
+    /* ── Full-bleed photo slide (bg-photo mode) ── */
+    .slide.bg-photo {
+      padding: 0;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+    .slide.bg-photo .photo-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transform: scale(1.06);
+      transition: opacity 1.6s ease 0.2s, transform 8s ease 0.2s;
+      z-index: 0;
+    }
+    .slide.bg-photo.active .photo-bg {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .slide.bg-photo .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg,
+          rgba(15,13,11,0.55) 0%,
+          rgba(15,13,11,0.15) 25%,
+          rgba(15,13,11,0.10) 55%,
+          rgba(15,13,11,0.78) 100%),
+        radial-gradient(ellipse at 50% 100%,
+          rgba(15,13,11,0.55) 0%,
+          rgba(15,13,11,0) 60%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .slide.bg-photo .photo-text {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(70px, 9vh, 110px) clamp(28px, 6vw, 80px) clamp(120px, 18vh, 200px);
+      pointer-events: none;
+    }
+    .slide.bg-photo .slide-chapter {
+      align-self: flex-start;
+      color: rgba(255,255,255,0.7);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    }
+    .slide.bg-photo .slide-chapter .voice {
+      color: var(--gold-light);
+    }
+    .slide.bg-photo .slide-chapter .voice.teal {
+      color: var(--teal-light);
+    }
+    .slide.bg-photo .photo-bottom {
+      align-self: stretch;
+    }
+    .slide.bg-photo .slide-headline {
+      max-width: 16ch;
+      margin: 0 auto;
+      color: #fff;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.6);
+      font-size: clamp(40px, 7vw, 88px);
+    }
+    .slide.bg-photo .slide-sub {
+      color: rgba(255,255,255,0.85);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+      max-width: 42ch;
+      margin: clamp(14px, 2vh, 22px) auto 0;
+    }
+
     .slide-sub {
       font-family: 'Playfair Display', serif;
       font-style: italic;
@@ -519,12 +593,17 @@
   <!-- ── Deck ── -->
   <div class="deck" id="deck">
 
-    <!-- Slide 1 — Hero -->
-    <section class="slide" data-slide="0" data-chapter="p00-hero" data-voice="matthi">
-      <div class="slide-chapter">Chapter 01 <span class="voice">Matthi</span></div>
-      <div class="slide-illus"><img src="images/pitch/p00-hero.svg" alt="Two figures on a couch in morning light"></div>
-      <h1 class="slide-headline">One breath.<br><em>Two souls.</em></h1>
-      <p class="slide-sub">Three years ago, something in our relationship got quiet.</p>
+    <!-- Slide 1 — Hero (full-bleed photo) -->
+    <section class="slide bg-photo" data-slide="0" data-chapter="p00-hero" data-voice="matthi">
+      <div class="photo-bg" style="background-image: url('images/pitch/p00-hero.jpg');" role="img" aria-label="A couple lying in a sunlit meadow of wildflowers, holding hands, smiling at each other"></div>
+      <div class="photo-overlay"></div>
+      <div class="photo-text">
+        <div class="slide-chapter">Chapter 01 <span class="voice">Matthi</span></div>
+        <div class="photo-bottom">
+          <h1 class="slide-headline">One breath.<br><em>Two souls.</em></h1>
+          <p class="slide-sub">Every morning, for three years.</p>
+        </div>
+      </div>
     </section>
 
     <!-- Slide 2 — Problem -->
