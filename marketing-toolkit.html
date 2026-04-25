@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>TwoBreath · Marketing Toolkit (EN · JA · DE)</title>
+  <meta name="description" content="Per-locale brief templates for Gemini, Veo 3, Imagen 4, Lyria 2, ElevenLabs. Copy and paste — campaign in a day.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#0f0d0b; --ink-light:#1a1714; --ink-soft:#2a2520;
+      --warm:#f5f0e8; --warm-60:rgba(245,240,232,0.6); --warm-40:rgba(245,240,232,0.4);
+      --teal:#2d9e8a; --teal-light:#3dbfaa;
+      --gold:#c9a84c; --gold-light:#dabe6a;
+      --rose:#c96b6b;
+      --muted:#8a8075;
+      --us:#3dbfaa; --jp:#c96b6b; --de:#c9a84c;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--ink);color:var(--warm);
+      font-family:'DM Sans',system-ui,sans-serif;font-weight:300;line-height:1.7;
+      -webkit-font-smoothing:antialiased;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+    }
+    :focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:4px}
+
+    /* ── Top bar ── */
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:14px clamp(20px,4vw,40px);
+      background:rgba(15,13,11,0.85);
+      backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+      border-bottom:.5px solid rgba(255,255,255,.06);
+    }
+    .topbar a.brand{
+      font-family:'Playfair Display',serif;font-size:18px;letter-spacing:-.01em;
+      color:var(--warm);text-decoration:none;
+    }
+    .topbar a.brand span{color:var(--teal)}
+    .topbar .meta{
+      font-family:'JetBrains Mono',monospace;font-size:11px;
+      color:var(--warm-60);letter-spacing:.14em;text-transform:uppercase;
+    }
+    .topbar .meta .dot{
+      display:inline-block;width:7px;height:7px;border-radius:50%;
+      background:var(--rose);margin-right:8px;vertical-align:1px;
+      animation:pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+    /* ── Sections ── */
+    section{padding:80px clamp(20px,5vw,40px);max-width:1180px;margin:0 auto}
+    section.tight{padding:50px clamp(20px,5vw,40px)}
+
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:400;letter-spacing:-.02em;line-height:1.12}
+    h1{font-size:clamp(40px,6vw,72px);margin-bottom:24px}
+    h1 em{font-style:italic;color:var(--gold-light)}
+    h2{font-size:clamp(28px,4vw,44px);margin-bottom:18px}
+    h2 em{font-style:italic;color:var(--gold-light)}
+    h3{font-size:22px;margin-bottom:12px;font-weight:500;font-family:'DM Sans',sans-serif}
+    h4{font-size:15px;font-family:'JetBrains Mono',monospace;font-weight:400;
+       letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+
+    p{color:var(--warm-60);max-width:72ch;font-size:16px}
+    p+p{margin-top:14px}
+    p strong{color:var(--warm);font-weight:500}
+    p em{color:var(--warm);font-style:italic}
+
+    .lead{font-size:19px;color:var(--warm);max-width:64ch;line-height:1.7}
+
+    .eyebrow{
+      display:inline-block;
+      font-family:'JetBrains Mono',monospace;font-size:11px;
+      letter-spacing:.22em;text-transform:uppercase;color:var(--teal);
+      padding:5px 14px;border:.5px solid rgba(45,158,138,.35);border-radius:20px;
+      margin-bottom:24px;
+    }
+
+    /* ── Hero ── */
+    .hero{
+      min-height:80vh;display:flex;flex-direction:column;justify-content:center;
+      padding-top:120px;position:relative;overflow:hidden;
+    }
+    .hero::before{
+      content:'';position:absolute;top:0;right:-200px;width:600px;height:600px;border-radius:50%;
+      background:radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 65%);
+      pointer-events:none;animation:float 14s ease-in-out infinite;
+    }
+    .hero::after{
+      content:'';position:absolute;bottom:-100px;left:-150px;width:500px;height:500px;border-radius:50%;
+      background:radial-gradient(circle,rgba(45,158,138,.08) 0%,transparent 65%);
+      pointer-events:none;animation:float 18s ease-in-out infinite reverse;
+    }
+    @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
+
+    /* ── Stack overview ── */
+    .stack{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:14px;margin-top:48px;
+    }
+    .tool{
+      padding:22px;background:var(--ink-light);
+      border:.5px solid rgba(255,255,255,.08);border-radius:12px;
+      transition:border-color .3s ease,transform .3s ease;
+    }
+    .tool:hover{border-color:rgba(201,168,76,.3);transform:translateY(-2px)}
+    .tool .name{
+      font-family:'JetBrains Mono',monospace;font-size:11px;
+      color:var(--teal);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;
+    }
+    .tool .what{font-family:'Playfair Display',serif;font-size:20px;color:var(--warm);margin-bottom:8px}
+    .tool .desc{font-size:13px;color:var(--warm-60);line-height:1.55}
+
+    /* ── Locale switcher ── */
+    .locale-bar{
+      display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+      margin:16px auto 48px;padding:6px;
+      background:var(--ink-light);border:.5px solid rgba(255,255,255,.08);
+      border-radius:999px;width:fit-content;
+    }
+    .locale-btn{
+      padding:10px 22px;border-radius:999px;border:none;background:transparent;
+      color:var(--warm-60);cursor:pointer;font-family:'JetBrains Mono',monospace;
+      font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+      transition:all .3s ease;display:flex;align-items:center;gap:8px;
+    }
+    .locale-btn .flag{font-size:14px;line-height:1}
+    .locale-btn:hover{color:var(--warm)}
+    .locale-btn.active{background:var(--gold);color:var(--ink)}
+
+    .locale-pane{display:none}
+    .locale-pane.active{display:block;animation:fadeIn .5s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+    .locale-header{
+      padding:24px 28px;background:var(--ink-light);
+      border-radius:14px;margin-bottom:28px;
+      border-left:3px solid var(--gold);
+    }
+    .locale-pane[data-locale="us"] .locale-header{border-left-color:var(--us)}
+    .locale-pane[data-locale="jp"] .locale-header{border-left-color:var(--jp)}
+    .locale-pane[data-locale="de"] .locale-header{border-left-color:var(--de)}
+    .locale-header .flag{font-size:24px;margin-right:10px;vertical-align:-2px}
+    .locale-header h2{margin-bottom:6px;font-size:28px}
+    .locale-header p{font-size:14px;margin:0}
+
+    /* ── Prompt block ── */
+    .prompt-block{
+      background:var(--ink-soft);border:.5px solid rgba(255,255,255,.07);
+      border-radius:10px;padding:18px 20px;margin-bottom:14px;position:relative;
+      transition:border-color .3s ease;
+    }
+    .prompt-block:hover{border-color:rgba(201,168,76,.25)}
+    .prompt-block .label{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:10px;
+    }
+    .prompt-block .tag{
+      font-family:'JetBrains Mono',monospace;font-size:10px;
+      color:var(--teal);letter-spacing:.16em;text-transform:uppercase;
+    }
+    .copy-btn{
+      background:transparent;border:.5px solid rgba(255,255,255,.18);
+      color:var(--warm-60);padding:5px 12px;border-radius:14px;
+      font-family:'JetBrains Mono',monospace;font-size:10px;
+      letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
+      transition:all .25s ease;
+    }
+    .copy-btn:hover{background:rgba(255,255,255,.06);color:var(--warm);border-color:rgba(255,255,255,.4)}
+    .copy-btn.copied{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+    .prompt-block pre{
+      font-family:'JetBrains Mono',monospace;font-size:13px;
+      color:var(--warm);line-height:1.65;
+      white-space:pre-wrap;word-break:break-word;
+    }
+    .prompt-block.poetic pre{
+      font-family:'Playfair Display',serif;font-style:italic;font-size:18px;
+      color:var(--gold-light);line-height:1.5;
+    }
+    .prompt-block .note{
+      margin-top:10px;padding-top:10px;
+      border-top:.5px dashed rgba(255,255,255,.1);
+      font-size:12px;color:var(--muted);
+    }
+    .prompt-block .note strong{color:var(--warm-60)}
+
+    /* ── Subsection layout ── */
+    .subsection{margin-bottom:48px}
+    .subsection-head{
+      display:flex;align-items:baseline;gap:14px;margin-bottom:18px;
+      padding-bottom:10px;border-bottom:.5px solid rgba(255,255,255,.07);
+    }
+    .subsection-head h3{margin:0;font-family:'Playfair Display',serif;font-weight:400;font-size:24px}
+    .subsection-head .badge{
+      font-family:'JetBrains Mono',monospace;font-size:10px;
+      color:var(--gold);letter-spacing:.18em;text-transform:uppercase;
+      padding:2px 10px;background:rgba(201,168,76,.1);
+      border:.5px solid rgba(201,168,76,.3);border-radius:12px;
+    }
+
+    /* ── Channels ── */
+    .channels{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;margin-top:32px;
+    }
+    .channel{
+      padding:24px;background:var(--ink-light);
+      border:.5px solid rgba(255,255,255,.08);border-radius:14px;
+    }
+    .channel h3{
+      font-family:'JetBrains Mono',monospace;font-weight:500;font-size:12px;
+      color:var(--gold);letter-spacing:.18em;text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    .channel .name{font-family:'Playfair Display',serif;font-size:22px;color:var(--warm);margin-bottom:14px}
+    .channel ul{list-style:none}
+    .channel li{
+      font-size:13px;color:var(--warm-60);padding:6px 0 6px 18px;
+      position:relative;line-height:1.55;
+    }
+    .channel li::before{
+      content:'·';position:absolute;left:6px;color:var(--gold);font-weight:700;
+    }
+    .channel li strong{color:var(--warm);font-weight:500}
+    .channel .spec{
+      margin-top:14px;padding:10px 12px;
+      background:var(--ink-soft);border-radius:8px;
+      font-family:'JetBrains Mono',monospace;font-size:11px;
+      color:var(--teal-light);letter-spacing:.06em;
+    }
+
+    /* ── Workflow timeline ── */
+    .timeline{
+      margin-top:32px;border-left:.5px dashed rgba(201,168,76,.4);
+      padding-left:28px;
+    }
+    .step{
+      position:relative;padding-bottom:28px;
+    }
+    .step::before{
+      content:'';position:absolute;left:-35px;top:6px;width:14px;height:14px;
+      border-radius:50%;background:var(--ink);
+      border:1.5px solid var(--gold);
+    }
+    .step .when{
+      font-family:'JetBrains Mono',monospace;font-size:10px;
+      color:var(--gold);letter-spacing:.18em;text-transform:uppercase;
+      margin-bottom:4px;
+    }
+    .step .what{
+      font-family:'Playfair Display',serif;font-size:20px;color:var(--warm);margin-bottom:6px;
+    }
+    .step .how{font-size:14px;color:var(--warm-60);max-width:64ch}
+
+    /* ── Footer card ── */
+    .closing{
+      margin-top:48px;padding:48px;
+      background:radial-gradient(ellipse at center,rgba(45,158,138,.06) 0%,transparent 60%),var(--ink-light);
+      border-radius:18px;text-align:center;
+    }
+    .closing h2 em{font-style:italic;color:var(--gold-light)}
+    .closing p{margin:18px auto 0;color:var(--warm-60);max-width:54ch}
+
+    /* ── Toast ── */
+    .toast{
+      position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);
+      background:var(--gold);color:var(--ink);
+      padding:12px 24px;border-radius:999px;
+      font-family:'JetBrains Mono',monospace;font-size:11px;
+      letter-spacing:.16em;text-transform:uppercase;
+      opacity:0;pointer-events:none;
+      transition:transform .4s ease,opacity .4s ease;
+      z-index:100;box-shadow:0 6px 24px rgba(201,168,76,.3);
+    }
+    .toast.shown{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    /* ── Mobile ── */
+    @media (max-width:760px){
+      .locale-bar{width:100%;justify-content:stretch}
+      .locale-btn{flex:1;padding:10px 12px;font-size:10px}
+      .locale-header{padding:18px 20px}
+      .prompt-block{padding:14px 16px}
+      .prompt-block.poetic pre{font-size:16px}
+      .topbar{padding:12px 18px}
+      .topbar .meta{display:none}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <a href="/" class="brand">two<span>breath</span></a>
+    <div class="meta"><span class="dot"></span>Marketing Toolkit · Internal</div>
+  </header>
+
+  <!-- ═══════ HERO ═══════ -->
+  <section class="hero">
+    <div class="eyebrow">Internal toolkit · operator-ready</div>
+    <h1>Marketing Toolkit<br><em>EN · JA · DE.</em></h1>
+    <p class="lead">
+      Every prompt below is a copy-and-paste away from a campaign asset.
+      Pick a locale, paste prompts into Gemini, Veo&nbsp;3, Imagen&nbsp;4, Lyria&nbsp;2 and ElevenLabs in order,
+      assemble in CapCut. <strong>One day per market.</strong>
+    </p>
+  </section>
+
+  <!-- ═══════ STACK ═══════ -->
+  <section class="tight">
+    <h2>The stack — <em>six tools, one day.</em></h2>
+    <p>Each tool plays one role. Don't stack them — chain them.</p>
+    <div class="stack">
+      <div class="tool"><div class="name">01 · Copy</div><div class="what">Gemini 3</div><div class="desc">Localized hook variants in native idiom — not translated. Run prompts in Gemini app or Vertex AI.</div></div>
+      <div class="tool"><div class="name">02 · Video</div><div class="what">Veo 3</div><div class="desc">8-sec cinematic clips, 720p–1080p, with native audio. Vertex AI batch or Gemini Pro/Ultra.</div></div>
+      <div class="tool"><div class="name">03 · Stills</div><div class="what">Imagen 4 + Nano Banana 2</div><div class="desc">Reels covers and Reddit thumbnails. Imagen 4 for editorial, Nano Banana 2 for face fidelity.</div></div>
+      <div class="tool"><div class="name">04 · Music</div><div class="what">Lyria 2</div><div class="desc">60-sec ambient bed at the breathing tempo. MusicFX or Vertex AI.</div></div>
+      <div class="tool"><div class="name">05 · Voice</div><div class="what">ElevenLabs Multilingual v2</div><div class="desc">Voice-clone hooks in JA/DE in Matthi's or Dascha's actual voice. Already in our stack.</div></div>
+      <div class="tool"><div class="name">06 · Loop</div><div class="what">NotebookLM</div><div class="desc">Turn the assets into an Audio Overview podcast. Citation surface for ChatGPT.</div></div>
+    </div>
+  </section>
+
+  <!-- ═══════ LOCALE BRIEFS ═══════ -->
+  <section>
+    <h2>Per-locale briefs.</h2>
+    <p>Click a locale. Every block has a copy button — paste straight into the tool.</p>
+
+    <div class="locale-bar" role="tablist" aria-label="Locale">
+      <button class="locale-btn active" data-locale="us" role="tab" aria-selected="true">
+        <span class="flag">🇺🇸</span> United States · EN
+      </button>
+      <button class="locale-btn" data-locale="jp" role="tab" aria-selected="false">
+        <span class="flag">🇯🇵</span> Japan · JA
+      </button>
+      <button class="locale-btn" data-locale="de" role="tab" aria-selected="false">
+        <span class="flag">🇩🇪</span> Germany · DE
+      </button>
+    </div>
+
+    <!-- ═══ US PANE ═══ -->
+    <div class="locale-pane active" data-locale="us" role="tabpanel">
+      <div class="locale-header">
+        <h2><span class="flag">🇺🇸</span> United States — <em>performance + longevity.</em></h2>
+        <p>Audience: Peter Attia, Andrew Huberman, Bryan Johnson · HRV Twitter · r/PeterAttia · r/longevity. Frame: evidence-forward. The 20 minutes that change the next 10 years.</p>
+      </div>
+
+      <!-- Hooks -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>Hook copy variants</h3><span class="badge">Gemini 3</span></div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">Hook A · longevity frame</span><button class="copy-btn">Copy</button></div>
+          <pre>The 20 minutes with your partner that changes the next 10 years.</pre>
+        </div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">Hook B · category frame</span><button class="copy-btn">Copy</button></div>
+          <pre>Every longevity protocol is solo. Until now.</pre>
+        </div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">Hook C · device frame</span><button class="copy-btn">Copy</button></div>
+          <pre>Your Apple Watch tracks your HRV. What about hers?</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Gemini prompt — generate 5 more variants</span><button class="copy-btn">Copy</button></div>
+<pre>Write 5 short Instagram Reels hook lines (under 9 words each) for "twobreath" — a daily synchronized breathing app for couples. The audience is the longevity-and-performance community: Peter Attia / Huberman / Bryan Johnson followers who already track HRV on Apple Watch. Frame: relationship as the missing longevity protocol. Tone: evidence-forward, calm authority, no hype. Output as a numbered list, no explanation.</pre>
+        </div>
+      </div>
+
+      <!-- Veo 3 -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>Veo 3 — 4-shot reel</h3><span class="badge">Veo 3 · 8s each</span></div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 01 · the inhale</span><button class="copy-btn">Copy</button></div>
+<pre>Brooklyn loft at 6:42am. Mid-30s couple in soft cotton, sitting cross-legged on a low bed, knees touching. Both wearing Apple Watch. They close their eyes simultaneously and inhale. Handheld 35mm, warm golden light through tall window, shallow depth of field, slight grain. 8 seconds. Native audio: gentle inhale + distant city hum. Cinematic but unposed.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 02 · HRV macro</span><button class="copy-btn">Copy</button></div>
+<pre>Macro close-up of two Apple Watch screens side by side on a wooden table. Two HRV waveforms gradually synchronizing into one rhythm. Soft natural lighting, shallow depth of field. 8 seconds. No music — just the soft tick of a clock and one inhale. Clinical but warm.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 03 · eye contact</span><button class="copy-btn">Copy</button></div>
+<pre>Same Brooklyn couple, eyes now open, sustained eye contact. He smiles slightly. She breathes. Out-of-focus background: kitchen, a stack of books, a single houseplant. Documentary feel, 35mm, intimate close-mid shot. 8 seconds. Native audio: room tone, one quiet laugh.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 04 · the city wakes</span><button class="copy-btn">Copy</button></div>
+<pre>Wide aerial of Brooklyn brownstones at dawn. Slow forward push. Soft golden light spilling between buildings. 8 seconds. Native audio: distant subway, birds, one car. Voiceover-ready (low ambient).</pre>
+        </div>
+      </div>
+
+      <!-- Imagen / Nano Banana -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>Imagen 4 / Nano Banana 2 — stills</h3><span class="badge">posters · thumbnails</span></div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Poster A · Reels cover (9:16)</span><button class="copy-btn">Copy</button></div>
+<pre>Editorial photograph, 9:16 vertical. Mid-30s couple in a Brooklyn loft at dawn, sitting cross-legged on a bed, foreheads almost touching, eyes closed. Apple Watch visible on each wrist. Warm golden window light, slight film grain, shallow depth of field. 35mm, intimate, magazine-quality. No text.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Poster B · Reddit thumbnail (16:9)</span><button class="copy-btn">Copy</button></div>
+<pre>Editorial photograph, 16:9. Macro of two Apple Watches side by side on a wooden table, both showing HRV waveforms. Soft daylight, shallow depth of field, clinical-but-warm aesthetic. Subtle steam from a coffee cup at the edge of frame. No text. Wirecutter / Verge product photography style.</pre>
+        </div>
+      </div>
+
+      <!-- Lyria -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>Lyria 2 — 60-sec backing track</h3><span class="badge">5–6 BPM breath</span></div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Music prompt</span><button class="copy-btn">Copy</button></div>
+<pre>Ambient piano with a soft sub-bass pulse synced to a 6-breaths-per-minute rhythm. Brian Eno meets Hans Zimmer at his quietest. 60 seconds. Mood: hopeful + grounded. No drums, no vocals. Slight reverb. Build subtly across the second 30 seconds.</pre>
+          <div class="note"><strong>Spec:</strong> 60s · 6 BPM breath · key C major · -14 LUFS · stereo</div>
+        </div>
+      </div>
+
+      <!-- ElevenLabs voice -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>ElevenLabs voiceover</h3><span class="badge">Matthi or Dascha clone</span></div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">VO line · 12s read</span><button class="copy-btn">Copy</button></div>
+<pre>Every longevity protocol is solo — Zone 2, fasting, cold plunge. Until now. twobreath. The first one for two.</pre>
+          <div class="note"><strong>Settings:</strong> stability 0.50 · similarity 0.88 · style 0.25 · model eleven_multilingual_v2</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ JP PANE ═══ -->
+    <div class="locale-pane" data-locale="jp" role="tabpanel">
+      <div class="locale-header">
+        <h2><span class="flag">🇯🇵</span> Japan — <em>relationship-as-craft.</em></h2>
+        <p>Audience: Note.com wellness writers · 5ch · Tokyo / Osaka couples 30–40s. Frame: poetic, kuuki-aware. <em>二人の呼吸を重ねる四分間.</em> Slower cadence than the US version.</p>
+      </div>
+
+      <!-- Hooks -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>フック · Hook copy variants</h3><span class="badge">Gemini 3 · 日本語</span></div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">フック A · 朝の習慣</span><button class="copy-btn">Copy</button></div>
+<pre>朝、十五分、一緒に息をする。
+それだけで、十年後が変わる。</pre>
+        </div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">フック B · 二人の呼吸</span><button class="copy-btn">Copy</button></div>
+<pre>二人の呼吸を重ねる、四分間。</pre>
+        </div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">フック C · 整える</span><button class="copy-btn">Copy</button></div>
+<pre>夫婦の朝の整え方に、もう一つだけ。</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Gemini プロンプト — 5 つのバリエーション生成</span><button class="copy-btn">Copy</button></div>
+<pre>「twobreath」というカップル向けの同期呼吸アプリのために、Instagramリール用の短いフック（各9文字以内、できるだけ短く詩的）を日本語で5つ書いてください。ターゲット：30〜40代の東京・大阪のカップル、Note.com読者層、ウェルネスとロンジェビティに興味あり。トーン：静か、詩的、kuuki-aware。翻訳ではなく、日本語ネイティブの感性で書いてください。番号付きリストで出力、説明不要。</pre>
+        </div>
+      </div>
+
+      <!-- Veo 3 -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>Veo 3 — 4-shot reel</h3><span class="badge">Veo 3 · 8s each</span></div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 01 · 朝の正座</span><button class="copy-btn">Copy</button></div>
+<pre>Tatami-floored Tokyo apartment at dawn, autumn light. Mid-30s Japanese couple in soft linen, kneeling seiza-style facing each other, hands resting on thighs. Shoji sliding doors with morning light filtering through paper. They close their eyes together and inhale. 8 seconds. Painterly stillness, warm muted palette, slight film grain, anamorphic widescreen. Native audio: distant cicada, the creak of wood.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 02 · 茶碗の湯気</span><button class="copy-btn">Copy</button></div>
+<pre>Macro close-up of two ceramic tea bowls side by side on a low wooden table. Steam rising slowly. Two pairs of hands resting nearby, one finger lightly touching the other. Soft window light. 8 seconds. Painterly, contemplative. Native audio: water from a kettle, one breath.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 03 · 障子のシルエット</span><button class="copy-btn">Copy</button></div>
+<pre>The same couple from behind, silhouetted against a shoji screen. Tokyo skyline barely visible through the paper. They sit close, shoulders touching. 8 seconds. Backlit, minimalist composition. Native audio: distant city hum, room tone.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 04 · 手を繋ぐ</span><button class="copy-btn">Copy</button></div>
+<pre>Mid-shot. Couple lying side by side under a futon, hands intertwined on the mattress between them. Eyes closed, slight smile. Sun rising slowly outside. 8 seconds. Warm intimate light, slow zoom in on the held hands. Native audio: soft breathing, distant temple bell.</pre>
+        </div>
+      </div>
+
+      <!-- Imagen -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>Imagen 4 / Nano Banana 2 — stills</h3><span class="badge">posters · thumbnails</span></div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Poster A · Note.com hero (16:9)</span><button class="copy-btn">Copy</button></div>
+<pre>Editorial photograph, 16:9. Japanese couple in their 30s in a Tokyo tatami apartment at dawn, kneeling seiza, foreheads almost touching, eyes closed. Soft warm light through shoji screens. Linen clothing, neutral palette. Magazine-quality, painterly, intimate. Slight film grain. No text. Note.com / Brutus magazine aesthetic, NOT advertising.</pre>
+          <div class="note"><strong>Critical:</strong> use a Japanese-native photographer's reference (search Adobe Stock by photographer location) — avoid Western-agency wellness gloss.</div>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Poster B · Reels cover (9:16)</span><button class="copy-btn">Copy</button></div>
+<pre>Editorial photograph, 9:16 vertical. Macro of two ceramic Japanese tea bowls with steam rising on a low wooden table. Two hands at the edge of frame, one resting on the other. Warm window light, shallow depth of field. Painterly, contemplative. No text.</pre>
+        </div>
+      </div>
+
+      <!-- Lyria -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>Lyria 2 — 60-sec backing track</h3><span class="badge">5 BPM breath · 邦楽</span></div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Music prompt</span><button class="copy-btn">Copy</button></div>
+<pre>Ambient shakuhachi flute with kalimba and a soft string pad, synced to a 5-breaths-per-minute rhythm. Joe Hisaishi at his quietest meets Ryuichi Sakamoto's "async". 60 seconds. Mood: contemplative + warm. No percussion, no vocals. Slight reverb, sense of a wooden room. Build very subtly.</pre>
+          <div class="note"><strong>Spec:</strong> 60s · 5 BPM breath · key A minor · -14 LUFS · stereo</div>
+        </div>
+      </div>
+
+      <!-- ElevenLabs voice -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>ElevenLabs voiceover</h3><span class="badge">Matthi clone · 日本語</span></div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">VO line · 8 秒</span><button class="copy-btn">Copy</button></div>
+<pre>朝、私たちは十五分、一緒に息をします。
+それだけで、十年後の私たちが変わります。</pre>
+          <div class="note"><strong>Settings:</strong> stability 0.45 · similarity 0.88 · style 0.30 · model eleven_multilingual_v2 · use Matthi clone for the founder-credibility moment</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ DE PANE ═══ -->
+    <div class="locale-pane" data-locale="de" role="tabpanel">
+      <div class="locale-header">
+        <h2><span class="flag">🇩🇪</span> Deutschland — <em>evidenzbasierte Präzision.</em></h2>
+        <p>Zielgruppe: <em>Achtsamkeit + Stressbewältigung</em> · heise · t3n · Krankenkassen-eligible Wellness-Sucher · Atemtherapie-Community. Frame: nüchtern, peer-reviewed, ruhig. <em>Vier Minuten gemeinsam atmen — nachweislich.</em></p>
+      </div>
+
+      <!-- Hooks -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>Hook-Varianten</h3><span class="badge">Gemini 3 · Deutsch</span></div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">Hook A · evidenzbasiert</span><button class="copy-btn">Copy</button></div>
+<pre>Vier Minuten gemeinsam atmen.
+Nachweislich niedrigerer Cortisolspiegel.</pre>
+        </div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">Hook B · Ritual-Rahmen</span><button class="copy-btn">Copy</button></div>
+<pre>Das Ritual, das die nächsten zehn Jahre
+eurer Beziehung verändert.</pre>
+        </div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">Hook C · Kategorie</span><button class="copy-btn">Copy</button></div>
+<pre>Atemtherapie für Paare —
+wissenschaftlich fundiert.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Gemini-Prompt — 5 Varianten generieren</span><button class="copy-btn">Copy</button></div>
+<pre>Schreibe 5 kurze Instagram-Reels-Hooks (jeweils unter 10 Wörtern) auf Deutsch für „twobreath" — eine tägliche Atem-App für Paare. Zielgruppe: deutsche Achtsamkeits- und Wellness-Sucher, Krankenkassen-eligible, t3n- und heise-Leserschaft. Tonfall: nüchtern, evidenzbasiert, ruhig — keine Wellness-Floskeln. Schreibe in deutscher Sprachrhythmik, keine Übersetzung. Ausgabe als nummerierte Liste, ohne Erklärung.</pre>
+        </div>
+      </div>
+
+      <!-- Veo 3 -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>Veo 3 — 4-Shot Reel</h3><span class="badge">Veo 3 · 8s je Shot</span></div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 01 · Berliner Altbau</span><button class="copy-btn">Copy</button></div>
+<pre>Berlin Altbau loft at dawn, exposed brick wall, tall double window with white linen curtain. Mid-30s couple sitting on a wooden floor by the window, wool blanket over their shoulders. Both wearing Apple Watch. They breathe in unison, eyes closed. 8 seconds. Cool natural light, painterly composition, slight film grain. Native audio: morning street, distant tram bell.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 02 · Kaffee-Dampf</span><button class="copy-btn">Copy</button></div>
+<pre>Macro of a single ceramic mug with rising steam, soft window light. A hand reaches in slowly and lifts the mug. 8 seconds. Minimalist, cool palette. Native audio: coffee pour, room tone.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 03 · Berliner Fenster</span><button class="copy-btn">Copy</button></div>
+<pre>Two figures silhouetted against a tall Berlin Altbau window at dawn, holding hands. The window is open a crack, curtain moving in the cool morning air. 8 seconds. Backlit, contemplative, cool blue palette warming to gold. Native audio: birds, the distant U-Bahn.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Shot 04 · Fenster öffnen</span><button class="copy-btn">Copy</button></div>
+<pre>Mid-shot. Woman in a soft sweater opens a tall double window. Cool morning air visibly moves the white curtain. She steps back. Her partner is sitting cross-legged on the floor, eyes closed. 8 seconds. Soft natural light, intimate, painterly. Native audio: window latch, the rush of cool air.</pre>
+        </div>
+      </div>
+
+      <!-- Imagen -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>Imagen 4 / Nano Banana 2 — Stills</h3><span class="badge">Poster · Thumbnails</span></div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Poster A · t3n / heise hero (16:9)</span><button class="copy-btn">Copy</button></div>
+<pre>Editorial photograph, 16:9. German couple in their 30s in a Berlin Altbau apartment at dawn. Sitting on a wooden floor by a tall window with white linen curtain, wool blanket over shoulders. Eyes closed, breathing. Cool natural light, exposed brick wall behind them. Apple Watches visible. Magazine-quality, painterly, slight film grain. No text. Brand und t3n aesthetic, NOT wellness advertising.</pre>
+        </div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Poster B · Reels cover (9:16)</span><button class="copy-btn">Copy</button></div>
+<pre>Editorial photograph, 9:16 vertical. Two silhouetted figures holding hands at a tall Berlin window at dawn. White linen curtain, exposed brick. Cool morning palette warming to gold. Painterly, intimate. Slight film grain. No text.</pre>
+        </div>
+      </div>
+
+      <!-- Lyria -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>Lyria 2 — 60-Sek-Backing</h3><span class="badge">5–6 BPM Atem</span></div>
+        <div class="prompt-block">
+          <div class="label"><span class="tag">Music prompt</span><button class="copy-btn">Copy</button></div>
+<pre>Minimal piano with a sustained cello drone, synced to a 5-to-6-breaths-per-minute rhythm. Ólafur Arnalds and Nils Frahm at their quietest. 60 seconds. Mood: intimate + slightly poignant, German precision. Slight reverb, sense of a high-ceilinged room. No percussion, no vocals. Build subtly across the last 20 seconds with a single cello line.</pre>
+          <div class="note"><strong>Spec:</strong> 60s · 5–6 BPM breath · key D minor · -14 LUFS · stereo</div>
+        </div>
+      </div>
+
+      <!-- ElevenLabs voice -->
+      <div class="subsection">
+        <div class="subsection-head"><h3>ElevenLabs Voiceover</h3><span class="badge">Dascha clone · Deutsch</span></div>
+        <div class="prompt-block poetic">
+          <div class="label"><span class="tag">VO-Zeile · 10 Sek</span><button class="copy-btn">Copy</button></div>
+<pre>Vier Minuten gemeinsam atmen.
+Das verändert, wer ihr in zehn Jahren seid.</pre>
+          <div class="note"><strong>Settings:</strong> stability 0.40 · similarity 0.88 · style 0.40 · model eleven_multilingual_v2 · use Dascha clone for warmth</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════ CHANNELS ═══════ -->
+  <section>
+    <h2>Channel playbooks.</h2>
+    <p>Same assets, four assemblies. Cut once per locale, then publish four ways.</p>
+
+    <div class="channels">
+      <div class="channel">
+        <h3>📷 Instagram Reels</h3>
+        <div class="name">9:16 · 30s</div>
+        <ul>
+          <li><strong>0–3s:</strong> Hook text overlay + first beat of voiceover</li>
+          <li><strong>3–12s:</strong> Veo Shot 01 (the inhale) with Lyria bed</li>
+          <li><strong>12–22s:</strong> Veo Shot 02 (HRV / steam / silhouette)</li>
+          <li><strong>22–28s:</strong> Veo Shot 04 + CTA "twobreath.com — July 1"</li>
+          <li><strong>28–30s:</strong> Brand card</li>
+        </ul>
+        <div class="spec">export · 1080×1920 · H.264 · 30fps · stereo</div>
+      </div>
+
+      <div class="channel">
+        <h3>▶ YouTube Shorts</h3>
+        <div class="name">9:16 · 60s</div>
+        <ul>
+          <li>Same Reels structure, all 4 Veo shots, full VO</li>
+          <li>Add captions in target language (Veo native audio + ElevenLabs VO mix)</li>
+          <li>Description includes <strong>Note.com / t3n / Substack</strong> back-link for citation</li>
+          <li>Indexed by Google AI Overview within 7 days</li>
+        </ul>
+        <div class="spec">export · 1080×1920 · H.264 · 60fps · stereo</div>
+      </div>
+
+      <div class="channel">
+        <h3>♪ TikTok</h3>
+        <div class="name">9:16 · 15–30s</div>
+        <ul>
+          <li>Hook-first cut. Front-load the strongest shot.</li>
+          <li>Use Veo Shot 02 (macro / steam) as opener for thumb-stop</li>
+          <li>Music heavier in the mix. Voiceover trimmed to one line.</li>
+          <li>Caption asks: "<strong>do you breathe together?</strong>"</li>
+        </ul>
+        <div class="spec">export · 1080×1920 · H.264 · 30fps · stereo</div>
+      </div>
+
+      <div class="channel">
+        <h3>👥 Reddit</h3>
+        <div class="name">16:9 · long-form post</div>
+        <ul>
+          <li>Imagen 4 still as hero (16:9)</li>
+          <li>Long-form post (300–500 words) referencing <strong>Gottman, Attia, Harvard 86yr study</strong></li>
+          <li><strong>EN:</strong> r/PeterAttia · r/longevity · r/HRV</li>
+          <li><strong>JP:</strong> r/Tokyo + cross-post on Note.com</li>
+          <li><strong>DE:</strong> r/de + post on heise.de comments / t3n</li>
+          <li>Never link directly. Mention twobreath in the second paragraph.</li>
+        </ul>
+        <div class="spec">image · 1920×1080 · post · 300–500 words</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ WORKFLOW ═══════ -->
+  <section>
+    <h2>One day, one locale — <em>the workflow.</em></h2>
+    <p>Run sequentially, not in parallel. Each step's output is the next step's input.</p>
+
+    <div class="timeline">
+      <div class="step"><div class="when">Hour 1 · 0:00–1:00</div><div class="what">Generate localized copy</div><div class="how">Paste the Gemini prompt for the target locale. Get 5 hook variants. Pick the strongest. Run Hook through Tavily to check it isn't already used by Calm/Headspace.</div></div>
+      <div class="step"><div class="when">Hours 2–3 · 1:00–3:00</div><div class="what">Generate 4 Veo 3 clips</div><div class="how">Submit all four shots as a Vertex AI batch job. Each clip ~3–5 min generation time. While waiting: open Imagen 4 and start the still posters.</div></div>
+      <div class="step"><div class="when">Hour 3 · 2:00–3:00</div><div class="what">Generate stills</div><div class="how">Imagen 4 for the 16:9 editorial poster. Nano Banana 2 for face-fidelity Reels covers. 6 stills total — keep the best 2.</div></div>
+      <div class="step"><div class="when">Hour 4 · 3:00–4:00</div><div class="what">Generate music</div><div class="how">Lyria 2 in MusicFX or Vertex AI. 60-second bed at the right BPM. Render 3 takes, pick the most subtle.</div></div>
+      <div class="step"><div class="when">Hour 5 · 4:00–5:00</div><div class="what">Voice-clone the hook</div><div class="how">ElevenLabs Multilingual v2 with Matthi or Dascha clone. Render 3 takes per line. Pick the take where pacing matches the Lyria breath rhythm.</div></div>
+      <div class="step"><div class="when">Hours 6–7 · 5:00–7:00</div><div class="what">Assemble in CapCut</div><div class="how">Reels first (it has the tightest constraint). Then Shorts (extend), then TikTok (front-load), then Reddit hero. Export all four. Master at -14 LUFS.</div></div>
+      <div class="step"><div class="when">Hour 8 · 7:00–8:00</div><div class="what">Schedule + Reddit draft</div><div class="how">Schedule Reels / Shorts / TikTok in Buffer or native schedulers. Draft Reddit post in markdown. Soak overnight before posting — read it cold in the morning.</div></div>
+    </div>
+  </section>
+
+  <!-- ═══════ NOTEBOOKLM LOOP ═══════ -->
+  <section>
+    <h2>The citation loop — <em>NotebookLM closes it.</em></h2>
+    <p class="lead">
+      AnswerAtlas told us where ChatGPT fails to mention us. NotebookLM is how we get cited back.
+      The published assets feed the loop.
+    </p>
+
+    <div class="prompt-block">
+      <div class="label"><span class="tag">NotebookLM workflow</span><button class="copy-btn">Copy</button></div>
+<pre>1. Upload to NotebookLM: the locale's hook, the 4 Veo shot scripts, the Reddit long-form, the twobreath.com science page.
+2. Generate "Audio Overview" — a 10-min two-host podcast.
+3. Publish the podcast on Substack (EN), Note.com (JP), or Steady (DE).
+4. Get 1–2 inbound links from credible sources (Reddit comments, niche newsletters).
+5. ChatGPT and Gemini start citing the podcast within 2–4 weeks.
+6. Re-run AnswerAtlas. Watch the red cells turn amber, then teal.</pre>
+    </div>
+  </section>
+
+  <!-- ═══════ CLOSING ═══════ -->
+  <section class="tight">
+    <div class="closing">
+      <h2>One day. One locale. <em>Three markets in three weeks.</em></h2>
+      <p>
+        Every prompt above is a first draft. Run them, judge the output, re-prompt with what worked.
+        The toolkit improves every campaign — version it in git like code.
+      </p>
+    </div>
+  </section>
+
+  <div class="toast" id="toast">Copied to clipboard</div>
+
+  <script>
+    // ── Locale tabs ──
+    const localeBtns = document.querySelectorAll('.locale-btn');
+    const localePanes = document.querySelectorAll('.locale-pane');
+    localeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const locale = btn.dataset.locale;
+        localeBtns.forEach(b => {
+          const active = b.dataset.locale === locale;
+          b.classList.toggle('active', active);
+          b.setAttribute('aria-selected', active);
+        });
+        localePanes.forEach(p => {
+          p.classList.toggle('active', p.dataset.locale === locale);
+        });
+        // Scroll the locale brief into view (just below the tab bar)
+        const target = document.querySelector(`.locale-pane[data-locale="${locale}"] .locale-header`);
+        if (target) {
+          const y = target.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ── Copy buttons ──
+    const toast = document.getElementById('toast');
+    let toastTimer = null;
+    function showToast(msg) {
+      toast.textContent = msg || 'Copied to clipboard';
+      toast.classList.add('shown');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('shown'), 1800);
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const block = btn.closest('.prompt-block');
+        const text = block ? block.querySelector('pre').textContent : '';
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.classList.add('copied');
+          btn.textContent = 'Copied';
+          showToast('Copied · paste into the tool');
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.textContent = 'Copy';
+          }, 1600);
+        } catch (err) {
+          // Fallback for older browsers
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); showToast('Copied'); } catch (e) {}
+          document.body.removeChild(ta);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
