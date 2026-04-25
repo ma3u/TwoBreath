@@ -79,16 +79,22 @@ We are the first longevity protocol for couples.`,
   },
   {
     key: 'p05-tools', voice: 'dascha',
-    text: `Our production stack, for this weekend.
-CapCut Desktop Pro and Descript for video. ElevenLabs for voice cloning — the voice you are hearing right now is mine. Cloned. And in the video demo, Matthi will speak Japanese — in his own real voice — even though he does not speak Japanese.
-Nano Banana 2 for the Tokyo couple image. Lovable for the AnswerAtlas dashboard. Peec AI is the compass. Gemini 3 writes native Japanese content. Tavily finds our citations. ai-coustics cleans the breath audio. Entire keeps a human in the loop.`,
+    text: `In one day, two of us shipped five rails for TwoBreath.
+Claude Code orchestrated all of it — code, copy, voiceover, deploy — in one continuous loop.
+First: market analysis. Peec AI gave us the compass. One hundred prompts across English, German, and Japanese. Seven competitors tracked. Three AI engines monitored, every day.
+Second: website SEO. www.twobreath.com is live, with full structured data, eight FAQs, and a canonical URL — moving from zero AI visibility, toward indexed.
+Third: YouTube. Three video scripts, plus a one minute forty-five second product walkthrough — voiced in English, German, and Japanese, with Google DeepMind's Gemini.
+Fourth: five Instagram Reel scripts. Captions, hashtags, posting cadence.
+Fifth: five Reddit posts. Five communities. One playbook.
+ElevenLabs cloned my voice — the voice you are hearing right now. Thank you, Peec AI. Thank you, Anthropic, for Claude Code. Thank you, Google DeepMind. Thank you, GitHub. And thank you, Matthi. After three years of breathing together, we built it.`,
   },
   {
     key: 'p06-close', voice: 'matthi',
-    text: `We are not here to sell another two hundred dollar subscription. We lived that for three years.
-We are here to build a community. Of couples. In three languages. Who breathe together on purpose. Every morning.
-Oxytocin fades. We cannot stop that. But we can build the morning that brings it back — for us, and for every couple who recognizes themselves in this.
-One breath. Two souls. Launch July first, 2026. Join us.`,
+    text: `Oxytocin fades. We cannot stop that. But we can build the morning that brings it back.
+The science is real. After fifteen minutes of synchronized breathing, two nervous systems begin to align. Heart rate variability rises. Cortisol drops. The bond is rebuilt — not metaphorically, biologically.
+We made this video to share that science with other couples. To build a community.
+Because we are not selling a two hundred dollar subscription — we lived that for three years. We are inviting you to join a community of couples, in three languages, who breathe together on purpose. Every morning.
+One breath. Two souls. Launch July first, twenty twenty-six. Join us.`,
   },
 ];
 
