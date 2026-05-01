@@ -4,3 +4,6 @@ node_modules/
 
 # Regenerable YouTube draft-cut intermediates (cards, segments, voice tracks)
 marketing/assets/youtube/*/build/
+
+# Microsoft Office temp / lock files (e.g. ~$Document.pptx while a deck is open)
+~$*
