@@ -108,6 +108,12 @@ See `pitch.html` chapter 06 — *"One Claude Code · Three rails to launch"* —
 
 After three years of breathing together, we built the app no one else made — for couples.
 
+### App in action
+
+| iPhone — Home | iPhone — Health Dashboard | Apple Watch — Today's session |
+|:---:|:---:|:---:|
+| ![TwoBreath iPhone home screen showing the Strengthening level 6 routine and Start Together button](images/screenshot-iphone-home.jpeg) | ![Health Dashboard showing HRV and Resting Heart Rate trends correlated with breathing sessions](images/screenshot-iphone-dashboard.jpeg) | ![Apple Watch showing the Morning Together 1 session with a 3-minute play button](images/screenshot-watch-home.png) |
+
 ### Links
 
 - [TwoBreathBig Berlin Hack Pitch Video](https://www.youtube.com/watch?v=oaaEZBEuCL0) 1:20min
