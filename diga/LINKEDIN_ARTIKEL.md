@@ -3,8 +3,8 @@
 **Untertitel:** Wie moderne Software-Lieferketten, DevSecOps und generative KI die Datensicherheits-Zertifizierung digitaler Gesundheitsanwendungen nach BSI TR-03161 von Monaten auf Tage komprimieren können — ohne den Schutzbedarf der Patient:innen zu senken.
 
 **Autor:** Matthias Buchhorn-Roth
-**Veröffentlichung:** Entwurf v0.2, 2026-05-02
-**Lesezeit:** ca. 7 Minuten
+**Veröffentlichung:** Entwurf v0.3, 2026-05-02
+**Lesezeit:** ca. 9 Minuten
 
 ---
 
@@ -12,7 +12,9 @@
 
 - Eine DiGA muss seit 1.1.2025 ein BSI-Zertifikat nach **TR-03161** vorlegen. Heute dauert die jährliche Re-Zertifizierung **mehrere Monate** und bindet erhebliche Ressourcen.
 - Wir haben anhand einer realen App **alle 127 Prüfanforderungen** der TR-03161-1 v3.0 einzeln gegen den tatsächlichen Code durchgearbeitet — **und in Folgearbeit alle ehemaligen Lücken geschlossen**. Ergebnis: **80 % aller Anforderungen sind grundsätzlich deterministisch erbringbar** (74 % deploy-time, 4 % real-time, 2 % periodisch). Nur 20 % erfordern manuelles Urteil — überwiegend Dokumentations- und Konzeptarbeiten.
-- Im konkreten Fall der untersuchten App stehen — nach Bearbeitung der dokumentierten Lücken — **55 % der Anforderungen auf ✅ erfüllt**, **2 % auf 🟡 teilweise** (App Attest, wartet auf Backend), **0 % auf ❌**, **43 % auf ➖ nicht anwendbar** (lokal-zuerst-Architektur). Die Schließung erfolgte über 8 Konzeptdokumente, eine `SECURITY.md` und 10 PR-fertige Code-Patches — gemeinsam unter [`diga/`](https://github.com/ma3u/TwoBreath/tree/main/diga) im Repo.
+- Im konkreten Fall der untersuchten App stehen — nach Bearbeitung der dokumentierten Lücken — **55 % der Anforderungen auf ✅ erfüllt**, **2 % auf 🟡 teilweise** (App Attest, wartet auf Backend), **0 % auf ❌**, **43 % auf ➖ nicht anwendbar** (lokal-zuerst-Architektur).
+- **Marktbefund aus 4-Agenten-Web-Recherche:** Im DiGA-Verzeichnis Mai 2026 ist **F51.0 (nicht-organische Insomnie) mit Paar-basiertem Bedtime-Ritual nicht besetzt**. Drei gelistete Insomnie-DiGA (somnio / mementor-ResMed, HelloBetter Schlafen, somnovia) adressieren ausschließlich Solo-CBT-I — obwohl 60–75 % der Insomnie-Episoden paar-synchron sind (Bed-Sharing-Effekt).
+- **Realismus aus dem Verzeichnis:** ~58–60 DiGA insgesamt, **16 davon mangels Versorgungsnutzen wieder gestrichen**. Die klinische Studienhürde ist real — die Erprobungslistung nach § 139e Abs. 4 SGB V ist die strukturierte Antwort darauf.
 - Das eigentliche Problem ist nicht „zu viele Anforderungen". Das Problem ist, dass das Verfahren fast alle Nachweise wie **manuelle Dokumente** behandelt, obwohl viele bei jedem Build oder live im Produktivsystem belegt werden könnten.
 - Wir teilen die Befunde mit dem **BSI** und dem **BfArM**, weil eine Modernisierung allen vier Zielgruppen nützt: Hersteller, Krankenkassen, behandelnden Ärzt:innen, **und vor allem Patient:innen**.
 
@@ -64,6 +66,38 @@ Die zwei verbleibenden 🟡 (App-Attest-Schließung) sind bewusst aufgeschoben, 
 > Die ehrliche Aussage lautet: für eine kleine, lokal-orientierte App ist das Datensicherheits-Niveau bereits heute substanziell — und die fehlenden Stücke sind in **Personentagen**, nicht Personenmonaten geschlossen. Das hier dokumentierte Material ist die Form, in der ein Hersteller einen TR-03161-Audit erfolgreich vorbereiten kann.
 
 > Dort wo Monate verloren gehen, geht es selten um schwierige Fragen. Es geht um die Form der Antwort.
+
+---
+
+## Sechs persönliche Erkenntnisse aus dieser Übung
+
+Diese Schlüsse habe ich aus der Detailarbeit an den 127 Anforderungen plus aus einer ergänzenden Vier-Agenten-Web-Recherche zur deutschen DiGA-Landschaft gezogen. Sie sind subjektiv, aber jede ist mit einer konkreten Quelle im [Repo](https://github.com/ma3u/TwoBreath/tree/main/diga) belegt.
+
+### 1. Die Marktlücke ist strukturell, nicht zufällig
+
+Drei Insomnie-DiGA sind heute gelistet — alle adressieren Einzelpersonen mit klassischer CBT-I. Doch **60–75 % der Insomnie-Episoden sind paar-synchron** (Bed-Sharing-Effekt). Das ist kein Marketing-USP; das ist Polysomnographie. Trotzdem gibt es im DiGA-Verzeichnis **null** Anwendungen, die das Bett als das gemeinsame Therapie-Setting behandeln, das es ist. Die Lücke ist physiologisch begründet und im Verfahren nicht abgebildet.
+
+### 2. Die Studienhürde ist real, und das ist gut so
+
+Von ~60 gelisteten DiGA wurden **16 wieder gestrichen** ([GKV-Spitzenverband 2024-Bericht](https://www.gkv-spitzenverband.de/media/dokumente/krankenversicherung_1/telematik/digitales/2024_DiGA-Bericht_final.pdf)). Das ist nicht angenehm zu lesen, aber es ist genau das Filter, das die Listung von einem Marketing-Stempel unterscheidet. Mein eigener Schluss: die **Erprobungslistung nach § 139e Abs. 4 SGB V** ist nicht der „leichte Weg", sondern der ehrliche — sie gibt 12 Monate Erstattungs-Erprobung mit echter Studie als Pflicht.
+
+### 3. Generative KI funktioniert — auf dem Strukturierungspfad
+
+Claude Opus 4.7 hat in dieser Übung 127 normative Anforderungs-Texte aus einem 66-Seiten-PDF extrahiert, sie zur App-Konfiguration gemappt und in einer Matrix dargestellt. **Vier parallele Recherche-Agenten** haben über 100 reale Partner-Kandidat:innen mit Quellenlinks ermittelt. Das ist eine andere Größenordnung Geschwindigkeit, als ich sie aus klassischen Beratungs-Mandaten kenne. **Aber:** kein einziger Beweis-Schritt lief über das Sprachmodell. Werkzeugausgabe (gitleaks, MobSF, syft, testssl.sh, …) ist der Beweis. Diese Trennung ist nicht ideologisch, sie ist regulatorisch geboten.
+
+### 4. Plattform-Aussagen sind die größte ungehobene Reserve
+
+Etwa 30 der 127 TR-03161-1-Anforderungen werden durch korrekt konfigurierte Apple-iOS-Plattform-Eigenschaften (App-Sandbox, Data Protection Class A, ATS, Notarisation, App-Store-Distribution, HealthKit-Berechtigungs-Modell) **implizit erfüllt**. Heute muss jede:r Hersteller:in das in der eigenen Dokumentation neu beweisen. Ein vom BSI publizierter **Plattform-Aussagen-Katalog** je iOS- bzw. Android-Major-Version würde Hersteller und Prüfstellen erheblich entlasten — ohne den Schutzbedarf zu reduzieren. Das ist Empfehlung E3 im BSI-Bericht.
+
+### 5. Die Form der Antwort ist der Hebel — nicht weniger Anforderungen
+
+74 % der 127 Anforderungen sind deploy-time, 4 % real-time, 2 % periodisch erbringbar. Nur 20 % brauchen menschliches Urteil. **Diese Verteilung ist robust** — und sie steht im scharfen Widerspruch zur heutigen Praxis, in der praktisch jeder Nachweis wie ein manuelles Dokument behandelt wird. Wenn ich aus dieser Übung eine Sache mitgebe: **es geht nicht um weniger Anforderungen, es geht um eine andere Form der Antwort** (CycloneDX-SBOM, SARIF-Reports, cosign-Signaturen, PROV-O-Manifest — siehe Empfehlung E2).
+
+### 6. Co-Regulation ist nicht Marketing — und genau das ist die Chance
+
+Die Vagusnerv-Aktivierung durch verlangsamtes Atmen ist klinisch belegt. Die HRV-Synchronisation zwischen nahestehenden Personen ist im Labor messbar (Bodenmann, UZH). **Was bisher fehlt: der Schritt von der akademischen Studie in die Versorgung.** Eine couples-fähige DiGA, die HRV-Reads aus Apple Watch / iPhone als objektiven Endpunkt nutzt und an ein Paar-basiertes Bedtime-Ritual koppelt, würde diesen Schritt machen — und gleichzeitig eine ehrliche Lücke im Verzeichnis schließen.
+
+> **Die persönliche Erkenntnis quer durch alle sechs Punkte:** TwoBreath als kleine, lokal-orientierte iOS-App zeigt, dass eine substanzielle Datensicherheits-Posture mit Open-Source-Werkzeugen, Markdown und einem genau eingegrenzten LLM-Einsatz **in Personentagen, nicht Personenmonaten** dokumentiert werden kann. Das macht weder eine Studie überflüssig noch ersetzt es eine Prüfstelle. Aber es verschiebt die Frage von „wie kommen wir überhaupt durch?" zu „wie messen wir den Versorgungs-Nutzen?". Das ist der Wechsel, den ich im DiGA-Diskurs gerne sehen würde.
 
 ---
 
@@ -161,10 +195,16 @@ Schreibt mir gerne unter den Beitrag oder per Direktnachricht. Ich antworte auf 
 
 ## Quellen und weiterführende Materialien
 
-- **Vollständiger BSI-Bericht** (auf Deutsch, im Repo): `diga/BSI_BERICHT.md`
-- **Maschinenlesbare 127-Zeilen-Matrix:** `diga/COMPLIANCE_MATRIX_TR1_OFFICIAL.md`
-- **Eingelesenes Regelwerk** (TR-03161-1/-2/-3, DiGAV, § 139e SGB V): `diga/regulations/markdown/`
-- **Quellen-Pinning** mit sha256: `diga/regulations/source-manifest.yaml`
+- **Vollständiger BSI-Bericht** (auf Deutsch, im Repo): [`diga/BSI_BERICHT.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/BSI_BERICHT.md)
+- **Werkzeug-Empfehlungen pro Anforderung × Phase:** [`diga/BSI_TOOL_EMPFEHLUNGEN.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/BSI_TOOL_EMPFEHLUNGEN.md)
+- **Maschinenlesbare 127-Zeilen-Matrix:** [`diga/COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/COMPLIANCE_MATRIX_TR1_OFFICIAL.md)
+- **Repositionierungs-Roadmap mit Partner-Ökosystem:** [`diga/DIGA_ROADMAP.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/DIGA_ROADMAP.md)
+- **Konkrete recherchierte Partner mit Quellenlinks:** [`diga/PARTNER_SHORTLIST.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/PARTNER_SHORTLIST.md)
+- **CI/CD-Sicherheits-Status + drop-in `security.yml`:** [`diga/CI_CD_SECURITY.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/CI_CD_SECURITY.md)
+- **Konzeptdokumente (Datenschutz, Threat-Model, Krypto, Resilienz, …):** [`diga/concepts/`](https://github.com/ma3u/TwoBreath/tree/main/diga/concepts)
+- **Tracking-Issue auf GitHub:** [#1 — DiGA × BSI TR-03161](https://github.com/ma3u/TwoBreath/issues/1)
+- **Eingelesenes Regelwerk** (TR-03161-1/-2/-3, DiGAV, § 139e SGB V): [`diga/regulations/markdown/`](https://github.com/ma3u/TwoBreath/tree/main/diga/regulations/markdown)
+- **Quellen-Pinning** mit sha256: [`diga/regulations/source-manifest.yaml`](https://github.com/ma3u/TwoBreath/blob/main/diga/regulations/source-manifest.yaml)
 - **TR-03161 Übersicht (BSI):** <https://www.bsi.bund.de/dok/TR-03161>
 - **§ 139e SGB V:** <https://www.gesetze-im-internet.de/sgb_5/__139e.html>
 - **DiGAV:** <https://www.gesetze-im-internet.de/digav/>
