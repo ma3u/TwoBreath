@@ -46,7 +46,8 @@ Mit Commit dieser Erweiterung läuft im öffentlichen Repo nun die folgende Pipe
 | **secrets** | [`gitleaks`](https://github.com/gitleaks/gitleaks) | Secret-Scan | push + PR + cron Mo 06:00 UTC | O.Cryp_1, O.Source_8 |
 | **markdown-lint** | [`markdownlint-cli2`](https://github.com/DavidAnson/markdownlint-cli2) | Doku-Linter | push + PR | Audit-Hygiene |
 | **link-check** | [`lychee`](https://github.com/lycheeverse/lychee) | Link-Validierung | push + PR | Audit-Hygiene (Quellenverzeichnisse erreichbar?) |
-| **dependency-review** | [`actions/dependency-review-action`](https://github.com/actions/dependency-review-action) | Dependency-CVE bei PR-Diff | PR | O.TrdP_3 |
+| **dependency-review** | [`actions/dependency-review-action`](https://github.com/actions/dependency-review-action) | Dependency-CVE bei PR-Diff (skipped auf push/dispatch — by design) | PR | O.TrdP_3 |
+| **osv-scan** | [`google/osv-scanner-action`](https://github.com/google/osv-scanner-action) | Manifest-CVE-Scan auf push/PR/cron — Push-/Cron-Variante zu dependency-review; SARIF-Upload in das Code-Scanning-Tab | push + PR + Mo 06:00 UTC | O.TrdP_3 |
 | **tls-posture** | [`testssl.sh`](https://github.com/drwetter/testssl.sh) (Docker) | TLS-Konfig-Scan | scheduled + manuell | O.Ntwk_2, O.Ntwk_7 |
 | **http-headers** | [Mozilla HTTP Observatory](https://observatory-api.mdn.mozilla.net/) | HTTP-Header-Check | scheduled + manuell | O.Ntwk_2 |
 

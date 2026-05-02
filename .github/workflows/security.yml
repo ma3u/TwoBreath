@@ -85,6 +85,11 @@ jobs:
 
   # ──────────────────────────────────────────────────────────────────────
   # 4. Dependency Review — sobald in einem PR ein Lock-File geändert wird
+  #    Hinweis: dieser Job läuft NUR auf pull_request-Events. Auf push und
+  #    workflow_dispatch wird er korrekt als "skipped" angezeigt — die
+  #    Action benötigt eine Base-/Head-Diff aus dem PR-Kontext und kann
+  #    außerhalb dessen nicht funktionieren. Für Push/Cron-Scans siehe
+  #    den `osv-scan` Job darunter.
   # ──────────────────────────────────────────────────────────────────────
   dependency-review:
     name: Dependency Review
@@ -97,6 +102,48 @@ jobs:
         with:
           fail-on-severity: high
           comment-summary-in-pr: on-failure
+
+  # ──────────────────────────────────────────────────────────────────────
+  # 4b. OSV-Scanner — Manifest-basierter CVE-Scan auf push + PR + cron
+  #     Schließt: TR-03161 O.TrdP_3 (regelmäßiger Schwachstellen-Check
+  #     auf eingesetzte Drittanbieter-Software).
+  #     Aktuell: dieses Repo enthält noch kein package.json / Lockfile;
+  #     der Scan produziert eine leere Baseline-SARIF. Sobald Manifeste
+  #     einziehen (Build-Toolchain, MCP-Server, etc.), schlägt der Scan
+  #     ohne weiteren Konfigurationsaufwand an.
+  # ──────────────────────────────────────────────────────────────────────
+  osv-scan:
+    name: OSV Scanner (manifest-CVE)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run osv-scanner
+        uses: google/osv-scanner-action/osv-scanner-action@v2
+        with:
+          scan-args: |-
+            --recursive
+            --skip-git
+            --format=sarif
+            --output=osv.sarif
+            ./
+        continue-on-error: true   # leere Manifest-Lage soll keinen Build blockieren
+      - name: Upload SARIF to GitHub code scanning
+        if: always() && hashFiles('osv.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: osv.sarif
+          category: osv-scanner
+      - name: Upload SARIF as artefact
+        if: always() && hashFiles('osv.sarif') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: osv-scanner-report
+          path: osv.sarif
+          retention-days: 90
+          if-no-files-found: ignore
 
   # ──────────────────────────────────────────────────────────────────────
   # 5. TLS-Posture-Check — twobreath.com (testssl.sh)
