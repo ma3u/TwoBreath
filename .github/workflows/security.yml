@@ -112,18 +112,27 @@ jobs:
         run: |
           set -eu
           mkdir -p reports
+          chmod 777 reports
+          # `--user` bindet die Container-UID an den Runner-User, damit
+          # die JSON-Ausgabe in das gemountete Volume geschrieben werden
+          # kann. Ohne diesen Schritt läuft der Scan, aber die Datei
+          # wird nicht persistiert (Permission denied).
           docker run --rm \
+            --user "$(id -u):$(id -g)" \
             -v "$PWD/reports:/data" \
             drwetter/testssl.sh:latest \
             --jsonfile-pretty /data/testssl.json \
             --severity LOW \
             --quiet --color 0 \
             https://www.twobreath.com || true
-          # gibt einen Auszug in den Job-Log für schnelle Sichtprüfung
           if [ -f reports/testssl.json ]; then
             echo "=== testssl.sh summary ==="
-            jq '.scanResult[0] | {target, ip, service, finding: [.protocols[]?, .vulnerabilities[]?]}' \
-              reports/testssl.json 2>/dev/null || cat reports/testssl.json
+            jq '.scanResult[0] | {target, ip, service, severity_summary: (
+              [.protocols[]?, .vulnerabilities[]?, .cipherTests[]?]
+              | group_by(.severity) | map({(.[0].severity): length}) | add
+            )}' reports/testssl.json 2>/dev/null || cat reports/testssl.json
+          else
+            echo "::warning::testssl.json was not produced — see step log for raw output."
           fi
       - uses: actions/upload-artifact@v4
         if: always()
