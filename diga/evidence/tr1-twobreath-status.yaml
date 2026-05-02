@@ -1,0 +1,580 @@
+# Per-O.* status overrides for TwoBreath × TR-03161-1 v3.0 (25.03.2024).
+#
+# Authored 2026-05-02 from inspection of:
+#   - TwoBreath-app/project.yml, Info.plist, *.entitlements, PrivacyInfo.xcprivacy
+#   - TwoBreath-app/.github/workflows/{ci,security}.yml
+#   - TwoBreath-app/.gitleaks.toml, .swiftlint.yml, .husky/
+#   - TwoBreath-app/Shared/Services/{HealthKit,Pairing,ProximityPairing,Connectivity,Audio,Haptic,Workout}*
+#   - TwoBreath-app/CLAUDE.md (architecture summary)
+#
+# Status legend: ✅ met · 🟡 partial · ❌ missing · ➖ N/A today (with trigger) · 🔍 to be determined.
+# Class legend:  R real-time · D deploy-time · P periodic · M manual.
+#
+# This YAML is the single source of truth for the per-row determination.
+# Re-run `make official-matrix` to regenerate COMPLIANCE_MATRIX_TR1_OFFICIAL.md.
+
+defaults:
+  notes: >-
+    TwoBreath posture (snapshot 2026-05-02): iOS 17 + watchOS 10, Swift 6, SwiftUI,
+    SwiftData. Zero third-party Swift dependencies (Apple frameworks only).
+    HealthKit reads HR/HRV/Schlaf, schreibt Mindful-Minutes. MultipeerConnectivity +
+    NearbyInteraction für Partner-Pairing. WatchConnectivity iPhone↔Watch.
+    Kein Hintergrundsystem, keine Nutzerkonten, keine Authentifizierung.
+    App-Store-Distribution + Apple Notarisation. CI: gitleaks, swiftlint --strict,
+    eslint, npm audit (Build-Toolchain), iPhone- und Watch-Tests, Playwright (Web).
+    PrivacyInfo.xcprivacy deklariert Health + Fitness, NSPrivacyTracking=false.
+    ITSAppUsesNonExemptEncryption=false. Pre-Commit: husky.
+
+overrides:
+
+  # ──────────────────────────────────────────
+  # (1) Anwendungszweck — O.Purp_*
+  # ──────────────────────────────────────────
+  O.Purp_1:
+    status: "🟡"
+    class: "M"
+    note: "App-Store-Beschreibung deklariert Zweck (Atemübung); Info.plist usage strings deklarieren Datenzwecke. Formelle Erstinformation beim ersten Start zu auditieren."
+  O.Purp_2:
+    status: "✅"
+    class: "M"
+    note: "PrivacyInfo.xcprivacy: Health + Fitness ausschließlich für AppFunctionality, kein Tracking. HealthKit-Berechtigungen entsprechen den deklarierten Zwecken."
+  O.Purp_3:
+    status: "🟡"
+    class: "M"
+    note: "iOS-vermittelte Berechtigungsdialoge für HealthKit, LocalNetwork, NearbyInteraction. Eigene App-Einwilligungs-UI zusätzlich zum Plattform-Standard zu dokumentieren."
+  O.Purp_4:
+    status: "✅"
+    class: "D"
+    note: "Apple-HealthKit-API erzwingt Autorisierungsprüfung; bei Verweigerung kein Datenzugriff. Verifikation per Code-Review von HealthKitService.swift."
+  O.Purp_5:
+    status: "🟡"
+    class: "M"
+    note: "Plattform-Mechanismus (iOS Einstellungen) ermöglicht Widerruf. App-eigene UI mit Hinweis auf Konsequenzen empfohlen — heute partiell."
+  O.Purp_6:
+    status: "❌"
+    class: "M"
+    note: "Hersteller-Verzeichnis der Nutzereinwilligungen fehlt; iOS speichert Berechtigungsstatus, ist aber nicht als Hersteller-Verzeichnis abrufbar. Lücke."
+  O.Purp_7:
+    status: "✅"
+    class: "D"
+    note: "Anwendung nutzt ausschließlich Apple-Frameworks (SwiftUI, SwiftData, HealthKit, MultipeerConnectivity, NearbyInteraction, AVFoundation, WatchConnectivity). Keine Drittanbieter-Bibliotheken — Anforderung trivial erfüllt."
+  O.Purp_8:
+    status: "✅"
+    class: "M"
+    note: "Daten werden ausschließlich lokal verarbeitet (SwiftData) oder mit dem Partner-Gerät über MPC nach expliziter Bestätigung geteilt. Keine Drittanbieter-Schnittstellen."
+  O.Purp_9:
+    status: "✅"
+    class: "M"
+    note: "Anzeige beschränkt auf Atemphasen und Achtsamkeitsminuten. Keine sensiblen Datenelemente auf dem Bildschirm außerhalb des primären Zwecks."
+
+  # ──────────────────────────────────────────
+  # (2) Architektur — O.Arch_*
+  # ──────────────────────────────────────────
+  O.Arch_1:
+    status: "🟡"
+    class: "M + D"
+    note: "DevSecOps-Pipeline existiert (security.yml, ci.yml: gitleaks, swiftlint --strict, eslint, npm audit, Tests, Playwright). Formale 'Security-in-SDLC'-Dokumentation des Herstellers (Threat-Model, Secure-Coding-Standards) ergänzungsbedürftig."
+  O.Arch_2:
+    status: "❌"
+    class: "M"
+    note: "Datenlebenszyklus für HealthKit-Reads (HR/HRV/Schlaf) und Writes (Mindful-Minutes) sowie für SwiftData SessionLog ist im Code nachvollziehbar, aber nicht formal als Designdokument aufgesetzt. Lücke."
+  O.Arch_3:
+    status: "➖"
+    class: "M"
+    note: "Anwendung hält keine eigenen kryptographischen Schlüssel. MultipeerConnectivity-Sitzungsschlüssel werden plattformseitig verwaltet. Schlüsselrichtlinie nicht anwendbar — Plattform-Aussage zu dokumentieren."
+  O.Arch_4:
+    status: "✅"
+    class: "D"
+    note: "iOS-Backups sind plattformseitig verschlüsselt (iCloud + iTunes-Backup). SwiftData-Datei liegt unter Data-Protection Class A. Anforderung durch Plattform abgedeckt."
+  O.Arch_5:
+    status: "✅"
+    class: "D"
+    note: "Externe Schnittstellen: (a) MPC mit `encryptionPreference: .required`, (b) WatchConnectivity (Apple-vermittelt), (c) NearbyInteraction (Apple-vermittelt). Alle tragen plattformseitige Sicherheitsfunktionen."
+  O.Arch_6:
+    status: "✅"
+    class: "D"
+    note: "Apple Code-Signing + Notarisation auf jedem Release. CURRENT_PROJECT_VERSION + MARKETING_VERSION versioniert in project.yml."
+  O.Arch_7:
+    status: "✅"
+    class: "D"
+    note: "Keine Drittanbieter-Software in Verwendung (CLAUDE.md: 'No SPM packages, no CocoaPods, no Carthage')."
+  O.Arch_8:
+    status: "➖"
+    class: "D"
+    note: "Keine WebView in der Anwendung. Marketing-Website ist im separaten Repo `ma3u/TwoBreath`."
+  O.Arch_9:
+    status: "❌"
+    class: "M"
+    note: "Vulnerability-Disclosure-Pfad fehlt. Empfehlung: `SECURITY.md` mit verschlüsseltem Kontakt (PGP-Key) im Repo ergänzen."
+  O.Arch_10:
+    status: "🟡"
+    class: "R"
+    note: "App Store ist die Update-Quelle; iOS-System prompt'et zum Update. App-eigene 'sicherheitsrelevant'-Unterscheidung gibt es nicht. Zu auditieren, ob TR-Anforderung durch Apple-Modell hinreichend abgedeckt."
+  O.Arch_11:
+    status: "✅"
+    class: "D"
+    note: "Distribution ausschließlich über Apple App Store."
+  O.Arch_12:
+    status: "✅"
+    class: "M"
+    note: "twobreath.com verlinkt App-Store-Eintrag; QR-Codes auf Marketing-Material."
+
+  # ──────────────────────────────────────────
+  # (3) Quellcode — O.Source_*
+  # ──────────────────────────────────────────
+  O.Source_1:
+    status: "🟡"
+    class: "D"
+    note: "Nutzer-Eingaben minimal (Slider, Buttons, Pairing-Code). Externe Daten (programs.json, MPC-Nachrichten) via Codable validiert. SAST (semgrep) sollte ergänzt werden, um Validierungslücken systemisch zu erkennen."
+  O.Source_2:
+    status: "🟡"
+    class: "D"
+    note: "Eingabe-/Ausgabe-Schnittstellen typisiert (Codable, HealthKit, MPC). Klassische Injection-Vektoren (SQL/HTML) liegen nicht vor."
+  O.Source_3:
+    status: "🟡"
+    class: "D"
+    note: "Log-Aufrufe (`print`, `os_log`) per Code-Review auf PII-Lecks zu prüfen. Empfehlung: presidio-Regex-Set über Log-Stichprobe in CI."
+  O.Source_4:
+    status: "✅"
+    class: "D"
+    note: "Swift-Fehlerbehandlung via `throws/try/catch`; keine debugbaren Stack-Traces in Release-Builds (Apple-Standard)."
+  O.Source_5:
+    status: "🟡"
+    class: "D"
+    note: "Swift ARC + value semantics; keine eigenen sensiblen Speicherpuffer (delegiert an Apple-Frameworks). Anforderung implizit über Plattform abgedeckt."
+  O.Source_6:
+    status: "➖"
+    class: "D"
+    note: "Swift mit ARC; keine manuelle Speicherverwaltung. Anforderung nicht anwendbar."
+  O.Source_7:
+    status: "🟡"
+    class: "D + M"
+    note: "SessionLog persistiert dauerhaft (für Streaks/Insights). Datenminimierung durch Aufzeichnung minimaler Felder. Auto-Löschung nach Zeit nicht implementiert — Datenschutzkonzept ergänzen."
+  O.Source_8:
+    status: "✅"
+    class: "D"
+    note: "Release-Konfiguration in project.yml (`defaultConfig: Release`). Keine Debug-URLs / Test-Endpoints im Quellcode (per Code-Review + gitleaks)."
+  O.Source_9:
+    status: "🟡"
+    class: "D"
+    note: "Apple-Toolchain aktiviert standardmäßig Stack-Canary, ASLR, NX. Obfuskation (Symbol-Stripping etc.) nicht aktiv — Wechselwirkung mit O.Resi_8."
+  O.Source_10:
+    status: "✅"
+    class: "D"
+    note: "SwiftLint --strict + opt-in rules in `.swiftlint.yml`; in CI per security.yml. ESLint für Playwright-Skripte. Empfehlung: zusätzlich semgrep mit Swift-Regeln."
+
+  # ──────────────────────────────────────────
+  # (4) Drittanbieter-Software — O.TrdP_*
+  # ──────────────────────────────────────────
+  O.TrdP_1:
+    status: "✅"
+    class: "D"
+    note: "Liste der Drittanbieter-Software ist leer (per CLAUDE.md: 'Apple frameworks only'). Erfüllung trivial; SBOM-Erzeugung empfohlen, um Leerheit signiert zu belegen."
+  O.TrdP_2:
+    status: "✅"
+    class: "D"
+    note: "Nicht anwendbar — keine Drittanbieter-Software."
+  O.TrdP_3:
+    status: "✅"
+    class: "P"
+    note: "Nicht anwendbar — keine Drittanbieter-Software. `npm audit` wirkt nur auf Build-/Website-Toolchain."
+  O.TrdP_4:
+    status: "✅"
+    class: "D + P"
+    note: "Nicht anwendbar."
+  O.TrdP_5:
+    status: "✅"
+    class: "M"
+    note: "Nicht anwendbar."
+  O.TrdP_6:
+    status: "✅"
+    class: "D"
+    note: "Trivial erfüllt — keine Drittanbieter-Software vorhanden."
+  O.TrdP_7:
+    status: "✅"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.TrdP_8:
+    status: "✅"
+    class: "P"
+    note: "Nicht anwendbar."
+
+  # ──────────────────────────────────────────
+  # (5) Kryptographische Umsetzung — O.Cryp_* / O.Rand_*
+  # ──────────────────────────────────────────
+  O.Cryp_1:
+    status: "✅"
+    class: "D"
+    note: "Keine Hard-Coded-Schlüssel im Quellcode. `.gitleaks.toml` mit Custom-Regeln für ElevenLabs- und Apple-API-Keys; gitleaks läuft in CI (security.yml)."
+  O.Cryp_2:
+    status: "➖"
+    class: "D"
+    note: "Anwendung implementiert keine eigenen Krypto-Primitiven. MultipeerConnectivity nutzt Apple-vetted Implementierungen (CommonCrypto / CryptoKit intern)."
+  O.Cryp_3:
+    status: "➖"
+    class: "D"
+    note: "Plattform-vermittelt; keine eigene Wahl von Primitiven."
+  O.Cryp_4:
+    status: "➖"
+    class: "M"
+    note: "Keine eigenen Schlüssel; Anforderung nicht anwendbar."
+  O.Cryp_5:
+    status: "➖"
+    class: "D"
+    note: "Plattform-vermittelt."
+  O.Cryp_6:
+    status: "➖"
+    class: "D"
+    note: "Plattform-vermittelt (Secure Enclave bei Bedarf)."
+  O.Cryp_7:
+    status: "➖"
+    class: "D"
+    note: "Plattform-vermittelt."
+  O.Rand_1:
+    status: "➖"
+    class: "D"
+    note: "Keine eigene Erzeugung kryptographischer Zufallswerte im App-Code. Plattform delegiert."
+
+  # ──────────────────────────────────────────
+  # (6) Authentisierung — O.Auth_* / O.Pass_*
+  # ──────────────────────────────────────────
+  O.Auth_1:
+    status: "➖"
+    class: "M"
+    note: "Keine Nutzer-Authentifizierung in der Anwendung. Partner-Pairing erfolgt geräte-zu-gerät über MPC mit manueller Bestätigungs-Code (PairingService.swift)."
+  O.Auth_2:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar — kein Konten-/Rollenmodell."
+  O.Auth_3:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Auth_4:
+    status: "➖"
+    class: "M"
+    note: "Nicht anwendbar — keine Authentifizierung."
+  O.Auth_5:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Auth_6:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Auth_7:
+    status: "➖"
+    class: "R + D"
+    note: "Nicht anwendbar."
+  O.Auth_8:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Auth_9:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Auth_10:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Auth_11:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Auth_12:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar — kein Hintergrundsystem."
+  O.Auth_13:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar — keine Tokens."
+  O.Auth_14:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar — keine Sessions."
+  O.Auth_15:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Pass_1:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar — keine Passwörter."
+  O.Pass_2:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Pass_3:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Pass_4:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Pass_5:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+
+  # ──────────────────────────────────────────
+  # (7) Datensicherheit — O.Data_*
+  # ──────────────────────────────────────────
+  O.Data_1:
+    status: "✅"
+    class: "D"
+    note: "Werkseinstellung: kein Tracking, alle Daten lokal, alle sensiblen Berechtigungen vom Nutzer per iOS-Prompt explizit zu erteilen. PrivacyInfo.xcprivacy deklariert dies."
+  O.Data_2:
+    status: "🟡"
+    class: "D + M"
+    note: "SwiftData liegt unter iOS Data Protection. HealthKit-Daten verbleiben im plattformseitig verschlüsselten HealthKit-Store. App-Ebene-Verschlüsselung über die Plattform hinaus heute nicht zusätzlich implementiert. TR fordert explizit über die OS-Verschlüsselung hinausgehende Maßnahmen — Begründung über Schutzbedarfsanalyse erforderlich."
+  O.Data_3:
+    status: "✅"
+    class: "D"
+    note: "iOS-App-Sandbox + Data-Protection Class A; HealthKit als zusätzlich isolierter Speicherbereich."
+  O.Data_4:
+    status: "✅"
+    class: "D"
+    note: "Keine veröffentlichten URL-Schemes, keine Document-Provider-/Sharing-Extensions. MPC-Pairing erfordert manuelle Bestätigung (PairingService.swift)."
+  O.Data_5:
+    status: "🟡"
+    class: "D + M"
+    note: "SessionLog dauerhaft persistiert für Streaks-Funktion; Datenminimierung durch Aufzeichnung nur minimaler Felder. Auto-Löschung nach Zeit nicht implementiert — Begründung im Datenschutzkonzept erforderlich."
+  O.Data_6:
+    status: "✅"
+    class: "M"
+    note: "SessionLog speichert nur programID, Dauer, Phase-Zeiten, Comfort-Rating. HealthKit-Reads beschränkt auf deklarierte Typen (HR, HRV, Schlaf)."
+  O.Data_7:
+    status: "➖"
+    class: "M"
+    note: "Kein Hintergrundsystem; sensible Daten verbleiben lokal."
+  O.Data_8:
+    status: "➖"
+    class: "D"
+    note: "Anwendung verwendet keine Aufnahmegeräte (nur Audio-Wiedergabe via AVFoundation aus pre-bundled MP3s)."
+  O.Data_9:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar — keine Aufnahme."
+  O.Data_10:
+    status: "🟡"
+    class: "D"
+    note: "Tastatureingaben minimal (z. B. Pairing-Code). UITextContentType + isSecureTextEntry per Code-Review zu prüfen."
+  O.Data_11:
+    status: "🟡"
+    class: "D"
+    note: "Sensible Anzeigen sollten `.textSelection(.disabled)` setzen. Per Code-Review zu prüfen."
+  O.Data_12:
+    status: "➖"
+    class: "D"
+    note: "Anwendung erhebt weder biometrische Daten noch hält private Schlüssel."
+  O.Data_13:
+    status: "🟡"
+    class: "D"
+    note: "App-Switcher-Snapshot-Maskierung (`UIApplication.willResignActiveNotification`-Handler) wird empfohlen, ist heute nicht implementiert. Sensible HealthKit-Werte werden in der App jedoch nicht im Klartext angezeigt."
+  O.Data_14:
+    status: "✅"
+    class: "D"
+    note: "iOS Data Protection (NSFileProtectionComplete) bei Gerätesperre — plattformseitig erfüllt."
+  O.Data_15:
+    status: "✅"
+    class: "D"
+    note: "iOS Data Protection: Verschlüsselung mit aus Passcode + Device-UID abgeleitetem Schlüssel = Geräte- und Nutzerbindung."
+  O.Data_16:
+    status: "✅"
+    class: "D"
+    note: "iOS-Deinstallation entfernt App-Sandbox vollständig; HealthKit-Daten verbleiben absichtlich in HealthKit (Plattformmodell, vom Nutzer steuerbar)."
+  O.Data_17:
+    status: "🟡"
+    class: "M"
+    note: "Vollständige Löschung über Deinstallation möglich. In-App-'Alles löschen'-Funktion noch nicht implementiert; Empfehlung für Aufnahme."
+  O.Data_18:
+    status: "➖"
+    class: "D"
+    note: "Optionale KANN-Anforderung. Ohne Hintergrundsystem nicht umsetzbar."
+
+  # ──────────────────────────────────────────
+  # (8) Kostenpflichtige Ressourcen — O.Paid_*
+  # ──────────────────────────────────────────
+  O.Paid_1:
+    status: "✅"
+    class: "M"
+    note: "Anwendung enthält heute keine kostenpflichtigen Funktionen oder Ressourcen. ITSAppUsesNonExemptEncryption=false."
+  O.Paid_2:
+    status: "➖"
+    class: "D"
+    note: "Keine kostenpflichtigen Funktionen."
+  O.Paid_3:
+    status: "➖"
+    class: "D"
+    note: "Keine kostenpflichtigen Ressourcen (SMS, Telefonate, Mobile-Daten) werden verwendet."
+  O.Paid_4:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Paid_5:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Paid_6:
+    status: "➖"
+    class: "M"
+    note: "Nicht anwendbar."
+  O.Paid_7:
+    status: "➖"
+    class: "M"
+    note: "Nicht anwendbar."
+  O.Paid_8:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+  O.Paid_9:
+    status: "➖"
+    class: "M"
+    note: "Nicht anwendbar."
+  O.Paid_10:
+    status: "➖"
+    class: "D"
+    note: "Nicht anwendbar."
+
+  # ──────────────────────────────────────────
+  # (9) Netzwerkkommunikation — O.Ntwk_*
+  # ──────────────────────────────────────────
+  O.Ntwk_1:
+    status: "🟡"
+    class: "D"
+    note: "MultipeerConnectivity nutzt session-key-basierte Verschlüsselung (`encryptionPreference: .required`, PairingService.swift:27). Beidseitige Authentisierung erfolgt per User-bestätigtem Pairing-Code, nicht per X.509-mTLS. Anforderung nach mTLS strikt nicht erfüllt; alternative Authentisierung dokumentationspflichtig."
+  O.Ntwk_2:
+    status: "✅"
+    class: "R + D"
+    note: "App führt keine eigenen HTTP(S)-Verbindungen aus. ATS-Default (TLS 1.2+, starke Ciphers) gilt; keine ATS-Ausnahmen in Info.plist."
+  O.Ntwk_3:
+    status: "✅"
+    class: "D"
+    note: "Sichere Kanäle ausschließlich über Apple-Plattformbibliotheken (MultipeerConnectivity, Network)."
+  O.Ntwk_4:
+    status: "➖"
+    class: "D"
+    note: "Kein eigenes Hintergrundsystem; Zertifikats-Pinning nicht anwendbar. Falls künftig HTTPS-Backend angebunden, ist Pinning vorzusehen."
+  O.Ntwk_5:
+    status: "➖"
+    class: "D"
+    note: "Kein Hintergrundsystem."
+  O.Ntwk_6:
+    status: "➖"
+    class: "D"
+    note: "Kein Hintergrundsystem."
+  O.Ntwk_7:
+    status: "✅"
+    class: "D"
+    note: "Info.plist enthält keine ATS-Ausnahmen (`NSAllowsArbitraryLoads` nicht gesetzt). Cleartext-Traffic standardmäßig deaktiviert."
+  O.Ntwk_8:
+    status: "🟡"
+    class: "R"
+    note: "Keine zentrale Verbindungs-Log-Datei; angesichts fehlenden Hintergrundsystems heute nicht zielführend. Bei Architekturänderung neu zu bewerten."
+
+  # ──────────────────────────────────────────
+  # (10) Plattformspezifische Interaktionen — O.Plat_*
+  # ──────────────────────────────────────────
+  O.Plat_1:
+    status: "🟡"
+    class: "M"
+    note: "Geräte-Sperrcheck via `LAContext.canEvaluatePolicy(.deviceOwnerAuthentication)` nicht implementiert. Gemäß Schutzbedarf der HealthKit-Daten zu prüfen, ob Hinweis nötig."
+  O.Plat_2:
+    status: "✅"
+    class: "D"
+    note: "Entitlements: nur HealthKit. Info.plist usage strings: nur Health, LocalNetwork (Bonjour-Pairing), NearbyInteraction (UWB-Pairing). Berechtigungen entsprechen primärem Zweck."
+  O.Plat_3:
+    status: "✅"
+    class: "D"
+    note: "Alle Berechtigungs-Beschreibungen in Info.plist erklären Zweck (NSHealthShare/Update, NSLocalNetwork, NSNearbyInteraction). Auswirkung der Verweigerung sollte in App-UI ergänzt werden."
+  O.Plat_4:
+    status: "✅"
+    class: "D"
+    note: "Anwendung sendet heute keine Push- oder Local-Notifications mit sensiblen Inhalten."
+  O.Plat_5:
+    status: "➖"
+    class: "D"
+    note: "Keine Notifications."
+  O.Plat_6:
+    status: "✅"
+    class: "D"
+    note: "iOS-Sandbox plus HealthKit-Typ-spezifische Autorisierung."
+  O.Plat_7:
+    status: "✅"
+    class: "D"
+    note: "Genutzte IPC: WatchConnectivity (Geräte des Nutzers) + MPC (bestätigter Partner). Beide für primären Zweck erforderlich."
+  O.Plat_8:
+    status: "➖"
+    class: "D"
+    note: "Keine Rendering-Engine / WebView."
+  O.Plat_9:
+    status: "🟡"
+    class: "D"
+    note: "Hintergrund-Übergangs-Maskierung empfohlen, heute nicht implementiert."
+  O.Plat_10:
+    status: "➖"
+    class: "D"
+    note: "Keine Rendering-Engine."
+  O.Plat_11:
+    status: "➖"
+    class: "D"
+    note: "Keine Rendering-Engine."
+  O.Plat_12:
+    status: "➖"
+    class: "D"
+    note: "Swift ARC räumt Speicher beim Exit auf; keine eigenen sensiblen Speicherpuffer."
+  O.Plat_13:
+    status: "❌"
+    class: "M"
+    note: "User-Hinweise zur Geräte-PIN, App-Aktualisierung, Pairing-Sicherheit fehlen — empfohlen für Settings-/About-Screen."
+  O.Plat_14:
+    status: "➖"
+    class: "R"
+    note: "Kein Hintergrundsystem für Logging; abnormaler Anwendungsstart → iOS-Standard-Handling."
+
+  # ──────────────────────────────────────────
+  # (11) Resilienz — O.Resi_*
+  # ──────────────────────────────────────────
+  O.Resi_1:
+    status: "❌"
+    class: "M"
+    note: "User-Best-Practices-Seite fehlt — siehe O.Plat_13."
+  O.Resi_2:
+    status: "🟡"
+    class: "D"
+    note: "Mindest-iOS-Version per `deploymentTarget: iOS: '17.0'` erzwungen. Jailbreak-/Modifikations-Erkennung nicht implementiert."
+  O.Resi_3:
+    status: "❌"
+    class: "D"
+    note: "Debug-Erkennung (z. B. `sysctl(KERN_PROC_ALL)`) nicht implementiert. Bei TR-Strenge anzustreben."
+  O.Resi_4:
+    status: "➖"
+    class: "D"
+    note: "iOS-Sandbox-Modell: keine 'ungewöhnlichen Benutzerrechte' im klassischen Sinne. Anforderung primär für jailbroken devices relevant — siehe O.Resi_2."
+  O.Resi_5:
+    status: "🟡"
+    class: "D"
+    note: "Apple App Attest (`DCAppAttestService`) verfügbar, ist heute nicht implementiert."
+  O.Resi_6:
+    status: "➖"
+    class: "D"
+    note: "Kein Hintergrundsystem."
+  O.Resi_7:
+    status: "🟡"
+    class: "D"
+    note: "Implementierung mit Apple App Attest empfohlen, heute nicht aktiv."
+  O.Resi_8:
+    status: "🟡"
+    class: "D"
+    note: "Apple-Toolchain-Defaults aktiv (Stack-Canary, ASLR, NX). Obfuskation (Symbol-Stripping, Anti-Debugging) nicht implementiert. Wechselwirkung mit O.Source_9."
+  O.Resi_9:
+    status: "➖"
+    class: "D"
+    note: "Anwendung ist iOS-/watchOS-exklusiv; Hersteller-Variations-Problem entfällt."
+  O.Resi_10:
+    status: "✅"
+    class: "D + P"
+    note: "Robustheit durch Engine-State-Machine-Tests (BreathingEngine pause/resume, Audio-interruption-Handling). CI testet auf iPhone- und Watch-Simulator (ci.yml)."

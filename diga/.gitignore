@@ -1,0 +1,17 @@
+# Source binaries — reproducible via `make ingest` from regulations/source-manifest.yaml.
+# We exclude them to keep the repo small and to avoid mirroring BSI / government
+# binaries; the manifest's URL + sha256 lets anyone verify their local copy.
+regulations/pdf/
+regulations/html/
+
+# OS / editor cruft
+.DS_Store
+*.swp
+*~
+
+# Run artefacts (per-session ledger entries land in MEMORY.md instead)
+runs/*
+!runs/.gitkeep
+
+# Local evidence bundles signed by Phase-3 CI
+evidence/builds/
