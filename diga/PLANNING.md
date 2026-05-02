@@ -219,9 +219,10 @@ See [`MEMORY.md`](MEMORY.md) for the full ledger format. Headline rules:
 | **2 — Regulation ingestion** | TR-03161-1/2/3 PDFs ingested (127 anchored requirements), DiGAV (51 §§) + § 139e SGB V scraped, `regulations/source-manifest.yaml` with sha256 | ✅ done |
 | **3 — Per-row resolution** | All 127 `O.*` requirements bewertet against real TwoBreath posture; `evidence/tr1-twobreath-status.yaml` + regenerated `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`. Stats: ✅ 40 (31 %) · 🟡 25 (20 %) · ❌ 6 (5 %) · ➖ 56 (44 %). 101/127 (~80 %) deterministisch erbringbar (R+D+P). | ✅ done |
 | **4 — German deliverables** | `BSI_BERICHT.md` (formal Behördendeutsch report), `LINKEDIN_ARTIKEL.md` (German article for regulators / Krankenkassen / Ärzt:innen / Patient:innen) | ✅ done |
-| **5 — Tooling wired (Phase 3 of original plan)** | Beyond what's already in `TwoBreath-app/.github/workflows/` (gitleaks, swiftlint, eslint, npm audit, tests, Playwright): add `syft` SBOM, `osv-scanner`, `cosign` signing, `MobSF` archive scan, scheduled `testssl.sh` on twobreath.com | next |
-| **6 — Close the 6 ❌ gaps** | `SECURITY.md`, data-lifecycle design doc, consent-register concept, in-app security info screen, debug-env detection snippet | next |
-| **7 — BSI / BfArM share-out** | Polished package + walkthrough recording | when 5+6 land |
+| **5 — Closure pass** | Eight concept docs (`concepts/01..08`), `SECURITY.md`, `CI_CD_SECURITY.md` (answers SAST/DAST question + drop-in `security.yml`), `patches/PATCHES.md` (10 Swift snippets). v0.2 stats: **✅ 70 (55 %) · 🟡 2 (2 %) · ❌ 0 · ➖ 55 (43 %)**. Remaining 🟡 are App-Attest, deferred until backend exists. | ✅ done |
+| **6 — Tooling wired in TwoBreath-app CI** | Apply `CI_CD_SECURITY.md` § 4 to `TwoBreath-app/.github/workflows/security.yml`: add semgrep, syft SBOM, osv-scanner, MobSF, testssl.sh jobs. | next |
+| **7 — Apply patches in TwoBreath-app** | Land the 10 PR-fertigen Patches einzeln in `ma3u/TwoBreath-app`. | next |
+| **8 — BSI / BfArM share-out** | Polished package + walkthrough recording. | when 6+7 land |
 
 ---
 

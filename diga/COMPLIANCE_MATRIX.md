@@ -90,7 +90,8 @@ The TR-03161-1 v3.0 organises requirements into **11 Prüfaspekte**. The CRY/AUT
 
 > The matrix below uses CRY/AUT/STO shorthand for narrative grouping. The **full per-`O.*` enumeration** of all **127 official requirement IDs** with **resolved per-row status** lives in [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](COMPLIANCE_MATRIX_TR1_OFFICIAL.md), auto-generated from the ingested TR-03161-1 markdown + per-ID overrides in [`evidence/tr1-twobreath-status.yaml`](evidence/tr1-twobreath-status.yaml) by `scripts/build-official-matrix.py` (`make official-matrix`). Refresh after TR update or override edit.
 >
-> **Resolved totals (2026-05-02):** ✅ 40 (31 %) · 🟡 25 (20 %) · ❌ 6 (5 %) · ➖ 56 (44 %) · 🔍 0. **101/127 (~80 %) deterministisch erbringbar** (R 5 / D 94 / P 2). Manual: 26.
+> **Resolved totals (2026-05-02 v0.2):** ✅ **70 (55 %)** · 🟡 **2 (2 %)** · ❌ **0** · ➖ **55 (43 %)** · 🔍 0. **101/127 (~80 %) deterministisch erbringbar** (R 5 / D 94 / P 2). Manual: 26.
+> Closure-Werkzeuge: 8 concept docs, `SECURITY.md`, `CI_CD_SECURITY.md`, `patches/PATCHES.md`. Verbleibende 🟡: O.Resi_5 / O.Resi_7 (App Attest) — bewusst aufgeschoben bis ein Hintergrundsystem existiert.
 
 ### A.1 Cryptographic implementation (CRY)
 

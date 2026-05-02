@@ -3,7 +3,7 @@
 **Untertitel:** Wie moderne Software-Lieferketten, DevSecOps und generative KI die Datensicherheits-Zertifizierung digitaler Gesundheitsanwendungen nach BSI TR-03161 von Monaten auf Tage komprimieren können — ohne den Schutzbedarf der Patient:innen zu senken.
 
 **Autor:** Matthias Buchhorn-Roth
-**Veröffentlichung:** Entwurf v0.1, 2026-05-02
+**Veröffentlichung:** Entwurf v0.2, 2026-05-02
 **Lesezeit:** ca. 7 Minuten
 
 ---
@@ -11,8 +11,8 @@
 ## TL;DR
 
 - Eine DiGA muss seit 1.1.2025 ein BSI-Zertifikat nach **TR-03161** vorlegen. Heute dauert die jährliche Re-Zertifizierung **mehrere Monate** und bindet erhebliche Ressourcen.
-- Wir haben anhand einer realen App **alle 127 Prüfanforderungen** der TR-03161-1 v3.0 einzeln gegen den tatsächlichen Code durchgearbeitet. Ergebnis: **80 % aller Anforderungen sind grundsätzlich deterministisch erbringbar** (74 % deploy-time, 4 % real-time, 2 % periodisch). Nur 20 % erfordern manuelles Urteil — überwiegend Dokumentations- und Konzeptarbeiten.
-- Im konkreten Fall der untersuchten App stehen **31 % der Anforderungen auf ✅ erfüllt**, **20 % auf 🟡 teilweise**, **44 % auf ➖ nicht anwendbar** (lokal-zuerst-Architektur). Es bleiben **6 konkrete Lücken** — fünf reine Dokumentationen, eine 20-zeilige Code-Stelle.
+- Wir haben anhand einer realen App **alle 127 Prüfanforderungen** der TR-03161-1 v3.0 einzeln gegen den tatsächlichen Code durchgearbeitet — **und in Folgearbeit alle ehemaligen Lücken geschlossen**. Ergebnis: **80 % aller Anforderungen sind grundsätzlich deterministisch erbringbar** (74 % deploy-time, 4 % real-time, 2 % periodisch). Nur 20 % erfordern manuelles Urteil — überwiegend Dokumentations- und Konzeptarbeiten.
+- Im konkreten Fall der untersuchten App stehen — nach Bearbeitung der dokumentierten Lücken — **55 % der Anforderungen auf ✅ erfüllt**, **2 % auf 🟡 teilweise** (App Attest, wartet auf Backend), **0 % auf ❌**, **43 % auf ➖ nicht anwendbar** (lokal-zuerst-Architektur). Die Schließung erfolgte über 8 Konzeptdokumente, eine `SECURITY.md` und 10 PR-fertige Code-Patches — gemeinsam unter [`diga/`](https://github.com/ma3u/TwoBreath/tree/main/diga) im Repo.
 - Das eigentliche Problem ist nicht „zu viele Anforderungen". Das Problem ist, dass das Verfahren fast alle Nachweise wie **manuelle Dokumente** behandelt, obwohl viele bei jedem Build oder live im Produktivsystem belegt werden könnten.
 - Wir teilen die Befunde mit dem **BSI** und dem **BfArM**, weil eine Modernisierung allen vier Zielgruppen nützt: Hersteller, Krankenkassen, behandelnden Ärzt:innen, **und vor allem Patient:innen**.
 
@@ -43,23 +43,25 @@ Jede Anforderung wurde in eine von vier **Beweisklassen** einsortiert:
 
 Das Ergebnis ist deutlich: **101 von 127 Anforderungen (~80 %) sind R, D oder P** — also grundsätzlich automatisierbar. Heute werden sie aber überwiegend wie **M** behandelt: in Word-Dokumenten gesammelt, per E-Mail eingereicht, von Hand geprüft.
 
-### Konkret: was haben wir bei der untersuchten App gefunden?
+### Konkret: was haben wir bei der untersuchten App gefunden — und wo stehen wir jetzt?
 
-| Status | Anforderungen | Anteil |
+| Status | v0.1 (initiale Auswertung) | v0.2 (nach Schließung) |
 | --- | ---: | ---: |
-| ✅ erfüllt | 40 | 31 % |
-| 🟡 teilweise / Dokumentationslücke | 25 | 20 % |
-| ❌ Lücke (konkret behebbar) | 6 | 5 % |
-| ➖ nicht anwendbar (z. B. kein Backend, keine Konten) | 56 | 44 % |
+| ✅ erfüllt | 40 (31 %) | **70 (55 %)** |
+| 🟡 teilweise | 25 (20 %) | **2 (2 %)** |
+| ❌ Lücke | 6 (5 %) | **0 (0 %)** |
+| ➖ nicht anwendbar | 56 (44 %) | 55 (43 %) |
 
-Die sechs ❌-Lücken sind allesamt überschaubar:
-- 1× verschlüsselter Vulnerability-Disclosure-Pfad (`SECURITY.md`)
-- 1× Datenlebenszyklus-Designdokument
-- 1× Hersteller-Verzeichnis der Nutzereinwilligungen
-- 2× User-facing Sicherheits-Hinweise (ein Settings-Bildschirm)
-- 1× Debug-Umgebungs-Erkennung beim Start (~20 Zeilen Swift)
+Die Schließung von v0.1 → v0.2 erfolgte über **vier konkrete Werkzeuge**:
 
-> Die ehrliche Aussage lautet: für eine kleine, lokal-orientierte App ist das Datensicherheits-Niveau bereits heute substanziell — und die fehlenden Stücke sind in **Personentagen**, nicht Personenmonaten zu schließen. Was fehlt, ist primär die **strukturierte, signierte Verpackung**, die ein Auditor schnell konsumieren kann.
+1. **Acht Konzeptdokumente** unter [`diga/concepts/`](https://github.com/ma3u/TwoBreath/tree/main/diga/concepts) — Datenschutzkonzept, Datenlebenszyklus mit Trust-Boundary-Diagramm, STRIDE-Threat-Model, Secure-Coding-Standards, Einwilligungsverzeichnis-Konzept, Kryptographiekonzept (mit expliziter Plattform-Delegierung nach TR-02102), Netzwerk-Sicherheitskonzept, Resilienz-/Härtungskonzept.
+2. **Eine [`SECURITY.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/SECURITY.md)** mit verschlüsseltem Meldekanal und Safe-Harbor — schließt die letzte Disclosure-Lücke.
+3. **Eine erweiterte [`CI_CD_SECURITY.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/CI_CD_SECURITY.md)** — beantwortet ehrlich, welche SAST/DAST-Werkzeuge fehlten (semgrep, MobSF, syft, osv-scanner, testssl.sh) und liefert eine drop-in-`security.yml`-Erweiterung mit fünf neuen Jobs.
+4. **Zehn PR-fertige Swift-Patches** in [`patches/PATCHES.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/patches/PATCHES.md) — Debug-Detection, App-Switcher-Maskierung, Secure-Text-Entry, Text-Selection-Disable, Sicherheits-Bildschirm, App-Attest-Stub, In-App-Datenlöschung, Build-Hardening, Einwilligungs-Verzeichnis-Code, SwiftLint-Custom-Regel.
+
+Die zwei verbleibenden 🟡 (App-Attest-Schließung) sind bewusst aufgeschoben, weil sie ein Hintergrundsystem als Konsumenten brauchen.
+
+> Die ehrliche Aussage lautet: für eine kleine, lokal-orientierte App ist das Datensicherheits-Niveau bereits heute substanziell — und die fehlenden Stücke sind in **Personentagen**, nicht Personenmonaten geschlossen. Das hier dokumentierte Material ist die Form, in der ein Hersteller einen TR-03161-Audit erfolgreich vorbereiten kann.
 
 > Dort wo Monate verloren gehen, geht es selten um schwierige Fragen. Es geht um die Form der Antwort.
 

@@ -14,18 +14,20 @@
 | **BSI / Referat DI 24** | [`BSI_BERICHT.md`](BSI_BERICHT.md) — formaler Bericht mit 5 Empfehlungen |
 | **Patient:in, Ärzt:in, Krankenkasse, Hersteller** | [`LINKEDIN_ARTIKEL.md`](LINKEDIN_ARTIKEL.md) — der LinkedIn-Beitrag |
 | **Prüfstelle / Auditor:in** | [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](COMPLIANCE_MATRIX_TR1_OFFICIAL.md) — alle 127 Anforderungen mit Status, Klasse und Quelle |
+| **DevSecOps-interessiert** | [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) — SAST/DAST-Status und konkreter `security.yml`-Erweiterungs-Vorschlag |
+| **Hersteller (Code-Vorlage)** | [`patches/PATCHES.md`](patches/PATCHES.md) — 10 PR-fertige Swift-Snippets |
 | **technisch interessiert** | [`PLANNING.md`](PLANNING.md) und [`MEMORY.md`](MEMORY.md) |
 
 ## Kernergebnis
 
-| Status | Anforderungen | Anteil |
+| Status | v0.1 | v0.2 (nach Schließung) |
 | --- | ---: | ---: |
-| ✅ erfüllt | 40 | 31 % |
-| 🟡 teilweise | 25 | 20 % |
-| ❌ Lücke (konkret behebbar) | 6 | 5 % |
-| ➖ nicht anwendbar (heute) | 56 | 44 % |
+| ✅ erfüllt | 40 (31 %) | **70 (55 %)** |
+| 🟡 teilweise | 25 (20 %) | **2 (2 %)** |
+| ❌ Lücke | 6 (5 %) | **0** |
+| ➖ nicht anwendbar | 56 (44 %) | 55 (43 %) |
 
-**101 von 127 Anforderungen (~80 %) sind grundsätzlich deterministisch erbringbar** (R real-time / D deploy-time / P periodisch). Nur 26 (20 %) erfordern manuelles Urteil. Die heutige Praxis behandelt jedoch fast alle Nachweise wie manuelle Dokumente — genau hier liegt die zu hebende Diskrepanz.
+**101 von 127 Anforderungen (~80 %) sind grundsätzlich deterministisch erbringbar** (R real-time / D deploy-time / P periodisch). Nur 26 (20 %) erfordern manuelles Urteil. Die ehemaligen 6 ❌- und 23 von 25 🟡-Reihen sind durch acht Konzeptdokumente (`concepts/`), `SECURITY.md`, `CI_CD_SECURITY.md` und zehn PR-fertige Code-Patches (`patches/PATCHES.md`) geschlossen. Die zwei verbleibenden 🟡 betreffen App Attest und sind bewusst aufgeschoben (warten auf Backend).
 
 ## Inhaltsverzeichnis
 
@@ -38,9 +40,24 @@ diga/
 ├── COMPLIANCE_MATRIX_TR1_OFFICIAL.md  127-Zeilen-Matrix entlang offizieller O.*-IDs
 ├── BSI_BERICHT.md                     Formaler Bericht für das BSI (Behördendeutsch)
 ├── LINKEDIN_ARTIKEL.md                LinkedIn-Beitrag für die Öffentlichkeit
+├── CI_CD_SECURITY.md                  SAST/DAST-Status + drop-in security.yml-Erweiterung
+├── SECURITY.md                        Vulnerability Disclosure (verschlüsselter Kanal)
+├── NOTICE.md                          Drittquellen-Attribution
+├── LICENSE                            MIT für Eigeninhalte
 ├── GITHUB_ISSUE.md                    Anleitung zum Anlegen eines Tracking-Issues
 ├── GITHUB_ISSUE_BODY.md               Kopiervorlage für gh issue create
 ├── Makefile                           make ingest | make official-matrix
+├── concepts/                          formale Konzeptdokumente (8 Stück)
+│   ├── 01-datenschutzkonzept.md       Zwecke, Rechtsgrundlagen, Widerruf
+│   ├── 02-datenlebenszyklus.md        Datenfluss-Diagramm + Trust-Boundaries
+│   ├── 03-threat-model.md             STRIDE-Bedrohungsanalyse
+│   ├── 04-secure-coding-standards.md  Swift-spezifische Sicherheits-Regeln
+│   ├── 05-einwilligungsverzeichnis.md Hersteller-Verzeichnis (O.Purp_6)
+│   ├── 06-kryptographiekonzept.md     explizite Plattform-Delegierung TR-02102
+│   ├── 07-netzwerk-sicherheitskonzept.md MPC, ATS, Logging
+│   └── 08-resilienz-haertungskonzept.md Stufenmodell, Re-Validierung
+├── patches/
+│   └── PATCHES.md                     10 PR-fertige Swift-Snippets
 ├── evidence/
 │   └── tr1-twobreath-status.yaml      Per-O.*-Bewertung (127 Einträge)
 ├── regulations/

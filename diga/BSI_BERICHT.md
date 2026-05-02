@@ -114,20 +114,43 @@ Die hohe Quote der Klasse ➖ (44 %) ergibt sich konsistent aus der lokal-zuerst
 
 > **101 von 127 Anforderungen (~80 %) sind grundsätzlich deterministisch erbringbar (R, D oder P).** Nur 26 Anforderungen (20 %) erfordern manuelle Bewertung im engeren Sinne — überwiegend Dokumentations- und Konzeptarbeiten (Anwendungszweck, Architektur, Datenschutzkonzept).
 
-### 5.4 Konkrete Lücken
+### 5.4 Schließung der ehemaligen Lücken (Stand v0.2)
 
-Die sechs als `❌` klassifizierten Anforderungen — also der konkrete Handlungsbedarf für TwoBreath — sind allesamt überschaubar:
+In der Fassung v0.1 wurden 6 ❌- und 25 🟡-Anforderungen ausgewiesen. Mit den Folgematerialien sind diese geschlossen:
 
-| ID | Lücke | Klasse | Behebung |
-| --- | --- | --- | --- |
-| [O.Purp_6](COMPLIANCE_MATRIX_TR1_OFFICIAL.md#opurp_) | Hersteller-Verzeichnis der Nutzereinwilligungen | M | Markdown-Konzeptdokument, ggf. JSON-Export der iOS-Berechtigungs-Snapshots |
-| [O.Arch_2](COMPLIANCE_MATRIX_TR1_OFFICIAL.md#oarch_) | Datenlebenszyklus-Designdokument für HealthKit + SwiftData | M | Markdown-Designdokument, einmalig |
-| [O.Arch_9](COMPLIANCE_MATRIX_TR1_OFFICIAL.md#oarch_-2) | Verschlüsselter Vulnerability-Disclosure-Pfad | M | `SECURITY.md` mit PGP-Schlüssel im Repo |
-| [O.Plat_13](COMPLIANCE_MATRIX_TR1_OFFICIAL.md#oplat_) | Information des Nutzers über Sicherheitsmaßnahmen | M | Settings-/About-Bildschirm in der App |
-| [O.Resi_1](COMPLIANCE_MATRIX_TR1_OFFICIAL.md#oresi_) | Best-Practice-Empfehlungen zum sicheren Umgang | M | gleicher Bildschirm wie O.Plat_13 |
-| [O.Resi_3](COMPLIANCE_MATRIX_TR1_OFFICIAL.md#oresi_-2) | Erkennung der Debug-Umgebung beim Start | D | Swift-Snippet (~20 Zeilen), in CI verifiziert |
+| Werkzeug der Schließung | Schließt |
+| --- | --- |
+| [`concepts/01-datenschutzkonzept.md`](concepts/01-datenschutzkonzept.md) | O.Purp_1, O.Purp_2, O.Purp_4, O.Data_5, O.Data_6 |
+| [`concepts/02-datenlebenszyklus.md`](concepts/02-datenlebenszyklus.md) | O.Arch_2, O.Source_7 |
+| [`concepts/03-threat-model.md`](concepts/03-threat-model.md) | O.Arch_1 (Threat-Model-Anteil) |
+| [`concepts/04-secure-coding-standards.md`](concepts/04-secure-coding-standards.md) | O.Arch_1, O.Source_1, O.Source_2, O.Source_5 |
+| [`concepts/05-einwilligungsverzeichnis.md`](concepts/05-einwilligungsverzeichnis.md) | O.Purp_3, O.Purp_5, O.Purp_6 |
+| [`concepts/06-kryptographiekonzept.md`](concepts/06-kryptographiekonzept.md) | O.Arch_3 (Plattform-Delegierung explizit) |
+| [`concepts/07-netzwerk-sicherheitskonzept.md`](concepts/07-netzwerk-sicherheitskonzept.md) | O.Ntwk_1 (Lesart), O.Ntwk_8 |
+| [`concepts/08-resilienz-haertungskonzept.md`](concepts/08-resilienz-haertungskonzept.md) | O.Arch_10, O.Resi_2 |
+| [`SECURITY.md`](SECURITY.md) | O.Arch_9 |
+| [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) | beantwortet die Rückfrage zu SAST/DAST und ergänzt die Pipeline |
+| [`patches/PATCHES.md`](patches/PATCHES.md) § 1 | O.Resi_3 |
+| § 2 | O.Plat_9, O.Data_13 |
+| § 3 | O.Data_10 |
+| § 4 | O.Data_11 |
+| § 5 | O.Plat_1, O.Plat_13, O.Resi_1 |
+| § 6 | O.Resi_5, O.Resi_7 (Stub vorbereitet) |
+| § 7 | O.Data_17 |
+| § 8 | O.Source_9, O.Resi_8 |
+| § 9 | O.Purp_3, O.Purp_5, O.Purp_6 (Code-Seite) |
+| § 10 | O.Source_3 |
 
-Fünf der sechs Lücken sind reine Dokumentations- bzw. Inhalts-Aufgaben. Die einzige Code-Lücke (`O.Resi_3`) ist mit einem kurzen Swift-Snippet schließbar, das in der bestehenden CI-Pipeline (security.yml) automatisch geprüft werden kann. Aus Hersteller-Sicht entspricht dies einem Bearbeitungsumfang von **wenigen Personentagen** — nicht Monaten.
+### 5.5 Verbleibende offene Punkte
+
+Zwei `🟡`-Reihen verbleiben — nicht als Mangel, sondern als bewusst aufgeschobene Aktivierung:
+
+| ID | Status | Begründung |
+| --- | --- | --- |
+| [O.Resi_5](COMPLIANCE_MATRIX_TR1_OFFICIAL.md#oresi_-9) | 🟡 | App-Attest-Stub vorbereitet; mangels Hintergrundsystem ohne Verifizierer. Aktivierung mit Backend-Anbindung. |
+| [O.Resi_7](COMPLIANCE_MATRIX_TR1_OFFICIAL.md#oresi_-13) | 🟡 | wie O.Resi_5 — Härtungs-Integritätsprüfung fußt auf App Attest. |
+
+Aus Hersteller-Sicht entspricht der Bearbeitungsumfang dieser Schließung **wenigen Personentagen** — nicht Monaten. Das ist die Pointe für den BSI-Dialog: das hier dokumentierte Material ist die Form, in der ein Hersteller einen TR-03161-Audit erfolgreich vorbereiten kann; die Größe der Aufgabe wird durch das Verfahren, nicht durch die Anforderungen, bestimmt.
 
 ### 5.5 Implikation
 

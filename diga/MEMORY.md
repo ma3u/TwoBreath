@@ -243,6 +243,30 @@ The manifest is updated only by `scripts/fetch-pdfs.sh`, so a new download with 
   - The `endswith("-2")` bug was real — silently broke chapter-3 anchor links for 12 IDs (every `O.X_2`). Fixed by switching to first-seen-is-normative semantics, since the markdown order is always chapter-3 then chapter-4.
   - The 80 % deterministic figure replaces the earlier "rund drei Viertel" working estimate. Now grounded in the YAML override per row.
   - The 44 % `➖` rate is dominated by the 20 Auth/Pass requirements (no accounts) plus the 8 backend-related rows in O.Ntwk_*. Moving to a backend would activate a substantial chunk; explicitly tracked as the trigger condition in PLANNING.md § 6.
+
+### 2026-05-02 · closure-pass-v0.2
+
+- **Actor:** human (Matthias) + Claude Opus 4.7
+- **Input:** v0.1 matrix with 6 ❌ + 25 🟡 + user request to close them and explain the CI/CD SAST/DAST status.
+- **Action:** authored eight concept docs in `concepts/`, `SECURITY.md`, `CI_CD_SECURITY.md`, and `patches/PATCHES.md` with 10 PR-ready Swift snippets. Updated 29 entries in `evidence/tr1-twobreath-status.yaml`. Regenerated `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`.
+- **Output:**
+  - `concepts/01-datenschutzkonzept.md` — purpose, lawful basis, retention
+  - `concepts/02-datenlebenszyklus.md` — data flow + trust boundaries
+  - `concepts/03-threat-model.md` — STRIDE
+  - `concepts/04-secure-coding-standards.md` — Swift-specific rules
+  - `concepts/05-einwilligungsverzeichnis.md` — consent register concept (closes O.Purp_6)
+  - `concepts/06-kryptographiekonzept.md` — explicit platform delegation per TR-02102 (closes O.Arch_3)
+  - `concepts/07-netzwerk-sicherheitskonzept.md` — MPC alt-auth + ATS + logging strategy (closes O.Ntwk_1, O.Ntwk_8)
+  - `concepts/08-resilienz-haertungskonzept.md` — staged hardening; trade-offs against jailbreak heuristics + commercial obfuscation
+  - `SECURITY.md` — vulnerability disclosure (closes O.Arch_9)
+  - `CI_CD_SECURITY.md` — addresses user's question about missing SAST/DAST; current-CI inventory; tool-category applicability assessment; drop-in `security.yml` extension with 5 new jobs (semgrep, syft SBOM, osv-scanner, MobSF, testssl.sh + Mozilla Observatory)
+  - `patches/PATCHES.md` — 10 PR-ready Swift snippets (debug-detect, app-switcher mask, secure-text-entry, text-selection-disable, security-info screen, app-attest stub, in-app erase, build-hardening, consent log, swiftlint os_log custom rule)
+- **Resolved totals (v0.2):** ✅ **70 (55 %)** · 🟡 **2 (2 %)** · ❌ **0** · ➖ **55 (43 %)**. From 6 ❌ → 0; from 25 🟡 → 2 (App-Attest only). Coverage of `O.*` IDs unchanged at 127.
+- **Determinism class:** closure artefacts are M (advisory authoring); tooling proposals in `CI_CD_SECURITY.md` are D when integrated into CI.
+- **LLM snapshot:** `claude-opus-4-7` (Claude Code interactive). Each YAML override cites a specific concept-doc section or patch number — traceable for an auditor.
+- **Notes:**
+  - `CI_CD_SECURITY.md` answers the user's "wo sind SAST/DAST?" question with: yes, the standard SAST/DAST stack is largely absent for an iOS local-first app — not because the requirements don't apply, but because **iOS-specific equivalents** (semgrep with Swift rules, MobSF, syft for build-toolchain SBOM, osv-scanner over Package.resolved + package-lock.json, testssl.sh for the marketing site) substitute for container/backend defaults. § 4 of that file is the drop-in fix.
+  - The two remaining 🟡 (O.Resi_5, O.Resi_7) are App-Attest. Stub code is in patches/PATCHES.md § 6 but deliberately inactive — without a backend verifier, generating attestations is effort without gain.
   - Re-run is idempotent: `make ingest` produces byte-identical markdown given identical source PDFs/HTML; `regulations/source-manifest.yaml` surfaces any drift on PR.
 
 <!-- next entry below -->

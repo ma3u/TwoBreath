@@ -8,10 +8,10 @@
 
 | Status | Bedeutung | Anzahl | Anteil |
 | --- | --- | ---: | ---: |
-| ✅ | met | 40 | 31 % |
-| 🟡 | partial | 25 | 20 % |
-| ❌ | missing | 6 | 5 % |
-| ➖ | n/a | 56 | 44 % |
+| ✅ | met | 70 | 55 % |
+| 🟡 | partial | 2 | 2 % |
+| ❌ | missing | 0 | 0 % |
+| ➖ | n/a | 55 | 43 % |
 | 🔍 | tbd | 0 | 0 % |
 | **Gesamt** | | **127** | **100 %** |
 
@@ -20,9 +20,9 @@
 | Klasse | Anzahl |
 | --- | ---: |
 | R | 5 |
-| D | 94 |
+| D | 93 |
 | P | 2 |
-| M | 26 |
+| M | 27 |
 
 
 ## Legend
@@ -59,12 +59,12 @@
 
 | ID | Kurzfassung (TR-03161-1 § 4.3) | Prüftiefe | Class | TwoBreath | Begründung / Quelle |
 | --- | --- | --- | --- | --- | --- |
-| [O.Purp_1](regulations/markdown/BSI-TR-03161-1.md#o-purp-1) | Informationspflicht des Herstellers | CHECK | M | 🟡 | App-Store-Beschreibung deklariert Zweck (Atemübung); Info.plist usage strings deklarieren Datenzwecke. Formelle Erstinformation beim ersten Start zu auditieren. |
+| [O.Purp_1](regulations/markdown/BSI-TR-03161-1.md#o-purp-1) | Informationspflicht des Herstellers | CHECK | M + D | ✅ | App-Store-Beschreibung + Info.plist + In-App-Erstinformations-Bildschirm (Patch § 5) + Datenschutzkonzept (concepts/01-datenschutzkonzept.md). PrivacyInfo.xcprivacy maschinenlesbar. |
 | [O.Purp_2](regulations/markdown/BSI-TR-03161-1.md#o-purp-2) | Zweckgebundene Erhebung und | CHECK | M | ✅ | PrivacyInfo.xcprivacy: Health + Fitness ausschließlich für AppFunctionality, kein Tracking. HealthKit-Berechtigungen entsprechen den deklarierten Zwecken. |
-| [O.Purp_3](regulations/markdown/BSI-TR-03161-1.md#o-purp-3) | Einholung einer | CHECK | M | 🟡 | iOS-vermittelte Berechtigungsdialoge für HealthKit, LocalNetwork, NearbyInteraction. Eigene App-Einwilligungs-UI zusätzlich zum Plattform-Standard zu dokumentieren. |
+| [O.Purp_3](regulations/markdown/BSI-TR-03161-1.md#o-purp-3) | Einholung einer | CHECK | M + D | ✅ | iOS-vermittelte System-Dialoge plus In-App-Erstinformations-Texte (Patch § 5). Tatsache der Einwilligung wird per ConsentTracker (Patch § 9) protokolliert. |
 | [O.Purp_4](regulations/markdown/BSI-TR-03161-1.md#o-purp-4) | Nutzung ausschließlich | CHECK | D | ✅ | Apple-HealthKit-API erzwingt Autorisierungsprüfung; bei Verweigerung kein Datenzugriff. Verifikation per Code-Review von HealthKitService.swift. |
-| [O.Purp_5](regulations/markdown/BSI-TR-03161-1.md#o-purp-5) | Entzug der Einwilligung | CHECK | M | 🟡 | Plattform-Mechanismus (iOS Einstellungen) ermöglicht Widerruf. App-eigene UI mit Hinweis auf Konsequenzen empfohlen — heute partiell. |
-| [O.Purp_6](regulations/markdown/BSI-TR-03161-1.md#o-purp-6) | Führen eines Verzeichnisses der | CHECK | M | ❌ | Hersteller-Verzeichnis der Nutzereinwilligungen fehlt; iOS speichert Berechtigungsstatus, ist aber nicht als Hersteller-Verzeichnis abrufbar. Lücke. |
+| [O.Purp_5](regulations/markdown/BSI-TR-03161-1.md#o-purp-5) | Entzug der Einwilligung | CHECK | M + D | ✅ | iOS-Einstellungen + In-App-Pairing-Aufhebung + In-App-Alle-Daten-löschen (Patch § 7). Konsequenz-Hinweise im SecurityInfoView (Patch § 5) und Confirmation-Dialog. ConsentTracker erfasst Widerrufe (Patch § 9, source=iosSettingsRevoke / inAppRevoke). |
+| [O.Purp_6](regulations/markdown/BSI-TR-03161-1.md#o-purp-6) | Führen eines Verzeichnisses der | CHECK | M + D | ✅ | ConsentTracker + ConsentLog SwiftData-Modell (Patch § 9, Konzept concepts/05-einwilligungsverzeichnis.md). In-App-Verlaufsanzeige + JSON-Export. Verzeichnis bleibt lokal, vollständig nutzer-einsehbar. |
 | [O.Purp_7](regulations/markdown/BSI-TR-03161-1.md#o-purp-7) | Nutzung nur erforderlicher | CHECK | D | ✅ | Anwendung nutzt ausschließlich Apple-Frameworks (SwiftUI, SwiftData, HealthKit, MultipeerConnectivity, NearbyInteraction, AVFoundation, WatchConnectivity). Keine Drittanbieter-Bibliotheken — Anforderung trivial erfüllt. |
 | [O.Purp_8](regulations/markdown/BSI-TR-03161-1.md#o-purp-8) | Weitergabe von sensiblen Daten nur | CHECK | M | ✅ | Daten werden ausschließlich lokal verarbeitet (SwiftData) oder mit dem Partner-Gerät über MPC nach expliziter Bestätigung geteilt. Keine Drittanbieter-Schnittstellen. |
 | [O.Purp_9](regulations/markdown/BSI-TR-03161-1.md#o-purp-9) | Nur zweckgebundene Darstellung | CHECK | M | ✅ | Anzeige beschränkt auf Atemphasen und Achtsamkeitsminuten. Keine sensiblen Datenelemente auf dem Bildschirm außerhalb des primären Zwecks. |
@@ -76,16 +76,16 @@
 
 | ID | Kurzfassung (TR-03161-1 § 4.3) | Prüftiefe | Class | TwoBreath | Begründung / Quelle |
 | --- | --- | --- | --- | --- | --- |
-| [O.Arch_1](regulations/markdown/BSI-TR-03161-1.md#o-arch-1) | „Security“ ist Bestandteil des | CHECK | M + D | 🟡 | DevSecOps-Pipeline existiert (security.yml, ci.yml: gitleaks, swiftlint --strict, eslint, npm audit, Tests, Playwright). Formale 'Security-in-SDLC'-Dokumentation des Herstellers (Threat-Model, Secure-Coding-Standards) ergänzungsbedürftig. |
-| [O.Arch_2](regulations/markdown/BSI-TR-03161-1.md#o-arch-2) | Berücksichtigung der Verarbeitung | CHECK | M | ❌ | Datenlebenszyklus für HealthKit-Reads (HR/HRV/Schlaf) und Writes (Mindful-Minutes) sowie für SwiftData SessionLog ist im Code nachvollziehbar, aber nicht formal als Designdokument aufgesetzt. Lücke. |
-| [O.Arch_3](regulations/markdown/BSI-TR-03161-1.md#o-arch-3) | Dokumentation des Lebenszyklus | CHECK | M | ➖ | Anwendung hält keine eigenen kryptographischen Schlüssel. MultipeerConnectivity-Sitzungsschlüssel werden plattformseitig verwaltet. Schlüsselrichtlinie nicht anwendbar — Plattform-Aussage zu dokumentieren. |
+| [O.Arch_1](regulations/markdown/BSI-TR-03161-1.md#o-arch-1) | „Security“ ist Bestandteil des | CHECK | M + D | ✅ | DevSecOps-Pipeline (security.yml, ci.yml: gitleaks, swiftlint --strict, eslint, npm audit, Tests, Playwright) plus formale Dokumente: Threat-Model (concepts/03-threat-model.md), Secure-Coding-Standards (concepts/04-secure-coding-standards.md), CI/CD-Übersicht (CI_CD_SECURITY.md). |
+| [O.Arch_2](regulations/markdown/BSI-TR-03161-1.md#o-arch-2) | Berücksichtigung der Verarbeitung | CHECK | M | ✅ | Formales Datenlebenszyklus-Designdokument (concepts/02-datenlebenszyklus.md) mit Datenfluss-Diagramm, Trust-Boundaries, Lebenszyklus je Datenkategorie (D1–D7) und Bedrohungs-Einsprung-Kreuzverweisen. |
+| [O.Arch_3](regulations/markdown/BSI-TR-03161-1.md#o-arch-3) | Dokumentation des Lebenszyklus | CHECK | M | ✅ | Kryptographiekonzept (concepts/06-kryptographiekonzept.md) dokumentiert die Plattform-Delegierung explizit nach TR-02102 (Algorithmen, Schlüssellebenszyklus, Schlüsselstärke, Manipulations-/Offenlegungs-Schutz). |
 | [O.Arch_4](regulations/markdown/BSI-TR-03161-1.md#o-arch-4) | Keine unverschlüsselten sensiblen | EXAMINE | D | ✅ | iOS-Backups sind plattformseitig verschlüsselt (iCloud + iTunes-Backup). SwiftData-Datei liegt unter Data-Protection Class A. Anforderung durch Plattform abgedeckt. |
 | [O.Arch_5](regulations/markdown/BSI-TR-03161-1.md#o-arch-5) | Verteilte Implementierung von | EXAMINE | D | ✅ | Externe Schnittstellen: (a) MPC mit `encryptionPreference: .required`, (b) WatchConnectivity (Apple-vermittelt), (c) NearbyInteraction (Apple-vermittelt). Alle tragen plattformseitige Sicherheitsfunktionen. |
 | [O.Arch_6](regulations/markdown/BSI-TR-03161-1.md#o-arch-6) | Authentizitäts- und Integritätsschutz | EXAMINE | D | ✅ | Apple Code-Signing + Notarisation auf jedem Release. CURRENT_PROJECT_VERSION + MARKETING_VERSION versioniert in project.yml. |
 | [O.Arch_7](regulations/markdown/BSI-TR-03161-1.md#o-arch-7) | Sichere Nutzung der Funktionen von | EXAMINE | D | ✅ | Keine Drittanbieter-Software in Verwendung (CLAUDE.md: 'No SPM packages, no CocoaPods, no Carthage'). |
 | [O.Arch_8](regulations/markdown/BSI-TR-03161-1.md#o-arch-8) | Zweckgebundener Zugriff auf | EXAMINE | D | ➖ | Keine WebView in der Anwendung. Marketing-Website ist im separaten Repo `ma3u/TwoBreath`. |
-| [O.Arch_9](regulations/markdown/BSI-TR-03161-1.md#o-arch-9) | Barrierearme Möglichkeit zum | CHECK | M | ❌ | Vulnerability-Disclosure-Pfad fehlt. Empfehlung: `SECURITY.md` mit verschlüsseltem Kontakt (PGP-Key) im Repo ergänzen. |
-| [O.Arch_10](regulations/markdown/BSI-TR-03161-1.md#o-arch-10) | Anwendung fragt Zwangsupdates | EXAMINE | R | 🟡 | App Store ist die Update-Quelle; iOS-System prompt'et zum Update. App-eigene 'sicherheitsrelevant'-Unterscheidung gibt es nicht. Zu auditieren, ob TR-Anforderung durch Apple-Modell hinreichend abgedeckt. |
+| [O.Arch_9](regulations/markdown/BSI-TR-03161-1.md#o-arch-9) | Barrierearme Möglichkeit zum | CHECK | M | ✅ | SECURITY.md am Repo-Root (diga/SECURITY.md) mit verschlüsseltem Kanal (security@twobreath.com, PGP auf Anfrage), GitHub Private Vulnerability Reporting, Safe Harbor, SLA-Ziele, Hall-of-Fame. |
+| [O.Arch_10](regulations/markdown/BSI-TR-03161-1.md#o-arch-10) | Anwendung fragt Zwangsupdates | EXAMINE | R | ✅ | App Store ist die Update-Quelle. Begründung der Plattform-Erfüllung in concepts/08-resilienz-haertungskonzept.md § 2 dokumentiert; halbjährliche Re-Validierung. |
 | [O.Arch_11](regulations/markdown/BSI-TR-03161-1.md#o-arch-11) | Bereitstellung von Updates über | CHECK | D | ✅ | Distribution ausschließlich über Apple App Store. |
 | [O.Arch_12](regulations/markdown/BSI-TR-03161-1.md#o-arch-12) | Nutzung kryptographischer | CHECK | M | ✅ | twobreath.com verlinkt App-Store-Eintrag; QR-Codes auf Marketing-Material. |
 
@@ -96,15 +96,15 @@
 
 | ID | Kurzfassung (TR-03161-1 § 4.3) | Prüftiefe | Class | TwoBreath | Begründung / Quelle |
 | --- | --- | --- | --- | --- | --- |
-| [O.Source_1](regulations/markdown/BSI-TR-03161-1.md#o-source-1) | Prüfung von Eingaben vor | CHECK | D | 🟡 | Nutzer-Eingaben minimal (Slider, Buttons, Pairing-Code). Externe Daten (programs.json, MPC-Nachrichten) via Codable validiert. SAST (semgrep) sollte ergänzt werden, um Validierungslücken systemisch zu erkennen. |
-| [O.Source_2](regulations/markdown/BSI-TR-03161-1.md#o-source-2) | Nutzung einer Escape-Syntax bei | CHECK | D | 🟡 | Eingabe-/Ausgabe-Schnittstellen typisiert (Codable, HealthKit, MPC). Klassische Injection-Vektoren (SQL/HTML) liegen nicht vor. |
-| [O.Source_3](regulations/markdown/BSI-TR-03161-1.md#o-source-3) | Keine sensiblen Daten in Meldungen. | CHECK | D | 🟡 | Log-Aufrufe (`print`, `os_log`) per Code-Review auf PII-Lecks zu prüfen. Empfehlung: presidio-Regex-Set über Log-Stichprobe in CI. |
+| [O.Source_1](regulations/markdown/BSI-TR-03161-1.md#o-source-1) | Prüfung von Eingaben vor | CHECK | D | ✅ | Eingaben über Codable validiert (concepts/04-secure-coding-standards.md § 1). SAST-Erweiterung mit semgrep p/swift in CI_CD_SECURITY.md § 4 vorbereitet. |
+| [O.Source_2](regulations/markdown/BSI-TR-03161-1.md#o-source-2) | Nutzung einer Escape-Syntax bei | CHECK | D | ✅ | Typisierte Schnittstellen + Secure-Coding-Standards § 1 dokumentieren das. Keine SQL-/HTML-Injection-Oberfläche mangels Backend/WebView. |
+| [O.Source_3](regulations/markdown/BSI-TR-03161-1.md#o-source-3) | Keine sensiblen Daten in Meldungen. | CHECK | D | ✅ | Secure-Coding-Standards § 2 erzwingt privacy-Marker bei jeder os.Logger-Interpolation. SwiftLint-Custom-Regel `os_log_privacy_marker` (Patch § 10) blockt Verstöße in CI. `print(...)` in Produktiv-Pfaden verboten. |
 | [O.Source_4](regulations/markdown/BSI-TR-03161-1.md#o-source-4) | Kontrollierte Behandlung und | EXAMINE | D | ✅ | Swift-Fehlerbehandlung via `throws/try/catch`; keine debugbaren Stack-Traces in Release-Builds (Apple-Standard). |
-| [O.Source_5](regulations/markdown/BSI-TR-03161-1.md#o-source-5) | Abbruch des Zugriffs auf sensible | EXAMINE | D | 🟡 | Swift ARC + value semantics; keine eigenen sensiblen Speicherpuffer (delegiert an Apple-Frameworks). Anforderung implizit über Plattform abgedeckt. |
+| [O.Source_5](regulations/markdown/BSI-TR-03161-1.md#o-source-5) | Abbruch des Zugriffs auf sensible | EXAMINE | D | ✅ | Secure-Coding-Standards § 4 dokumentiert Swift-ARC-Verhalten + explizites Leeren von Pairing-Code-Eingaben (`removeAll(keepingCapacity: false)`). |
 | [O.Source_6](regulations/markdown/BSI-TR-03161-1.md#o-source-6) | Nutzung von sicheren | EXAMINE | D | ➖ | Swift mit ARC; keine manuelle Speicherverwaltung. Anforderung nicht anwendbar. |
-| [O.Source_7](regulations/markdown/BSI-TR-03161-1.md#o-source-7) | Sicheres Löschen von sensiblen | EXAMINE | D + M | 🟡 | SessionLog persistiert dauerhaft (für Streaks/Insights). Datenminimierung durch Aufzeichnung minimaler Felder. Auto-Löschung nach Zeit nicht implementiert — Datenschutzkonzept ergänzen. |
+| [O.Source_7](regulations/markdown/BSI-TR-03161-1.md#o-source-7) | Sicheres Löschen von sensiblen | EXAMINE | M | ✅ | Datenschutzkonzept § 7 + Datenlebenszyklus § 4 begründen die Aufbewahrungs-Strategie. In-App-Alle-Daten-löschen (Patch § 7) gibt der Nutzer:in jederzeit die Löschung in die Hand. |
 | [O.Source_8](regulations/markdown/BSI-TR-03161-1.md#o-source-8) | Vollständige Entfernung von | EXAMINE | D | ✅ | Release-Konfiguration in project.yml (`defaultConfig: Release`). Keine Debug-URLs / Test-Endpoints im Quellcode (per Code-Review + gitleaks). |
-| [O.Source_9](regulations/markdown/BSI-TR-03161-1.md#o-source-9) | Aktivierung von modernen | CHECK | D | 🟡 | Apple-Toolchain aktiviert standardmäßig Stack-Canary, ASLR, NX. Obfuskation (Symbol-Stripping etc.) nicht aktiv — Wechselwirkung mit O.Resi_8. |
+| [O.Source_9](regulations/markdown/BSI-TR-03161-1.md#o-source-9) | Aktivierung von modernen | CHECK | D | ✅ | Apple-Toolchain-Defaults aktiv. Symbol-Stripping in Release-Konfiguration explizit gesetzt (Patch § 8: STRIP_INSTALLED_PRODUCT, STRIP_SWIFT_SYMBOLS, DEAD_CODE_STRIPPING). |
 | [O.Source_10](regulations/markdown/BSI-TR-03161-1.md#o-source-10) | Verwendung von Werkzeugen zur | CHECK | D | ✅ | SwiftLint --strict + opt-in rules in `.swiftlint.yml`; in CI per security.yml. ESLint für Playwright-Skripte. Empfehlung: zusätzlich semgrep mit Swift-Regeln. |
 
 ## `O.TrdP_*` — Drittanbieter-Software
@@ -191,22 +191,22 @@
 | ID | Kurzfassung (TR-03161-1 § 4.3) | Prüftiefe | Class | TwoBreath | Begründung / Quelle |
 | --- | --- | --- | --- | --- | --- |
 | [O.Data_1](regulations/markdown/BSI-TR-03161-1.md#o-data-1) | Maximale Sicherheit bei | CHECK | D | ✅ | Werkseinstellung: kein Tracking, alle Daten lokal, alle sensiblen Berechtigungen vom Nutzer per iOS-Prompt explizit zu erteilen. PrivacyInfo.xcprivacy deklariert dies. |
-| [O.Data_2](regulations/markdown/BSI-TR-03161-1.md#o-data-2) | Verschlüsselung aller sensiblen | EXAMINE | D + M | 🟡 | SwiftData liegt unter iOS Data Protection. HealthKit-Daten verbleiben im plattformseitig verschlüsselten HealthKit-Store. App-Ebene-Verschlüsselung über die Plattform hinaus heute nicht zusätzlich implementiert. TR fordert explizit über die OS-Verschlüsselung hinausgehende Maßnahmen — Begründung über Schutzbedarfsanalyse erforderlich. |
+| [O.Data_2](regulations/markdown/BSI-TR-03161-1.md#o-data-2) | Verschlüsselung aller sensiblen | EXAMINE | D + M | ✅ | Schutzbedarfsanalyse in concepts/01-datenschutzkonzept.md + Datenlebenszyklus § 4 begründen die Plattform-Erfüllung (Data Protection Class A + HealthKit-Store) als angemessen für die hier verarbeiteten Datenkategorien. Trigger zur Re-Bewertung bei Backend-Hinzufügen dokumentiert. |
 | [O.Data_3](regulations/markdown/BSI-TR-03161-1.md#o-data-3) | Ablage sensibler Daten. | EXAMINE | D | ✅ | iOS-App-Sandbox + Data-Protection Class A; HealthKit als zusätzlich isolierter Speicherbereich. |
 | [O.Data_4](regulations/markdown/BSI-TR-03161-1.md#o-data-4) | Zugriff auf sensible Daten durch | EXAMINE | D | ✅ | Keine veröffentlichten URL-Schemes, keine Document-Provider-/Sharing-Extensions. MPC-Pairing erfordert manuelle Bestätigung (PairingService.swift). |
-| [O.Data_5](regulations/markdown/BSI-TR-03161-1.md#o-data-5) | Löschung aller erhobenen | CHECK | D + M | 🟡 | SessionLog dauerhaft persistiert für Streaks-Funktion; Datenminimierung durch Aufzeichnung nur minimaler Felder. Auto-Löschung nach Zeit nicht implementiert — Begründung im Datenschutzkonzept erforderlich. |
+| [O.Data_5](regulations/markdown/BSI-TR-03161-1.md#o-data-5) | Löschung aller erhobenen | CHECK | M | ✅ | Datenschutzkonzept § 7 dokumentiert die Aufbewahrungs-Strategie und ihre Begründung. Datenlebenszyklus § 4 gibt pro Datenkategorie Phase-Zeitpunkte. In-App-Löschung (Patch § 7) ergänzt. |
 | [O.Data_6](regulations/markdown/BSI-TR-03161-1.md#o-data-6) | Erhebung, Speicherung und | CHECK | M | ✅ | SessionLog speichert nur programID, Dauer, Phase-Zeiten, Comfort-Rating. HealthKit-Reads beschränkt auf deklarierte Typen (HR, HRV, Schlaf). |
 | [O.Data_7](regulations/markdown/BSI-TR-03161-1.md#o-data-7) | Speicherung und Verarbeitung | CHECK | M | ➖ | Kein Hintergrundsystem; sensible Daten verbleiben lokal. |
 | [O.Data_8](regulations/markdown/BSI-TR-03161-1.md#o-data-8) | Entfernung von Metadaten mit | CHECK | D | ➖ | Anwendung verwendet keine Aufnahmegeräte (nur Audio-Wiedergabe via AVFoundation aus pre-bundled MP3s). |
 | [O.Data_9](regulations/markdown/BSI-TR-03161-1.md#o-data-9) | Zugriffsbeschränkung bei der | EXAMINE | D | ➖ | Nicht anwendbar — keine Aufnahme. |
-| [O.Data_10](regulations/markdown/BSI-TR-03161-1.md#o-data-10) | Keine Aufzeichnungen bei der | EXAMINE | D | 🟡 | Tastatureingaben minimal (z. B. Pairing-Code). UITextContentType + isSecureTextEntry per Code-Review zu prüfen. |
-| [O.Data_11](regulations/markdown/BSI-TR-03161-1.md#o-data-11) | Kein Export sensibler Daten in | CHECK | D | 🟡 | Sensible Anzeigen sollten `.textSelection(.disabled)` setzen. Per Code-Review zu prüfen. |
+| [O.Data_10](regulations/markdown/BSI-TR-03161-1.md#o-data-10) | Keine Aufzeichnungen bei der | EXAMINE | D | ✅ | Pairing-Code-Eingabe mit `.textContentType(.oneTimeCode)` + `.privacySensitive()` + `.autocorrectionDisabled()` (Patch § 3). |
+| [O.Data_11](regulations/markdown/BSI-TR-03161-1.md#o-data-11) | Kein Export sensibler Daten in | CHECK | D | ✅ | Sensible Anzeigen mit `.textSelection(.disabled)` und `.privacySensitive()` markiert (Patch § 4). |
 | [O.Data_12](regulations/markdown/BSI-TR-03161-1.md#o-data-12) | Kein Export von sensiblen Daten | EXAMINE | D | ➖ | Anwendung erhebt weder biometrische Daten noch hält private Schlüssel. |
-| [O.Data_13](regulations/markdown/BSI-TR-03161-1.md#o-data-13) | Keine Speicherung des | CHECK | D | 🟡 | App-Switcher-Snapshot-Maskierung (`UIApplication.willResignActiveNotification`-Handler) wird empfohlen, ist heute nicht implementiert. Sensible HealthKit-Werte werden in der App jedoch nicht im Klartext angezeigt. |
+| [O.Data_13](regulations/markdown/BSI-TR-03161-1.md#o-data-13) | Keine Speicherung des | CHECK | D | ✅ | AppSwitcherShield-ViewModifier (Patch § 2) verdeckt sensible Anzeigen bei Übergang in den Hintergrund. Anwendung auf alle HealthKit-anzeigenden Views. |
 | [O.Data_14](regulations/markdown/BSI-TR-03161-1.md#o-data-14) | Verschlüsselung aller sensiblen | EXAMINE | D | ✅ | iOS Data Protection (NSFileProtectionComplete) bei Gerätesperre — plattformseitig erfüllt. |
 | [O.Data_15](regulations/markdown/BSI-TR-03161-1.md#o-data-15) | Gerätebindung lokal | EXAMINE | D | ✅ | iOS Data Protection: Verschlüsselung mit aus Passcode + Device-UID abgeleitetem Schlüssel = Geräte- und Nutzerbindung. |
 | [O.Data_16](regulations/markdown/BSI-TR-03161-1.md#o-data-16) | Enterfernen oder anderweitiges | CHECK | D | ✅ | iOS-Deinstallation entfernt App-Sandbox vollständig; HealthKit-Daten verbleiben absichtlich in HealthKit (Plattformmodell, vom Nutzer steuerbar). |
-| [O.Data_17](regulations/markdown/BSI-TR-03161-1.md#o-data-17) | Möglichkeit zum Löschen oder | EXAMINE | M | 🟡 | Vollständige Löschung über Deinstallation möglich. In-App-'Alles löschen'-Funktion noch nicht implementiert; Empfehlung für Aufnahme. |
+| [O.Data_17](regulations/markdown/BSI-TR-03161-1.md#o-data-17) | Möglichkeit zum Löschen oder | EXAMINE | D | ✅ | DataEraseService + Settings-UI mit Confirmation-Dialog (Patch § 7) löscht SessionLog, ConsentLog, PartnerPairing und entfernt App-eigene HealthKit-Mindful-Minutes. |
 | [O.Data_18](regulations/markdown/BSI-TR-03161-1.md#o-data-18) | Sicheres Überschreiben von | EXAMINE | D | ➖ | Optionale KANN-Anforderung. Ohne Hintergrundsystem nicht umsetzbar. |
 
 ## `O.Paid_*` — Kostenpflichtige Ressourcen
@@ -234,14 +234,14 @@
 
 | ID | Kurzfassung (TR-03161-1 § 4.3) | Prüftiefe | Class | TwoBreath | Begründung / Quelle |
 | --- | --- | --- | --- | --- | --- |
-| [O.Ntwk_1](regulations/markdown/BSI-TR-03161-1.md#o-ntwk-1) | Netzwerkkommunikation | EXAMINE | D | 🟡 | MultipeerConnectivity nutzt session-key-basierte Verschlüsselung (`encryptionPreference: .required`, PairingService.swift:27). Beidseitige Authentisierung erfolgt per User-bestätigtem Pairing-Code, nicht per X.509-mTLS. Anforderung nach mTLS strikt nicht erfüllt; alternative Authentisierung dokumentationspflichtig. |
+| [O.Ntwk_1](regulations/markdown/BSI-TR-03161-1.md#o-ntwk-1) | Netzwerkkommunikation | EXAMINE | D | ✅ | Begründete Lesart in concepts/07-netzwerk-sicherheitskonzept.md § 3.2: MPC `encryptionPreference: .required` + manuelle, beidseitige Pairing-Code-Bestätigung erfüllen das Schutzziel der gegenseitigen Authentisierung wirkungsgleich, da kein Hersteller-Backend für eine Trust-Anchor-PKI existiert. Alternative ist dokumentiert. |
 | [O.Ntwk_2](regulations/markdown/BSI-TR-03161-1.md#o-ntwk-2) | Konfiguration der verschlüsselten | EXAMINE | R + D | ✅ | App führt keine eigenen HTTP(S)-Verbindungen aus. ATS-Default (TLS 1.2+, starke Ciphers) gilt; keine ATS-Ausnahmen in Info.plist. |
 | [O.Ntwk_3](regulations/markdown/BSI-TR-03161-1.md#o-ntwk-3) | Sichere Kommunikationskanäle nur | EXAMINE | D | ✅ | Sichere Kanäle ausschließlich über Apple-Plattformbibliotheken (MultipeerConnectivity, Network). |
 | [O.Ntwk_4](regulations/markdown/BSI-TR-03161-1.md#o-ntwk-4) | Unterstützung von Zertifikats- | EXAMINE | D | ➖ | Kein eigenes Hintergrundsystem; Zertifikats-Pinning nicht anwendbar. Falls künftig HTTPS-Backend angebunden, ist Pinning vorzusehen. |
 | [O.Ntwk_5](regulations/markdown/BSI-TR-03161-1.md#o-ntwk-5) | Validierung des Server-Zertifikats des | EXAMINE | D | ➖ | Kein Hintergrundsystem. |
 | [O.Ntwk_6](regulations/markdown/BSI-TR-03161-1.md#o-ntwk-6) | Validierung der Integrität und | EXAMINE | D | ➖ | Kein Hintergrundsystem. |
 | [O.Ntwk_7](regulations/markdown/BSI-TR-03161-1.md#o-ntwk-7) | Verwendung plattformspezifischer | EXAMINE | D | ✅ | Info.plist enthält keine ATS-Ausnahmen (`NSAllowsArbitraryLoads` nicht gesetzt). Cleartext-Traffic standardmäßig deaktiviert. |
-| [O.Ntwk_8](regulations/markdown/BSI-TR-03161-1.md#o-ntwk-8) | Vorhaltung von vollständigen Log- | CHECK | R | 🟡 | Keine zentrale Verbindungs-Log-Datei; angesichts fehlenden Hintergrundsystems heute nicht zielführend. Bei Architekturänderung neu zu bewerten. |
+| [O.Ntwk_8](regulations/markdown/BSI-TR-03161-1.md#o-ntwk-8) | Vorhaltung von vollständigen Log- | CHECK | R | ✅ | Logging-Tabelle in concepts/07-netzwerk-sicherheitskonzept.md § 6: Pairing-Beginn/-Ende, Reset/Reconnect, Verbindungsfehler über `os.Logger`-Subsystem `pairing` mit privacy-Markern. Verbleibt am Gerät (kein Hintergrundsystem); Trigger zur Erweiterung dokumentiert. |
 
 ## `O.Plat_*` — Plattformspezifische Interaktionen
 
@@ -250,7 +250,7 @@
 
 | ID | Kurzfassung (TR-03161-1 § 4.3) | Prüftiefe | Class | TwoBreath | Begründung / Quelle |
 | --- | --- | --- | --- | --- | --- |
-| [O.Plat_1](regulations/markdown/BSI-TR-03161-1.md#o-plat-1) | Geräteschutz für die Nutzung der | CHECK | M | 🟡 | Geräte-Sperrcheck via `LAContext.canEvaluatePolicy(.deviceOwnerAuthentication)` nicht implementiert. Gemäß Schutzbedarf der HealthKit-Daten zu prüfen, ob Hinweis nötig. |
+| [O.Plat_1](regulations/markdown/BSI-TR-03161-1.md#o-plat-1) | Geräteschutz für die Nutzung der | CHECK | M | ✅ | Sicherheits-Empfehlungs-Bildschirm (Patch § 5) klärt explizit über Geräte-Sperre / Face-/Touch-ID auf — Erstes Bullet im SecurityInfoView. |
 | [O.Plat_2](regulations/markdown/BSI-TR-03161-1.md#o-plat-2) | Nur Anforderung der für den | CHECK | D | ✅ | Entitlements: nur HealthKit. Info.plist usage strings: nur Health, LocalNetwork (Bonjour-Pairing), NearbyInteraction (UWB-Pairing). Berechtigungen entsprechen primärem Zweck. |
 | [O.Plat_3](regulations/markdown/BSI-TR-03161-1.md#o-plat-3) | Hinweis auf Zweck der | CHECK | D | ✅ | Alle Berechtigungs-Beschreibungen in Info.plist erklären Zweck (NSHealthShare/Update, NSLocalNetwork, NSNearbyInteraction). Auswirkung der Verweigerung sollte in App-UI ergänzt werden. |
 | [O.Plat_4](regulations/markdown/BSI-TR-03161-1.md#o-plat-4) | Keine sensiblen Daten in Meldungen | EXAMINE | D | ✅ | Anwendung sendet heute keine Push- oder Local-Notifications mit sensiblen Inhalten. |
@@ -258,11 +258,11 @@
 | [O.Plat_6](regulations/markdown/BSI-TR-03161-1.md#o-plat-6) | Zugriffsbeschränkungen auf sensible | EXAMINE | D | ✅ | iOS-Sandbox plus HealthKit-Typ-spezifische Autorisierung. |
 | [O.Plat_7](regulations/markdown/BSI-TR-03161-1.md#o-plat-7) | Nutzung von sensiblen | CHECK | D | ✅ | Genutzte IPC: WatchConnectivity (Geräte des Nutzers) + MPC (bestätigter Partner). Beide für primären Zweck erforderlich. |
 | [O.Plat_8](regulations/markdown/BSI-TR-03161-1.md#o-plat-8) | Nutzung von Rendering Engines zum | CHECK | D | ➖ | Keine Rendering-Engine / WebView. |
-| [O.Plat_9](regulations/markdown/BSI-TR-03161-1.md#o-plat-9) | Entfernung von sensiblen Daten bei | EXAMINE | D | 🟡 | Hintergrund-Übergangs-Maskierung empfohlen, heute nicht implementiert. |
+| [O.Plat_9](regulations/markdown/BSI-TR-03161-1.md#o-plat-9) | Entfernung von sensiblen Daten bei | EXAMINE | D | ✅ | AppSwitcherShield-ViewModifier (Patch § 2) maskiert sensible Inhalte bei Übergang in den Hintergrund. |
 | [O.Plat_10](regulations/markdown/BSI-TR-03161-1.md#o-plat-10) | Deaktivierung nicht benötigter | CHECK | D | ➖ | Keine Rendering-Engine. |
 | [O.Plat_11](regulations/markdown/BSI-TR-03161-1.md#o-plat-11) | Löschen anwendungsspezifischer | EXAMINE | D | ➖ | Keine Rendering-Engine. |
 | [O.Plat_12](regulations/markdown/BSI-TR-03161-1.md#o-plat-12) | Überschreiben aller | EXAMINE | D | ➖ | Swift ARC räumt Speicher beim Exit auf; keine eigenen sensiblen Speicherpuffer. |
-| [O.Plat_13](regulations/markdown/BSI-TR-03161-1.md#o-plat-13) | Information des Nutzers über | CHECK | M | ❌ | User-Hinweise zur Geräte-PIN, App-Aktualisierung, Pairing-Sicherheit fehlen — empfohlen für Settings-/About-Screen. |
+| [O.Plat_13](regulations/markdown/BSI-TR-03161-1.md#o-plat-13) | Information des Nutzers über | CHECK | M | ✅ | SecurityInfoView (Patch § 5) im Settings-Bildschirm enthält Sicherheits-Empfehlungen, Verarbeitungs-Übersicht, Verlauf-Verlinkung, Vulnerability-Disclosure-Link. |
 | [O.Plat_14](regulations/markdown/BSI-TR-03161-1.md#o-plat-14) | Protokollierung bestimmter | CHECK | R | ➖ | Kein Hintergrundsystem für Logging; abnormaler Anwendungsstart → iOS-Standard-Handling. |
 
 ## `O.Resi_*` — Resilienz
@@ -272,14 +272,14 @@
 
 | ID | Kurzfassung (TR-03161-1 § 4.3) | Prüftiefe | Class | TwoBreath | Begründung / Quelle |
 | --- | --- | --- | --- | --- | --- |
-| [O.Resi_1](regulations/markdown/BSI-TR-03161-1.md#o-resi-1) | Informationen zum sicheren | CHECK | M | ❌ | User-Best-Practices-Seite fehlt — siehe O.Plat_13. |
-| [O.Resi_2](regulations/markdown/BSI-TR-03161-1.md#o-resi-2) | Erkennung vom Betriebszustand des | EXAMINE | D | 🟡 | Mindest-iOS-Version per `deploymentTarget: iOS: '17.0'` erzwungen. Jailbreak-/Modifikations-Erkennung nicht implementiert. |
-| [O.Resi_3](regulations/markdown/BSI-TR-03161-1.md#o-resi-3) | Erkennung und Unterbindung des | CHECK | D | ❌ | Debug-Erkennung (z. B. `sysctl(KERN_PROC_ALL)`) nicht implementiert. Bei TR-Strenge anzustreben. |
+| [O.Resi_1](regulations/markdown/BSI-TR-03161-1.md#o-resi-1) | Informationen zum sicheren | CHECK | M | ✅ | Best-Practice-Empfehlungen im SecurityInfoView (Patch § 5) — gleicher Bildschirm wie O.Plat_13. |
+| [O.Resi_2](regulations/markdown/BSI-TR-03161-1.md#o-resi-2) | Erkennung vom Betriebszustand des | EXAMINE | D | ✅ | Mindest-iOS-Version 17.0; halbjährliche Re-Validierung in concepts/08-resilienz-haertungskonzept.md § 3 dokumentiert. Jailbreak-Heuristiken bewusst ausgeschlossen mit Begründung (§ 5.3). |
+| [O.Resi_3](regulations/markdown/BSI-TR-03161-1.md#o-resi-3) | Erkennung und Unterbindung des | CHECK | D | ✅ | `assertNotDebugged()`-Funktion via `sysctl(KERN_PROC, …, P_TRACED)` (Patch § 1), aufgerufen in App-Init. Wirkt nur in Release-Builds. |
 | [O.Resi_4](regulations/markdown/BSI-TR-03161-1.md#o-resi-4) | Abbruch des Starts der Anwendung | CHECK | D | ➖ | iOS-Sandbox-Modell: keine 'ungewöhnlichen Benutzerrechte' im klassischen Sinne. Anforderung primär für jailbroken devices relevant — siehe O.Resi_2. |
-| [O.Resi_5](regulations/markdown/BSI-TR-03161-1.md#o-resi-5) | wird angenommen, dass das Betriebssystem Funktionen bereitstellt, mit denen eine Anwendung die Konformität des Betriebszustandes bezüglich der Anforderungen des Betriebssystemherstellers an das Betriebssystem abfragen kann. | — | D | 🟡 | Apple App Attest (`DCAppAttestService`) verfügbar, ist heute nicht implementiert. |
+| [O.Resi_5](regulations/markdown/BSI-TR-03161-1.md#o-resi-5) | wird angenommen, dass das Betriebssystem Funktionen bereitstellt, mit denen eine Anwendung die Konformität des Betriebszustandes bezüglich der Anforderungen des Betriebssystemherstellers an das Betriebssystem abfragen kann. | — | D | 🟡 | App-Attest-Stub (Patch § 6) vorbereitet; wartet auf Hintergrundsystem als Konsumenten der Attestation. Begründung in concepts/08-resilienz-haertungskonzept.md § 5.1. |
 | [O.Resi_6](regulations/markdown/BSI-TR-03161-1.md#o-resi-6) | Überprüfung der Authentizität des | EXAMINE | D | ➖ | Kein Hintergrundsystem. |
-| [O.Resi_7](regulations/markdown/BSI-TR-03161-1.md#o-resi-7) | Integration von | EXAMINE | D | 🟡 | Implementierung mit Apple App Attest empfohlen, heute nicht aktiv. |
-| [O.Resi_8](regulations/markdown/BSI-TR-03161-1.md#o-resi-8) | Umsetzung von Maßnahmen gegen | EXAMINE | D | 🟡 | Apple-Toolchain-Defaults aktiv (Stack-Canary, ASLR, NX). Obfuskation (Symbol-Stripping, Anti-Debugging) nicht implementiert. Wechselwirkung mit O.Source_9. |
+| [O.Resi_7](regulations/markdown/BSI-TR-03161-1.md#o-resi-7) | Integration von | EXAMINE | D | 🟡 | App-Attest-Stub (Patch § 6) vorbereitet — siehe O.Resi_5. Aktivierung mit Hintergrundsystem. |
+| [O.Resi_8](regulations/markdown/BSI-TR-03161-1.md#o-resi-8) | Umsetzung von Maßnahmen gegen | EXAMINE | D | ✅ | Apple-Toolchain-Defaults + scharf gesetztes Symbol-Stripping in Release (Patch § 8). Trade-off-Begründung gegen kommerzielle Obfuscation in concepts/08-resilienz-haertungskonzept.md § 8 dokumentiert. |
 | [O.Resi_9](regulations/markdown/BSI-TR-03161-1.md#o-resi-9) | Berücksichtigung von Plattformen | EXAMINE | D | ➖ | Anwendung ist iOS-/watchOS-exklusiv; Hersteller-Variations-Problem entfällt. |
 | [O.Resi_10](regulations/markdown/BSI-TR-03161-1.md#o-resi-10) | Robustheit gegenüber Störungen. | EXAMINE | D + P | ✅ | Robustheit durch Engine-State-Machine-Tests (BreathingEngine pause/resume, Audio-interruption-Handling). CI testet auf iPhone- und Watch-Simulator (ci.yml). |
 
