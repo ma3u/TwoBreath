@@ -1,217 +1,222 @@
-# Wir machen Re-Zertifizierung kürzer — ein DiGA-Praxisbericht
-
-**Untertitel:** Wie moderne Software-Lieferketten, DevSecOps und generative KI die Datensicherheits-Zertifizierung digitaler Gesundheitsanwendungen nach BSI TR-03161 von Monaten auf Tage komprimieren können — ohne den Schutzbedarf der Patient:innen zu senken.
+# Aus Notwehr eine App gebaut — könnte sie auch DiGA werden? Eine offene Frage.
 
 **Autor:** Matthias Buchhorn-Roth
-**Veröffentlichung:** Entwurf v0.3, 2026-05-02
-**Lesezeit:** ca. 9 Minuten
+**Veröffentlichung:** Entwurf v0.4, persönliche Fassung, 2026-05-02
+**Lesezeit:** ca. 8 Minuten
 
 ---
 
-## TL;DR
+## Wie das angefangen hat
 
-- Eine DiGA muss seit 1.1.2025 ein BSI-Zertifikat nach **TR-03161** vorlegen. Heute dauert die jährliche Re-Zertifizierung **mehrere Monate** und bindet erhebliche Ressourcen.
-- Wir haben anhand einer realen App **alle 127 Prüfanforderungen** der TR-03161-1 v3.0 einzeln gegen den tatsächlichen Code durchgearbeitet — **und in Folgearbeit alle ehemaligen Lücken geschlossen**. Ergebnis: **80 % aller Anforderungen sind grundsätzlich deterministisch erbringbar** (74 % deploy-time, 4 % real-time, 2 % periodisch). Nur 20 % erfordern manuelles Urteil — überwiegend Dokumentations- und Konzeptarbeiten.
-- Im konkreten Fall der untersuchten App stehen — nach Bearbeitung der dokumentierten Lücken — **55 % der Anforderungen auf ✅ erfüllt**, **2 % auf 🟡 teilweise** (App Attest, wartet auf Backend), **0 % auf ❌**, **43 % auf ➖ nicht anwendbar** (lokal-zuerst-Architektur).
-- **Marktbefund aus 4-Agenten-Web-Recherche:** Im DiGA-Verzeichnis Mai 2026 ist **F51.0 (nicht-organische Insomnie) mit Paar-basiertem Bedtime-Ritual nicht besetzt**. Drei gelistete Insomnie-DiGA (somnio / mementor-ResMed, HelloBetter Schlafen, somnovia) adressieren ausschließlich Solo-CBT-I — obwohl 60–75 % der Insomnie-Episoden paar-synchron sind (Bed-Sharing-Effekt).
-- **Realismus aus dem Verzeichnis:** ~58–60 DiGA insgesamt, **16 davon mangels Versorgungsnutzen wieder gestrichen**. Die klinische Studienhürde ist real — die Erprobungslistung nach § 139e Abs. 4 SGB V ist die strukturierte Antwort darauf.
-- Das eigentliche Problem ist nicht „zu viele Anforderungen". Das Problem ist, dass das Verfahren fast alle Nachweise wie **manuelle Dokumente** behandelt, obwohl viele bei jedem Build oder live im Produktivsystem belegt werden könnten.
-- Wir teilen die Befunde mit dem **BSI** und dem **BfArM**, weil eine Modernisierung allen vier Zielgruppen nützt: Hersteller, Krankenkassen, behandelnden Ärzt:innen, **und vor allem Patient:innen**.
+Dascha und ich haben irgendwann aufgehört, Subscriptions für Apps zu bezahlen, die uns nicht das gegeben haben, was wir gebraucht haben.
 
----
+Atemübungen-Apps, Meditation, Schlaf-Tools — dreistellige Eurobeträge im Jahr für Software, die entweder nicht funktioniert hat, ihre wichtigsten Funktionen hinter einem nächsten Tier versteckt, oder uns als Einzelpersonen behandelt hat, obwohl wir die Übungen **gemeinsam** machen wollten. Und immer dieselbe Pop-up-Architektur: dreimal weggeklickt, einmal versehentlich verlängert.
 
-## Warum dieser Beitrag
+Also haben wir aufgehört zu zahlen — und angefangen zu bauen.
 
-Ich arbeite mit Hersteller-Teams an Datensicherheits-Zertifizierungen für DiGA. In Gesprächen mit dem BSI ist deutlich geworden: alle Beteiligten — Aufsicht, Hersteller, Prüfstellen — wünschen sich ein schlankeres Verfahren, **ohne** das Schutzniveau zu kompromittieren. Dieser Beitrag ist mein praktischer Versuch, dafür eine konkrete, nachprüfbare Diskussionsgrundlage zu liefern.
+[**TwoBreath**](https://www.twobreath.com) ist ein iOS-/Apple-Watch-Atemritual für **Paare**. Drei Jahre lang gemeinsam ausprobiert, jeden Morgen 15–25 Minuten: synchronisiertes Atmen, eine kurze Lesung, bewusster Augenkontakt. Was als Privatprojekt anfing — buchstäblich zwei Menschen, die ein Problem gelöst haben, das eine 10-Mrd-Dollar-Wellness-Industrie nicht für uns lösen wollte — ist heute eine App im App Store.
 
-Das Vorgehen war bewusst klein gehalten: **eine** reale, bereits ausgelieferte iOS-/Apple-Watch-App (TwoBreath, Atemübungen für Paare) als methodisches Beispiel — keine Marketingstudie, kein Hochglanz-Pilot. Dazu nur Open-Source-Werkzeuge, ein Markdown-Repository und ein modernes Sprachmodell (Claude Opus 4.7) — letzteres **ausschließlich** zur Strukturierung, niemals als Beweismittel.
+Und jetzt sitzen wir vor einer ehrlichen Frage:
 
-Den vollständigen Bericht für das BSI sowie die maschinenlesbare Anforderungs-Matrix verlinke ich am Ende.
+> **Könnte TwoBreath eine DiGA sein?**
+
+Ich kenne die Antwort noch nicht. Ich schreibe diesen Beitrag, um sie zu finden.
 
 ---
 
-## Was wir herausgefunden haben
+## Was eine DiGA überhaupt ist
 
-Wir haben aus dem TR-03161-1-PDF (66 Seiten, 25.03.2024) alle **127 eindeutigen Prüfanforderungen** (`O.Purp_*`, `O.Arch_*`, … `O.Resi_*`) mit Kurzfassung und Prüftiefe extrahiert und jede einzelne gegen den tatsächlichen Code der App geprüft — Konfigurationsdateien (`project.yml`, `Info.plist`, Entitlements, `PrivacyInfo.xcprivacy`), CI-Pipelines (`.github/workflows/`), Source-Services (HealthKit, Pairing, WatchConnectivity).
+Für die, die nicht täglich damit zu tun haben:
 
-Jede Anforderung wurde in eine von vier **Beweisklassen** einsortiert:
+**DiGA** steht für **„Digitale Gesundheitsanwendung"** — Apps, die in Deutschland von Ärzt:innen verschrieben und von der gesetzlichen Krankenversicherung **erstattet** werden können. Seit 2020 gibt es das DiGA-Verzeichnis beim [BfArM](https://diga.bfarm.de/de). Aktuell sind dort etwa 60 Apps gelistet — gegen Insomnie, Angststörungen, Depressionen, Tinnitus, Rückenschmerzen.
 
-| Klasse | Bedeutung | Beispiel |
-| --- | --- | --- |
-| **R — Real-time** | im Produktivsystem fortlaufend gültig, bei jeder Änderung neu auswertbar | TLS-Konfiguration, sichere HTTP-Header |
-| **D — Deploy-time** | bei jedem CI/CD-Build erzeugt, signiert, archiviert | SBOM, Abhängigkeits-CVE-Scan, statische Code-Analyse |
-| **P — Periodic** | mit definierter Gültigkeitsdauer | Penetrationstest, Restore-Drill |
-| **M — Manual** | erfordert menschliches Urteil | Datenschutz-Folgenabschätzung, Threat-Model-Review |
+Drei Hürden muss eine App nehmen, um darauf zu landen ([§ 139e SGB V](https://www.gesetze-im-internet.de/sgb_5/__139e.html)):
 
-Das Ergebnis ist deutlich: **101 von 127 Anforderungen (~80 %) sind R, D oder P** — also grundsätzlich automatisierbar. Heute werden sie aber überwiegend wie **M** behandelt: in Word-Dokumenten gesammelt, per E-Mail eingereicht, von Hand geprüft.
+1. **Sicherheit & Funktionstauglichkeit** — CE-Kennzeichnung als Medizinprodukt nach MDR.
+2. **Datenschutz & Datensicherheit** — BSI-Zertifikat nach **TR-03161** (verpflichtend seit 1.1.2025) plus GDPR-Art.-42-Zertifikat.
+3. **Positiver Versorgungseffekt** — klinischer Nutzen, belegt mit einer vergleichenden Studie. Üblicherweise ein RCT.
 
-### Konkret: was haben wir bei der untersuchten App gefunden — und wo stehen wir jetzt?
+Klingt machbar, oder? Ich war auch optimistisch. Bis ich anfing, durch die Anforderungen zu lesen.
 
-| Status | v0.1 (initiale Auswertung) | v0.2 (nach Schließung) |
+---
+
+## Warum die Frage „kann das DiGA werden?" für uns nicht akademisch ist
+
+Ich sage das offen: **wir sind selbst die Zielgruppe.**
+
+Dascha und ich sind eine Patchwork-Familie. Wir bringen aus zwei vorigen Leben Kinder, Verantwortungen, Verluste, Vergangenheiten mit. Eines unserer Kinder ist Autist. ADHS taucht in unserem näheren Umfeld in mehreren Generationen auf. Eltern werden älter, Krisen kommen unangekündigt, Stress sammelt sich im Schlaf ab, der dann nicht mehr richtig wird. Wer in einer Patchwork-Familie lebt, kennt die Variante: man fällt nicht aus dem Funktionsmodus heraus — man **stürzt** heraus, irgendwann in einer Augustnacht um 3 Uhr.
+
+Wir hätten gerne einen Therapeuten, der uns beim Sortieren hilft. **Termin: in sechs Monaten.** Falls überhaupt. In Großstädten ist die Lage ein bisschen besser, in Brandenburg deutlich schlechter, im Schnitt warten Patient:innen in Deutschland für eine kassenfinanzierte Verhaltenstherapie laut [Bundespsychotherapeutenkammer](https://www.bptk.de/) **fünf bis sieben Monate**. Wer kann, zahlt selbst, geht zu Heilpraktiker:innen oder ins Coaching. Wer nicht, wartet.
+
+Und ehrlich gesagt: selbst mit Therapeut:in **bleibt** ein Stück Arbeit am Alltag bei einem selbst. Beziehungs-Co-Regulation, Stress-Runter-Atmen, Schlaf-Anstoßen — das kann ein Therapeut nicht für euch tun. Das müsst ihr **gemeinsam** üben, jeden Tag, in der Küche, bevor ihr ins Bett geht.
+
+Genau dort ist TwoBreath gelandet: als kleines, tägliches **Paar-Werkzeug** zwischen den Therapie-Terminen.
+
+---
+
+## Warum eine Atem-App medizinisch überhaupt etwas zu suchen hat
+
+Damit hier kein Wellness-Beipackzettel entsteht: die zugrundeliegende Physiologie ist relativ gut belegt.
+
+- **Verlangsamtes Atmen aktiviert den Vagusnerv.** Das ist messbar in der Herzraten-Variabilität (HRV). Die Mechanismus-Beschreibung ist Standardstoff in der Schlafmedizin.
+- **Right-Hemisphere-Aktivitäten** — gemeinsamer Augenkontakt, Atem-Synchronisation, leiser Lesung — verschieben Aktivität in die rechte Hirnhemisphäre. Arthur Brooks fasst die Forschungslage in *„Build the Life You Want"* (2023) zusammen. Das ist nicht „Esoterik", das ist neuro-funktionale Bildgebung.
+- **Co-Regulation in Paaren ist im Labor reproduzierbar.** Guy Bodenmann (Universität Zürich, [paarlife.ch](https://www.paarlife.ch/)) hat über zwanzig Jahre Studien dazu publiziert. HRV synchronisiert sich zwischen vertrauten Personen. Stress-Crossover ist real — Stress-Down-Crossover auch.
+- **Schlafprobleme sind in 60–75 % der Fälle paar-synchron.** Das ist der „Bed-Sharing-Effekt". Wer schlecht schläft, schläft selten allein schlecht.
+
+Was bei dieser Forschungslage auffällt: **es gibt Studien. Es gibt eine Mechanismus-Erzählung. Es gibt sogar ein anerkanntes Versorgungsproblem (Therapeut:innen-Mangel, Wartezeiten).** Was fehlt, ist der Schritt von der akademischen Studie in die Versorgung.
+
+---
+
+## Was ich beim Lesen der DiGA-Anforderungen herausgefunden habe
+
+Ich komme aus der **IT-Sicherheit / DevSecOps**. Mein Tagesgeschäft sind automatisierte CI/CD-Pipelines, Software-Lieferketten, Compliance-Prozesse. Wenn jemand einen 66-seitigen technischen Anforderungskatalog vor mich legt, dann ist das mein Heimspiel — andere lesen Krimis.
+
+Also habe ich das mit **TwoBreath als Versuchsobjekt** gemacht: alle 127 Prüfanforderungen der **BSI TR-03161-1 v3.0** einzeln gegen den real existierenden iOS-/Apple-Watch-Code der App geprüft. Keine Marketing-Studie, keine Hochglanz-Slide. Eine Markdown-Datei, ein paar Open-Source-Werkzeuge, das Sprachmodell Claude Opus 4.7 als Strukturierungs-Helfer (niemals als Beweismittel — das wäre regulatorisch ein Problem). Vollständige Auswertung im Repo: [diga/COMPLIANCE_MATRIX_TR1_OFFICIAL.md](https://github.com/ma3u/TwoBreath/blob/main/diga/COMPLIANCE_MATRIX_TR1_OFFICIAL.md).
+
+Das Ergebnis hat mich überrascht.
+
+| Status | Anzahl | Anteil |
 | --- | ---: | ---: |
-| ✅ erfüllt | 40 (31 %) | **70 (55 %)** |
-| 🟡 teilweise | 25 (20 %) | **2 (2 %)** |
-| ❌ Lücke | 6 (5 %) | **0 (0 %)** |
-| ➖ nicht anwendbar | 56 (44 %) | 55 (43 %) |
+| ✅ erfüllt | 70 | 55 % |
+| 🟡 teilweise (App Attest, wartet auf Backend) | 2 | 2 % |
+| ❌ Lücke | **0** | **0 %** |
+| ➖ nicht anwendbar (z. B. keine Konten, kein Backend) | 55 | 43 % |
 
-Die Schließung von v0.1 → v0.2 erfolgte über **vier konkrete Werkzeuge**:
+**Keine einzige offene Lücke.** Das war nach 8 Konzeptdokumenten, einer `SECURITY.md`, einer `CI_CD_SECURITY.md` und 10 PR-fertigen Code-Patches der Stand. Aufwand: gefühlte 20 Personentage, weil die Werkzeuge da sind und die App keine fremden Bibliotheken benutzt.
 
-1. **Acht Konzeptdokumente** unter [`diga/concepts/`](https://github.com/ma3u/TwoBreath/tree/main/diga/concepts) — Datenschutzkonzept, Datenlebenszyklus mit Trust-Boundary-Diagramm, STRIDE-Threat-Model, Secure-Coding-Standards, Einwilligungsverzeichnis-Konzept, Kryptographiekonzept (mit expliziter Plattform-Delegierung nach TR-02102), Netzwerk-Sicherheitskonzept, Resilienz-/Härtungskonzept.
-2. **Eine [`SECURITY.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/SECURITY.md)** mit verschlüsseltem Meldekanal und Safe-Harbor — schließt die letzte Disclosure-Lücke.
-3. **Eine erweiterte [`CI_CD_SECURITY.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/CI_CD_SECURITY.md)** — beantwortet ehrlich, welche SAST/DAST-Werkzeuge fehlten (semgrep, MobSF, syft, osv-scanner, testssl.sh) und liefert eine drop-in-`security.yml`-Erweiterung mit fünf neuen Jobs.
-4. **Zehn PR-fertige Swift-Patches** in [`patches/PATCHES.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/patches/PATCHES.md) — Debug-Detection, App-Switcher-Maskierung, Secure-Text-Entry, Text-Selection-Disable, Sicherheits-Bildschirm, App-Attest-Stub, In-App-Datenlöschung, Build-Hardening, Einwilligungs-Verzeichnis-Code, SwiftLint-Custom-Regel.
+Auf der **Datensicherheits-Säule** könnte TwoBreath morgen den Audit gehen.
 
-Die zwei verbleibenden 🟡 (App-Attest-Schließung) sind bewusst aufgeschoben, weil sie ein Hintergrundsystem als Konsumenten brauchen.
-
-> Die ehrliche Aussage lautet: für eine kleine, lokal-orientierte App ist das Datensicherheits-Niveau bereits heute substanziell — und die fehlenden Stücke sind in **Personentagen**, nicht Personenmonaten geschlossen. Das hier dokumentierte Material ist die Form, in der ein Hersteller einen TR-03161-Audit erfolgreich vorbereiten kann.
-
-> Dort wo Monate verloren gehen, geht es selten um schwierige Fragen. Es geht um die Form der Antwort.
+Nun, jedenfalls fast. Es gibt da noch zwei andere Säulen.
 
 ---
 
-## Sechs persönliche Erkenntnisse aus dieser Übung
+## Wo die DiGA-Hürden tatsächlich liegen — und das ist nicht die Datensicherheit
 
-Diese Schlüsse habe ich aus der Detailarbeit an den 127 Anforderungen plus aus einer ergänzenden Vier-Agenten-Web-Recherche zur deutschen DiGA-Landschaft gezogen. Sie sind subjektiv, aber jede ist mit einer konkreten Quelle im [Repo](https://github.com/ma3u/TwoBreath/tree/main/diga) belegt.
+Der **Sicherheitsteil ist der einfachste Teil**, wenn man aus IT-Sicherheit kommt. Das, was wirklich schwierig wird, ist die **klinische Säule**.
 
-### 1. Die Marktlücke ist strukturell, nicht zufällig
+**Hürde 1 — Klinische Positionierung.** Eine DiGA muss eine **konkrete Indikation** adressieren — eine ICD-10-Diagnose. „Wellness für Paare" ist keine Indikation. Wir müssten TwoBreath als Anwendung **gegen** etwas positionieren — Insomnie (F51.0 / G47.0), generalisierte Angst (F41.1), akute Belastung (F43.0). Aus der Markt-Recherche ist das klar: **F51.0 mit Paar-basiertem Bedtime-Ritual ist im DiGA-Verzeichnis nicht besetzt.** Drei Insomnie-DiGA sind heute gelistet (somnio, HelloBetter Schlafen, somnovia) — alle Solo-CBT-I. Niemand adressiert das gemeinsame Bett, in dem 60–75 % der Insomnie passiert.
 
-Drei Insomnie-DiGA sind heute gelistet — alle adressieren Einzelpersonen mit klassischer CBT-I. Doch **60–75 % der Insomnie-Episoden sind paar-synchron** (Bed-Sharing-Effekt). Das ist kein Marketing-USP; das ist Polysomnographie. Trotzdem gibt es im DiGA-Verzeichnis **null** Anwendungen, die das Bett als das gemeinsame Therapie-Setting behandeln, das es ist. Die Lücke ist physiologisch begründet und im Verfahren nicht abgebildet.
+**Hürde 2 — MDR-Konformität.** Eine DiGA ist ein Medizinprodukt. Wir bräuchten ein **CE-Zertifikat nach MDR**, eine ISO-14971-Risikoakte, IEC-62304-Software-Lebenszyklus-Dokumentation, ISO-13485-QMS. Die gute Nachricht: TwoBreath wäre vermutlich **MDR-Klasse-I** (keine Diagnose-Funktion, eng formulierter „Intended Use") — keine Benannte Stelle nötig, Selbsterklärung möglich. Das verkürzt den Pfad erheblich. Trotzdem ist das Doku-Arbeit, die wir bisher nicht hatten.
 
-### 2. Die Studienhürde ist real, und das ist gut so
+**Hürde 3 — Klinischer Wirknachweis.** Hier liegt das eigentliche Problem. Ich muss in einer **vergleichenden Studie** zeigen, dass TwoBreath einen **patientenrelevanten Effekt** hat. Üblich ist ein RCT mit 200 Patient:innen pro Studienarm, 8–12 Wochen Beobachtung, Endpunkt zum Beispiel ISI-Reduktion (Insomnia Severity Index). Diese Studie kostet **100.000 bis 500.000 Euro** und dauert **12 bis 24 Monate**.
 
-Von ~60 gelisteten DiGA wurden **16 wieder gestrichen** ([GKV-Spitzenverband 2024-Bericht](https://www.gkv-spitzenverband.de/media/dokumente/krankenversicherung_1/telematik/digitales/2024_DiGA-Bericht_final.pdf)). Das ist nicht angenehm zu lesen, aber es ist genau das Filter, das die Listung von einem Marketing-Stempel unterscheidet. Mein eigener Schluss: die **Erprobungslistung nach § 139e Abs. 4 SGB V** ist nicht der „leichte Weg", sondern der ehrliche — sie gibt 12 Monate Erstattungs-Erprobung mit echter Studie als Pflicht.
-
-### 3. Generative KI funktioniert — auf dem Strukturierungspfad
-
-Claude Opus 4.7 hat in dieser Übung 127 normative Anforderungs-Texte aus einem 66-Seiten-PDF extrahiert, sie zur App-Konfiguration gemappt und in einer Matrix dargestellt. **Vier parallele Recherche-Agenten** haben über 100 reale Partner-Kandidat:innen mit Quellenlinks ermittelt. Das ist eine andere Größenordnung Geschwindigkeit, als ich sie aus klassischen Beratungs-Mandaten kenne. **Aber:** kein einziger Beweis-Schritt lief über das Sprachmodell. Werkzeugausgabe (gitleaks, MobSF, syft, testssl.sh, …) ist der Beweis. Diese Trennung ist nicht ideologisch, sie ist regulatorisch geboten.
-
-### 4. Plattform-Aussagen sind die größte ungehobene Reserve
-
-Etwa 30 der 127 TR-03161-1-Anforderungen werden durch korrekt konfigurierte Apple-iOS-Plattform-Eigenschaften (App-Sandbox, Data Protection Class A, ATS, Notarisation, App-Store-Distribution, HealthKit-Berechtigungs-Modell) **implizit erfüllt**. Heute muss jede:r Hersteller:in das in der eigenen Dokumentation neu beweisen. Ein vom BSI publizierter **Plattform-Aussagen-Katalog** je iOS- bzw. Android-Major-Version würde Hersteller und Prüfstellen erheblich entlasten — ohne den Schutzbedarf zu reduzieren. Das ist Empfehlung E3 im BSI-Bericht.
-
-### 5. Die Form der Antwort ist der Hebel — nicht weniger Anforderungen
-
-74 % der 127 Anforderungen sind deploy-time, 4 % real-time, 2 % periodisch erbringbar. Nur 20 % brauchen menschliches Urteil. **Diese Verteilung ist robust** — und sie steht im scharfen Widerspruch zur heutigen Praxis, in der praktisch jeder Nachweis wie ein manuelles Dokument behandelt wird. Wenn ich aus dieser Übung eine Sache mitgebe: **es geht nicht um weniger Anforderungen, es geht um eine andere Form der Antwort** (CycloneDX-SBOM, SARIF-Reports, cosign-Signaturen, PROV-O-Manifest — siehe Empfehlung E2).
-
-### 6. Co-Regulation ist nicht Marketing — und genau das ist die Chance
-
-Die Vagusnerv-Aktivierung durch verlangsamtes Atmen ist klinisch belegt. Die HRV-Synchronisation zwischen nahestehenden Personen ist im Labor messbar (Bodenmann, UZH). **Was bisher fehlt: der Schritt von der akademischen Studie in die Versorgung.** Eine couples-fähige DiGA, die HRV-Reads aus Apple Watch / iPhone als objektiven Endpunkt nutzt und an ein Paar-basiertes Bedtime-Ritual koppelt, würde diesen Schritt machen — und gleichzeitig eine ehrliche Lücke im Verzeichnis schließen.
-
-> **Die persönliche Erkenntnis quer durch alle sechs Punkte:** TwoBreath als kleine, lokal-orientierte iOS-App zeigt, dass eine substanzielle Datensicherheits-Posture mit Open-Source-Werkzeugen, Markdown und einem genau eingegrenzten LLM-Einsatz **in Personentagen, nicht Personenmonaten** dokumentiert werden kann. Das macht weder eine Studie überflüssig noch ersetzt es eine Prüfstelle. Aber es verschiebt die Frage von „wie kommen wir überhaupt durch?" zu „wie messen wir den Versorgungs-Nutzen?". Das ist der Wechsel, den ich im DiGA-Diskurs gerne sehen würde.
+Das ist ein Sprung. Und genau hier suchen wir Mitstreiter:innen.
 
 ---
 
-## Was das für die einzelnen Zielgruppen bedeutet
+## Realismus: was bei DiGA bisher nicht klappt
 
-### Für Patient:innen
+Nach dem Optimismus eine ehrliche Einordnung. Vom rund 60 in der Vergangenheit gelisteten DiGA wurden inzwischen **16 wieder gestrichen** ([GKV-Spitzenverband 2024-Bericht](https://www.gkv-spitzenverband.de/media/dokumente/krankenversicherung_1/telematik/digitales/2024_DiGA-Bericht_final.pdf)) — überwiegend, weil der Versorgungsnutzen am Ende der Erprobungs-Studien nicht ausreichend belegt werden konnte. Das ist nicht angenehm zu lesen, aber es ist exakt der Filter, der die Listung von einem Marketing-Stempel unterscheidet.
 
-Was Patient:innen heute nicht haben: **eine zeitnahe, verlässliche Aussage darüber, ob „ihre" DiGA gerade jetzt — also nach dem letzten Bibliotheks-Update, nach dem letzten CVE — sicher ist.** Ein Zertifikat ist heute eine Stichtagsaussage, kein laufendes Signal.
+Mein Schluss: die **Erprobungslistung nach § 139e Abs. 4 SGB V** — 12 Monate Erstattung mit der Studie als Pflicht-Auftrag — ist nicht der „leichte Weg", sondern der **ehrliche**. Sie zwingt, vor und nach der Listung sauber zu evaluieren.
 
-Was wir uns als Maßstab erlauben dürfen: bei einem Lebensmittel zeigt das Etikett, was drin ist; bei einer Bank-App nehmen wir an, dass im Hintergrund kontinuierlich getestet wird. Bei einer DiGA, die unsere Gesundheitsdaten verarbeitet, sollte beides selbstverständlich sein.
+Was im DiGA-System aktuell zusätzlich knirscht:
 
-Eine Modernisierung mit signiertem **Live-Posture-Signal** (Klasse R) macht die Zertifikatsaussage präziser, ohne sie für Patient:innen komplizierter zu machen — ein einfaches „grün" oder „aktualisiert am" reicht.
-
-### Für behandelnde Ärzt:innen und Therapeut:innen
-
-Eine Verschreibung einer DiGA ist eine **Versorgungsentscheidung**. Wer verschreibt, möchte wissen, ob die Anwendung nicht nur einmal zertifiziert wurde, sondern ob sich seither der technische Zustand verändert hat. Heute ist diese Information faktisch nicht abrufbar.
-
-Mit einer maschinenlesbaren TR-03161-Aussage und einem fortlaufenden Posture-Signal könnten KBV, Apotheken-Software und Praxisverwaltungssysteme die DiGA-Auswahllisten **selbsttätig kuratieren** — und im Zweifel davon abraten.
-
-### Für gesetzliche Krankenkassen
-
-Krankenkassen erstatten DiGA aus Beitragsmitteln. Sie haben ein berechtigtes Interesse daran, dass die erstattete Leistung **nicht nur am Tag der Listung**, sondern über die Erstattungsdauer hinweg den Datensicherheitsanforderungen entspricht.
-
-Ein deterministisch belegbares, signiertes Posture-Signal pro DiGA ließe sich als Erstattungs-Voraussetzung in den Selektivvertrag einbeziehen, ohne Hersteller administrativ zusätzlich zu belasten — denn das Signal entsteht ohnehin im Build.
-
-### Für Hersteller (DiGA und DiPA)
-
-Ich höre in Mandaten immer dieselbe Beobachtung: jede Re-Zertifizierung beginnt damit, **dieselben Nachweise erneut zusammenzusuchen**. Architektur-Dokumente, SBOMs, Krypto-Inventare, Test-Protokolle — alle bereits vorhanden, aber nicht in einem für die Prüfung konsumierbaren Format gehalten.
-
-Wer heute auf eine **GitOps-getriebene Lieferkette** mit signierten Artefakten umstellt (`syft` / `osv-scanner` / `semgrep` / `cosign`), erzeugt das Nachweispaket bei **jedem Build automatisch** mit. Die Re-Zertifizierung wird dann zu einem Abgleich, nicht zu einem Wiederaufbau.
-
-### Für Prüfstellen
-
-Prüfstellen lesen heute große, oft inkonsistent strukturierte PDF-Pakete und gleichen sie mit der TR von Hand ab. Mit einem **standardisierten Einreichungsformat** (CycloneDX + SARIF + JUnit + cosign-Signaturen + PROV-O-Manifest) wird aus dem Lese- ein **Diff-Vorgang** — und für Re-Zertifizierungen lässt sich quantifizieren, was sich seit dem Vor-Audit konkret verändert hat.
-
-### Für das BSI und das BfArM
-
-Das BSI hat das Verfahren aufgesetzt und entwickelt es weiter. Genau hier setzt unser Beitrag an: nicht „macht es ganz anders", sondern „lasst uns die Hebel benennen, die ohne Verfahrensbruch eingeführt werden können". Die fünf Empfehlungen aus dem BSI-Bericht sind so geschnitten, dass sie **einzeln** wirken — ohne dass die TR-03161 im Kern angefasst werden muss.
+- Der **Re-Zertifizierungs-Aufwand** ist hoch. Hersteller berichten von mehrmonatiger Bindung jährlich, fast komplett papierbasiert.
+- Es gibt **noch keine DAkkS-akkreditierte GDPR-Art.-42-Zertifizierungsstelle** mit Geltungsbereich „DiGA / Gesundheits-App" — bis dahin gilt der DiGAV-§-4-Nachweis plus TR-03161 als de-facto-Pflicht.
+- **Plattform-Aussagen** (etwa „dieser TR-Anforderungs-Aspekt wird durch iOS-Sandbox + Data Protection erfüllt") werden heute nicht zentral kuratiert. Jede:r Hersteller:in beweist das neu.
 
 ---
 
-## Vier Hebel, die einzeln wirken
+## Was ich aus der IT-Sicherheits-Brille beitragen kann — und wo ich Hilfe brauche
 
-| Hebel | Was sich ändert | Wer profitiert |
-| --- | --- | --- |
-| **1. Maschinenlesbare TR-Fassung** (JSON/YAML neben dem PDF) | Hersteller-Tools können `O.*`-IDs direkt referenzieren; TR-Updates erscheinen als Diff | alle |
-| **2. Standardisiertes Einreichungsformat** (CycloneDX, SARIF, cosign, PROV-O) | Prüfstellen diffen statt zu lesen; Re-Zertifizierung wird quantifizierbar | Prüfstellen, Hersteller |
-| **3. Plattform-Aussagen-Katalog** (welche `O.*` decken iOS/Android-Plattformen implizit ab?) | senkt Prüfaufwand bei Standard-Konfigurationen | Hersteller, Prüfstellen |
-| **4. Reaktive Re-Zertifizierungs-Trigger** (CVE / TR-Revision statt nur Stichtag) | Sicherheit pro Geld-Einheit erhöht; Hersteller-Aufwand pro Jahr sinkt | Patient:innen, Kassen |
+Ich kann sagen, was ich kann:
 
-Keiner dieser Hebel ersetzt die menschliche Begutachtung. Alle vier ändern nur die **Form**, in der die Nachweise fließen.
+- **CI/CD-Pipelines mit Sicherheitswerkzeugen** wirken hier. Eine `security.yml`, die bei jedem Build SBOM (CycloneDX), CVE-Scan (osv-scanner), Mobile-Binär-Analyse (MobSF), Statik-Analyse (semgrep), Geheimnis-Scan (gitleaks) ausführt und **signierte Berichte** als Artefakt ablegt — das ist ein Tag Arbeit für jemanden mit DevSecOps-Hintergrund. Ich habe das für TwoBreath als drop-in-fertige Datei in [`CI_CD_SECURITY.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/CI_CD_SECURITY.md) hinterlegt.
+- **Markdown als System der Wahrheit + signierte Artefakte als Beweis** ist eine valide Alternative zu großen QMS-Plattformen für eine Phase-1-DiGA. Ich glaube, das ist auch für andere Hersteller interessant.
+- **Generative KI auf dem Strukturierungspfad** — Anforderungen extrahieren, Werkzeuge zuordnen, Begleittexte vorformulieren — funktioniert. Auf dem **Beweispfad** ist sie tabu, weil regulatorisch nicht reproduzierbar. Diese Trennung kann ich klar halten.
 
----
+Ich kann **nicht**, was die anderen zwei Säulen brauchen:
 
-## Was generative KI dabei tut — und was nicht
+- Ich bin **kein Schlafmediziner und kein klinischer Psychologe.** Den Wirknachweis muss ein Universitäts-Institut führen.
+- Ich bin **kein Regulatory-Affairs-Experte.** Der MDR-Pfad und der BfArM-Antrag wollen Erfahrung, die ich nicht habe.
+- Ich kann **keine RCT** finanzieren. 200.000 Euro sind ein anderer Ordnung als die App selbst.
 
-Ein häufiges Missverständnis: „Mit GPT/Claude lässt sich doch jetzt alles automatisieren." Bei einer Zertifizierung wäre das ein gefährlicher Trugschluss. Sprachmodelle sind **nicht-deterministisch**. Eine Zertifizierungsaussage muss aber für Aufsicht und Prüfstelle reproduzierbar sein.
-
-Wir haben deshalb eine klare Trennung gezogen:
-
-- **LLM auf dem Strukturierungspfad:** Anforderungen aus dem 66-Seiten-PDF extrahieren, sie passenden Werkzeugen zuordnen, Begleittexte vor-formulieren.
-- **Deterministische Werkzeuge auf dem Beweispfad:** `testssl.sh`, `MobSF`, `syft`, `osv-scanner`, `semgrep`, `gitleaks`, `cosign`. Ihre Ausgabe ist signierbar und identisch reproduzierbar — sie ist der Beweis.
-- **Mensch im Beweis-Audit:** das Urteil, ob ein Beweis ausreicht, bleibt bei der Prüfstelle bzw. beim BSI. Generative KI ersetzt sie an keiner Stelle.
-
-Diese Trennung ist nicht nur regulatorisch geboten, sie ist auch technisch sauber. LLMs werden besser darin, **die richtige Frage zu stellen**. Werkzeuge sind besser darin, **die richtige Antwort zu liefern**.
+Hier kommt der Aufruf.
 
 ---
 
-## Wie wir das gebaut haben
+## Wir suchen Mitstreiter:innen
 
-Stack:
-- **Markdown-zuerst** als System der Wahrheit (`PLANNING.md`, `MEMORY.md`, `COMPLIANCE_MATRIX.md`).
-- **Git** als Versionierung und Provenienz; **cosign** für Signaturen.
-- **GitHub Actions** als Lieferkette (geplant).
-- **Open-Source-Werkzeuge** für jeden deterministischen Nachweis.
-- **Claude Opus 4.7** für Strukturierungsaufgaben.
+Ich habe in den letzten Tagen 100+ konkrete Partner-Kandidat:innen mit Quellenlinks recherchiert ([`PARTNER_SHORTLIST.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/PARTNER_SHORTLIST.md)). Hier sind die Profile, mit denen wir gerne ins Gespräch kommen würden:
 
-Keine Plattform, keine eigenen Server, kein Vendor-Lock-in. Wer den Bericht reproduzieren möchte, klont das Repository, ruft `make ingest` auf — und hat in unter zehn Minuten dieselben Originaldokumente, dieselben extrahierten Anforderungen, dieselben sha256-Prüfsummen.
+### Klinik / Forschung
 
----
+- **Schlafmediziner:innen** mit CBT-I-Track-Record, idealerweise Anschluss an die [DGSM-AG Insomnie](https://www.dgsm.de/) (Riemann/Spiegelhalder-Tandem in Freiburg ist die Goldreferenz).
+- **Klinische Psycholog:innen** mit DiGA-Studienerfahrung — zum Beispiel das Team um **Prof. Dr. David Daniel Ebert** an der TU München (sechs zugelassene DiGA, Co-Founder HelloBetter, [Protect Lab](https://www.protectlab.org/en/)).
+- **Paartherapie-Forschende** wie **Prof. Dr. Guy Bodenmann** (UZH) — der einzige in DACH, der Co-Regulation als physiologischen Mechanismus methodisch sauber misst.
+- **Universitäts-Institute** für die unabhängige Erprobungs-Evaluation. Charité Berlin, UK Freiburg, FAU Erlangen-Nürnberg, FU Berlin sind die plausiblen Optionen.
 
-## Wo wir Hilfe suchen
+### Therapeut:innen-Praxis
 
-Damit aus diesem Praxisbericht eine produktive Diskussion wird, brauchen wir Stimmen aus den Zielgruppen:
+- **Psychotherapeut:innen** in Niederlassung, die TwoBreath gerne **zwischen den Sitzungen** verschreiben würden. Wir möchten verstehen: was bräuchte eine App, damit ihr sie ohne schlechtes Gewissen empfehlen könnt? Was würde eure Arbeit erleichtern?
+- **Paartherapeut:innen** und **EFT-Coaches** — die App ergänzt das Setting, sie ersetzt es nicht.
 
-- **DiGA-Hersteller**, die ihre tatsächliche Re-Zertifizierungs-Dauer und ihren Aufwand teilen — auch wenn er hoch war.
-- **Akkreditierte Prüfstellen**, die offen über die Mehrarbeit beim Lesen heutiger PDF-Pakete sprechen.
-- **Krankenkassen-IT**, die Anforderungen an ein DiGA-Posture-Signal formulieren würden.
-- **Ärzt:innen und Therapeut:innen**, die uns sagen, was sie über die Sicherheit einer DiGA wirklich wissen wollen, bevor sie sie verschreiben.
-- **Patientenorganisationen**, die aus Patient:innen-Sicht die richtigen Fragen kuratieren.
+### Krankenkassen
 
-Schreibt mir gerne unter den Beitrag oder per Direktnachricht. Ich antworte auf jede ernstgemeinte Rückmeldung.
+- Die **TK** ist DiGA-Vorreiter; die **BARMER** hat mit dem [BIfG](https://www.bifg.de/projekte) ein eigenes Forschungsinstitut; **AOK Bayern** ist bei digitalen Selektivverträgen vorne. Wir würden gerne **parallel zur Erprobungslistung** Selektivvertrags-Optionen besprechen — gerade weil der Patchwork-Familien-Markt (couples + parenting + stress) für Kassen ein hoch relevantes Segment ist.
+- Der Gedanke „**Familienpaket**": wenn Burnout-Risiko in beiden Eltern-Köpfen abgefedert wird, ist das mit hoher Wahrscheinlichkeit auch eine Investition in das Kind. Ich weiß noch nicht, wie man das versorgungsökonomisch fasst — aber ich glaube, jemand bei einer Kasse weiß es.
 
----
+### Regulatorik
 
-## Quellen und weiterführende Materialien
+- **Eine BSI-anerkannte Prüfstelle für TR-03161** (secuvera, TÜV Informationstechnik, SRC sind unsere Top-Drei nach Recherche).
+- **Das BfArM-Innovationsbüro** (`innovation@bfarm.de`) — die kostenlose Pre-Submission-Beratung nehmen wir auf jeden Fall in Anspruch.
+- **Eine DiGA-erfahrene Regulatory-Beratung** für den MDR-Klasse-I-Pfad (metecon, Johner Institut, fbeta, QuickBird Medical).
 
-- **Vollständiger BSI-Bericht** (auf Deutsch, im Repo): [`diga/BSI_BERICHT.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/BSI_BERICHT.md)
-- **Werkzeug-Empfehlungen pro Anforderung × Phase:** [`diga/BSI_TOOL_EMPFEHLUNGEN.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/BSI_TOOL_EMPFEHLUNGEN.md)
-- **Maschinenlesbare 127-Zeilen-Matrix:** [`diga/COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/COMPLIANCE_MATRIX_TR1_OFFICIAL.md)
-- **Repositionierungs-Roadmap mit Partner-Ökosystem:** [`diga/DIGA_ROADMAP.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/DIGA_ROADMAP.md)
-- **Konkrete recherchierte Partner mit Quellenlinks:** [`diga/PARTNER_SHORTLIST.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/PARTNER_SHORTLIST.md)
-- **CI/CD-Sicherheits-Status + drop-in `security.yml`:** [`diga/CI_CD_SECURITY.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/CI_CD_SECURITY.md)
-- **Konzeptdokumente (Datenschutz, Threat-Model, Krypto, Resilienz, …):** [`diga/concepts/`](https://github.com/ma3u/TwoBreath/tree/main/diga/concepts)
-- **Tracking-Issue auf GitHub:** [#1 — DiGA × BSI TR-03161](https://github.com/ma3u/TwoBreath/issues/1)
-- **Eingelesenes Regelwerk** (TR-03161-1/-2/-3, DiGAV, § 139e SGB V): [`diga/regulations/markdown/`](https://github.com/ma3u/TwoBreath/tree/main/diga/regulations/markdown)
-- **Quellen-Pinning** mit sha256: [`diga/regulations/source-manifest.yaml`](https://github.com/ma3u/TwoBreath/blob/main/diga/regulations/source-manifest.yaml)
-- **TR-03161 Übersicht (BSI):** <https://www.bsi.bund.de/dok/TR-03161>
-- **§ 139e SGB V:** <https://www.gesetze-im-internet.de/sgb_5/__139e.html>
-- **DiGAV:** <https://www.gesetze-im-internet.de/digav/>
-- **DiGA-Verzeichnis (BfArM):** <https://diga.bfarm.de/de>
+### Finanzierung
+
+- **Heal Capital**, **Earlybird Health**, **HTGF** als Investor:innen mit DiGA-Track-Record.
+- **G-BA Innovationsfonds** — Bekanntmachung 19.06.2026, ideal für die F51.0-Erprobungsstudie.
 
 ---
 
-**#DiGA #BSI #TR03161 #DigitaleGesundheit #DevSecOps #GitOps #SBOM #BfArM #eHealth #Datensicherheit**
+## Vier offene Fragen, die ich nicht alleine beantworten kann
 
-*TwoBreath ist eine Atemübungs-App, die ich gemeinsam mit Dascha entwickelt habe. Sie ist heute keine DiGA — und genau deshalb ein nützliches methodisches Beispiel: kein Hintergrundsystem, keine Konten, keine personenbezogenen Daten in Übertragung. Diese kompakte Angriffsfläche erlaubt eine saubere TR-03161-Auswertung ohne Vermischung mit umfangreichen Backend-Themen. Den vollständigen Bericht und das Repository findet ihr verlinkt.*
+Wenn Sie Antworten oder Hinweise haben, freue ich mich über Kommentare oder eine Direktnachricht.
+
+1. **Wo passt TwoBreath am besten ins DiGA-Verzeichnis?** Mein heutiger Tipp ist F51.0 (nicht-organische Insomnie) als Primär-Indikation und F41.1 (generalisierte Angst) als Sekundär-Indikation, weil die Markt-Lücke bei F51.0 paar-synchron strukturell ist und die Mechanismus-Erzählung über Vagus + HRV solide. Ist das aus klinischer Sicht plausibel?
+
+2. **Wie melden wir am besten an?** Direkter Antrag oder Erprobungslistung nach § 139e Abs. 4? Mit oder ohne BfArM-Innovationsbüro-Sitzung vorab? Wer hat das durchexerziert und kann eine Stunde reden?
+
+3. **Mit welchen Partnern starten wir?** Ein klinisches Tandem (Spiegelhalder/Riemann?) plus eine DiGA-Beratung (metecon? Johner?) plus eine Prüfstelle (secuvera?) plus eine Kasse (TK?) — wäre das die Formation? Übersehen wir etwas?
+
+4. **Wie organisieren wir die Auflagen so, dass sie nicht das Produkt erdrücken?** Regelmäßige Security-Checks für das BSI-Zertifikat sind technisch lösbar (siehe `CI_CD_SECURITY.md`). Wirknachweis und Re-Zertifizierung jährlich — wie macht ihr das, ohne dass es das Team ein Quartal lahmlegt?
+
+---
+
+## Was wir nicht versprechen
+
+- TwoBreath ist **nicht** eine Behandlung von Autismus oder ADHS. Es ist ein gemeinsames Atemritual. Es löst nicht die strukturellen Probleme — Therapeut:innen-Mangel, Versorgungslücken, gesellschaftliche Stress-Spirale. Aber es gibt zwei erwachsenen Menschen, die zusammen leben, ein **tägliches Werkzeug** zwischen den Therapie-Terminen.
+- Wir sind **nicht** der nächste Headspace-Konkurrent. Wir bauen kein Imperium. Wir bauen ein Werkzeug, das wir selbst gerne hätten und teilen es.
+- Die DiGA-Frage ist **echt offen**. Vielleicht ist das beste Ergebnis dieses Beitrags, dass jemand mit klinischer Erfahrung uns sagt: „Vergesst die DiGA, geht direkt zu den Kassen über § 140a und macht einen Selektivvertrag." Auch das wäre ein Erfolg.
+
+---
+
+## Repository (alles offen, alles reproduzierbar)
+
+Wer technisch tiefer einsteigen will:
+
+- 📋 **Komplettes DiGA-Dossier:** [github.com/ma3u/TwoBreath/tree/main/diga](https://github.com/ma3u/TwoBreath/tree/main/diga)
+- 🩺 **Strategische Roadmap mit Partner-Ökosystem:** [`DIGA_ROADMAP.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/DIGA_ROADMAP.md)
+- 🤝 **Recherchierte Partner-Liste mit Quellenlinks:** [`PARTNER_SHORTLIST.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/PARTNER_SHORTLIST.md)
+- 📊 **127-Zeilen-TR-03161-Matrix mit Status:** [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/COMPLIANCE_MATRIX_TR1_OFFICIAL.md)
+- 🛠 **CI/CD-Sicherheit (`security.yml`-Vorlage):** [`CI_CD_SECURITY.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/CI_CD_SECURITY.md)
+- 📝 **BSI-Bericht (Behördendeutsch):** [`BSI_BERICHT.md`](https://github.com/ma3u/TwoBreath/blob/main/diga/BSI_BERICHT.md)
+- 💬 **Tracking-Issue (öffentliche Diskussion):** [#1](https://github.com/ma3u/TwoBreath/issues/1)
+- 🌐 **Die App selbst:** [twobreath.com](https://www.twobreath.com)
+
+---
+
+## Kontakt
+
+Per Direktnachricht hier auf LinkedIn oder per E-Mail über [twobreath.com/contact](https://www.twobreath.com/contact.html).
+
+Wer einen 30-Minuten-Slot für einen Kennenlern-Call erbittet — gerne. Ich antworte auf jede ernstgemeinte Rückmeldung.
+
+— Matthias
+
+---
+
+*TwoBreath ist eine Atemübungs-App, die ich gemeinsam mit Dascha entwickelt habe. Wir sind keine Mediziner und keine Psychotherapeut:innen. Wir sind ein Paar, das ein Problem für sich selbst gelöst hat und sich jetzt fragt, ob das Werkzeug auch anderen Patchwork-Familien helfen könnte — und wenn ja, wie es im deutschen Versorgungssystem ankommt.*
+
+**#DiGA #BSI #TR03161 #DigitaleGesundheit #BfArM #Krankenkassen #Patchworkfamilie #Schlafmedizin #Paartherapie #EHealth**
