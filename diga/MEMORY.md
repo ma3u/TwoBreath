@@ -286,6 +286,37 @@ The manifest is updated only by `scripts/fetch-pdfs.sh`, so a new download with 
 - **Notes:**
   - The roadmap is consistent with PLANNING.md § 5 (Option A/B both retained as primary candidates) but adds operational detail (90-day plan, partner table, budget, timeline).
   - Tool recommendations doc explicitly maps each O.* to a phase D/C/P/B/R/L/Z/A — this addresses the user's request for phase-specific recommendations and complements CI_CD_SECURITY.md (which is centred on phase B = Build/CI).
+
+### 2026-05-02 · partner-shortlist
+
+- **Actor:** human (Matthias) + Claude Opus 4.7 + 4 parallel research agents.
+- **Input:** user request "Ermittler potentielle Partner" — translate the generic partner-category table in DIGA_ROADMAP.md § 5 into a concrete, sourced shortlist with verification status.
+- **Action:** spawned four parallel general-purpose research agents with web-search + web-fetch:
+  - Agent A — clinical / academic partners (sleep medicine, digital therapy researchers, couples-therapy researchers).
+  - Agent B — regulatory / audit ecosystem (BSI TR-03161 Prüfstellen, DiGA consultants, MDR Notified Bodies, BfArM contacts).
+  - Agent C — funding / payer (Health VCs, accelerators, public funding calls 2025–2026, DiGA-experienced Krankenkassen, DiGA-Manager platforms).
+  - Agent D — competitive landscape (current DiGA-Verzeichnis listings for F51.0 / G47.0 / F41.x / F43, B2C breathing/meditation apps, couples apps, gap analysis).
+  Compiled findings into `PARTNER_SHORTLIST.md` with per-entry verification status (✅ / 🔍 / ❌) and source URLs.
+- **Output:**
+  - `PARTNER_SHORTLIST.md` — single source of truth for concrete partner candidates across 8 sections (TL;DR, gap analysis, clinical, regulatory, funding, payers, DiGA-Manager, competitive landscape, outreach prioritisation, sources).
+  - DIGA_ROADMAP.md § 5 now points to PARTNER_SHORTLIST.md as the authoritative concrete list.
+  - README.md adds the new doc to the navigation.
+- **Headline finding:** **F51.0 (nicht-organische Insomnie) with partner-based bedtime ritual is the strongest open gap** in the DiGA-Verzeichnis. Three listed Insomnie-DiGA (somnio, HelloBetter Schlafen, somnovia) all address solo-CBT-I; 60–75 % of insomnia episodes are couple-synchronous (Bed-Sharing-Effekt) → unbesetzte Indikation.
+- **Verified key contacts:**
+  - Klinik: Riemann + Spiegelhalder (Freiburg) als Tandem; Ebert (TUM/Protect Lab); Bodenmann (UZH) als USP-Validator.
+  - BSI-Prüfstelle: secuvera (Referenz: kontina BSI-K-TR-0832, April 2026).
+  - VC: Heal Capital (privat-KV-getragen, Fund-2 seit 2025); HTGF (DiGA-Track-Record bestätigt).
+  - BfArM: kostenloses Innovationsbüro (`innovation@bfarm.de`).
+  - DiGA-Manager: smartpatient/MyTherapy (Teil von Redcare Pharmacy seit 2021).
+- **Honest caveats:**
+  - Drei der größten 2026-Calls (Horizon Europe Health 16.04, EIT Health Catapult 27.04, Vision Health Pioneers Cohort 8 29.03) sind bereits verpasst — nächster realistischer öffentlicher Call ist G-BA Innovationsfonds 19.06.2026.
+  - Es existiert noch **kein DAkkS-akkreditiertes GDPR-Art.-42-Schema mit Geltungsbereich „DiGA / Gesundheits-App"** — bis dahin gilt DiGAV § 4 + TR-03161 als de-facto-Pflicht.
+  - 16 von ~60 DiGA wurden bereits wieder gestrichen (GKV-Bericht 2024) — das ist ein nüchterner Hinweis auf die Studienhürden.
+- **Determinism class:** M (research synthesis); each entry cites a public source URL.
+- **LLM snapshot:** `claude-opus-4-7` (Claude Code interactive) — agents used WebSearch + WebFetch for primary research.
+- **Notes:**
+  - Recoupling (FU Berlin) ist sowohl Wettbewerber als auch potenzieller Forschungspartner — Doppelrolle prüfen.
+  - Pflege: Datei alle 6 Monate (oder nach jeder Repositions-Entscheidung) re-recherchieren — Verifikations-Status verfällt schnell.
   - Re-run is idempotent: `make ingest` produces byte-identical markdown given identical source PDFs/HTML; `regulations/source-manifest.yaml` surfaces any drift on PR.
 
 <!-- next entry below -->

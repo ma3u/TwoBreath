@@ -157,6 +157,8 @@ Statt einer großen ISO-13485-Implementierung von Tag 1: **schlankes „MDR-taug
 
 ## 5. Partner-Ökosystem
 
+> **Konkrete recherchierte Partner-Kandidat:innen mit Quellenlinks** stehen in [`PARTNER_SHORTLIST.md`](PARTNER_SHORTLIST.md). Die folgende Tabelle gibt nur den Kategorien-Überblick.
+
 Der wichtigste Punkt: **diese Aufgabe ist nicht alleinerledigbar.** Erfolgreiche DiGA-Hersteller arbeiten in Partner-Netzen.
 
 ### 5.1 Klinische Partner (Studien-Leitung + Validierung)

@@ -17,6 +17,7 @@
 | **DevSecOps-interessiert** | [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) — SAST/DAST-Status und konkreter `security.yml`-Erweiterungs-Vorschlag |
 | **Hersteller (Code-Vorlage)** | [`patches/PATCHES.md`](patches/PATCHES.md) — 10 PR-fertige Swift-Snippets |
 | **strategische Roadmap (DiGA-Listung)** | [`DIGA_ROADMAP.md`](DIGA_ROADMAP.md) — Repositionierungs-Plan + Partner-Ökosystem |
+| **Partner-Liste mit Quellenlinks** | [`PARTNER_SHORTLIST.md`](PARTNER_SHORTLIST.md) — recherchierte und verifizierte Kandidat:innen je Kategorie |
 | **technisch interessiert** | [`PLANNING.md`](PLANNING.md) und [`MEMORY.md`](MEMORY.md) |
 
 ## Kernergebnis
@@ -43,6 +44,7 @@ diga/
 ├── BSI_TOOL_EMPFEHLUNGEN.md           Werkzeug-Empfehlungen je Anforderung × Phase
 ├── LINKEDIN_ARTIKEL.md                LinkedIn-Beitrag für die Öffentlichkeit
 ├── DIGA_ROADMAP.md                    Repositionierungs-Roadmap + Partner-Ökosystem
+├── PARTNER_SHORTLIST.md               recherchierte konkrete Partner-Kandidat:innen mit Quellen
 ├── CI_CD_SECURITY.md                  SAST/DAST-Status + drop-in security.yml-Erweiterung
 ├── SECURITY.md                        Vulnerability Disclosure (verschlüsselter Kanal)
 ├── NOTICE.md                          Drittquellen-Attribution
