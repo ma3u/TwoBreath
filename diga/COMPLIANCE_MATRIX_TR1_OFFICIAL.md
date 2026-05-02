@@ -24,7 +24,6 @@
 | P | 2 |
 | M | 27 |
 
-
 ## Legend
 
 - **Class:** R real-time · D deploy-time · P periodic · M manual (see `PLANNING.md` § 7).
@@ -84,7 +83,7 @@
 | [O.Arch_6](regulations/markdown/BSI-TR-03161-1.md#o-arch-6) | Authentizitäts- und Integritätsschutz | EXAMINE | D | ✅ | Apple Code-Signing + Notarisation auf jedem Release. CURRENT_PROJECT_VERSION + MARKETING_VERSION versioniert in project.yml. |
 | [O.Arch_7](regulations/markdown/BSI-TR-03161-1.md#o-arch-7) | Sichere Nutzung der Funktionen von | EXAMINE | D | ✅ | Keine Drittanbieter-Software in Verwendung (CLAUDE.md: 'No SPM packages, no CocoaPods, no Carthage'). |
 | [O.Arch_8](regulations/markdown/BSI-TR-03161-1.md#o-arch-8) | Zweckgebundener Zugriff auf | EXAMINE | D | ➖ | Keine WebView in der Anwendung. Marketing-Website ist im separaten Repo `ma3u/TwoBreath`. |
-| [O.Arch_9](regulations/markdown/BSI-TR-03161-1.md#o-arch-9) | Barrierearme Möglichkeit zum | CHECK | M | ✅ | SECURITY.md am Repo-Root (diga/SECURITY.md) mit verschlüsseltem Kanal (security@twobreath.com, PGP auf Anfrage), GitHub Private Vulnerability Reporting, Safe Harbor, SLA-Ziele, Hall-of-Fame. |
+| [O.Arch_9](regulations/markdown/BSI-TR-03161-1.md#o-arch-9) | Barrierearme Möglichkeit zum | CHECK | M | ✅ | SECURITY.md am Repo-Root (diga/SECURITY.md) mit verschlüsseltem Kanal (<security@twobreath.com>, PGP auf Anfrage), GitHub Private Vulnerability Reporting, Safe Harbor, SLA-Ziele, Hall-of-Fame. |
 | [O.Arch_10](regulations/markdown/BSI-TR-03161-1.md#o-arch-10) | Anwendung fragt Zwangsupdates | EXAMINE | R | ✅ | App Store ist die Update-Quelle. Begründung der Plattform-Erfüllung in concepts/08-resilienz-haertungskonzept.md § 2 dokumentiert; halbjährliche Re-Validierung. |
 | [O.Arch_11](regulations/markdown/BSI-TR-03161-1.md#o-arch-11) | Bereitstellung von Updates über | CHECK | D | ✅ | Distribution ausschließlich über Apple App Store. |
 | [O.Arch_12](regulations/markdown/BSI-TR-03161-1.md#o-arch-12) | Nutzung kryptographischer | CHECK | M | ✅ | twobreath.com verlinkt App-Store-Eintrag; QR-Codes auf Marketing-Material. |
@@ -282,4 +281,3 @@
 | [O.Resi_8](regulations/markdown/BSI-TR-03161-1.md#o-resi-8) | Umsetzung von Maßnahmen gegen | EXAMINE | D | ✅ | Apple-Toolchain-Defaults + scharf gesetztes Symbol-Stripping in Release (Patch § 8). Trade-off-Begründung gegen kommerzielle Obfuscation in concepts/08-resilienz-haertungskonzept.md § 8 dokumentiert. |
 | [O.Resi_9](regulations/markdown/BSI-TR-03161-1.md#o-resi-9) | Berücksichtigung von Plattformen | EXAMINE | D | ➖ | Anwendung ist iOS-/watchOS-exklusiv; Hersteller-Variations-Problem entfällt. |
 | [O.Resi_10](regulations/markdown/BSI-TR-03161-1.md#o-resi-10) | Robustheit gegenüber Störungen. | EXAMINE | D + P | ✅ | Robustheit durch Engine-State-Machine-Tests (BreathingEngine pause/resume, Audio-interruption-Handling). CI testet auf iPhone- und Watch-Simulator (ci.yml). |
-

@@ -1,0 +1,163 @@
+name: Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Wöchentlicher Lauf, Montag 06:00 UTC — fängt zwischen-Release-Drift in
+    # Geheimnissen, TLS-Posture und HTTP-Headern auf.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  security-events: write   # für SARIF-Uploads (gitleaks)
+  pull-requests: read
+
+jobs:
+  # ──────────────────────────────────────────────────────────────────────
+  # 1. Geheimnis-Scan — Quellcode + gesamte Git-History
+  #    Schließt: TR-03161 O.Cryp_1, O.Source_8
+  # ──────────────────────────────────────────────────────────────────────
+  secrets:
+    name: Secret Scanning (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # vollständige History scannen
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ──────────────────────────────────────────────────────────────────────
+  # 2. Markdown-Lint — Konsistenz der diga/-Dokumente
+  #    Verhindert die Lint-Warnungen, die der IDE-Linter heute gemeldet hat.
+  # ──────────────────────────────────────────────────────────────────────
+  markdown-lint:
+    name: Markdown Lint (diga/)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run markdownlint-cli2
+        uses: DavidAnson/markdownlint-cli2-action@v18
+        with:
+          globs: |
+            diga/**/*.md
+            !diga/regulations/markdown/**
+          config: '.markdownlint.json'
+
+  # ──────────────────────────────────────────────────────────────────────
+  # 3. Link-Check über alle Markdown-Dokumente in diga/
+  #    Stellt sicher, dass Quellenverzeichnisse (BSI/BfArM/Gesetze)
+  #    erreichbar bleiben.
+  # ──────────────────────────────────────────────────────────────────────
+  link-check:
+    name: Link Check (lychee)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --verbose
+            --no-progress
+            --max-concurrency 4
+            --timeout 30
+            --retry-wait-time 5
+            --max-retries 2
+            --exclude-path diga/regulations/markdown
+            --exclude '^https?://(www\.)?linkedin\.com'
+            --exclude '^https?://localhost'
+            --exclude '^https?://twobreath\.com'
+            'diga/**/*.md'
+            'README.md'
+          fail: false  # Linkfehler blockieren keinen Build, sind nur Warnungen
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  # ──────────────────────────────────────────────────────────────────────
+  # 4. Dependency Review — sobald in einem PR ein Lock-File geändert wird
+  # ──────────────────────────────────────────────────────────────────────
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependency review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          comment-summary-in-pr: on-failure
+
+  # ──────────────────────────────────────────────────────────────────────
+  # 5. TLS-Posture-Check — twobreath.com (testssl.sh)
+  #    Schließt: TR-03161 O.Ntwk_2, O.Ntwk_7 (Marketing-Site)
+  #    Nur scheduled / manuell — vermeidet jeden-Push-Last gegen den Server.
+  # ──────────────────────────────────────────────────────────────────────
+  tls-posture:
+    name: TLS Posture (testssl.sh)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Run testssl.sh against www.twobreath.com
+        run: |
+          set -eu
+          mkdir -p reports
+          docker run --rm \
+            -v "$PWD/reports:/data" \
+            drwetter/testssl.sh:latest \
+            --jsonfile-pretty /data/testssl.json \
+            --severity LOW \
+            --quiet --color 0 \
+            https://www.twobreath.com || true
+          # gibt einen Auszug in den Job-Log für schnelle Sichtprüfung
+          if [ -f reports/testssl.json ]; then
+            echo "=== testssl.sh summary ==="
+            jq '.scanResult[0] | {target, ip, service, finding: [.protocols[]?, .vulnerabilities[]?]}' \
+              reports/testssl.json 2>/dev/null || cat reports/testssl.json
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: testssl-report
+          path: reports/testssl.json
+          if-no-files-found: warn
+          retention-days: 90
+
+  # ──────────────────────────────────────────────────────────────────────
+  # 6. HTTP-Security-Header — twobreath.com (Mozilla HTTP Observatory)
+  #    Schließt: TR-03161 O.Ntwk_2 (Marketing-Site)
+  # ──────────────────────────────────────────────────────────────────────
+  http-headers:
+    name: HTTP Security Headers (Observatory)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Trigger Observatory scan
+        run: |
+          set -eu
+          mkdir -p reports
+          curl -sS -X POST \
+            "https://observatory-api.mdn.mozilla.net/api/v2/scan?host=www.twobreath.com" \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+          | tee reports/observatory.json
+          echo
+          echo "=== Observatory grade ==="
+          jq -r '.grade // "n/a"' reports/observatory.json || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: observatory-report
+          path: reports/observatory.json
+          if-no-files-found: warn
+          retention-days: 90

@@ -288,6 +288,7 @@ All M-class. Out of scope to produce in this exercise; tracked here so the matri
 ## References
 
 ### BSI / TR-03161
+
 - [TR-03161 hub](https://www.bsi.bund.de/dok/TR-03161)
 - [TR-03161-1 — Mobile (PDF)](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03161/BSI-TR-03161-1.pdf?__blob=publicationFile)
 - [TR-03161-2 — Web (PDF)](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03161/BSI-TR-03161-2.pdf?__blob=publicationFile)
@@ -296,12 +297,15 @@ All M-class. Out of scope to produce in this exercise; tracked here so the matri
 - [BSI C5 — Cloud security catalogue](https://www.bsi.bund.de/dok/7685384)
 
 ### German law
+
 - [§ 139e SGB V](https://www.gesetze-im-internet.de/sgb_5/__139e.html)
 - [DiGAV](https://www.gesetze-im-internet.de/digav/)
 
 ### EU
+
 - [GDPR (EU) 2016/679](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
 - [MDR (EU) 2017/745](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32017R0745)
 
 ### Tooling (alphabetical)
+
 - [checkov](https://github.com/bridgecrewio/checkov) · [cosign](https://github.com/sigstore/cosign) · [gitleaks](https://github.com/gitleaks/gitleaks) · [Mozilla Observatory](https://observatory.mozilla.org/) · [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF) · [osv-scanner](https://github.com/google/osv-scanner) · [OWASP ZAP](https://www.zaproxy.org/) · [presidio](https://github.com/microsoft/presidio) · [schemathesis](https://github.com/schemathesis/schemathesis) · [semgrep](https://semgrep.dev/) · [swiftlint](https://github.com/realm/SwiftLint) · [syft](https://github.com/anchore/syft) · [testssl.sh](https://github.com/drwetter/testssl.sh) · [threagile](https://threagile.io/) · [trivy](https://github.com/aquasecurity/trivy) · [trufflehog](https://github.com/trufflesecurity/trufflehog)

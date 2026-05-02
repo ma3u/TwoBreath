@@ -2,7 +2,9 @@
 
 > Eine berechtigte Frage aus der Lektüre des Berichts: „Unter den verwendeten Werkzeugen vermisse ich Standard-SAST, -DAST und andere Security-Checks im CI/CD." Dieses Dokument beantwortet das im Detail — für die untersuchte Anwendung **und** als generelle Diskussionsgrundlage.
 
-**Stand:** 2026-05-02
+**Stand:** 2026-05-02 v0.2 — Implementierung der anwendbaren Werkzeuge auf den öffentlichen Repo gelandet.
+
+> **Kurz-Status:** Im **öffentlichen Repo `ma3u/TwoBreath`** sind die anwendbaren Werkzeuge jetzt aktiv (siehe § 1.2 + [`.github/workflows/security.yml`](../.github/workflows/security.yml)). Im **privaten App-Repo `ma3u/TwoBreath-app`** bleibt der bisherige Stand (gitleaks, swiftlint, eslint, npm audit, Tests). Die in § 4 vorgeschlagene Erweiterung dort (semgrep, syft, osv-scanner, MobSF) wartet auf einen separaten PR im App-Repo.
 
 ---
 
@@ -11,7 +13,7 @@
 - [1. Was im CI/CD heute aktiv ist](#1-was-im-cicd-heute-aktiv-ist)
 - [2. Warum „Standard-SAST/DAST" für diese App teilweise nicht greift](#2-warum-standard-sastdast-für-diese-app-teilweise-nicht-greift)
 - [3. Werkzeug-Kategorien und Anwendbarkeits-Bewertung](#3-werkzeug-kategorien-und-anwendbarkeits-bewertung)
-- [4. Konkreter Vorschlag: erweiterte security.yml](#4-konkreter-vorschlag-erweiterte-securityyml)
+- [4. Konkreter Vorschlag: erweiterte security.yml für `TwoBreath-app`](#4-konkreter-vorschlag-erweiterte-securityyml-für-twobreath-app)
 - [5. Mapping: Werkzeug → erfüllte TR-03161-Anforderungen](#5-mapping-werkzeug--erfüllte-tr-03161-anforderungen)
 - [6. Was iOS-spezifisch ist und in der TR-03161 fehlt](#6-was-ios-spezifisch-ist-und-in-der-tr-03161-fehlt)
 
@@ -19,7 +21,7 @@
 
 ## 1. Was im CI/CD heute aktiv ist
 
-In `TwoBreath-app/.github/workflows/`:
+### 1.1 Privat-Repo `ma3u/TwoBreath-app` (iOS / watchOS)
 
 | Workflow / Job | Werkzeug | Klasse | Trigger | Bewertung |
 | --- | --- | --- | --- | --- |
@@ -33,7 +35,27 @@ In `TwoBreath-app/.github/workflows/`:
 | `ci.yml` › *build-release* | `xcodebuild` Release | Build-Gate | push + PR | ✅ |
 | Pre-commit | `husky` | Hook-Runner | lokal | ✅ |
 
-**Vorhanden:** Secret-Scan, Linter (SwiftLint, ESLint), Funktionstests, Release-Build. **Nicht vorhanden:** echte SAST/DAST, SBOM-Erzeugung, App-Binary-Scan, TLS-Posture-Scan, Provenienz-Signatur.
+**Vorhanden:** Secret-Scan, Linter (SwiftLint, ESLint), Funktionstests, Release-Build. **Nicht vorhanden:** echte SAST/DAST, SBOM-Erzeugung, App-Binary-Scan, App-/TLS-Posture-Scan, Provenienz-Signatur — siehe § 4-Vorschlag.
+
+### 1.2 Öffentliches Repo `ma3u/TwoBreath` (Marketing-Site + DiGA-Dossier) — **NEU mit dieser Pipeline-Erweiterung**
+
+Mit Commit dieser Erweiterung läuft im öffentlichen Repo nun die folgende Pipeline (`.github/workflows/security.yml`):
+
+| Job | Werkzeug | Klasse | Trigger | TR-Bezug |
+| --- | --- | --- | --- | --- |
+| **secrets** | [`gitleaks`](https://github.com/gitleaks/gitleaks) | Secret-Scan | push + PR + cron Mo 06:00 UTC | O.Cryp_1, O.Source_8 |
+| **markdown-lint** | [`markdownlint-cli2`](https://github.com/DavidAnson/markdownlint-cli2) | Doku-Linter | push + PR | Audit-Hygiene |
+| **link-check** | [`lychee`](https://github.com/lycheeverse/lychee) | Link-Validierung | push + PR | Audit-Hygiene (Quellenverzeichnisse erreichbar?) |
+| **dependency-review** | [`actions/dependency-review-action`](https://github.com/actions/dependency-review-action) | Dependency-CVE bei PR-Diff | PR | O.TrdP_3 |
+| **tls-posture** | [`testssl.sh`](https://github.com/drwetter/testssl.sh) (Docker) | TLS-Konfig-Scan | scheduled + manuell | O.Ntwk_2, O.Ntwk_7 |
+| **http-headers** | [Mozilla HTTP Observatory](https://observatory-api.mdn.mozilla.net/) | HTTP-Header-Check | scheduled + manuell | O.Ntwk_2 |
+
+**Konfiguration:**
+- `.markdownlint.json` (relaxed default — die zwei real-bedrohlichen Regeln MD026/MD036 bleiben scharf)
+- `.markdownlintignore` schließt `diga/regulations/markdown/` aus (eingelesene Drittquellen)
+- TLS- und Header-Checks laufen **nicht** bei jedem Push gegen den Server, sondern wöchentlich (Mo 06:00 UTC) bzw. on-demand via `workflow_dispatch`
+
+**Berichte** werden als GitHub-Actions-Artefakte 90 Tage aufbewahrt (`testssl-report`, `observatory-report`).
 
 ## 2. Warum „Standard-SAST/DAST" für diese App teilweise nicht greift
 
@@ -72,10 +94,10 @@ Eine vollständige Übersicht. „Anwendbar?" bezieht sich auf TwoBreath in der 
 | [OWASP ZAP](https://www.zaproxy.org/) | HTTP/HTTPS-Endpunkte | ➖ App, ✅ Website | ❌ | — | App hat keine HTTP-Endpunkte. Website wäre denkbar (statisch, daher minimaler Nutzen) |
 | Burp Suite Enterprise | HTTP/HTTPS | ➖ | ❌ | — | wie ZAP |
 | [`nuclei`](https://github.com/projectdiscovery/nuclei) | HTTP-Templates | 🟡 Website | ❌ | — | leichtgewichtige Variante für Marketing-Site |
-| [`testssl.sh`](https://github.com/drwetter/testssl.sh) | TLS | ✅ Website | ❌ | O.Ntwk_2, O.Ntwk_7 | **klare Empfehlung** — wöchentlich gegen `twobreath.com` |
-| [Mozilla Observatory CLI](https://github.com/mozilla/http-observatory-cli) | HTTP-Header (CSP, HSTS) | ✅ Website | ❌ | O.Ntwk_2 | **klare Empfehlung** |
+| [`testssl.sh`](https://github.com/drwetter/testssl.sh) | TLS | ✅ Website | ✅ **aktiv** im öffentlichen Repo (scheduled cron Mo + manuell) | O.Ntwk_2, O.Ntwk_7 | wöchentlich gegen `twobreath.com`, JSON-Bericht 90 Tage als Artefakt |
+| [Mozilla HTTP Observatory](https://observatory-api.mdn.mozilla.net/) | HTTP-Header (CSP, HSTS) | ✅ Website | ✅ **aktiv** im öffentlichen Repo (scheduled cron Mo + manuell) | O.Ntwk_2 | API-Aufruf, Bericht 90 Tage als Artefakt |
 
-**Kernfehlend:** TLS-Posture-Scan + HTTP-Header-Scan auf der Marketing-Website.
+**Status:** TLS- + HTTP-Header-Scan **implementiert** im öffentlichen Repo (siehe § 1.2).
 
 ### 3.3 Mobile-spezifische Analyse (das eigentliche „SAST/DAST" hier)
 
@@ -126,7 +148,9 @@ Eine vollständige Übersicht. „Anwendbar?" bezieht sich auf TwoBreath in der 
 | [`microsoft/presidio`](https://github.com/microsoft/presidio) | ✅ | ❌ | O.Source_3 | Regex über Log-Stichproben |
 | Custom regex-set (`grep -rE` über `os_log`) | ✅ | ❌ | O.Source_3 | leichter Einstieg |
 
-## 4. Konkreter Vorschlag: erweiterte `security.yml`
+## 4. Konkreter Vorschlag: erweiterte `security.yml` für `TwoBreath-app`
+
+> Die für das **öffentliche Repo** anwendbaren Werkzeuge (gitleaks, markdownlint, lychee, dependency-review, testssl.sh, Mozilla Observatory) sind **bereits implementiert** — siehe § 1.2 + [`.github/workflows/security.yml`](../.github/workflows/security.yml). Der untenstehende Vorschlag betrifft das **private App-Repo** und beschreibt, wie semgrep, syft, osv-scanner, MobSF dort ergänzt werden.
 
 Die folgende Erweiterung ergänzt die heutige Pipeline um **die fünf wichtigsten fehlenden Werkzeuge** (semgrep, MobSF, syft, osv-scanner, testssl.sh) ohne die bestehende Struktur zu brechen:
 
@@ -268,4 +292,7 @@ Die TR-03161 ist plattformübergreifend formuliert. Für iOS-Apps existieren **p
 
 ## Zusammenfassung in einem Satz
 
-Die heutige CI-Sicherheits-Pipeline deckt **Geheimnisse, Linter, Funktionstests** ab; sie lässt **SAST (semgrep), iOS-Binär-Analyse (MobSF), SBOM (syft), OSV-Scan und TLS-Posture-Scan** offen. Diese fünf Werkzeuge fehlen ehrlich im aktuellen Setup und sollten — als nächste Phase 5 — ergänzt werden. Der konkrete YAML-Vorschlag in § 4 ist drop-in.
+**Stand v0.2 (mit dieser Pipeline-Erweiterung):**
+
+- Im **öffentlichen Repo** (`ma3u/TwoBreath`) sind nun **alle anwendbaren Werkzeuge live** — gitleaks (Geheimnis-Scan), markdownlint (Doku-Hygiene), lychee (Link-Validierung), dependency-review (PR-Diff), testssl.sh + Mozilla Observatory (TLS- und Header-Posture wöchentlich gegen `twobreath.com`). Berichte als 90-Tage-Artefakte abrufbar. Konfig: [`.github/workflows/security.yml`](../.github/workflows/security.yml).
+- Im **privaten App-Repo** (`ma3u/TwoBreath-app`) bleibt der bisherige Stand (gitleaks, swiftlint, eslint, npm audit, Tests). Die in § 4 vorgeschlagene Ergänzung — **semgrep, syft SBOM, osv-scanner, MobSF** — wartet auf einen separaten PR im App-Repo. Der YAML-Vorschlag dort ist drop-in.

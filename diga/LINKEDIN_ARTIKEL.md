@@ -1,4 +1,4 @@
-# Aus Notwehr eine App gebaut — könnte sie auch DiGA werden? Eine offene Frage.
+# Aus Notwehr eine App gebaut — könnte sie auch DiGA werden?
 
 **Autor:** Matthias Buchhorn-Roth
 **Veröffentlichung:** Entwurf v0.4, persönliche Fassung, 2026-05-02
@@ -219,4 +219,6 @@ Wer einen 30-Minuten-Slot für einen Kennenlern-Call erbittet — gerne. Ich ant
 
 *TwoBreath ist eine Atemübungs-App, die ich gemeinsam mit Dascha entwickelt habe. Wir sind keine Mediziner und keine Psychotherapeut:innen. Wir sind ein Paar, das ein Problem für sich selbst gelöst hat und sich jetzt fragt, ob das Werkzeug auch anderen Patchwork-Familien helfen könnte — und wenn ja, wie es im deutschen Versorgungssystem ankommt.*
 
-**#DiGA #BSI #TR03161 #DigitaleGesundheit #BfArM #Krankenkassen #Patchworkfamilie #Schlafmedizin #Paartherapie #EHealth**
+## Hashtags
+
+\#DiGA \#BSI \#TR03161 \#DigitaleGesundheit \#BfArM \#Krankenkassen \#Patchworkfamilie \#Schlafmedizin \#Paartherapie \#EHealth
