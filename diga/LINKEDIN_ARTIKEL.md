@@ -118,6 +118,36 @@ Was im DiGA-System aktuell zusätzlich knirscht:
 
 ---
 
+## Fünf Vorschläge an das BSI — die ich respektvoll auf den Tisch lege
+
+Aus den 127 Anforderungen, der Plattform-Aussagen-Beobachtung und der Erkenntnis, dass die meisten Nachweise heute „wie Word-Dokumente" behandelt werden, ergeben sich fünf konkrete Empfehlungen. Sie sind so geschnitten, dass das **BSI-Referat DI 24** sie **einzeln** angehen kann — keine erfordert eine Reform der TR-03161 selbst, jede ändert nur die Form, in der Nachweise fließen. Ausführliche Fassung im [BSI-Bericht § 8](https://github.com/ma3u/TwoBreath/blob/main/diga/BSI_BERICHT.md), hier die Kurzform für die LinkedIn-Diskussion:
+
+### E1 — Maschinenlesbare Fassung der nächsten TR-03161-Revision
+
+Eine **JSON- oder YAML-Datei** neben der weiterhin verbindlichen PDF, die je `O.*`-ID die Prüftiefe, die Vorgängerversion und einen Verweis auf den normativen Abschnitt enthält. Wirkung: Hersteller-Toolchains können Anforderungen direkt referenzieren statt aus PDF zu extrahieren; eine TR-Revision wird als Diff sichtbar. Aufwand für das BSI: gering, der TR-Inhalt selbst bleibt unverändert.
+
+### E2 — Konsultationsentwurf für ein standardisiertes Einreichungsformat
+
+Ein offenes Format **„Nachweispaket TR-03161"** auf Basis bewährter Standards — **CycloneDX** (SBOM), **SARIF** (Werkzeug-Berichte), **JUnit** (Tests), **cosign** (Signaturen), **PROV-O** (Provenienz-Manifest). Veröffentlicht als Konsultationsentwurf mit 60-Tage-Fenster für Hersteller und Prüfstellen. Wirkung: Audit-Lesezeit sinkt, Re-Zertifizierung wird zum **Diff** gegen die Vor-Einreichung statt zum erneuten Lesen einer 200-Seiten-PDF.
+
+### E3 — BSI-publizierter Plattform-Aussagen-Katalog
+
+Eine je iOS- bzw. Android-Major-Version gepflegte Liste, **welche `O.*`-Anforderungen durch dokumentierte Apple- bzw. Google-Plattform-Funktionen implizit erfüllt werden** (App-Sandbox, Data Protection, ATS, Notarisation, HealthKit-Berechtigungs-Modell). Wirkung: jede:r Hersteller:in muss Standard-Konfigurationen nicht mehr neu beweisen. Schutzbedarf bleibt unverändert; nur die Beweis-Doppelarbeit fällt weg.
+
+### E4 — Pilot-Prüfstelle für strukturierte Einreichungen
+
+Eine akkreditierte Prüfstelle nimmt — auf freiwilliger Basis — strukturierte Nachweispakete entgegen und quantifiziert die Mehrarbeit gegenüber dem klassischen PDF-Pfad. Bei positivem Ergebnis Anerkennung des strukturierten Pfads als gleichwertige Einreichungsform. Wirkung: Evidenz-basierte Validierung, dass das neue Format auch wirklich Audit-Aufwand reduziert.
+
+### E5 — Reaktive Re-Zertifizierungs-Trigger
+
+Mittelfristig: die zwei-jährige Geltungsdauer eines Zertifikats kann durch **CVE-Funde** in eingesetzten Bibliotheken oder durch **TR-Revisionen** früher ablaufen — gefolgt von einem **verkürzten Bestätigungsverfahren**, sofern die App nachweisbar nicht betroffen ist. Wirkung: Sicherheit pro investiertem Euro steigt, der jährliche Hersteller-Aufwand sinkt. Patient:innen profitieren von einer Zertifikatsaussage, die näher am tatsächlichen Zustand bleibt.
+
+> **Was diese fünf Vorschläge gemeinsam haben:** sie ändern weder den Schutzbedarf noch die Anzahl der Anforderungen. Sie ändern die **Form**, in der Hersteller, Prüfstellen und das BSI Nachweise austauschen. Genau hier liegt — meinem Eindruck nach — der größte ungenutzte Hebel der DiGA-Verfahrensökonomie.
+
+Wenn jemand aus dem Referat DI 24 oder einer akkreditierten Prüfstelle das gerne im Detail diskutieren würde — ich freue mich über die Unterhaltung.
+
+---
+
 ## Was ich aus der IT-Sicherheits-Brille beitragen kann — und wo ich Hilfe brauche
 
 Ich kann sagen, was ich kann:
