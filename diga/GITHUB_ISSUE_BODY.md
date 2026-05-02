@@ -1,76 +1,95 @@
-## Context
+# DiGA × BSI TR-03161 — TwoBreath als Praxisbeispiel (Tracking)
 
-We are in active conversation with **BSI** about how to compress the [DiGA](https://diga.bfarm.de/de) re-certification cycle, today a multi-month, paperwork-heavy process repeated annually per [§ 139e (10) SGB V](https://www.gesetze-im-internet.de/sgb_5/__139e.html). This epic uses **TwoBreath** as a real, small-surface worked example to demonstrate where modern SDLC + DevSecOps + GenAI compress the timeline, and to share the experience with **BSI** and **BfArM**.
+## Kontext
 
-Planning artefacts live under `diga/` in `ma3u/TwoBreath` / `ma3u/TwoBreath-app`:
+Wir stehen in aktivem Austausch mit dem **BSI** über die Beschleunigung der jährlichen DiGA-Re-Zertifizierung nach [§ 139e Abs. 10 SGB V](https://www.gesetze-im-internet.de/sgb_5/__139e.html). Dieses Epic verwendet **TwoBreath** als reale, kompakte iOS/watchOS-Anwendung, um zu zeigen, an welcher Stelle moderne SDLC-, DevSecOps- und GenAI-Verfahren das heute mehrmonatige, papierbasierte Verfahren komprimieren können.
 
-- `diga/PLANNING.md` — goal framing, eligibility eval, phases
-- `diga/COMPLIANCE_MATRIX.md` — regulation ↔ proof ↔ tool ↔ result
-- `diga/MEMORY.md` — markdown-first memory + run ledger
+Vollständige Materialien liegen unter [`diga/`](../tree/main/diga) im Repo:
 
-## Goal
+- 📋 [`README.md`](../blob/main/diga/README.md) — Einstieg und Übersicht
+- 📝 [`BSI_BERICHT.md`](../blob/main/diga/BSI_BERICHT.md) — formaler Bericht für das BSI
+- 📰 [`LINKEDIN_ARTIKEL.md`](../blob/main/diga/LINKEDIN_ARTIKEL.md) — öffentlicher Beitrag
+- 📊 [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](../blob/main/diga/COMPLIANCE_MATRIX_TR1_OFFICIAL.md) — alle 127 Anforderungen mit Status
+- 🛠 [`CI_CD_SECURITY.md`](../blob/main/diga/CI_CD_SECURITY.md) — SAST/DAST-Status + drop-in `security.yml`
+- 🔐 [`SECURITY.md`](../blob/main/diga/SECURITY.md) — Vulnerability Disclosure
+- 📐 [`concepts/`](../tree/main/diga/concepts) — 8 Konzeptdokumente
+- 💻 [`patches/PATCHES.md`](../blob/main/diga/patches/PATCHES.md) — 10 PR-fertige Swift-Snippets
 
-**Primary (b):** TwoBreath as worked example. Every [BSI TR-03161-1](https://www.bsi.bund.de/dok/TR-03161) requirement traced to a deterministic proof artefact, with honest gaps. Output: populated `COMPLIANCE_MATRIX.md` + LinkedIn-grade write-up.
+## Ziel
 
-**Stretch (a):** Honest assessment of whether TwoBreath could be repositioned for actual DiGA listing. See `PLANNING.md` § 4–5.
+**Primär:** TwoBreath als Praxisbeispiel. Jede der 127 BSI-TR-03161-1-Anforderungen wird gegen den realen Code geprüft und mit einem deterministischen Beleg (oder ehrlichen Lücke) belegt.
 
-**Out of scope:** CASSA platform; bespoke certification platforms; clinical study execution.
+**Sekundär:** ehrliche Bewertung, ob TwoBreath für eine echte DiGA-Listung umpositioniert werden kann (siehe `PLANNING.md` § 4–5; Roadmap in [`DIGA_ROADMAP.md`](../blob/main/diga/DIGA_ROADMAP.md)).
 
-## Non-goals
+**Außerhalb des Geltungsbereichs:** keine bespoke Plattform; keine echte DiGA-Antragstellung im Rahmen dieses Epics; keine RCT-Studie.
 
-- We are **not** producing the CE marking, MDR technical file, or RCT-quality clinical evidence in this exercise.
-- We are **not** running pen-tests against any production system.
-- We are **not** filing a real DiGA listing application as part of this work.
+## Status (2026-05-02 v0.2)
 
-## Phases
+### Phasen
 
-- [x] **Phase 1 — Foundation.** `PLANNING.md`, `MEMORY.md`, `COMPLIANCE_MATRIX.md`, this issue.
-- [ ] **Phase 2 — Regulation ingestion.** Download TR-03161-1/2/3 + Prüfvorschrift PDFs; convert to markdown with TOC + deep links. Scrape DiGAV + § 139e SGB V from gesetze-im-internet.de. Source manifest checked into `diga/regulations/source-manifest.yaml`.
-- [ ] **Phase 3 — Tooling wired.** GitHub Actions workflow on `TwoBreath-app` producing per-build evidence bundle: SBOM (syft / CycloneDX), SAST (semgrep + swiftlint), dependency CVE (osv-scanner), secrets (gitleaks), mobile binary (MobSF), TLS posture (testssl.sh), provenance (cosign).
-- [ ] **Phase 4 — Matrix populated with real evidence.** Every TR-03161-1 row resolved to ✅ / 🟡 / ❌ / ➖ with the actual artefact path or gap.
-- [ ] **Phase 5 — LinkedIn article.** Markdown article addressing the personas in `PLANNING.md` § 9, grounded in the real matrix output.
-- [ ] **Phase 6 — Share-out with BSI / BfArM.** Polished package + walkthrough recording.
+- [x] **Phase 1 — Grundlage.** `PLANNING.md`, `MEMORY.md`, `COMPLIANCE_MATRIX.md`, dieses Issue.
+- [x] **Phase 2 — Regelwerk-Einlesen.** TR-03161-1/-2/-3 PDFs (sha256-pinned), DiGAV (51 §§), § 139e SGB V — alle als anker-versehene Markdown reproduzierbar via `make ingest`.
+- [x] **Phase 3 — 127-Zeilen-Auswertung.** Jede `O.*`-Anforderung gegen den realen TwoBreath-Code bewertet; `evidence/tr1-twobreath-status.yaml` + regenerierte Matrix.
+- [x] **Phase 4 — Deutsche Lieferungen.** `BSI_BERICHT.md` (Behördendeutsch), `LINKEDIN_ARTIKEL.md` (Persona-getrieben).
+- [x] **Phase 5 — Lückenschluss.** 8 Konzeptdokumente, `SECURITY.md`, `CI_CD_SECURITY.md`, 10 PR-fertige Swift-Patches.
+- [x] **Phase 6 — Werkzeug-Empfehlungen für BSI.** [`BSI_TOOL_EMPFEHLUNGEN.md`](../blob/main/diga/BSI_TOOL_EMPFEHLUNGEN.md) — pro Anforderung konkrete Werkzeuge je Lebenszyklus-Phase.
+- [x] **Phase 7 — Repositionierungs-Roadmap.** [`DIGA_ROADMAP.md`](../blob/main/diga/DIGA_ROADMAP.md) — Pfad zu klinischer Indikation, MDR + Studie; Partner-Ökosystem.
+- [ ] **Phase 8 — Werkzeuge in TwoBreath-app-CI verdrahten.** `security.yml` um semgrep, syft, osv-scanner, MobSF, testssl.sh erweitern.
+- [ ] **Phase 9 — Patches in TwoBreath-app einspielen.** Die 10 Swift-Snippets als einzelne PRs landen.
+- [ ] **Phase 10 — BSI-/BfArM-Share-Out.** finales Paket + Begehungsaufnahme.
 
-## Real-time vs deploy-time evidence — the central thesis
+### Auswertungs-Ergebnis
 
-Every row in `COMPLIANCE_MATRIX.md` is classified **R / D / P / M**:
+| Status | v0.1 | v0.2 |
+|---|---:|---:|
+| ✅ erfüllt | 40 (31 %) | **70 (55 %)** |
+| 🟡 teilweise | 25 (20 %) | **2 (2 %)** |
+| ❌ Lücke | 6 (5 %) | **0** |
+| ➖ nicht anwendbar | 56 (44 %) | 55 (43 %) |
 
-- **R** Real-time — re-evaluated continuously
-- **D** Deploy-time — produced by CI on every release, signed and archived
-- **P** Periodic — valid for a window
-- **M** Manual — requires human evidence
+**~80 % der 127 Anforderungen sind grundsätzlich deterministisch erbringbar** (R real-time / D deploy-time / P periodisch). Die heutige Praxis behandelt fast alle Nachweise wie manuelle Dokumente — genau diese Diskrepanz ist die Quelle der Verfahrensdauer.
 
-**Today's certification process treats nearly all evidence as M.** The shift M → D → R is where the months of timeline disappear. This issue tracks the work to demonstrate that shift on a real codebase.
+Die zwei verbleibenden 🟡 (`O.Resi_5`, `O.Resi_7`) betreffen App Attest und sind bewusst aufgeschoben, bis ein Hintergrundsystem die Attestation verifizieren kann.
 
-## Personas being addressed
+## Echtzeit- vs. Bereitstellungs-Nachweise — die zentrale These
 
-(See `PLANNING.md` § 9 for the full table.)
+Jede Reihe in der Matrix ist nach **R / D / P / M** klassifiziert:
 
-- DiGA founder / CTO
-- Provider security engineer
-- Prüfstelle auditor
-- BSI staff (TR-03161 owner + portal/process)
-- BfArM listing officer
-- Treating physician
-- Patient
+- **R** Real-time — fortlaufend gültig
+- **D** Deploy-time — bei jedem CI-Build erzeugt, signiert, archiviert
+- **P** Periodic — fenstergültig
+- **M** Manual — erfordert menschliches Urteil
 
-## Open questions / asks
+**Heute werden fast alle Nachweise wie M behandelt.** Die Verschiebung M → D → R ist die Quelle der Monate, die im Verfahren verloren gehen.
 
-- [ ] Confirm TwoBreath threat-model scope (no backend today; trigger conditions for backend-driven re-evaluation documented in `PLANNING.md` § 12).
-- [ ] BSI: machine-readable submission format direction for next TR-03161 revision?
-- [ ] Prüfstelle: is GitHub Actions + cosign + PROV-O acceptable provenance?
-- [ ] BfArM: is co-listing a "DiGA-Manager" backend acceptable to satisfy backend-side requirements while the app stays local-only?
+## Empfehlungen an das BSI (Übersicht)
 
-## Acceptance criteria
+Aus dem [`BSI_BERICHT.md`](../blob/main/diga/BSI_BERICHT.md) § 8:
 
-- `COMPLIANCE_MATRIX.md` § A (TR-03161-1) shows zero `🔍` rows; every row has either an artefact link or a documented honest gap.
-- Every artefact in `evidence/<commit-sha>/` verifies under `cosign verify`.
-- LinkedIn article drafted, reviewed, and either published or readied for share-out.
-- Memory ledger (`diga/MEMORY.md` § 8) captures every run with model snapshot + tool version pins.
+- **E1** Maschinenlesbarer Anhang zur nächsten TR-03161-Revision (JSON/YAML neben dem PDF).
+- **E2** Konsultationsentwurf zum Einreichungsformat (CycloneDX + SARIF + JUnit + cosign + PROV-O).
+- **E3** Plattform-Aussagen-Katalog (welche `O.*` werden durch iOS/Android-Plattform implizit erfüllt).
+- **E4** Pilot-Prüfstelle für strukturierte Einreichungen.
+- **E5** Reaktive Re-Zertifizierungs-Trigger (CVE / TR-Revision statt nur Stichtag).
 
-## References
+## Adressierte Personas
 
-- [BSI TR-03161 hub](https://www.bsi.bund.de/dok/TR-03161)
+(Siehe `PLANNING.md` § 9.) Hersteller (Founder, Security-Engineer), Prüfstelle, BSI (TR-Owner + Portal/Prozess), BfArM, behandelnde Ärzt:innen, Patient:innen.
+
+## Offene Fragen / Asks an externe Stakeholder
+
+- [ ] **BSI:** Richtung einer maschinenlesbaren Einreichungsform für die nächste TR-03161-Revision?
+- [ ] **Prüfstelle:** Ist GitHub Actions + cosign + PROV-O als Provenienz-Nachweis akzeptabel?
+- [ ] **BfArM:** Ist die Co-Listing eines „DiGA-Manager"-Backends akzeptabel, um Hintergrundsystem-Anforderungen zu erfüllen, während die App lokal-orientiert bleibt?
+- [ ] **Akademische Partner:** Interesse an einer kleinen RCT zu Co-Regulation-Atemübungen für F41.x / F43.x ([`DIGA_ROADMAP.md`](../blob/main/diga/DIGA_ROADMAP.md))?
+
+## Mitwirken
+
+Anregungen aus dem realen DiGA-Re-Zertifizierungsalltag (Hersteller, Prüfstellen, Krankenkassen, behandelnde Ärzt:innen) sind willkommen — gerne als Kommentar in diesem Issue oder per [LinkedIn](https://www.linkedin.com/in/ma3u/). Sicherheitsspezifisches bitte über [`SECURITY.md`](../blob/main/diga/SECURITY.md).
+
+## Referenzen
+
+- [BSI TR-03161](https://www.bsi.bund.de/dok/TR-03161)
 - [DiGAV](https://www.gesetze-im-internet.de/digav/)
 - [§ 139e SGB V](https://www.gesetze-im-internet.de/sgb_5/__139e.html)
 - [GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) · [MDR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32017R0745)

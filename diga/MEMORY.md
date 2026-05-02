@@ -267,6 +267,25 @@ The manifest is updated only by `scripts/fetch-pdfs.sh`, so a new download with 
 - **Notes:**
   - `CI_CD_SECURITY.md` answers the user's "wo sind SAST/DAST?" question with: yes, the standard SAST/DAST stack is largely absent for an iOS local-first app — not because the requirements don't apply, but because **iOS-specific equivalents** (semgrep with Swift rules, MobSF, syft for build-toolchain SBOM, osv-scanner over Package.resolved + package-lock.json, testssl.sh for the marketing site) substitute for container/backend defaults. § 4 of that file is the drop-in fix.
   - The two remaining 🟡 (O.Resi_5, O.Resi_7) are App-Attest. Stub code is in patches/PATCHES.md § 6 but deliberately inactive — without a backend verifier, generating attestations is effort without gain.
+
+### 2026-05-02 · tool-empfehlungen-und-roadmap
+
+- **Actor:** human (Matthias) + Claude Opus 4.7
+- **Input:** explicit user request — "konkrete Tool-Empfehlungen für unterschiedliche Phasen und einzelne 127 Anforderungen", "Public issue ist missing", "Empfehlungen wie wir die App in DiGA-Richtung entwickeln, mit welchen Partnern".
+- **Action:**
+  - Filed public tracking issue #1 on `ma3u/TwoBreath` from refreshed `GITHUB_ISSUE_BODY.md` (now reflects v0.2 status + new docs).
+  - Authored `BSI_TOOL_EMPFEHLUNGEN.md` — tool recommendations per O.* requirement and per lifecycle phase (D/C/P/B/R/L/Z/A); includes proposed structure for the "Nachweispaket TR-03161" submission format (concrete E2 specification).
+  - Authored `DIGA_ROADMAP.md` — repositioning roadmap addressing the three blockers (clinical positioning, MDR conformity, clinical evidence). Recommends F51.0 / G47.0 (Insomnie) as primary indication, F41.1 (GAS) as secondary; proposes Erprobungslistung pathway per § 139e Abs. 4 SGB V; partner ecosystem with named example organisations across clinical, regulatory, technical, payer, research, and patient-organisation categories; 90-day plan; 24–30 month timeline; ≈920 k € mid-range budget.
+  - Updated `README.md` and `BSI_BERICHT.md` § Anlagen to link the new docs.
+- **Output:**
+  - GitHub issue: <https://github.com/ma3u/TwoBreath/issues/1>
+  - `BSI_TOOL_EMPFEHLUNGEN.md` — per-row tool guidance for all 127 requirements
+  - `DIGA_ROADMAP.md` — strategic roadmap with partner ecosystem
+- **Determinism class:** M (advisory authoring).
+- **LLM snapshot:** `claude-opus-4-7` (Claude Code interactive). Roadmap content is recommendations, not committed plan; partner names are public-knowledge organisations relevant to DiGA — must be confirmed individually before outreach.
+- **Notes:**
+  - The roadmap is consistent with PLANNING.md § 5 (Option A/B both retained as primary candidates) but adds operational detail (90-day plan, partner table, budget, timeline).
+  - Tool recommendations doc explicitly maps each O.* to a phase D/C/P/B/R/L/Z/A — this addresses the user's request for phase-specific recommendations and complements CI_CD_SECURITY.md (which is centred on phase B = Build/CI).
   - Re-run is idempotent: `make ingest` produces byte-identical markdown given identical source PDFs/HTML; `regulations/source-manifest.yaml` surfaces any drift on PR.
 
 <!-- next entry below -->

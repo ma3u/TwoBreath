@@ -11,11 +11,12 @@
 
 | Wenn Sie sind … | … lesen Sie zuerst |
 | --- | --- |
-| **BSI / Referat DI 24** | [`BSI_BERICHT.md`](BSI_BERICHT.md) — formaler Bericht mit 5 Empfehlungen |
+| **BSI / Referat DI 24** | [`BSI_BERICHT.md`](BSI_BERICHT.md) — formaler Bericht mit 5 Empfehlungen + [`BSI_TOOL_EMPFEHLUNGEN.md`](BSI_TOOL_EMPFEHLUNGEN.md) (pro Anforderung) |
 | **Patient:in, Ärzt:in, Krankenkasse, Hersteller** | [`LINKEDIN_ARTIKEL.md`](LINKEDIN_ARTIKEL.md) — der LinkedIn-Beitrag |
 | **Prüfstelle / Auditor:in** | [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](COMPLIANCE_MATRIX_TR1_OFFICIAL.md) — alle 127 Anforderungen mit Status, Klasse und Quelle |
 | **DevSecOps-interessiert** | [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) — SAST/DAST-Status und konkreter `security.yml`-Erweiterungs-Vorschlag |
 | **Hersteller (Code-Vorlage)** | [`patches/PATCHES.md`](patches/PATCHES.md) — 10 PR-fertige Swift-Snippets |
+| **strategische Roadmap (DiGA-Listung)** | [`DIGA_ROADMAP.md`](DIGA_ROADMAP.md) — Repositionierungs-Plan + Partner-Ökosystem |
 | **technisch interessiert** | [`PLANNING.md`](PLANNING.md) und [`MEMORY.md`](MEMORY.md) |
 
 ## Kernergebnis
@@ -39,7 +40,9 @@ diga/
 ├── COMPLIANCE_MATRIX.md               Kurzform-Arbeitsmatrix (CRY/AUT/STO)
 ├── COMPLIANCE_MATRIX_TR1_OFFICIAL.md  127-Zeilen-Matrix entlang offizieller O.*-IDs
 ├── BSI_BERICHT.md                     Formaler Bericht für das BSI (Behördendeutsch)
+├── BSI_TOOL_EMPFEHLUNGEN.md           Werkzeug-Empfehlungen je Anforderung × Phase
 ├── LINKEDIN_ARTIKEL.md                LinkedIn-Beitrag für die Öffentlichkeit
+├── DIGA_ROADMAP.md                    Repositionierungs-Roadmap + Partner-Ökosystem
 ├── CI_CD_SECURITY.md                  SAST/DAST-Status + drop-in security.yml-Erweiterung
 ├── SECURITY.md                        Vulnerability Disclosure (verschlüsselter Kanal)
 ├── NOTICE.md                          Drittquellen-Attribution

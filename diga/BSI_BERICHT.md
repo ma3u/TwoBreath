@@ -221,8 +221,14 @@ Mittelfristige Diskussion eines Verfahrensmodells, in dem die zwei-jährige Gelt
 ### Anlagen (im Repository)
 
 - [`PLANNING.md`](PLANNING.md) — Planungsdokument mit Eignungsanalyse und Phasenmodell.
+- [`BSI_TOOL_EMPFEHLUNGEN.md`](BSI_TOOL_EMPFEHLUNGEN.md) — **werkzeug-spezifische Empfehlung pro Anforderung × Lebenszyklus-Phase**, einschließlich konkretem Vorschlag für ein standardisiertes Einreichungsformat „Nachweispaket TR-03161" (Empfehlung E2-Konkretisierung).
+- [`DIGA_ROADMAP.md`](DIGA_ROADMAP.md) — Repositionierungs-Roadmap (Indikation, MDR, Studie) + Partner-Ökosystem.
 - [`COMPLIANCE_MATRIX.md`](COMPLIANCE_MATRIX.md) — Arbeitsmatrix in CRY/AUT/STO-Gruppierung.
 - [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](COMPLIANCE_MATRIX_TR1_OFFICIAL.md) — vollständige 127-Zeilen-Matrix entlang der offiziellen `O.*`-IDs.
+- [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) — Inventarisierung der CI-Pipeline + drop-in `security.yml`-Erweiterung.
+- [`concepts/`](concepts/) — acht Konzeptdokumente (Datenschutz, Datenlebenszyklus, Threat-Model, Secure-Coding, Einwilligungsverzeichnis, Kryptographie, Netzwerk, Resilienz/Härtung).
+- [`patches/PATCHES.md`](patches/PATCHES.md) — zehn PR-fertige Swift-Snippets.
+- [`SECURITY.md`](SECURITY.md) — Vulnerability Disclosure.
 - [`MEMORY.md`](MEMORY.md) — Lauf-Protokoll mit sha256-Pinning, Werkzeugversionen und Modell-Snapshots.
 - [`regulations/markdown/BSI-TR-03161-1.md`](regulations/markdown/BSI-TR-03161-1.md) — eingelesene TR-03161-1 v3.0 mit Anker je `O.*`-Anforderung.
 - [`regulations/markdown/BSI-TR-03161-2.md`](regulations/markdown/BSI-TR-03161-2.md), [`-3.md`](regulations/markdown/BSI-TR-03161-3.md) — Web- und Hintergrundsystem-Teile.
