@@ -58,11 +58,11 @@ In der nachfolgenden Matrix steht je Anforderung an erster Stelle die **primäre
 | ID | Werkzeug | Phase | Klasse | Hinweis |
 | --- | --- | --- | --- | --- |
 | O.Purp_1 | Markdown-Konzept (Datenschutzkonzept) + App-Store-Beschreibung + In-App-Onboarding | D, R | M+D | [`concepts/01-datenschutzkonzept.md`](concepts/01-datenschutzkonzept.md) § 4 + [`patches/PATCHES.md`](patches/PATCHES.md) § 5 |
-| O.Purp_2 | Apple PrivacyInfo.xcprivacy + manuelle Review der HealthKit-Berechtigungen | B, A | M | `PrivacyInfo.xcprivacy` im Repo |
-| O.Purp_3 | iOS-System-Dialog + In-App-Erstinformation + ConsentTracker | C, B, R | M+D | Patch § 5 + § 9 |
-| O.Purp_4 | XCUITest-Szenario (Verweigerung → kein Datenzugriff); HealthKit-API-Erzwingen plattformseitig | B | D | Apple HealthKit-API Code-Review |
-| O.Purp_5 | iOS-Settings + In-App-Pairing-Aufhebung + In-App-Datenlöschung | C, R | M+D | Patch § 7 + § 9 |
-| O.Purp_6 | ConsentLog-Modell (SwiftData) + In-App-Verlauf + JSON-Export | C, B | M+D | [`concepts/05-einwilligungsverzeichnis.md`](concepts/05-einwilligungsverzeichnis.md) + Patch § 9 |
+| O.Purp_2 | [Apple PrivacyInfo.xcprivacy](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files) + manuelle Review der [HealthKit](https://developer.apple.com/documentation/healthkit)-Berechtigungen | B, A | M | `PrivacyInfo.xcprivacy` im Repo |
+| O.Purp_3 | iOS-System-Dialog + In-App-Erstinformation + ConsentTracker | C, B, R | M+D | [`patches/PATCHES.md`](patches/PATCHES.md) § 5 + § 9 |
+| O.Purp_4 | XCUITest-Szenario (Verweigerung → kein Datenzugriff); [HealthKit](https://developer.apple.com/documentation/healthkit)-API-Erzwingen plattformseitig | B | D | [Apple HealthKit-API](https://developer.apple.com/documentation/healthkit) Code-Review |
+| O.Purp_5 | iOS-Settings + In-App-Pairing-Aufhebung + In-App-Datenlöschung | C, R | M+D | [`patches/PATCHES.md`](patches/PATCHES.md) § 7 + § 9 |
+| O.Purp_6 | ConsentLog-Modell (SwiftData) + In-App-Verlauf + JSON-Export | C, B | M+D | [`concepts/05-einwilligungsverzeichnis.md`](concepts/05-einwilligungsverzeichnis.md) + [`patches/PATCHES.md`](patches/PATCHES.md) § 9 |
 | O.Purp_7 | `syft`-SBOM + manuelle Inventarisierung Apple-Frameworks | B, A | D | leere SBOM = trivialer Beleg |
 | O.Purp_8 | Code-Review + DLP-Probe mit `presidio` über Logs/Outputs | B, A | M | künftig in CI |
 | O.Purp_9 | UI-Review + Threat-Model-Cross-Check | D, A | M | [`concepts/03-threat-model.md`](concepts/03-threat-model.md) |
@@ -75,7 +75,7 @@ In der nachfolgenden Matrix steht je Anforderung an erster Stelle die **primäre
 | O.Arch_2 | Datenfluss-Diagramm (z. B. Mermaid) + Trust-Boundary-Tabelle | D, A | M | [`concepts/02-datenlebenszyklus.md`](concepts/02-datenlebenszyklus.md) |
 | O.Arch_3 | Krypto-Inventar-YAML, abgeglichen via `semgrep` mit `CryptoKit`/`CommonCrypto`-Verwendungen | D, B | M | [`concepts/06-kryptographiekonzept.md`](concepts/06-kryptographiekonzept.md); App-seitig leer |
 | O.Arch_4 | iOS Data Protection Class A (Plattform) + iCloud-Backup-Verschlüsselung; manuelle Auditierung | B, A | D | Plattform-Aussage |
-| O.Arch_5 | Code-Review + MobSF (Plist-/Entitlements-Audit) | B, A | D | MobSF in CI (siehe `CI_CD_SECURITY.md` § 4) |
+| O.Arch_5 | Code-Review + [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF) (Plist-/Entitlements-Audit) | B, A | D | MobSF in CI (siehe [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) § 4) |
 | O.Arch_6 | Apple Code-Signing + Apple Notarisation; zusätzlich `cosign` für Evidence-Bundle | R | D | Apple-Pfad standard |
 | O.Arch_7 | `syft`-SBOM-Beleg + Code-Review | B, A | D | trivial bei null Drittanbieter-Code |
 | O.Arch_8 | Code-Grep auf `WKWebView`/`WKUserContentController`; semgrep-Regel | B | D | TwoBreath: keine WebView |
@@ -88,15 +88,15 @@ In der nachfolgenden Matrix steht je Anforderung an erster Stelle die **primäre
 
 | ID | Werkzeug | Phase | Klasse | Hinweis |
 | --- | --- | --- | --- | --- |
-| O.Source_1 | `semgrep` (`p/swift`, `p/security-audit`) + Code-Review | C, B | D | `CI_CD_SECURITY.md` § 4 |
-| O.Source_2 | `semgrep` + typisierte Codable-Schnittstellen | C, B | D | Secure-Coding-Standards § 1 |
-| O.Source_3 | benutzerdefinierte SwiftLint-Regel + `presidio`-Sample über Logs | P, B, Z | D | Patch § 10 |
+| O.Source_1 | [`semgrep`](https://semgrep.dev) (`p/swift`, `p/security-audit`) + Code-Review | C, B | D | [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) § 4 |
+| O.Source_2 | [`semgrep`](https://semgrep.dev) + typisierte Codable-Schnittstellen | C, B | D | [`concepts/04-secure-coding-standards.md`](concepts/04-secure-coding-standards.md) § 1 |
+| O.Source_3 | benutzerdefinierte [`SwiftLint`](https://github.com/realm/SwiftLint)-Regel + [`presidio`](https://github.com/microsoft/presidio)-Sample über Logs | P, B, Z | D | [`patches/PATCHES.md`](patches/PATCHES.md) § 10 |
 | O.Source_4 | Release-Build-Test (manuelle UI-Probe in QA) + `semgrep` | C, B, R | D | |
-| O.Source_5 | Swift ARC + Code-Review | C | D | Secure-Coding-Standards § 4 |
+| O.Source_5 | Swift ARC + Code-Review | C | D | [`concepts/04-secure-coding-standards.md`](concepts/04-secure-coding-standards.md) § 4 |
 | O.Source_6 | Swift hat ARC — Anforderung n/a; semgrep als Rückversicherung gegen `unsafe*`-Verwendung | B | D | |
-| O.Source_7 | Datenschutz-Konzept (Aufbewahrung) + In-App-Löschung | D, C | M+D | [`concepts/01`](concepts/01-datenschutzkonzept.md) § 7 + Patch § 7 |
+| O.Source_7 | Datenschutz-Konzept (Aufbewahrung) + In-App-Löschung | D, C | M+D | [`concepts/01-datenschutzkonzept.md`](concepts/01-datenschutzkonzept.md) § 7 + [`patches/PATCHES.md`](patches/PATCHES.md) § 7 |
 | O.Source_8 | `gitleaks`, `trufflehog`, semgrep-Regel `debug-url` | P, B | D | bereits aktiv + erweiterbar |
-| O.Source_9 | `STRIP_INSTALLED_PRODUCT`/`STRIP_SWIFT_SYMBOLS` in `project.yml` Release-Konfig | B, R | D | Patch § 8 |
+| O.Source_9 | `STRIP_INSTALLED_PRODUCT`/`STRIP_SWIFT_SYMBOLS` in `project.yml` Release-Konfig | B, R | D | [`patches/PATCHES.md`](patches/PATCHES.md) § 8 |
 | O.Source_10 | `SwiftLint --strict` + `semgrep` + `Periphery` (Dead-Code) | C, B | D | + `swiftlint analyze` |
 
 ### 3.4 Prüfaspekt (4) — Drittanbieter-Software (`O.TrdP_*`)
@@ -105,7 +105,7 @@ In der nachfolgenden Matrix steht je Anforderung an erster Stelle die **primäre
 | --- | --- | --- | --- | --- |
 | O.TrdP_1 | `syft` → CycloneDX SBOM + signierte Veröffentlichung pro Release | B, R | D | bei null Deps trivial |
 | O.TrdP_2 | `osv-scanner` mit Versions-Pinning aus `Package.resolved` | B | D | derzeit n/a |
-| O.TrdP_3 | `osv-scanner` + GitHub Dependabot + `npm audit` | B, Z | D | bereits aktiv für Build-Tools |
+| O.TrdP_3 | `osv-scanner` + [GitHub Dependabot](https://docs.github.com/en/code-security/dependabot) + `npm audit` | B, Z | D | bereits aktiv für Build-Tools |
 | O.TrdP_4 | Dependabot-Auto-PR + Sicherheits-Konzept-Doc | B, R | D+M | + Grace-Period-Tabelle |
 | O.TrdP_5 | manuelle Vendor-Bewertung; SLSA-Provenienz-Check beim Beziehen | D, B | M | bei null Deps trivial |
 | O.TrdP_6 | Code-Review + DLP-Probe | B, A | M | n/a heute |
@@ -117,10 +117,10 @@ In der nachfolgenden Matrix steht je Anforderung an erster Stelle die **primäre
 | ID | Werkzeug | Phase | Klasse | Hinweis |
 | --- | --- | --- | --- | --- |
 | O.Cryp_1 | `gitleaks` (CI + weekly cron) mit Custom-Regeln | P, B, Z | D | `.gitleaks.toml` |
-| O.Cryp_2 | semgrep-Regelsatz „crypto-bad-practice" (z. B. `MD5`, `arc4random`) + Code-Review | B | D | TR-02102-Konformitäts-Check |
+| O.Cryp_2 | semgrep-Regelsatz „crypto-bad-practice“ (z. B. `MD5`, `arc4random`) + Code-Review | B | D | [BSI TR-02102](https://www.bsi.bund.de/dok/TR-02102)-Konformitäts-Check |
 | O.Cryp_3 | Krypto-Inventar-YAML, abgeglichen mit Code-Scan | D, B | D | Plattform-vermittelt |
-| O.Cryp_4 | manuelle Schlüssel-Zweck-Inventarisierung; n/a bei reiner Plattform-Delegierung | D | M | TR-Konzept § 6 |
-| O.Cryp_5 | TR-02102-1-Abgleich; Plattform-Aussage je iOS-Version | A, Z | M | halbjährliche Re-Validierung |
+| O.Cryp_4 | manuelle Schlüssel-Zweck-Inventarisierung; n/a bei reiner Plattform-Delegierung | D | M | [`concepts/06-kryptographiekonzept.md`](concepts/06-kryptographiekonzept.md) § 6 |
+| O.Cryp_5 | [BSI TR-02102-1](https://www.bsi.bund.de/dok/TR-02102)-Abgleich; Plattform-Aussage je iOS-Version | A, Z | M | halbjährliche Re-Validierung |
 | O.Cryp_6 | Plattform-Aussage (Secure Enclave); MobSF-Plist-Audit | B, A | D | |
 | O.Cryp_7 | Plattform-Aussage; semgrep-Regel gegen Userspace-Krypto-Handling | B | D | |
 | O.Rand_1 | semgrep-Regel: `arc4random` blockieren, `SecRandomCopyBytes` zulassen | C, B | D | bereits in Coding-Standards |
@@ -135,9 +135,9 @@ In der nachfolgenden Matrix steht je Anforderung an erster Stelle die **primäre
 | O.Auth_2–O.Auth_15 | Auth0/Keycloak/oAuth2-Proxy-Konfig + Postman-/`schemathesis`-Vertragstests + JWT-Claim-Assertions in Tests | C, B, L | D+R | + Logging via `os.Logger` |
 | O.Auth_3 (MFA) | Apple Sign-In, FIDO2 (z. B. `WebAuthn4Swift`); MFA-Schritte in XCUITest | C, B | D | |
 | O.Auth_5 (Kontextfaktoren) | Risk-Engine-Bibliothek; SIEM-Anomaly-Detect | L | R | |
-| O.Auth_7 (Brute-Force) | Server-seitige Rate-Limits (ggf. Auth0-Policy); Last-Test mit `k6` | B, L | R+D | |
+| O.Auth_7 (Brute-Force) | Server-seitige Rate-Limits (ggf. Auth0-Policy); Last-Test mit [`k6`](https://k6.io/) | B, L | R+D | |
 | O.Auth_13 (Token als sensibel) | Keychain (iOS), `Security.framework` | C | D | |
-| O.Pass_1–O.Pass_5 | NIST-SP800-63B-Konformes Policy-Set; bcrypt/scrypt/argon2 (libsodium); semgrep-Regel | C, B | D | |
+| O.Pass_1–O.Pass_5 | [NIST SP 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html)-Konformes Policy-Set; bcrypt/scrypt/argon2 ([libsodium](https://doc.libsodium.org/)); semgrep-Regel | C, B | D | |
 
 ### 3.7 Prüfaspekt (7) — Datensicherheit (`O.Data_*`)
 
@@ -149,17 +149,17 @@ In der nachfolgenden Matrix steht je Anforderung an erster Stelle die **primäre
 | O.Data_4 | Code-Grep auf `URLScheme`, Entitlements-Audit | B | D | |
 | O.Data_5 | Datenschutzkonzept + Auto-Löschungs-Strategie | D | M | |
 | O.Data_6 | Datenminimierungs-Audit (Felder vs. Zweck) | D, A | M | |
-| O.Data_7 | n/a ohne Backend; bei Hinzufügen: TR-03161-3 + BSI C5 | D | M | Trigger dokumentiert |
+| O.Data_7 | n/a ohne Backend; bei Hinzufügen: [TR-03161-3](https://www.bsi.bund.de/dok/TR-03161) + [BSI C5](https://www.bsi.bund.de/dok/C5) | D | M | Trigger dokumentiert |
 | O.Data_8 | Code-Grep auf `AVCaptureSession`/`UIImagePickerController`; EXIF-Strip-Bib | C, B | D | n/a heute |
 | O.Data_9 | Sandbox-Audit; iOS-Foto-Berechtigung | B | D | n/a heute |
-| O.Data_10 | `.privacySensitive()` + `.textContentType(.oneTimeCode)` | C, B | D | Patch § 3 |
-| O.Data_11 | `.textSelection(.disabled)` | C | D | Patch § 4 |
+| O.Data_10 | `.privacySensitive()` + `.textContentType(.oneTimeCode)` | C, B | D | [`patches/PATCHES.md`](patches/PATCHES.md) § 3 |
+| O.Data_11 | `.textSelection(.disabled)` | C | D | [`patches/PATCHES.md`](patches/PATCHES.md) § 4 |
 | O.Data_12 | iOS Secure Enclave (Plattform); Code-Audit auf Export-Pfade | B | D | |
-| O.Data_13 | `AppSwitcherShield`-ViewModifier (`scenePhase`) | C, B | D | Patch § 2 |
+| O.Data_13 | `AppSwitcherShield`-ViewModifier (`scenePhase`) | C, B | D | [`patches/PATCHES.md`](patches/PATCHES.md) § 2 |
 | O.Data_14 | iOS Data Protection Class A (`NSFileProtectionComplete`) | B, R | D | Plattform |
 | O.Data_15 | iOS UID-abhängige Schlüsselableitung (Plattform) | R | D | Plattform |
 | O.Data_16 | iOS-Sandbox-Removal beim Uninstall | R | D | Plattform |
-| O.Data_17 | In-App-Datenlösch-UI + `DataEraseService` | C, B | D | Patch § 7 |
+| O.Data_17 | In-App-Datenlösch-UI + `DataEraseService` | C, B | D | [`patches/PATCHES.md`](patches/PATCHES.md) § 7 |
 | O.Data_18 (KANN) | Backend-Kill-Switch via Push (mit Hintergrundsystem) | L | D | n/a heute |
 
 ### 3.8 Prüfaspekt (8) — Kostenpflichtige Ressourcen (`O.Paid_*`)
@@ -186,7 +186,7 @@ In der nachfolgenden Matrix steht je Anforderung an erster Stelle die **primäre
 | O.Ntwk_1 | App: MPC `encryptionPreference: .required` + Pairing-Code; Backend (sobald vorhanden): mTLS via Service-Mesh | C, L | D | [`concepts/07`](concepts/07-netzwerk-sicherheitskonzept.md) § 3 |
 | O.Ntwk_2 | `testssl.sh` + Mozilla Observatory (Site); ATS-Default (App) | B, L, Z | R+D | |
 | O.Ntwk_3 | Apple `Network.framework` + ATS; bei Backend: `URLSession` | C | D | |
-| O.Ntwk_4 | bei Backend: TrustKit (iOS) + Code-Grep | C, B | D | n/a heute |
+| O.Ntwk_4 | bei Backend: [TrustKit](https://github.com/datatheorem/TrustKit) (iOS) + Code-Grep | C, B | D | n/a heute |
 | O.Ntwk_5 | bei Backend: `URLSession` Cert-Validation (Plattform) + manuelle Test | B | D | n/a heute |
 | O.Ntwk_6 | bei Backend: HMAC oder JWS-Signaturen + `URLSession`-Validation | C, L | D | n/a heute |
 | O.Ntwk_7 | `Info.plist`-Audit auf ATS-Ausnahmen; MobSF | B | D | bereits sicher |
@@ -196,7 +196,7 @@ In der nachfolgenden Matrix steht je Anforderung an erster Stelle die **primäre
 
 | ID | Werkzeug | Phase | Klasse | Hinweis |
 | --- | --- | --- | --- | --- |
-| O.Plat_1 | In-App-Hinweis-UI + `LAContext.canEvaluatePolicy` | C, B | D+M | Patch § 5 |
+| O.Plat_1 | In-App-Hinweis-UI + `LAContext.canEvaluatePolicy` | C, B | D+M | [`patches/PATCHES.md`](patches/PATCHES.md) § 5 |
 | O.Plat_2 | MobSF-Entitlements-Audit + `Info.plist`-Diff in PR | B | D | |
 | O.Plat_3 | `Info.plist` Usage-Strings (verpflichtend); MobSF | C, B | D | |
 | O.Plat_4 | semgrep-Regel auf `UNNotificationContent.body` mit sensiblen Quellen | B | D | |
@@ -204,26 +204,26 @@ In der nachfolgenden Matrix steht je Anforderung an erster Stelle die **primäre
 | O.Plat_6 | iOS-Sandbox + HealthKit-Berechtigung | B | D | Plattform |
 | O.Plat_7 | Code-Review IPC; semgrep-Regel auf `XPC`/`UIPasteboard` | B | D | |
 | O.Plat_8 | bei WebView: `WKWebpagePreferences.javaScriptEnabled = false`; CSP-Header | C, B | D | n/a heute |
-| O.Plat_9 | `AppSwitcherShield`-ViewModifier | C, B | D | Patch § 2 |
+| O.Plat_9 | `AppSwitcherShield`-ViewModifier | C, B | D | [`patches/PATCHES.md`](patches/PATCHES.md) § 2 |
 | O.Plat_10 | bei WebView: WKWebView-Konfig + URL-Schema-Filter | C | D | n/a |
 | O.Plat_11 | bei WebView: `WKWebsiteDataStore.removeData(...)` | C | D | n/a |
 | O.Plat_12 | Swift ARC; Code-Review auf eigene Buffer | C | D | |
-| O.Plat_13 | `SecurityInfoView` (Settings-Bildschirm) | C, B | D | Patch § 5 |
+| O.Plat_13 | `SecurityInfoView` (Settings-Bildschirm) | C, B | D | [`patches/PATCHES.md`](patches/PATCHES.md) § 5 |
 | O.Plat_14 | bei Backend: zentrale Logs Loki + Alerting | L | R | n/a heute |
 
 ### 3.11 Prüfaspekt (11) — Resilienz (`O.Resi_*`)
 
 | ID | Werkzeug | Phase | Klasse | Hinweis |
 | --- | --- | --- | --- | --- |
-| O.Resi_1 | `SecurityInfoView` (gemeinsam mit O.Plat_13) | C, B | D+M | Patch § 5 |
+| O.Resi_1 | `SecurityInfoView` (gemeinsam mit O.Plat_13) | C, B | D+M | [`patches/PATCHES.md`](patches/PATCHES.md) § 5 |
 | O.Resi_2 | Mindest-iOS-Version (project.yml `deploymentTarget`); halbjährliche Re-Validierung | D, B, Z | D+M | [`concepts/08`](concepts/08-resilienz-haertungskonzept.md) § 3 |
-| O.Resi_3 | `assertNotDebugged()` via `sysctl(KERN_PROC, P_TRACED)` | C, B, R | D | Patch § 1 |
-| O.Resi_4 | iOS-Sandbox; n/a außer Jailbreak | B | D | Begründung in `concepts/08` § 5.3 |
-| O.Resi_5 | Apple App Attest (`DCAppAttestService`) — Stub | C | D | Patch § 6 (inaktiv) |
+| O.Resi_3 | `assertNotDebugged()` via `sysctl(KERN_PROC, P_TRACED)` | C, B, R | D | [`patches/PATCHES.md`](patches/PATCHES.md) § 1 |
+| O.Resi_4 | iOS-Sandbox; n/a außer Jailbreak | B | D | Begründung in [`concepts/08-resilienz-haertungskonzept.md`](concepts/08-resilienz-haertungskonzept.md) § 5.3 |
+| O.Resi_5 | Apple App Attest (`DCAppAttestService`) — Stub | C | D | [`patches/PATCHES.md`](patches/PATCHES.md) § 6 (inaktiv) |
 | O.Resi_6 | bei Backend: TrustKit-Pinning + App-Attest-Verify | C, L | D | n/a heute |
 | O.Resi_7 | App Attest pro sensitiver Aktion | C, L | D | wartet auf Backend |
-| O.Resi_8 | Symbol-Stripping (`STRIP_*`) + Apple-Toolchain-Defaults | B | D | Patch § 8 |
-| O.Resi_9 | iOS-only — n/a | — | D | Begründung in `concepts/08` § 9 |
+| O.Resi_8 | Symbol-Stripping (`STRIP_*`) + Apple-Toolchain-Defaults | B | D | [`patches/PATCHES.md`](patches/PATCHES.md) § 8 |
+| O.Resi_9 | iOS-only — n/a | — | D | Begründung in [`concepts/08-resilienz-haertungskonzept.md`](concepts/08-resilienz-haertungskonzept.md) § 9 |
 | O.Resi_10 | Swift Testing Unit-Tests (BreathingEngine pause/resume); Audio-Interruption-Handling | B, Z | D+P | bereits aktiv in `ci.yml` |
 
 ## 4. Aggregat: Werkzeuge nach Phase
@@ -232,35 +232,35 @@ Wer eine **Phase** umsetzen möchte, findet hier die Hauptwerkzeuge im Schnellzu
 
 ### 4.1 Design (D)
 
-`threagile` · ADR-Verzeichnis · Markdown-Konzepte · Mermaid-Datenfluss-Diagramme · DSFA-Vorlage
+[`threagile`](https://threagile.io/) · ADR-Verzeichnis · Markdown-Konzepte · Mermaid-Datenfluss-Diagramme · DSFA-Vorlage
 
 ### 4.2 Code/IDE (C)
 
-`SwiftLint` (mit Custom-Regeln) · `semgrep` (CLI lokal) · `gitleaks` Pre-Commit · `swiftformat` · IDE-Integrationen
+[`SwiftLint`](https://github.com/realm/SwiftLint) (mit Custom-Regeln) · [`semgrep`](https://semgrep.dev) (CLI lokal) · [`gitleaks`](https://github.com/gitleaks/gitleaks) Pre-Commit · [`swiftformat`](https://github.com/nicklockwood/SwiftFormat) · IDE-Integrationen
 
 ### 4.3 Pre-Commit (P)
 
-`husky`-Hook → `gitleaks`, `swiftformat`, `swiftlint --quiet`, `detect-secrets`
+[`husky`](https://typicode.github.io/husky/)-Hook → [`gitleaks`](https://github.com/gitleaks/gitleaks), [`swiftformat`](https://github.com/nicklockwood/SwiftFormat), `swiftlint --quiet`, [`detect-secrets`](https://github.com/Yelp/detect-secrets)
 
 ### 4.4 Build/CI (B)
 
-`SwiftLint --strict` · `semgrep` (`p/swift`, `p/security-audit`) · `gitleaks` · `syft` SBOM · `osv-scanner` · `MobSF` (statisch) · `npm audit` (Build-Toolchain) · `xcodebuild test`
+[`SwiftLint --strict`](https://github.com/realm/SwiftLint) · [`semgrep`](https://semgrep.dev) (`p/swift`, `p/security-audit`) · [`gitleaks`](https://github.com/gitleaks/gitleaks) · [`syft`](https://github.com/anchore/syft) SBOM · [`osv-scanner`](https://github.com/google/osv-scanner) · [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF) (statisch) · `npm audit` (Build-Toolchain) · `xcodebuild test`
 
 ### 4.5 Pre-Release (R)
 
-Apple Notarisation · `cosign` für Evidence-Bundle · Symbol-Stripping-Verifizierung · `nm`/`otool`-Sanity-Check · finaler MobSF-Lauf
+[Apple Notarisation](https://developer.apple.com/documentation/xcode/notarizing-macos-software-before-distribution) · [`cosign`](https://github.com/sigstore/cosign) für Evidence-Bundle · Symbol-Stripping-Verifizierung · `nm`/`otool`-Sanity-Check · finaler [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF)-Lauf
 
 ### 4.6 Laufzeit / Live (L)
 
-`testssl.sh` (Marketing-Site, scheduled) · Mozilla Observatory · Apple App Attest · Loki/Splunk (mit Backend)
+[`testssl.sh`](https://github.com/drwetter/testssl.sh) (Marketing-Site, scheduled) · [Mozilla HTTP Observatory](https://github.com/mozilla/http-observatory-cli) · [Apple App Attest](https://developer.apple.com/documentation/devicecheck) · Loki/Splunk (mit Backend)
 
 ### 4.7 Periodisch (Z)
 
-`gitleaks` weekly cron · TLS-Re-Scan · Pen-Test · Restore-Drill · Backup-Restore-Test · `osv-scanner` über externe Manifest-Datei · iOS-Major-Version-Re-Validierung (halbjährlich)
+[`gitleaks`](https://github.com/gitleaks/gitleaks) weekly cron · TLS-Re-Scan · Pen-Test · Restore-Drill · Backup-Restore-Test · [`osv-scanner`](https://github.com/google/osv-scanner) über externe Manifest-Datei · iOS-Major-Version-Re-Validierung (halbjährlich)
 
 ### 4.8 Audit (A)
 
-signiertes Evidence-Bundle (CycloneDX + SARIF + JUnit + cosign + PROV-O) · diff gegen vorigen Audit · Konzeptdokumente in `concepts/` · Plattform-Aussagen (BSI E3-Vorschlag)
+signiertes Evidence-Bundle ([CycloneDX](https://cyclonedx.org/) + [SARIF 2.1](https://sarifweb.azurewebsites.net/) + JUnit + [`cosign`](https://github.com/sigstore/cosign) + [PROV-O](https://www.w3.org/TR/prov-o/)) · diff gegen vorigen Audit · Konzeptdokumente in [`concepts/`](concepts/) · Plattform-Aussagen (BSI E3-Vorschlag)
 
 ## 5. Werkzeug-Empfehlung an das BSI (E2-Konkretisierung)
 

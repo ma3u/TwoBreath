@@ -1,8 +1,8 @@
 # Bericht an das BSI: Modernisierung des TR-03161-Zertifizierungsverfahrens
 
-**Verfasser:** Matthias Buchhorn-Roth
-**Datum:** 2026-05-02
-**Bezug:** Laufender Austausch mit dem BSI zur Verbesserung des Verfahrens zur Datensicherheits-Zertifizierung digitaler Gesundheitsanwendungen nach § 139e Abs. 10 SGB V i. V. m. BSI TR-03161
+* **Verfasser:** Matthias Buchhorn-Roth
+* **Datum:** 2026-05-02
+* **Bezug:** Austausch mit dem BSI zur Verbesserung des Verfahrens zur Datensicherheits-Zertifizierung digitaler Gesundheitsanwendungen nach § 139e Abs. 10 SGB V i. V. m. BSI TR-03161
 **Status:** Entwurf v0.1 — zur Diskussion mit dem Referat DI 24
 
 ---
@@ -24,9 +24,9 @@
 
 ## 1. Anlass und Zielsetzung
 
-Mit der verpflichtenden Vorlage eines BSI-Zertifikats nach TR-03161 für DiGA seit dem 1. Januar 2025 (§ 139e Abs. 10 Satz 3 SGB V) hat sich der regulatorische Rahmen verfestigt. Die Praxiserfahrung der Hersteller — über mehrere Berater- und Prüfstellen-Mandate hinweg — zeigt jedoch, dass das Zertifizierungs- und insbesondere das jährliche Re-Zertifizierungsverfahren weiterhin überwiegend papier- und manuellgestützt verläuft. Typische Durchlaufzeiten liegen im Bereich mehrerer Monate. Die Folge ist ein dauerhafter Ressourcen- und Erlöswettbewerb gegen die Re-Zertifizierungstaktung selbst.
+Mit der verpflichtenden Vorlage eines BSI-Zertifikats nach TR-03161 für DiGA seit dem 1. Januar 2025 (§ 139e Abs. 10 Satz 3 SGB V) hat sich der regulatorische Rahmen verfestigt. Die Praxiserfahrung der Hersteller über mehrere Berater- und Prüfstellen-Mandate hinweg zeigt jedoch, dass das Zertifizierungs- und insbesondere das jährliche Re-Zertifizierungsverfahren weiterhin überwiegend papier- und manuellgestützt verläuft. Typische Durchlaufzeiten liegen im Bereich mehrerer Monate. Die Folge ist ein dauerhafter Ressourcen- und Erlöswettbewerb gegen die Re-Zertifizierungstaktung selbst.
 
-Dieser Bericht dokumentiert eine **konkrete, anhand einer realen Anwendung durchgeführte Auswertung** sämtlicher 127 Prüfanforderungen aus TR-03161-1 v3.0 mit dem Ziel, dem BSI einen evidenzbasierten Diskussionsbeitrag zur Verfahrensmodernisierung vorzulegen. Er ist ausdrücklich **kein Antrag** und **keine Marketingmitteilung**, sondern eine technisch belastbare Diskussionsgrundlage.
+Dieser Bericht dokumentiert eine **konkrete, anhand einer realen Anwendung durchgeführte Auswertung** sämtlicher 127 Prüfanforderungen aus [TR-03161-1 v3.0](https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/Technische-Richtlinien/TR-nach-Thema-sortiert/tr03161/tr-03161.html) mit dem Ziel, dem BSI einen evidenzbasierten Diskussionsbeitrag zur Verfahrensmodernisierung vorzulegen. Er ist ausdrücklich **kein Antrag** und **keine Marketingmitteilung**, sondern eine technisch belastbare Diskussionsgrundlage.
 
 Der zentrale Befund ist quantifizierbar: Ein erheblicher Teil der TR-03161-Anforderungen lässt sich **deterministisch** und entweder **zur Bereitstellungszeit (D — deploy-time)** oder **zur Laufzeit (R — real-time)** durch standardisierte, signierbare Werkzeuge erbringen. Die heutige Praxis behandelt diese Anforderungen jedoch überwiegend wie manuelle (M-) Nachweise. Genau diese Diskrepanz ist die Quelle des Großteils der Verfahrensdauer.
 
@@ -43,7 +43,7 @@ Als Untersuchungsgegenstand dient die mobile Anwendung **„TwoBreath"** (iOS + 
 | Drittsysteme | nur Apple App Store / Apple-Plattformdienste |
 | Distribution | Apple App Store + Apple Notarisation |
 
-Diese „lokal-zuerst"-Architektur ist methodisch geeignet, weil sie eine klare, kompakte Angriffsfläche bietet und damit erlaubt, die TR-03161-Anforderungen ohne Vermischung mit umfangreichen Hintergrundsystem-Themen einzeln durchzuarbeiten. TR-03161-2 (Web-Anwendungen) und TR-03161-3 (Hintergrundsysteme) entfallen für diese Anwendung weitgehend, sind im Bericht aber als „aktivierbar bei Architekturänderung" mitgeführt.
+Die „local-only"-Architektur ist methodisch geeignet, weil sie eine klare, kompakte Angriffsfläche bietet und damit erlaubt, die TR-03161-Anforderungen ohne Vermischung mit umfangreichen Hintergrundsystem-Themen einzeln durchzuarbeiten. TR-03161-2 (Web-Anwendungen) und TR-03161-3 (Hintergrundsysteme) entfallen für diese Anwendung weitgehend, sind im Bericht aber als „aktivierbar bei Architekturänderung" mitgeführt.
 
 ## 3. Methodik
 
@@ -84,7 +84,7 @@ Aus TR-03161-1 v3.0 wurden **127 eindeutige Prüfanforderungen (`O.*`)** in 13 G
 | 🔍 offen | Determinierung pendent | 0 | 0 % |
 | **Gesamt** | | **127** | **100 %** |
 
-Die hohe Quote der Klasse ➖ (44 %) ergibt sich konsistent aus der lokal-zuerst-Architektur ohne Hintergrundsystem, ohne Nutzerkonten und ohne Drittanbieter-Bibliotheken. Sämtliche Authentisierungs- und Passwort-Anforderungen (`O.Auth_*`, `O.Pass_*` — 20 Stück) sowie die Mehrzahl der Backend-bezogenen Anforderungen entfallen damit. Diese Bewertung ist im Anhang zeilenweise begründet und verbleibt überprüfbar.
+Die hohe Quote der Klasse von 44 % ergibt sich konsistent aus der local-only-Architektur ohne Hintergrundsystem, ohne Nutzerkonten und ohne Drittanbieter-Bibliotheken. Sämtliche Authentisierungs- und Passwort-Anforderungen (`O.Auth_*`, `O.Pass_*` — 20 Stück) sowie die Mehrzahl der Backend-bezogenen Anforderungen entfallen damit. Diese Bewertung ist im Anhang zeilenweise begründet und verbleibt überprüfbar.
 
 ### 5.2 Verteilung der Anforderungen je Prüfaspekt
 
@@ -114,47 +114,20 @@ Die hohe Quote der Klasse ➖ (44 %) ergibt sich konsistent aus der lokal-zuerst
 
 > **101 von 127 Anforderungen (~80 %) sind grundsätzlich deterministisch erbringbar (R, D oder P).** Nur 26 Anforderungen (20 %) erfordern manuelle Bewertung im engeren Sinne — überwiegend Dokumentations- und Konzeptarbeiten (Anwendungszweck, Architektur, Datenschutzkonzept).
 
-### 5.4 Schließung der ehemaligen Lücken (Stand v0.2)
+### 5.4 Verbleibende offene Punkte
 
-In der Fassung v0.1 wurden 6 ❌- und 25 🟡-Anforderungen ausgewiesen. Mit den Folgematerialien sind diese geschlossen:
-
-| Werkzeug der Schließung | Schließt |
-| --- | --- |
-| [`concepts/01-datenschutzkonzept.md`](concepts/01-datenschutzkonzept.md) | O.Purp_1, O.Purp_2, O.Purp_4, O.Data_5, O.Data_6 |
-| [`concepts/02-datenlebenszyklus.md`](concepts/02-datenlebenszyklus.md) | O.Arch_2, O.Source_7 |
-| [`concepts/03-threat-model.md`](concepts/03-threat-model.md) | O.Arch_1 (Threat-Model-Anteil) |
-| [`concepts/04-secure-coding-standards.md`](concepts/04-secure-coding-standards.md) | O.Arch_1, O.Source_1, O.Source_2, O.Source_5 |
-| [`concepts/05-einwilligungsverzeichnis.md`](concepts/05-einwilligungsverzeichnis.md) | O.Purp_3, O.Purp_5, O.Purp_6 |
-| [`concepts/06-kryptographiekonzept.md`](concepts/06-kryptographiekonzept.md) | O.Arch_3 (Plattform-Delegierung explizit) |
-| [`concepts/07-netzwerk-sicherheitskonzept.md`](concepts/07-netzwerk-sicherheitskonzept.md) | O.Ntwk_1 (Lesart), O.Ntwk_8 |
-| [`concepts/08-resilienz-haertungskonzept.md`](concepts/08-resilienz-haertungskonzept.md) | O.Arch_10, O.Resi_2 |
-| [`SECURITY.md`](SECURITY.md) | O.Arch_9 |
-| [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) | beantwortet die Rückfrage zu SAST/DAST und ergänzt die Pipeline |
-| [`patches/PATCHES.md`](patches/PATCHES.md) § 1 | O.Resi_3 |
-| § 2 | O.Plat_9, O.Data_13 |
-| § 3 | O.Data_10 |
-| § 4 | O.Data_11 |
-| § 5 | O.Plat_1, O.Plat_13, O.Resi_1 |
-| § 6 | O.Resi_5, O.Resi_7 (Stub vorbereitet) |
-| § 7 | O.Data_17 |
-| § 8 | O.Source_9, O.Resi_8 |
-| § 9 | O.Purp_3, O.Purp_5, O.Purp_6 (Code-Seite) |
-| § 10 | O.Source_3 |
-
-### 5.5 Verbleibende offene Punkte
-
-Zwei `🟡`-Reihen verbleiben — nicht als Mangel, sondern als bewusst aufgeschobene Aktivierung:
+Zwei `🟡`-Reihen verbleiben aber nicht als Mangel, sondern weil die Funktion schlichtweg nicht anbieten:
 
 | ID | Status | Begründung |
 | --- | --- | --- |
 | [O.Resi_5](COMPLIANCE_MATRIX_TR1_OFFICIAL.md#oresi_-9) | 🟡 | App-Attest-Stub vorbereitet; mangels Hintergrundsystem ohne Verifizierer. Aktivierung mit Backend-Anbindung. |
 | [O.Resi_7](COMPLIANCE_MATRIX_TR1_OFFICIAL.md#oresi_-13) | 🟡 | wie O.Resi_5 — Härtungs-Integritätsprüfung fußt auf App Attest. |
 
-Aus Hersteller-Sicht entspricht der Bearbeitungsumfang dieser Schließung **wenigen Personentagen** — nicht Monaten. Das ist die Pointe für den BSI-Dialog: das hier dokumentierte Material ist die Form, in der ein Hersteller einen TR-03161-Audit erfolgreich vorbereiten kann; die Größe der Aufgabe wird durch das Verfahren, nicht durch die Anforderungen, bestimmt.
+Aus Hersteller-Sicht entspricht der Bearbeitungsumfang dieser Schließung **1-2 Personentagen** nicht Monaten. 
 
 ### 5.5 Implikation
 
-Die zentrale These des Berichts findet sich quantitativ bestätigt: **74 % aller 127 Anforderungen sind deploy-time-erbringbar, weitere 4 % real-time, 2 % periodisch.** Die heutige Praxis behandelt all diese Anforderungen weiterhin überwiegend wie manuelle Nachweise. Das ist die zu hebende Diskrepanz.
+Die zentrale These des Berichts findet sich quantitativ bestätigt: **74 % aller 127 Anforderungen sind deploy-time-erbringbar, weitere 4 % real-time, 2 % periodisch.** Die heutige Praxis behandelt all diese Anforderungen weiterhin überwiegend wie manuelle Nachweise. 
 
 Die zeilenweise Klassifikation ist in [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](COMPLIANCE_MATRIX_TR1_OFFICIAL.md) dokumentiert und durch [`evidence/tr1-twobreath-status.yaml`](evidence/tr1-twobreath-status.yaml) reproduzierbar; jede Zeile verlinkt zurück auf die offizielle TR-Anforderung in der eingelesenen Markdown-Fassung.
 
@@ -194,16 +167,18 @@ Auf Grundlage der Befunde werden dem Referat DI 24 folgende Empfehlungen zur Dis
 **E1 — Maschinenlesbarer Anhang zur nächsten TR-03161-Revision.**
 Veröffentlichung einer JSON- oder YAML-Fassung, welche je `O.*`-ID die Prüftiefe, das Datum der Einführung, die Vorgängerversion und einen Verweis auf den normativen Abschnitt enthält. Das BSI behält die PDF als verbindliche Fassung; die maschinenlesbare Fassung dient als technischer Spiegel für Hersteller-Toolchains.
 
-**E2 — Konsultationsentwurf zum Einreichungsformat.**
+[BSI-TR-03161-1.md](regulations/markdown/BSI-TR-03161-1.md), [BSI-TR-03161-2.md](regulations/markdown/BSI-TR-03161-2.md), [BSI-TR-03161-3.md](regulations/markdown/BSI-TR-03161-3.md) eingelesene Markdown-Fassungen mit Anker je `O.*`-Anforderung, die als Grundlage für die maschinenlesbare Fassung dienen.
+
+**E2: Konsultationsentwurf zum Einreichungsformat.**
 Veröffentlichung eines Entwurfs „Nachweispaket TR-03161" auf Basis offener Standards (CycloneDX 1.5+, SARIF 2.1+, JUnit, cosign, PROV-O), mit einem 60-Tage-Konsultationsfenster für Hersteller und akkreditierte Prüfstellen.
 
-**E3 — Plattform-Aussagen-Katalog.**
+**E3: Plattform-Aussagen-Katalog.**
 Erarbeitung eines BSI-publizierten Katalogs, welcher die Erfüllung einzelner `O.*`-Anforderungen durch dokumentierte Apple-iOS- und Google-Android-Plattformfunktionen ausweist (mit Versions-Bezug zu iOS/Android-Major-Versionen). Dies senkt den Prüfaufwand bei Standard-Konfigurationen ohne den Schutzbedarf zu reduzieren.
 
-**E4 — Pilot-Prüfstelle für strukturierte Einreichungen.**
-Auswahl einer Prüfstelle, die — auf freiwilliger Basis — strukturierte Nachweispakete entgegennimmt und die Mehrarbeit gegenüber dem klassischen PDF-Pfad quantifiziert. Bei positivem Ergebnis Anerkennung des strukturierten Pfads als gleichwertige Einreichungsform.
+**E4:  Pilot-Prüfstelle für strukturierte Einreichungen.**
+Auswahl einer Prüfstelle, die auf freiwilliger Basis strukturierte Nachweispakete entgegennimmt und die Mehrarbeit gegenüber dem klassischen PDF-Pfad quantifiziert. Bei positivem Ergebnis Anerkennung des strukturierten Pfads als gleichwertige Einreichungsform.
 
-**E5 — Reaktiver Re-Zertifizierungs-Trigger.**
+**E5: Reaktiver Re-Zertifizierungs-Trigger.**
 Mittelfristige Diskussion eines Verfahrensmodells, in dem die zwei-jährige Geltungsdauer eines Zertifikats durch CVE- oder TR-Revisions-Trigger früher ablaufen kann, ergänzt durch ein verkürztes Bestätigungsverfahren bei nachweisbar unbetroffenen Anwendungen.
 
 ## 9. Risiken und offene Fragen
@@ -220,18 +195,18 @@ Mittelfristige Diskussion eines Verfahrensmodells, in dem die zwei-jährige Gelt
 
 ### Anlagen (im Repository)
 
-- [`PLANNING.md`](PLANNING.md) — Planungsdokument mit Eignungsanalyse und Phasenmodell.
-- [`BSI_TOOL_EMPFEHLUNGEN.md`](BSI_TOOL_EMPFEHLUNGEN.md) — **werkzeug-spezifische Empfehlung pro Anforderung × Lebenszyklus-Phase**, einschließlich konkretem Vorschlag für ein standardisiertes Einreichungsformat „Nachweispaket TR-03161" (Empfehlung E2-Konkretisierung).
-- [`DIGA_ROADMAP.md`](DIGA_ROADMAP.md) — Repositionierungs-Roadmap (Indikation, MDR, Studie) + Partner-Ökosystem.
-- [`COMPLIANCE_MATRIX.md`](COMPLIANCE_MATRIX.md) — Arbeitsmatrix in CRY/AUT/STO-Gruppierung.
-- [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](COMPLIANCE_MATRIX_TR1_OFFICIAL.md) — vollständige 127-Zeilen-Matrix entlang der offiziellen `O.*`-IDs.
-- [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) — Inventarisierung der CI-Pipeline + drop-in `security.yml`-Erweiterung.
-- [`concepts/`](concepts/) — acht Konzeptdokumente (Datenschutz, Datenlebenszyklus, Threat-Model, Secure-Coding, Einwilligungsverzeichnis, Kryptographie, Netzwerk, Resilienz/Härtung).
-- [`patches/PATCHES.md`](patches/PATCHES.md) — zehn PR-fertige Swift-Snippets.
-- [`SECURITY.md`](SECURITY.md) — Vulnerability Disclosure.
-- [`MEMORY.md`](MEMORY.md) — Lauf-Protokoll mit sha256-Pinning, Werkzeugversionen und Modell-Snapshots.
-- [`regulations/markdown/BSI-TR-03161-1.md`](regulations/markdown/BSI-TR-03161-1.md) — eingelesene TR-03161-1 v3.0 mit Anker je `O.*`-Anforderung.
-- [`regulations/markdown/BSI-TR-03161-2.md`](regulations/markdown/BSI-TR-03161-2.md), [`-3.md`](regulations/markdown/BSI-TR-03161-3.md) — Web- und Hintergrundsystem-Teile.
+- [`PLANNING.md`](PLANNING.md): Planungsdokument mit Eignungsanalyse und Phasenmodell.
+- [`BSI_TOOL_EMPFEHLUNGEN.md`](BSI_TOOL_EMPFEHLUNGEN.md): **werkzeug-spezifische Empfehlung pro Anforderung × Lebenszyklus-Phase**, einschließlich konkretem Vorschlag für ein standardisiertes Einreichungsformat „Nachweispaket TR-03161" (Empfehlung E2-Konkretisierung).
+- [`DIGA_ROADMAP.md`](DIGA_ROADMAP.md): Repositionierungs-Roadmap (Indikation, MDR, Studie) + Partner-Ökosystem.
+- [`COMPLIANCE_MATRIX.md`](COMPLIANCE_MATRIX.md): Arbeitsmatrix in CRY/AUT/STO-Gruppierung.
+- [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](COMPLIANCE_MATRIX_TR1_OFFICIAL.md): vollständige 127-Zeilen-Matrix entlang der offiziellen `O.*`-IDs.
+- [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md): Inventarisierung der CI-Pipeline + drop-in `security.yml`-Erweiterung.
+- [`concepts/`](concepts/): acht Konzeptdokumente (Datenschutz, Datenlebenszyklus, Threat-Model, Secure-Coding, Einwilligungsverzeichnis, Kryptographie, Netzwerk, Resilienz/Härtung).
+- [`patches/PATCHES.md`](patches/PATCHES.md): zehn PR-fertige Swift-Snippets.
+- [`SECURITY.md`](SECURITY.md): Vulnerability Disclosure.
+- [`MEMORY.md`](MEMORY.md): Lauf-Protokoll mit sha256-Pinning, Werkzeugversionen und Modell-Snapshots.
+- [`regulations/markdown/BSI-TR-03161-1.md`](regulations/markdown/BSI-TR-03161-1.md): eingelesene TR-03161-1 v3.0 mit Anker je `O.*`-Anforderung.
+- [`regulations/markdown/BSI-TR-03161-2.md`](regulations/markdown/BSI-TR-03161-2.md), [`-3.md`](regulations/markdown/BSI-TR-03161-3.md): Web- und Hintergrundsystem-Teile.
 - [`regulations/markdown/DiGAV.md`](regulations/markdown/DiGAV.md) — DiGAV vollständig (51 §§).
 - [`regulations/markdown/SGB-V-139e.md`](regulations/markdown/SGB-V-139e.md) — § 139e SGB V.
 - [`regulations/source-manifest.yaml`](regulations/source-manifest.yaml) — Quellen-Pinning mit sha256.
@@ -245,9 +220,13 @@ Mittelfristige Diskussion eines Verfahrensmodells, in dem die zwei-jährige Gelt
 - DiGAV: <https://www.gesetze-im-internet.de/digav/>
 - DiGA-Verzeichnis (BfArM): <https://diga.bfarm.de/de>
 
-### Verwendete Werkzeuge (Stand 2026-05-02)
+### Verwendete Werkzeuge 
 
-`pdftotext` (poppler) 26.04.0 · `python3` 3.13.13 · `bs4` 4.13.4 · `pandoc` 3.9.0.2 · Sprachmodell: `claude-opus-4-7` (nur strukturierend, nicht beweisführend).
+- `pdftotext` (poppler) 26.04.0 
+- `python3` 3.13.13 
+- `bs4` 4.13.4 
+- `pandoc` 3.9.0.2 
+- Sprachmodell: `claude-opus-4-7` (nur strukturierend, nicht beweisführend).
 
 ---
 

@@ -25,19 +25,19 @@
 
 ---
 
-## 0. TL;DR — die fünf Anrufe dieses Monats
+## 0. Shortlist
 
 | # | Person / Stelle | Warum jetzt |
 | --- | --- | --- |
 | 1 | **Prof. Dr. Dr. Kai Spiegelhalder** (UK Freiburg, AG Insomnie der DGSM) | Tandem mit Riemann; Co-PI für die F51.0-Erprobungsstudie |
 | 2 | **Prof. Dr. David Daniel Ebert** (TUM / Protect Lab, Co-Founder HelloBetter) | höchste DiGA-Verfahrenserfahrung in DE — sechs zugelassene DiGA |
-| 3 | **BfArM Innovationsbüro** (`innovation@bfarm.de`, +49 228 99 307-4053) | **kostenlose** Pre-Submission-Beratung nach § 139e Abs. 8 SGB V |
+| 3 | **BfArM Innovationsbüro** (`innovation@bfarm.de`) | **kostenlose** Pre-Submission-Beratung nach § 139e Abs. 8 SGB V |
 | 4 | **secuvera GmbH** (BSI-Prüfstelle TR-03161, Gäufelden) | bestes DiGA-Profil (Referenz: kontina BSI-K-TR-0832, April 2026) |
 | 5 | **Heal Capital** (Berlin) | privat-KV-getragener Fonds, strukturell auf DiGA/DTx-Erstattung ausgerichtet, neue Fund-2-Tranche 2025 |
 
 ---
 
-## 1. Marktlücke — Befund
+## 1. Marktlücke 
 
 Die Recherche im aktuellen DiGA-Verzeichnis (Mai 2026) ergibt eine **klare Lücke**:
 
