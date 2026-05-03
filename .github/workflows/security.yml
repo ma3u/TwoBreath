@@ -175,6 +175,86 @@ jobs:
           if-no-files-found: ignore
 
   # ──────────────────────────────────────────────────────────────────────
+  # 4c. Cross-Repo OSV-Scanner — privates ma3u/TwoBreath-app
+  #     Voraussetzung: Repository-Secret `APP_REPO_TOKEN` mit fine-grained
+  #     PAT, Read-Berechtigung auf `ma3u/TwoBreath-app/Contents`. Ohne
+  #     Secret skippt der Job ohne Fehler (Soft-Skip via Step-Output).
+  #
+  #     Privacy-Hinweis: SARIF-Upload landet im PUBLIC Code-Scanning-Tab
+  #     dieses Repos — Vulnerability-Findings über die App werden damit
+  #     öffentlich sichtbar. Das ist im Rahmen des öffentlichen DiGA-
+  #     Audit-Trail-Charakters dieses Repos akzeptiert.
+  # ──────────────────────────────────────────────────────────────────────
+  osv-scan-app:
+    name: OSV Scanner (private app repo)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    if: github.event_name != 'pull_request'  # cross-repo nur auf push/cron/dispatch
+    steps:
+      - name: Check token availability
+        id: have-token
+        run: |
+          if [ -n "${{ secrets.APP_REPO_TOKEN }}" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+            echo "Token present — proceeding."
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::APP_REPO_TOKEN secret not set — cross-repo scan skipped. Add a fine-grained PAT with Contents:Read on ma3u/TwoBreath-app to enable."
+          fi
+      - name: Checkout private TwoBreath-app
+        if: steps.have-token.outputs.ok == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: ma3u/TwoBreath-app
+          token: ${{ secrets.APP_REPO_TOKEN }}
+          path: app-src
+          fetch-depth: 1
+      - name: Install osv-scanner
+        if: steps.have-token.outputs.ok == 'true'
+        env:
+          OSV_VERSION: "2.3.6"
+        run: |
+          set -euo pipefail
+          curl -sSLf -o osv-scanner \
+            "https://github.com/google/osv-scanner/releases/download/v${OSV_VERSION}/osv-scanner_linux_amd64"
+          chmod +x osv-scanner
+          sudo mv osv-scanner /usr/local/bin/
+          osv-scanner --version
+      - name: Run osv-scanner against private app
+        if: steps.have-token.outputs.ok == 'true'
+        run: |
+          set -uo pipefail
+          osv-scanner scan source \
+            --recursive \
+            --format=sarif \
+            --output=osv-app.sarif \
+            ./app-src || rc=$?
+          rc=${rc:-0}
+          echo "osv-scanner exit code: $rc"
+          if [ -f osv-app.sarif ]; then
+            jq -r '.runs[]?.results | length' osv-app.sarif | head -3 | xargs -I{} echo "App SARIF results count: {}"
+          fi
+          # Hart fail nur bei echten Vulns (exit 1)
+          if [ "$rc" = "1" ]; then exit 1; fi
+      - name: Upload App SARIF to GitHub code scanning
+        if: always() && steps.have-token.outputs.ok == 'true'
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: osv-app.sarif
+          category: osv-scanner-app
+        continue-on-error: true
+      - name: Upload App SARIF as artefact
+        if: always() && steps.have-token.outputs.ok == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: osv-scanner-app-report
+          path: osv-app.sarif
+          retention-days: 90
+          if-no-files-found: ignore
+
+  # ──────────────────────────────────────────────────────────────────────
   # 5. TLS-Posture-Check — twobreath.com (testssl.sh)
   #    Schließt: TR-03161 O.Ntwk_2, O.Ntwk_7 (Marketing-Site)
   #    Nur scheduled / manuell — vermeidet jeden-Push-Last gegen den Server.

@@ -31,29 +31,29 @@ overrides:
   # (1) Anwendungszweck — O.Purp_*
   # ──────────────────────────────────────────
   O.Purp_1:
-    status: "✅"
+    status: "🟡"
     class: "M + D"
-    note: "App-Store-Beschreibung + Info.plist + In-App-Erstinformations-Bildschirm (Patch § 5) + Datenschutzkonzept (concepts/01-datenschutzkonzept.md). PrivacyInfo.xcprivacy maschinenlesbar."
+    note: "PATCH-PENDING — Patch § 5 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): App-Store-Beschreibung + Info.plist + In-App-Erstinformations-Bildschirm (Patch § 5) + Datenschutzkonzept (concepts/01-datenschutzkonzept.md). PrivacyInfo.xcprivacy maschinenlesbar."
   O.Purp_2:
     status: "✅"
     class: "M"
     note: "PrivacyInfo.xcprivacy: Health + Fitness ausschließlich für AppFunctionality, kein Tracking. HealthKit-Berechtigungen entsprechen den deklarierten Zwecken."
   O.Purp_3:
-    status: "✅"
+    status: "🟡"
     class: "M + D"
-    note: "iOS-vermittelte System-Dialoge plus In-App-Erstinformations-Texte (Patch § 5). Tatsache der Einwilligung wird per ConsentTracker (Patch § 9) protokolliert."
+    note: "PATCH-PENDING — Patch § 5 + § 9 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): iOS-vermittelte System-Dialoge plus In-App-Erstinformations-Texte (Patch § 5). Tatsache der Einwilligung wird per ConsentTracker (Patch § 9) protokolliert."
   O.Purp_4:
     status: "✅"
     class: "D"
     note: "Apple-HealthKit-API erzwingt Autorisierungsprüfung; bei Verweigerung kein Datenzugriff. Verifikation per Code-Review von HealthKitService.swift."
   O.Purp_5:
-    status: "✅"
+    status: "🟡"
     class: "M + D"
-    note: "iOS-Einstellungen + In-App-Pairing-Aufhebung + In-App-Alle-Daten-löschen (Patch § 7). Konsequenz-Hinweise im SecurityInfoView (Patch § 5) und Confirmation-Dialog. ConsentTracker erfasst Widerrufe (Patch § 9, source=iosSettingsRevoke / inAppRevoke)."
+    note: "PATCH-PENDING — Patch § 7 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): iOS-Einstellungen + In-App-Pairing-Aufhebung + In-App-Alle-Daten-löschen (Patch § 7). Konsequenz-Hinweise im SecurityInfoView (Patch § 5) und Confirmation-Dialog. ConsentTracker erfasst Widerrufe (Patch § 9, source=iosSettingsRevoke / inAppRevoke)."
   O.Purp_6:
-    status: "✅"
+    status: "🟡"
     class: "M + D"
-    note: "ConsentTracker + ConsentLog SwiftData-Modell (Patch § 9, Konzept concepts/05-einwilligungsverzeichnis.md). In-App-Verlaufsanzeige + JSON-Export. Verzeichnis bleibt lokal, vollständig nutzer-einsehbar."
+    note: "PATCH-PENDING — Patch § 9 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): ConsentTracker + ConsentLog SwiftData-Modell (Patch § 9, Konzept concepts/05-einwilligungsverzeichnis.md). In-App-Verlaufsanzeige + JSON-Export. Verzeichnis bleibt lokal, vollständig nutzer-einsehbar."
   O.Purp_7:
     status: "✅"
     class: "D"
@@ -131,9 +131,9 @@ overrides:
     class: "D"
     note: "Typisierte Schnittstellen + Secure-Coding-Standards § 1 dokumentieren das. Keine SQL-/HTML-Injection-Oberfläche mangels Backend/WebView."
   O.Source_3:
-    status: "✅"
+    status: "🟡"
     class: "D"
-    note: "Secure-Coding-Standards § 2 erzwingt privacy-Marker bei jeder os.Logger-Interpolation. SwiftLint-Custom-Regel `os_log_privacy_marker` (Patch § 10) blockt Verstöße in CI. `print(...)` in Produktiv-Pfaden verboten."
+    note: "PATCH-PENDING — Patch § 10 (SwiftLint-Custom-Regel) dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): Secure-Coding-Standards § 2 erzwingt privacy-Marker bei jeder os.Logger-Interpolation. SwiftLint-Custom-Regel `os_log_privacy_marker` (Patch § 10) blockt Verstöße in CI. `print(...)` in Produktiv-Pfaden verboten."
   O.Source_4:
     status: "✅"
     class: "D"
@@ -155,9 +155,9 @@ overrides:
     class: "D"
     note: "Release-Konfiguration in project.yml (`defaultConfig: Release`). Keine Debug-URLs / Test-Endpoints im Quellcode (per Code-Review + gitleaks)."
   O.Source_9:
-    status: "✅"
+    status: "🟡"
     class: "D"
-    note: "Apple-Toolchain-Defaults aktiv. Symbol-Stripping in Release-Konfiguration explizit gesetzt (Patch § 8: STRIP_INSTALLED_PRODUCT, STRIP_SWIFT_SYMBOLS, DEAD_CODE_STRIPPING)."
+    note: "PATCH-PENDING — Patch § 8 (Symbol-Stripping) dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): Apple-Toolchain-Defaults aktiv. Symbol-Stripping in Release-Konfiguration explizit gesetzt (Patch § 8: STRIP_INSTALLED_PRODUCT, STRIP_SWIFT_SYMBOLS, DEAD_CODE_STRIPPING)."
   O.Source_10:
     status: "✅"
     class: "D"
@@ -359,21 +359,21 @@ overrides:
     class: "D"
     note: "Nicht anwendbar — keine Aufnahme."
   O.Data_10:
-    status: "✅"
+    status: "🟡"
     class: "D"
-    note: "Pairing-Code-Eingabe mit `.textContentType(.oneTimeCode)` + `.privacySensitive()` + `.autocorrectionDisabled()` (Patch § 3)."
+    note: "PATCH-PENDING — Patch § 3 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): Pairing-Code-Eingabe mit `.textContentType(.oneTimeCode)` + `.privacySensitive()` + `.autocorrectionDisabled()` (Patch § 3)."
   O.Data_11:
-    status: "✅"
+    status: "🟡"
     class: "D"
-    note: "Sensible Anzeigen mit `.textSelection(.disabled)` und `.privacySensitive()` markiert (Patch § 4)."
+    note: "PATCH-PENDING — Patch § 4 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): Sensible Anzeigen mit `.textSelection(.disabled)` und `.privacySensitive()` markiert (Patch § 4)."
   O.Data_12:
     status: "➖"
     class: "D"
     note: "Anwendung erhebt weder biometrische Daten noch hält private Schlüssel."
   O.Data_13:
-    status: "✅"
+    status: "🟡"
     class: "D"
-    note: "AppSwitcherShield-ViewModifier (Patch § 2) verdeckt sensible Anzeigen bei Übergang in den Hintergrund. Anwendung auf alle HealthKit-anzeigenden Views."
+    note: "PATCH-PENDING — Patch § 2 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): AppSwitcherShield-ViewModifier (Patch § 2) verdeckt sensible Anzeigen bei Übergang in den Hintergrund. Anwendung auf alle HealthKit-anzeigenden Views."
   O.Data_14:
     status: "✅"
     class: "D"
@@ -387,9 +387,9 @@ overrides:
     class: "D"
     note: "iOS-Deinstallation entfernt App-Sandbox vollständig; HealthKit-Daten verbleiben absichtlich in HealthKit (Plattformmodell, vom Nutzer steuerbar)."
   O.Data_17:
-    status: "✅"
+    status: "🟡"
     class: "D"
-    note: "DataEraseService + Settings-UI mit Confirmation-Dialog (Patch § 7) löscht SessionLog, ConsentLog, PartnerPairing und entfernt App-eigene HealthKit-Mindful-Minutes."
+    note: "PATCH-PENDING — Patch § 7 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): DataEraseService + Settings-UI mit Confirmation-Dialog (Patch § 7) löscht SessionLog, ConsentLog, PartnerPairing und entfernt App-eigene HealthKit-Mindful-Minutes."
   O.Data_18:
     status: "➖"
     class: "D"
@@ -479,9 +479,9 @@ overrides:
   # (10) Plattformspezifische Interaktionen — O.Plat_*
   # ──────────────────────────────────────────
   O.Plat_1:
-    status: "✅"
+    status: "🟡"
     class: "M"
-    note: "Sicherheits-Empfehlungs-Bildschirm (Patch § 5) klärt explizit über Geräte-Sperre / Face-/Touch-ID auf — Erstes Bullet im SecurityInfoView."
+    note: "PATCH-PENDING — Patch § 5 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): Sicherheits-Empfehlungs-Bildschirm (Patch § 5) klärt explizit über Geräte-Sperre / Face-/Touch-ID auf — Erstes Bullet im SecurityInfoView."
   O.Plat_2:
     status: "✅"
     class: "D"
@@ -511,9 +511,9 @@ overrides:
     class: "D"
     note: "Keine Rendering-Engine / WebView."
   O.Plat_9:
-    status: "✅"
+    status: "🟡"
     class: "D"
-    note: "AppSwitcherShield-ViewModifier (Patch § 2) maskiert sensible Inhalte bei Übergang in den Hintergrund."
+    note: "PATCH-PENDING — Patch § 2 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): AppSwitcherShield-ViewModifier (Patch § 2) maskiert sensible Inhalte bei Übergang in den Hintergrund."
   O.Plat_10:
     status: "➖"
     class: "D"
@@ -527,9 +527,9 @@ overrides:
     class: "D"
     note: "Swift ARC räumt Speicher beim Exit auf; keine eigenen sensiblen Speicherpuffer."
   O.Plat_13:
-    status: "✅"
+    status: "🟡"
     class: "M"
-    note: "SecurityInfoView (Patch § 5) im Settings-Bildschirm enthält Sicherheits-Empfehlungen, Verarbeitungs-Übersicht, Verlauf-Verlinkung, Vulnerability-Disclosure-Link."
+    note: "PATCH-PENDING — Patch § 5 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): SecurityInfoView (Patch § 5) im Settings-Bildschirm enthält Sicherheits-Empfehlungen, Verarbeitungs-Übersicht, Verlauf-Verlinkung, Vulnerability-Disclosure-Link."
   O.Plat_14:
     status: "➖"
     class: "R"
@@ -539,17 +539,17 @@ overrides:
   # (11) Resilienz — O.Resi_*
   # ──────────────────────────────────────────
   O.Resi_1:
-    status: "✅"
+    status: "🟡"
     class: "M"
-    note: "Best-Practice-Empfehlungen im SecurityInfoView (Patch § 5) — gleicher Bildschirm wie O.Plat_13."
+    note: "PATCH-PENDING — Patch § 5 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): Best-Practice-Empfehlungen im SecurityInfoView (Patch § 5) — gleicher Bildschirm wie O.Plat_13."
   O.Resi_2:
     status: "✅"
     class: "D"
     note: "Mindest-iOS-Version 17.0; halbjährliche Re-Validierung in concepts/08-resilienz-haertungskonzept.md § 3 dokumentiert. Jailbreak-Heuristiken bewusst ausgeschlossen mit Begründung (§ 5.3)."
   O.Resi_3:
-    status: "✅"
+    status: "🟡"
     class: "D"
-    note: "`assertNotDebugged()`-Funktion via `sysctl(KERN_PROC, …, P_TRACED)` (Patch § 1), aufgerufen in App-Init. Wirkt nur in Release-Builds."
+    note: "PATCH-PENDING — Patch § 1 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): `assertNotDebugged()`-Funktion via `sysctl(KERN_PROC, …, P_TRACED)` (Patch § 1), aufgerufen in App-Init. Wirkt nur in Release-Builds."
   O.Resi_4:
     status: "➖"
     class: "D"
@@ -567,9 +567,9 @@ overrides:
     class: "D"
     note: "App-Attest-Stub (Patch § 6) vorbereitet — siehe O.Resi_5. Aktivierung mit Hintergrundsystem."
   O.Resi_8:
-    status: "✅"
+    status: "🟡"
     class: "D"
-    note: "Apple-Toolchain-Defaults + scharf gesetztes Symbol-Stripping in Release (Patch § 8). Trade-off-Begründung gegen kommerzielle Obfuscation in concepts/08-resilienz-haertungskonzept.md § 8 dokumentiert."
+    note: "PATCH-PENDING — Patch § 8 dokumentiert in patches/PATCHES.md, NOCH NICHT im TwoBreath-app eingespielt. Originalbewertung (mit Patch): Apple-Toolchain-Defaults + scharf gesetztes Symbol-Stripping in Release (Patch § 8). Trade-off-Begründung gegen kommerzielle Obfuscation in concepts/08-resilienz-haertungskonzept.md § 8 dokumentiert."
   O.Resi_9:
     status: "➖"
     class: "D"

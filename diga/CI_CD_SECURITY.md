@@ -47,7 +47,8 @@ Mit Commit dieser Erweiterung läuft im öffentlichen Repo nun die folgende Pipe
 | **markdown-lint** | [`markdownlint-cli2`](https://github.com/DavidAnson/markdownlint-cli2) | Doku-Linter | push + PR | Audit-Hygiene |
 | **link-check** | [`lychee`](https://github.com/lycheeverse/lychee) | Link-Validierung | push + PR | Audit-Hygiene (Quellenverzeichnisse erreichbar?) |
 | **dependency-review** | [`actions/dependency-review-action`](https://github.com/actions/dependency-review-action) | Dependency-CVE bei PR-Diff (skipped auf push/dispatch — by design) | PR | O.TrdP_3 |
-| **osv-scan** | [`google/osv-scanner-action`](https://github.com/google/osv-scanner-action) | Manifest-CVE-Scan auf push/PR/cron — Push-/Cron-Variante zu dependency-review; SARIF-Upload in das Code-Scanning-Tab | push + PR + Mo 06:00 UTC | O.TrdP_3 |
+| **osv-scan** | [`osv-scanner v2`](https://github.com/google/osv-scanner) (Binary aus GitHub Release) | Manifest-CVE-Scan auf push/PR/cron — Push-/Cron-Variante zu dependency-review; SARIF-Upload in das Code-Scanning-Tab | push + PR + Mo 06:00 UTC | O.TrdP_3 |
+| **osv-scan-app** | [`osv-scanner v2`](https://github.com/google/osv-scanner) (Binary) | **Cross-Repo-Scan** des privaten `ma3u/TwoBreath-app` über `APP_REPO_TOKEN`-Secret; SARIF-Upload mit Kategorie `osv-scanner-app` ins selbe Code-Scanning-Tab | push + cron + dispatch (nicht PR) | O.TrdP_3 |
 | **tls-posture** | [`testssl.sh`](https://github.com/drwetter/testssl.sh) (Docker) | TLS-Konfig-Scan | scheduled + manuell | O.Ntwk_2, O.Ntwk_7 |
 | **http-headers** | [Mozilla HTTP Observatory](https://observatory-api.mdn.mozilla.net/) | HTTP-Header-Check | scheduled + manuell | O.Ntwk_2 |
 
@@ -56,7 +57,25 @@ Mit Commit dieser Erweiterung läuft im öffentlichen Repo nun die folgende Pipe
 - `.markdownlintignore` schließt `diga/regulations/markdown/` aus (eingelesene Drittquellen)
 - TLS- und Header-Checks laufen **nicht** bei jedem Push gegen den Server, sondern wöchentlich (Mo 06:00 UTC) bzw. on-demand via `workflow_dispatch`
 
-**Berichte** werden als GitHub-Actions-Artefakte 90 Tage aufbewahrt (`testssl-report`, `observatory-report`).
+**Berichte** werden als GitHub-Actions-Artefakte 90 Tage aufbewahrt (`testssl-report`, `observatory-report`, `osv-scanner-report`, `osv-scanner-app-report`).
+
+### 1.3 Setup-Schritt für den Cross-Repo-Scan (`osv-scan-app`)
+
+Damit der `osv-scan-app`-Job tatsächlich gegen das private `ma3u/TwoBreath-app` läuft, ist einmalig ein Repository-Secret im **öffentlichen** Repo zu hinterlegen:
+
+1. **Fine-grained PAT erstellen:** GitHub → Settings → Developer Settings → Personal Access Tokens → Fine-grained tokens → Generate new.
+   - Resource owner: `ma3u`
+   - Repository access: nur `ma3u/TwoBreath-app`
+   - Permissions: `Contents: Read` (sonst nichts)
+   - Expiration: empfohlen 90 Tage mit Kalender-Erinnerung zur Rotation
+2. **Secret im Public-Repo eintragen:** `ma3u/TwoBreath` → Settings → Secrets and variables → Actions → New repository secret
+   - Name: `APP_REPO_TOKEN`
+   - Value: das im Schritt 1 erzeugte Token
+3. **Verifikation:** nächsten Push auslösen oder `gh workflow run security.yml`. Im `osv-scan-app`-Step-Log darf die Warning „APP_REPO_TOKEN secret not set" **nicht** mehr erscheinen.
+
+Ohne dieses Secret skippt der Job **soft** (kein Build-Fail, nur Warning) — die Pipeline bleibt grün.
+
+**Privacy-Hinweis:** SARIF-Findings über die App landen mit Kategorie `osv-scanner-app` im **öffentlichen** Code-Scanning-Tab dieses Repos. Das ist im Rahmen des bewussten DiGA-Audit-Trail-Charakters dieses Repos akzeptiert; Quellcode des privaten Repos selbst wird nicht veröffentlicht.
 
 ## 2. Warum „Standard-SAST/DAST" für diese App teilweise nicht greift
 
