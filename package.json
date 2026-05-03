@@ -1,0 +1,26 @@
+{
+  "name": "twobreath-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "TwoBreath marketing website + DiGA dossier (diga/). Static HTML site, Node only used for build-time tasks.",
+  "homepage": "https://www.twobreath.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ma3u/TwoBreath.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "lint:md": "markdownlint-cli2 'diga/**/*.md' '!diga/regulations/markdown/**'",
+    "lint:md:fix": "markdownlint-cli2 --fix 'diga/**/*.md' '!diga/regulations/markdown/**'",
+    "narration:en": "node generate-narration.js --lang en",
+    "narration:de": "node generate-narration.js --lang de",
+    "narration:ja": "node generate-narration.js --lang ja",
+    "narration:pitch": "node generate-pitch-narration.js"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "^0.18.0"
+  }
+}

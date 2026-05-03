@@ -120,26 +120,42 @@ jobs:
       security-events: write
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: stable
-      - name: Install osv-scanner from upstream Go module
+      - name: Install osv-scanner from upstream GitHub release
+        env:
+          OSV_VERSION: "2.3.6"   # pin; bump in PR after upstream release
         run: |
-          go install github.com/google/osv-scanner/v2/cmd/osv-scanner@latest
+          set -euo pipefail
+          url="https://github.com/google/osv-scanner/releases/download/v${OSV_VERSION}/osv-scanner_linux_amd64"
+          echo "Downloading osv-scanner v${OSV_VERSION}…"
+          curl -sSLf -o osv-scanner "$url"
+          chmod +x osv-scanner
+          sudo mv osv-scanner /usr/local/bin/
           osv-scanner --version
       - name: Run osv-scanner (recursive, manifest-based)
         run: |
-          # exit-codes: 0 = no vulnerable, 1 = vulnerable found, 128 = generic error.
-          # Bei leerer Manifest-Lage exit 0 mit leerer SARIF — der Job soll
-          # ohnehin nicht blockieren, solange die Pipeline reift.
+          set -uo pipefail
+          # exit-codes: 0 = no vulnerable, 1 = vulnerable found, 127 = misuse,
+          # 128 = generic error. Bei leerer Manifest-Lage exit 128 ohne Treffer —
+          # wir wollen den Job nicht hart auf 0 zwingen, sondern nur dann scharf
+          # stellen, wenn echte Vulns gefunden werden. Heute (mit nur einem
+          # devDependency) liefert der Scan eine reale, saubere SARIF.
           osv-scanner \
             --recursive \
             --skip-git \
             --format=sarif \
             --output=osv.sarif \
-            ./ || echo "::warning::osv-scanner returned non-zero — see SARIF artefact for details"
-          ls -la osv.sarif 2>/dev/null || echo "(no SARIF produced — likely no manifests detected)"
+            ./ || rc=$?
+          rc=${rc:-0}
+          echo "osv-scanner exit code: $rc"
+          if [ -f osv.sarif ]; then
+            ls -la osv.sarif
+            # Anzahl gefundener Treffer in den Job-Log
+            jq -r '.runs[]?.results | length' osv.sarif | head -3 | xargs -I{} echo "SARIF results count: {}"
+          else
+            echo "::warning::osv-scanner produced no SARIF (likely no manifests detected — that's OK for a first run)"
+          fi
+          # Job nur dann hart fail, wenn echte Vulns gefunden (exit 1)
+          if [ "$rc" = "1" ]; then exit 1; fi
       - name: Upload SARIF to GitHub code scanning
         if: hashFiles('osv.sarif') != ''
         uses: github/codeql-action/upload-sarif@v3
