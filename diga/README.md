@@ -12,6 +12,7 @@
 | Wenn Sie sind … | … lesen Sie zuerst |
 | --- | --- |
 | **BSI / Referat DI 24** | [`BSI_BERICHT.md`](BSI_BERICHT.md) — formaler Bericht mit 5 Empfehlungen + [`BSI_TOOL_EMPFEHLUNGEN.md`](BSI_TOOL_EMPFEHLUNGEN.md) (pro Anforderung) |
+| **Prüfstelle bei Beauftragung** | [`BSI_ASSESSMENT.md`](BSI_ASSESSMENT.md) — **Hersteller-Selbstdeklaration** (12 Abschnitte, alle Anhänge verlinkt) |
 | **Patient:in, Ärzt:in, Krankenkasse, Hersteller** | [`LINKEDIN_ARTIKEL.md`](LINKEDIN_ARTIKEL.md) — der LinkedIn-Beitrag |
 | **Prüfstelle / Auditor:in** | [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](COMPLIANCE_MATRIX_TR1_OFFICIAL.md) — alle 127 Anforderungen mit Status, Klasse und Quelle |
 | **DevSecOps-interessiert** | [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) — SAST/DAST-Status und konkreter `security.yml`-Erweiterungs-Vorschlag |
@@ -41,6 +42,7 @@ diga/
 ├── COMPLIANCE_MATRIX.md               Kurzform-Arbeitsmatrix (CRY/AUT/STO)
 ├── COMPLIANCE_MATRIX_TR1_OFFICIAL.md  127-Zeilen-Matrix entlang offizieller O.*-IDs
 ├── BSI_BERICHT.md                     Formaler Bericht für das BSI (Behördendeutsch)
+├── BSI_ASSESSMENT.md                  Hersteller-Selbstdeklaration für die Prüfstelle
 ├── BSI_TOOL_EMPFEHLUNGEN.md           Werkzeug-Empfehlungen je Anforderung × Phase
 ├── LINKEDIN_ARTIKEL.md                LinkedIn-Beitrag für die Öffentlichkeit
 ├── DIGA_ROADMAP.md                    Repositionierungs-Roadmap + Partner-Ökosystem
