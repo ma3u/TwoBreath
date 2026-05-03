@@ -159,13 +159,14 @@ jobs:
           # Job nur dann hart fail, wenn echte Vulns gefunden (exit 1)
           if [ "$rc" = "1" ]; then exit 1; fi
       - name: Upload SARIF to GitHub code scanning
-        if: hashFiles('osv.sarif') != ''
+        if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: osv.sarif
           category: osv-scanner
+        continue-on-error: true   # falls keine SARIF erzeugt — soll nicht hart failen
       - name: Upload SARIF as artefact
-        if: hashFiles('osv.sarif') != ''
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: osv-scanner-report
