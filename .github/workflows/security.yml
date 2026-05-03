@@ -139,9 +139,11 @@ jobs:
           # wir wollen den Job nicht hart auf 0 zwingen, sondern nur dann scharf
           # stellen, wenn echte Vulns gefunden werden. Heute (mit nur einem
           # devDependency) liefert der Scan eine reale, saubere SARIF.
-          osv-scanner \
+          # v2-CLI: explizit `scan source` als Subkommando.
+          # `--skip-git` aus v1 entfällt — v2 scannt Manifeste per default,
+          # nicht den Git-Index.
+          osv-scanner scan source \
             --recursive \
-            --skip-git \
             --format=sarif \
             --output=osv.sarif \
             ./ || rc=$?
