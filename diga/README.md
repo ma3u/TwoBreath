@@ -50,8 +50,6 @@ diga/
 ├── SECURITY.md                        Vulnerability Disclosure (verschlüsselter Kanal)
 ├── NOTICE.md                          Drittquellen-Attribution
 ├── LICENSE                            MIT für Eigeninhalte
-├── GITHUB_ISSUE.md                    Anleitung zum Anlegen eines Tracking-Issues
-├── GITHUB_ISSUE_BODY.md               Kopiervorlage für gh issue create
 ├── Makefile                           make ingest | make official-matrix
 ├── concepts/                          formale Konzeptdokumente (8 Stück)
 │   ├── 01-datenschutzkonzept.md       Zwecke, Rechtsgrundlagen, Widerruf

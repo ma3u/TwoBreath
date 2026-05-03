@@ -37,7 +37,6 @@ diga/
 ├── PLANNING.md                      # Why and what
 ├── MEMORY.md                        # This file — how to resume + run log
 ├── COMPLIANCE_MATRIX_TR1_OFFICIAL.md             # Regulation ↔ proof ↔ tool ↔ result
-├── GITHUB_ISSUE.md                  # Ready-to-file issue body
 ├── regulations/
 │   ├── pdf/                         # Raw downloaded PDFs (with sha256)
 │   ├── markdown/                    # Converted MD with TOC + deep links
