@@ -47,7 +47,7 @@ We deliberately separate **what we build** from **whether TwoBreath itself becom
 
 | Track | Definition | Output |
 | --- | --- | --- |
-| **(b) Worked example — primary** | Treat TwoBreath as a stand-in DiGA candidate. Apply every BSI TR-03161 requirement against the real codebase and infrastructure. Document where evidence is automatable, where it is not, and what would have to change. | `COMPLIANCE_MATRIX.md` populated with real proofs and real gaps. LinkedIn article. |
+| **(b) Worked example — primary** | Treat TwoBreath as a stand-in DiGA candidate. Apply every BSI TR-03161 requirement against the real codebase and infrastructure. Document where evidence is automatable, where it is not, and what would have to change. | `COMPLIANCE_MATRIX_TR1_OFFICIAL.md` populated with real proofs and real gaps. LinkedIn article. |
 | **(a) Real candidacy — stretch** | Honestly assess whether TwoBreath as it exists today, or with reasonable repositioning, could be listed in the DiGA-Verzeichnis. | Section [4](#4-diga-eligibility-evaluation) and [5](#5-repositioning-options-if-pursuing-real-diga-listing) below. No commitment to actually file. |
 
 The value to BSI is the same regardless of which track plays out: a compact, real evidence trail showing what works and where the process bites.
@@ -120,7 +120,7 @@ Even option B (most tractable) requires CE marking and an RCT-quality study. **N
 
 ## 6. Regulatory perimeter
 
-The full reference catalogue is in [`COMPLIANCE_MATRIX.md`](COMPLIANCE_MATRIX.md). Headline:
+The full reference catalogue is in [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](COMPLIANCE_MATRIX_TR1_OFFICIAL.md). Headline:
 
 - **Security:** [BSI TR-03161-1/2/3](https://www.bsi.bund.de/dok/TR-03161) — mobile / web / backend
 - **DiGA:** [DiGAV](https://www.gesetze-im-internet.de/digav/), [§ 139e SGB V](https://www.gesetze-im-internet.de/sgb_5/__139e.html)
@@ -136,7 +136,7 @@ For this exercise, we focus the proof effort on **TR-03161-1 (mobile)** since th
 
 A central question for the BSI conversation: **how much certification evidence can be produced in real time vs only at deployment time vs only manually?**
 
-This taxonomy is applied per row in `COMPLIANCE_MATRIX.md`. Headline shape:
+This taxonomy is applied per row in `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`. Headline shape:
 
 | Class | Definition | Examples | Implication for BSI |
 | --- | --- | --- | --- |
@@ -153,10 +153,10 @@ The thesis for the BSI dialogue: **a large fraction of TR-03161 evidence is R or
 
 The compression argument has four legs:
 
-1. **Deterministic-tool-first.** Every machine-checkable requirement maps to one or more reproducible tools (table in `COMPLIANCE_MATRIX.md`). No LLM is on the proof path.
+1. **Deterministic-tool-first.** Every machine-checkable requirement maps to one or more reproducible tools (table in `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`). No LLM is on the proof path.
 2. **GitOps as evidence pipeline.** Each commit produces a signed bundle: SARIF + CycloneDX + JUnit + cosign signatures + provenance manifest. The bundle is the evidence.
 3. **GenAI on the structuring path only.** Claude Opus 4.7 (or peer) maps free-text TR-03161 requirements to the right tool, drafts the compliance narrative, and detects missing evidence. **It never produces the final proof.**
-4. **Markdown as the system of record.** No bespoke platform. `COMPLIANCE_MATRIX.md` + `MEMORY.md` + the signed evidence bundle are sufficient for an auditor and re-runnable by anyone.
+4. **Markdown as the system of record.** No bespoke platform. `COMPLIANCE_MATRIX_TR1_OFFICIAL.md` + `MEMORY.md` + the signed evidence bundle are sufficient for an auditor and re-runnable by anyone.
 
 For TwoBreath specifically, the candidate stack:
 
@@ -215,7 +215,7 @@ See [`MEMORY.md`](MEMORY.md) for the full ledger format. Headline rules:
 
 | Phase | Deliverables | State |
 | --- | --- | --- |
-| **1 — Foundation** | `PLANNING.md`, `MEMORY.md`, `COMPLIANCE_MATRIX.md`, `GITHUB_ISSUE*.md` | ✅ done |
+| **1 — Foundation** | `PLANNING.md`, `MEMORY.md`, `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`, `GITHUB_ISSUE*.md` | ✅ done |
 | **2 — Regulation ingestion** | TR-03161-1/2/3 PDFs ingested (127 anchored requirements), DiGAV (51 §§) + § 139e SGB V scraped, `regulations/source-manifest.yaml` with sha256 | ✅ done |
 | **3 — Per-row resolution** | All 127 `O.*` requirements bewertet against real TwoBreath posture; `evidence/tr1-twobreath-status.yaml` + regenerated `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`. Stats: ✅ 40 (31 %) · 🟡 25 (20 %) · ❌ 6 (5 %) · ➖ 56 (44 %). 101/127 (~80 %) deterministisch erbringbar (R+D+P). | ✅ done |
 | **4 — German deliverables** | `BSI_BERICHT.md` (formal Behördendeutsch report), `LINKEDIN_ARTIKEL.md` (German article for regulators / Krankenkassen / Ärzt:innen / Patient:innen) | ✅ done |
@@ -252,7 +252,7 @@ See [`MEMORY.md`](MEMORY.md) for the full ledger format. Headline rules:
 
 ## 14. References
 
-See [`COMPLIANCE_MATRIX.md` § References](COMPLIANCE_MATRIX.md) for the full anchored list. Headline links:
+See [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md` § References](COMPLIANCE_MATRIX_TR1_OFFICIAL.md) for the full anchored list. Headline links:
 
 - [BSI TR-03161 hub](https://www.bsi.bund.de/dok/TR-03161)
 - [DiGAV](https://www.gesetze-im-internet.de/digav/)

@@ -8,8 +8,9 @@ Writes: COMPLIANCE_MATRIX_TR1_OFFICIAL.md  (full 127-row enumeration grouped by 
 The TwoBreath default-status heuristic reflects the actual posture of the app:
   - no backend, no accounts, no PHI/PII, App Store + Apple Notarisation only.
 
-This file replaces the working CRY/AUT/STO shorthand in COMPLIANCE_MATRIX.md
-for the per-row enumeration. The shorthand stays for narrative grouping.
+This is the canonical compliance matrix. The earlier hand-written
+COMPLIANCE_MATRIX.md draft (CRY/AUT/STO shorthand) was consolidated into this
+file on 2026-05-03; only this auto-generated artefact is maintained going forward.
 """
 from __future__ import annotations
 

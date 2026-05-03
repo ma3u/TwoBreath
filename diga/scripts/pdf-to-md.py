@@ -7,7 +7,7 @@ Strategy:
   2. Detect chapter headers (1, 2, 3, ...), subsections (1.1, 1.2, ..., 4.3.1, ...),
      and requirement IDs of the form `O.<Group>_<N>`.
   3. Emit GitHub-flavoured markdown with explicit `<a id="..."></a>` anchors
-     so requirements can be deep-linked from COMPLIANCE_MATRIX.md.
+     so requirements can be deep-linked from COMPLIANCE_MATRIX_TR1_OFFICIAL.md.
   4. Build a TOC from detected headers.
 
 Limitations (acceptable for v0.1):

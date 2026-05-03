@@ -2,7 +2,7 @@
 
 **Purpose:** Markdown-first, git-tracked, content-window-resilient memory for the TwoBreath × DiGA exercise. No graph DB, no platform — only files + signatures.
 
-> Any contributor (human or LLM) can resume work after reading this file plus `PLANNING.md` and `COMPLIANCE_MATRIX.md`. No hidden state.
+> Any contributor (human or LLM) can resume work after reading this file plus `PLANNING.md` and `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`. No hidden state.
 
 ---
 
@@ -25,7 +25,7 @@ The DiGA process is audited. Every claim of compliance must be reproducible by a
 
 1. **Reproducibility** — anyone can re-run the exact same scan on the exact same input and get the same output (deterministic tools) or the same structured output ± controlled drift (LLM-assisted with pinned snapshot).
 2. **Auditor-friendliness** — every claim → tool → output → signature is one click away in plain text + git history.
-3. **Resilience to context limits** — Claude / GPT context windows are bounded. A new session must be able to resume by reading three files: this one, `PLANNING.md`, `COMPLIANCE_MATRIX.md`.
+3. **Resilience to context limits** — Claude / GPT context windows are bounded. A new session must be able to resume by reading three files: this one, `PLANNING.md`, `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`.
 4. **No vendor lock-in** — no proprietary platform required to read or extend the system. `git`, `make`, `bash`, `pdftotext` are sufficient.
 
 ---
@@ -36,7 +36,7 @@ The DiGA process is audited. Every claim of compliance must be reproducible by a
 diga/
 ├── PLANNING.md                      # Why and what
 ├── MEMORY.md                        # This file — how to resume + run log
-├── COMPLIANCE_MATRIX.md             # Regulation ↔ proof ↔ tool ↔ result
+├── COMPLIANCE_MATRIX_TR1_OFFICIAL.md             # Regulation ↔ proof ↔ tool ↔ result
 ├── GITHUB_ISSUE.md                  # Ready-to-file issue body
 ├── regulations/
 │   ├── pdf/                         # Raw downloaded PDFs (with sha256)
@@ -107,7 +107,7 @@ LLM context windows compress old conversation; long-running exercises lose state
 1. Read `PLANNING.md` (top to § 11).
 2. Read this file (entire).
 3. Read latest entry in [§ 8](#8-run-ledger--append-below).
-4. Read `COMPLIANCE_MATRIX.md` § Open rows.
+4. Read `COMPLIANCE_MATRIX_TR1_OFFICIAL.md` § Open rows.
 5. Begin work; append new entry on completion.
 
 ---
@@ -154,11 +154,11 @@ The manifest is updated only by `scripts/fetch-pdfs.sh`, so a new download with 
 
 - **Actor:** human (Matthias) + Claude Opus 4.7
 - **Input:** clean tree, no prior diga/ folder
-- **Action:** create directory structure, author Phase 1 docs (`PLANNING.md`, `MEMORY.md`, `COMPLIANCE_MATRIX.md`, `GITHUB_ISSUE.md`)
+- **Action:** create directory structure, author Phase 1 docs (`PLANNING.md`, `MEMORY.md`, `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`, `GITHUB_ISSUE.md`)
 - **Output:**
   - `diga/PLANNING.md`
   - `diga/MEMORY.md`
-  - `diga/COMPLIANCE_MATRIX.md`
+  - `diga/COMPLIANCE_MATRIX_TR1_OFFICIAL.md`
   - `diga/GITHUB_ISSUE.md`
   - directory skeleton: `regulations/{pdf,markdown}/`, `evidence/`, `runs/`, `scripts/`
 - **Provenance:** none yet — files are unsigned drafts. Will be signed once they live in a git repo.
@@ -197,10 +197,10 @@ The manifest is updated only by `scripts/fetch-pdfs.sh`, so a new download with 
   - `python3` 3.13.13
   - `bs4` (BeautifulSoup) 4.13.4
   - `pandoc` 3.9.0.2 (installed but not invoked this run; reserved for HTML diff verification)
-- **LLM snapshot:** `claude-opus-4-7` (Claude Code interactive). LLM produced advisory text in `PLANNING.md`, `MEMORY.md`, `COMPLIANCE_MATRIX.md`, `GITHUB_ISSUE.md`. Conversion scripts and TOC/anchor generation are pure deterministic Python — no LLM in the proof path.
+- **LLM snapshot:** `claude-opus-4-7` (Claude Code interactive). LLM produced advisory text in `PLANNING.md`, `MEMORY.md`, `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`, `GITHUB_ISSUE.md`. Conversion scripts and TOC/anchor generation are pure deterministic Python — no LLM in the proof path.
 - **Notes:**
   - TR-03161-1 v3.0 (25.03.2024) and TR-03161-3 v3.0 (per `pdftotext` metadata). TR-03161-2 metadata showed PDF v1.6 but BSI document version is v3.0. The Prüfvorschrift mentioned in the planning doc is **embedded as Chapter 4** of each TR (not a separate PDF), so no additional download is required.
-  - Anchor convention: `o-<group>-<n>` for chapter-3 (normative) and `o-<group>-<n>-2` for chapter-4 (audit). Both forms are valid deep-link targets from `COMPLIANCE_MATRIX.md`.
+  - Anchor convention: `o-<group>-<n>` for chapter-3 (normative) and `o-<group>-<n>-2` for chapter-4 (audit). Both forms are valid deep-link targets from `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`.
   - **Resolved 2026-05-02:** the DiGAV index returns 51 section URLs, and `regulations/markdown/DiGAV.md` contains 51 anchored `§ X` sections. The earlier "49 §§" claim was a counting error in the summary; the artefact itself is complete (§§ 1–43 + 6a + 11a + 11b + 23a–23e = 51).
   - **Resolved 2026-05-02:** Gap 1 (re-enumerate matrix against 127 official `O.*` IDs) closed by `scripts/build-official-matrix.py` → `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`. Per-row Kurzfassung + Prüftiefe extracted from the chapter-4 Testcharakteristik tables; default R/D/P/M class and TwoBreath status assigned per group, refinable per row. Re-run via `make official-matrix`.
 
@@ -223,12 +223,12 @@ The manifest is updated only by `scripts/fetch-pdfs.sh`, so a new download with 
 
 - **Actor:** human (Matthias) + Claude Opus 4.7
 - **Input:** ingested TR-03161-1 markdown + evidence/tr1-twobreath-status.yaml (newly authored).
-- **Action:** Inspected actual TwoBreath app (project.yml, Info.plist, Entitlements, PrivacyInfo.xcprivacy, .github/workflows/{ci,security}.yml, .gitleaks.toml, .swiftlint.yml, Shared/Services/{HealthKit,Pairing,ProximityPairing,Connectivity}*.swift, CLAUDE.md). Authored per-ID status for **all 127 `O.*` requirements**. Extended `scripts/build-official-matrix.py` to load `evidence/tr1-twobreath-status.yaml` overrides + emit summary stats. Fixed `endswith("-2")` audit-anchor bug that mis-classified 12 IDs ending in `_2` (O.Purp_2, O.Arch_2 etc.). Regenerated `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`. Updated `BSI_BERICHT.md` § 5, `LINKEDIN_ARTIKEL.md`, `PLANNING.md` § 11, `COMPLIANCE_MATRIX.md` header with the resolved totals.
+- **Action:** Inspected actual TwoBreath app (project.yml, Info.plist, Entitlements, PrivacyInfo.xcprivacy, .github/workflows/{ci,security}.yml, .gitleaks.toml, .swiftlint.yml, Shared/Services/{HealthKit,Pairing,ProximityPairing,Connectivity}*.swift, CLAUDE.md). Authored per-ID status for **all 127 `O.*` requirements**. Extended `scripts/build-official-matrix.py` to load `evidence/tr1-twobreath-status.yaml` overrides + emit summary stats. Fixed `endswith("-2")` audit-anchor bug that mis-classified 12 IDs ending in `_2` (O.Purp_2, O.Arch_2 etc.). Regenerated `COMPLIANCE_MATRIX_TR1_OFFICIAL.md`. Updated `BSI_BERICHT.md` § 5, `LINKEDIN_ARTIKEL.md`, `PLANNING.md` § 11, `COMPLIANCE_MATRIX_TR1_OFFICIAL.md` header with the resolved totals.
 - **Output:**
   - `evidence/tr1-twobreath-status.yaml` (127 entries)
   - `scripts/build-official-matrix.py` v2 (yaml-loading + bug fix)
   - `COMPLIANCE_MATRIX_TR1_OFFICIAL.md` — fully resolved 127-row matrix
-  - Updated narratives in BSI_BERICHT.md / LINKEDIN_ARTIKEL.md / PLANNING.md / COMPLIANCE_MATRIX.md
+  - Updated narratives in BSI_BERICHT.md / LINKEDIN_ARTIKEL.md / PLANNING.md / COMPLIANCE_MATRIX_TR1_OFFICIAL.md
 - **Resolved totals:** ✅ 40 (31 %) · 🟡 25 (20 %) · ❌ 6 (5 %) · ➖ 56 (44 %) · 🔍 0. Class distribution: R 5 · D 94 · P 2 · M 26. **101/127 (~80 %) deterministically deliverable.**
 - **The 6 concrete ❌ gaps:**
   - O.Purp_6 — consent register (M)

@@ -39,8 +39,7 @@ diga/
 ├── README.md                          ← Sie sind hier
 ├── PLANNING.md                        Planungsdokument + Eignungsanalyse
 ├── MEMORY.md                          Lauf-Protokoll + Reproduktions-Anleitung
-├── COMPLIANCE_MATRIX.md               Kurzform-Arbeitsmatrix (CRY/AUT/STO)
-├── COMPLIANCE_MATRIX_TR1_OFFICIAL.md  127-Zeilen-Matrix entlang offizieller O.*-IDs
+├── COMPLIANCE_MATRIX_TR1_OFFICIAL.md  127-Zeilen-Matrix entlang offizieller O.*-IDs (auto-generiert)
 ├── BSI_BERICHT.md                     Formaler Bericht für das BSI (Behördendeutsch)
 ├── BSI_ASSESSMENT.md                  Hersteller-Selbstdeklaration für die Prüfstelle
 ├── BSI_TOOL_EMPFEHLUNGEN.md           Werkzeug-Empfehlungen je Anforderung × Phase
