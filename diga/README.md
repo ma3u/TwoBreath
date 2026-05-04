@@ -13,6 +13,7 @@
 | --- | --- |
 | **BSI / Referat DI 24** | [`BSI_BERICHT.md`](BSI_BERICHT.md) — formaler Bericht mit 5 Empfehlungen + [`BSI_TOOL_EMPFEHLUNGEN.md`](BSI_TOOL_EMPFEHLUNGEN.md) (pro Anforderung) |
 | **Prüfstelle bei Beauftragung** | [`BSI_ASSESSMENT.md`](BSI_ASSESSMENT.md) — **Hersteller-Selbstdeklaration** (12 Abschnitte, alle Anhänge verlinkt) |
+| **Grundschutz++ / Zero-Trust-Diskussion** | [`BSI_GRUNDSCHUTZ_ZT.md`](BSI_GRUNDSCHUTZ_ZT.md) — Eignungs-Analyse: methodisch ja, strukturell nein |
 | **Patient:in, Ärzt:in, Krankenkasse, Hersteller** | [`LINKEDIN_ARTIKEL.md`](LINKEDIN_ARTIKEL.md) — der LinkedIn-Beitrag |
 | **Prüfstelle / Auditor:in** | [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](COMPLIANCE_MATRIX_TR1_OFFICIAL.md) — alle 127 Anforderungen mit Status, Klasse und Quelle |
 | **DevSecOps-interessiert** | [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) — SAST/DAST-Status und konkreter `security.yml`-Erweiterungs-Vorschlag |
@@ -42,6 +43,7 @@ diga/
 ├── COMPLIANCE_MATRIX_TR1_OFFICIAL.md  127-Zeilen-Matrix entlang offizieller O.*-IDs (auto-generiert)
 ├── BSI_BERICHT.md                     Formaler Bericht für das BSI (Behördendeutsch)
 ├── BSI_ASSESSMENT.md                  Hersteller-Selbstdeklaration für die Prüfstelle
+├── BSI_GRUNDSCHUTZ_ZT.md              Eignung für Grundschutz++ und ZT-Eckpunktepapier
 ├── BSI_TOOL_EMPFEHLUNGEN.md           Werkzeug-Empfehlungen je Anforderung × Phase
 ├── LINKEDIN_ARTIKEL.md                LinkedIn-Beitrag für die Öffentlichkeit
 ├── DIGA_ROADMAP.md                    Repositionierungs-Roadmap + Partner-Ökosystem
