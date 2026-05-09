@@ -7,3 +7,9 @@ marketing/assets/youtube/*/build/
 
 # Microsoft Office temp / lock files (e.g. ~$Document.pptx while a deck is open)
 ~$*
+
+# Playwright artifacts (regenerated on each test run)
+test-results/
+playwright-report/
+blob-report/
+.last-run.json
