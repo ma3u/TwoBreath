@@ -62,27 +62,36 @@ test.describe('Techniques page (/techniques.html)', () => {
     expect(bodyWidth).toBeLessThanOrEqual(viewportWidth + 5);
   });
 
-  test('all 9 categories are present in the DOM', async ({ page }) => {
+  test('the 6 App-aligned categories are present in App order', async ({ page }) => {
     const expectedCategories = [
-      '#acute-panic',
-      '#pranayama',
-      '#walking',
-      '#gi',
-      '#sleep',
-      '#coherence',
-      '#performance',
-      '#altitude',
       '#couples',
+      '#highAltitude',
+      '#performance',
+      '#relaxation',
+      '#stamina',
+      '#wellness',
     ];
     for (const id of expectedCategories) {
       await expect(page.locator(id)).toBeAttached();
+    }
+    // Verify DOM order: each section appears before the next in source order.
+    const positions = await page.evaluate(ids =>
+      ids.map(id => {
+        const el = document.querySelector(id);
+        return el ? el.getBoundingClientRect().top + window.scrollY : -1;
+      }),
+      expectedCategories
+    );
+    for (let i = 1; i < positions.length; i++) {
+      expect(positions[i], `${expectedCategories[i]} after ${expectedCategories[i-1]}`)
+        .toBeGreaterThan(positions[i - 1]);
     }
   });
 
   test('table-of-contents links resolve to in-page anchors', async ({ page }) => {
     const tocLinks = page.locator('.toc-list a');
     const count = await tocLinks.count();
-    expect(count).toBeGreaterThanOrEqual(9);
+    expect(count).toBeGreaterThanOrEqual(6);
 
     for (let i = 0; i < count; i++) {
       const href = await tocLinks.nth(i).getAttribute('href');
