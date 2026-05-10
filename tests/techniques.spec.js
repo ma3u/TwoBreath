@@ -366,6 +366,86 @@ test.describe('Voice player & i18n', () => {
 
 });
 
+test.describe('Deep-link anchors on techniques', () => {
+
+  const ALL_TIDS = [
+    'panic-relief', '4-7-8-breathing', 'cyclic-sighing',
+    'nadi-shodhana-panic', 'alternate-nostril', 'bhramari-humming',
+    'walking-breath-simple', 'walking-breath-counted',
+    'sitali-cooling', 'buteyko-reduced',
+    'sleep-breath',
+    'resonant-breathing', 'physiological-sigh',
+    'box-breathing', 'combat-breathing', 'power-breathing', 'energizing-breath',
+    'stamina-1', 'high-altitude-1',
+    'morning-together-1',
+  ];
+
+  test('every technique has a matching id="<tid>" attribute', async ({ page }) => {
+    await page.goto('/techniques.html', { waitUntil: 'networkidle' });
+    for (const tid of ALL_TIDS) {
+      const card = page.locator(`article.technique[id="${tid}"]`);
+      await expect(card, `#${tid}`).toHaveCount(1);
+    }
+  });
+
+  test('every technique has a permalink anchor (#) inside it', async ({ page }) => {
+    await page.goto('/techniques.html', { waitUntil: 'networkidle' });
+    for (const tid of ALL_TIDS) {
+      const link = page.locator(`article.technique[id="${tid}"] > a.technique-permalink`);
+      await expect(link, `#${tid} permalink`).toHaveCount(1);
+      const href = await link.getAttribute('href');
+      expect(href).toBe(`#${tid}`);
+    }
+  });
+
+  test('navigating to /techniques.html#bhramari-humming scrolls the technique into view', async ({ page }) => {
+    await page.goto('/techniques.html#bhramari-humming', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(500);
+    const card = page.locator('article.technique[id="bhramari-humming"]');
+    await expect(card).toBeInViewport({ ratio: 0.3 });
+  });
+
+  test(':target highlight applies to the linked technique', async ({ page }) => {
+    await page.goto('/techniques.html#panic-relief', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(500);
+    // Verify CSS rule for :target produces a noticeable change
+    const borderColor = await page.locator('article.technique[id="panic-relief"]').evaluate(el =>
+      window.getComputedStyle(el).borderColor
+    );
+    // Teal-ish color: rgb(45, 158, 138)
+    expect(borderColor).toMatch(/rgba?\(45, ?158, ?138/);
+  });
+
+});
+
+test.describe('Footer social links', () => {
+
+  const PAGES = ['/', '/techniques.html', '/contact.html', '/impressum.html', '/privacy.html'];
+
+  for (const path of PAGES) {
+    test(`${path} has Instagram and YouTube footer links`, async ({ page }) => {
+      await page.goto(path, { waitUntil: 'networkidle' });
+      const social = page.locator('footer .social-links');
+      await expect(social).toBeVisible();
+
+      const ig = social.locator('a[href="https://www.instagram.com/twobreathapp/"]');
+      await expect(ig).toBeVisible();
+      await expect(ig).toHaveAttribute('target', '_blank');
+      const igRel = await ig.getAttribute('rel');
+      expect(igRel).toContain('noopener');
+      await expect(ig).toHaveAttribute('aria-label', /Instagram/i);
+
+      const yt = social.locator('a[href="https://www.youtube.com/@TwoBreath-z3q"]');
+      await expect(yt).toBeVisible();
+      await expect(yt).toHaveAttribute('target', '_blank');
+      const ytRel = await yt.getAttribute('rel');
+      expect(ytRel).toContain('noopener');
+      await expect(yt).toHaveAttribute('aria-label', /YouTube/i);
+    });
+  }
+
+});
+
 test.describe('Home page links to Techniques', () => {
 
   test('main nav on home page contains a Techniques link', async ({ page }) => {

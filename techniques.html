@@ -550,6 +550,31 @@
     }
     footer a:hover { color: var(--accent-teal); }
 
+    .social-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 0.5px solid rgba(255,255,255,0.12);
+      color: var(--warm-white-60);
+      transition: all 0.2s ease;
+    }
+    .social-links a:hover {
+      color: var(--accent-teal);
+      border-color: rgba(45,158,138,0.4);
+      background: rgba(45,158,138,0.06);
+      transform: translateY(-1px);
+    }
+    .social-links svg { width: 18px; height: 18px; fill: currentColor; }
+
     /* Language switcher */
     .lang-switcher {
       display: flex;
@@ -669,6 +694,39 @@
     }
     .voice-skip:hover { color: var(--warm-white); border-color: rgba(255,255,255,0.3); }
     .voice-skip svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* Permalink (#) — hover affordance on each technique */
+    .technique-permalink {
+      position: absolute;
+      top: 22px;
+      right: -28px;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-teal);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      text-decoration: none;
+      opacity: 0;
+      transition: opacity 0.2s ease, color 0.2s ease;
+      border-radius: 50%;
+    }
+    .technique:hover .technique-permalink,
+    .technique-permalink:focus-visible { opacity: 0.7; }
+    .technique-permalink:hover { opacity: 1; color: var(--accent-teal-light); background: rgba(45,158,138,0.1); }
+    @media (max-width: 900px) {
+      .technique-permalink { right: 10px; top: 10px; opacity: 0.4; }
+    }
+
+    /* Highlight when arriving via #anchor */
+    .technique:target {
+      border-color: rgba(45,158,138,0.55);
+      background: rgba(45,158,138,0.04);
+      box-shadow: 0 0 0 2px rgba(45,158,138,0.15);
+    }
 
     /* Active technique highlight (read-along) */
     .technique { position: relative; }
@@ -833,7 +891,8 @@
       <div class="technique-grid fade-in">
 
         <!-- panic-relief -->
-        <article class="technique" data-tid="panic-relief">
+        <article class="technique" data-tid="panic-relief" id="panic-relief">
+          <a class="technique-permalink" href="#panic-relief" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name" data-i18n-html="t.panic-relief.name">Panic Relief <span class="id-tag">panic-relief</span></h3>
             <div class="technique-meta">
@@ -864,7 +923,8 @@
         </article>
 
         <!-- 4-7-8 -->
-        <article class="technique" data-tid="4-7-8-breathing">
+        <article class="technique" data-tid="4-7-8-breathing" id="4-7-8-breathing">
+          <a class="technique-permalink" href="#4-7-8-breathing" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">4-7-8 Relaxing Breath <span class="id-tag">4-7-8-breathing</span></h3>
             <div class="technique-meta">
@@ -891,7 +951,8 @@
         </article>
 
         <!-- cyclic-sighing -->
-        <article class="technique" data-tid="cyclic-sighing">
+        <article class="technique" data-tid="cyclic-sighing" id="cyclic-sighing">
+          <a class="technique-permalink" href="#cyclic-sighing" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">Cyclic Sighing <span class="id-tag">cyclic-sighing</span></h3>
             <div class="technique-meta">
@@ -933,7 +994,8 @@
       <div class="technique-grid fade-in">
 
         <!-- nadi-shodhana-panic -->
-        <article class="technique" data-tid="nadi-shodhana-panic">
+        <article class="technique" data-tid="nadi-shodhana-panic" id="nadi-shodhana-panic">
+          <a class="technique-permalink" href="#nadi-shodhana-panic" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name" data-i18n-html="t.nadi-shodhana-panic.name">Alternate Nostril Calming <span class="id-tag">nadi-shodhana-panic</span></h3>
             <div class="technique-meta">
@@ -968,7 +1030,8 @@
         </article>
 
         <!-- alternate-nostril -->
-        <article class="technique" data-tid="alternate-nostril">
+        <article class="technique" data-tid="alternate-nostril" id="alternate-nostril">
+          <a class="technique-permalink" href="#alternate-nostril" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">Alternate Nostril (Standard) <span class="id-tag">alternate-nostril</span></h3>
             <div class="technique-meta">
@@ -995,7 +1058,8 @@
         </article>
 
         <!-- bhramari -->
-        <article class="technique" data-tid="bhramari-humming">
+        <article class="technique" data-tid="bhramari-humming" id="bhramari-humming">
+          <a class="technique-permalink" href="#bhramari-humming" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name" data-i18n-html="t.bhramari-humming.name">Humming Bee Breath / Bhramari <span class="id-tag">bhramari-humming</span></h3>
             <div class="technique-meta">
@@ -1045,7 +1109,8 @@
       <div class="technique-grid fade-in">
 
         <!-- walking-breath-simple -->
-        <article class="technique" data-tid="walking-breath-simple">
+        <article class="technique" data-tid="walking-breath-simple" id="walking-breath-simple">
+          <a class="technique-permalink" href="#walking-breath-simple" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name" data-i18n-html="t.walking-breath-simple.name">Walking Breath <span class="id-tag">walking-breath-simple</span></h3>
             <div class="technique-meta">
@@ -1077,7 +1142,8 @@
         </article>
 
         <!-- walking-breath-counted -->
-        <article class="technique" data-tid="walking-breath-counted">
+        <article class="technique" data-tid="walking-breath-counted" id="walking-breath-counted">
+          <a class="technique-permalink" href="#walking-breath-counted" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name" data-i18n-html="t.walking-breath-counted.name">Walking Breath 3-6 (counted) <span class="id-tag">walking-breath-counted</span></h3>
             <div class="technique-meta">
@@ -1123,7 +1189,8 @@
       <div class="technique-grid fade-in">
 
         <!-- sitali -->
-        <article class="technique" data-tid="sitali-cooling">
+        <article class="technique" data-tid="sitali-cooling" id="sitali-cooling">
+          <a class="technique-permalink" href="#sitali-cooling" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name" data-i18n-html="t.sitali-cooling.name">Cooling Breath / Sitali <span class="id-tag">sitali-cooling</span></h3>
             <div class="technique-meta">
@@ -1157,7 +1224,8 @@
         </article>
 
         <!-- buteyko -->
-        <article class="technique" data-tid="buteyko-reduced">
+        <article class="technique" data-tid="buteyko-reduced" id="buteyko-reduced">
+          <a class="technique-permalink" href="#buteyko-reduced" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name" data-i18n-html="t.buteyko-reduced.name">Buteyko Reduced Breath <span class="id-tag">buteyko-reduced</span></h3>
             <div class="technique-meta">
@@ -1204,7 +1272,8 @@
 
       <div class="technique-grid fade-in">
 
-        <article class="technique" data-tid="sleep-breath">
+        <article class="technique" data-tid="sleep-breath" id="sleep-breath">
+          <a class="technique-permalink" href="#sleep-breath" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">Sleep Breath <span class="id-tag">sleep-breath</span></h3>
             <div class="technique-meta">
@@ -1242,7 +1311,8 @@
 
       <div class="technique-grid fade-in">
 
-        <article class="technique" data-tid="resonant-breathing">
+        <article class="technique" data-tid="resonant-breathing" id="resonant-breathing">
+          <a class="technique-permalink" href="#resonant-breathing" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">Resonant Breathing <span class="id-tag">resonant-breathing</span></h3>
             <div class="technique-meta">
@@ -1267,7 +1337,8 @@
           </div>
         </article>
 
-        <article class="technique" data-tid="physiological-sigh">
+        <article class="technique" data-tid="physiological-sigh" id="physiological-sigh">
+          <a class="technique-permalink" href="#physiological-sigh" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">Physiological Sigh <span class="id-tag">physiological-sigh</span></h3>
             <div class="technique-meta">
@@ -1308,7 +1379,8 @@
 
       <div class="technique-grid fade-in">
 
-        <article class="technique" data-tid="box-breathing">
+        <article class="technique" data-tid="box-breathing" id="box-breathing">
+          <a class="technique-permalink" href="#box-breathing" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">Box Breathing <span class="id-tag">box-breathing</span></h3>
             <div class="technique-meta">
@@ -1335,7 +1407,8 @@
           </div>
         </article>
 
-        <article class="technique" data-tid="combat-breathing">
+        <article class="technique" data-tid="combat-breathing" id="combat-breathing">
+          <a class="technique-permalink" href="#combat-breathing" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">Tactical Breathing <span class="id-tag">combat-breathing</span></h3>
             <div class="technique-meta">
@@ -1355,7 +1428,8 @@
           </p>
         </article>
 
-        <article class="technique" data-tid="power-breathing">
+        <article class="technique" data-tid="power-breathing" id="power-breathing">
+          <a class="technique-permalink" href="#power-breathing" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">Power Breathing <span class="id-tag">power-breathing</span></h3>
             <div class="technique-meta">
@@ -1380,7 +1454,8 @@
           </div>
         </article>
 
-        <article class="technique" data-tid="energizing-breath">
+        <article class="technique" data-tid="energizing-breath" id="energizing-breath">
+          <a class="technique-permalink" href="#energizing-breath" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">Energizing Breath <span class="id-tag">energizing-breath</span></h3>
             <div class="technique-meta">
@@ -1419,7 +1494,8 @@
 
       <div class="technique-grid fade-in">
 
-        <article class="technique" data-tid="stamina-1">
+        <article class="technique" data-tid="stamina-1" id="stamina-1">
+          <a class="technique-permalink" href="#stamina-1" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">Stamina 1-5 <span class="id-tag">stamina-1 … stamina-5</span></h3>
             <div class="technique-meta">
@@ -1438,7 +1514,8 @@
           </p>
         </article>
 
-        <article class="technique" data-tid="high-altitude-1">
+        <article class="technique" data-tid="high-altitude-1" id="high-altitude-1">
+          <a class="technique-permalink" href="#high-altitude-1" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">High Altitude 1-5 <span class="id-tag">high-altitude-1 … high-altitude-5</span></h3>
             <div class="technique-meta">
@@ -1478,7 +1555,8 @@
 
       <div class="technique-grid fade-in">
 
-        <article class="technique" data-tid="morning-together-1">
+        <article class="technique" data-tid="morning-together-1" id="morning-together-1">
+          <a class="technique-permalink" href="#morning-together-1" aria-label="Permanent link to this technique" title="Copy link">#</a>
           <header class="technique-head">
             <h3 class="technique-name">Morning Together 1-3 <span class="id-tag">morning-together-1 … morning-together-3</span></h3>
             <div class="technique-meta">
@@ -1539,6 +1617,14 @@
   </div>
 
   <footer role="contentinfo">
+    <div class="social-links" aria-label="Social links">
+      <a href="https://www.instagram.com/twobreathapp/" target="_blank" rel="noopener" aria-label="TwoBreath on Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.95c-3.15 0-3.51.01-4.74.07-.95.04-1.46.2-1.81.34-.45.18-.78.39-1.12.74-.34.34-.55.67-.74 1.12-.13.34-.3.86-.34 1.8-.06 1.24-.07 1.6-.07 4.75s.01 3.51.07 4.74c.04.95.2 1.46.34 1.81.18.45.39.78.74 1.12.34.34.67.55 1.12.74.34.13.86.3 1.81.34 1.23.06 1.59.07 4.74.07s3.51-.01 4.74-.07c.95-.04 1.46-.2 1.81-.34.45-.18.78-.39 1.12-.74.34-.34.55-.67.74-1.12.13-.34.3-.86.34-1.81.06-1.23.07-1.59.07-4.74s-.01-3.51-.07-4.74c-.04-.95-.2-1.46-.34-1.81-.18-.45-.39-.78-.74-1.12-.34-.34-.67-.55-1.12-.74-.34-.13-.86-.3-1.81-.34-1.23-.06-1.59-.07-4.74-.07zm0 3.32a4.57 4.57 0 1 1 0 9.14 4.57 4.57 0 0 1 0-9.14zm0 7.54a2.97 2.97 0 1 0 0-5.94 2.97 2.97 0 0 0 0 5.94zm5.81-7.74a1.07 1.07 0 1 1-2.14 0 1.07 1.07 0 0 1 2.14 0z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@TwoBreath-z3q" target="_blank" rel="noopener" aria-label="TwoBreath on YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.5a3.02 3.02 0 0 0-2.13-2.13C19.45 4 12 4 12 4s-7.45 0-9.37.37A3.02 3.02 0 0 0 .5 6.5C.13 8.42.13 12 .13 12s0 3.58.37 5.5a3.02 3.02 0 0 0 2.13 2.13C4.55 20 12 20 12 20s7.45 0 9.37-.37a3.02 3.02 0 0 0 2.13-2.13c.37-1.92.37-5.5.37-5.5s0-3.58-.37-5.5zM9.6 15.6V8.4l6.4 3.6-6.4 3.6z"/></svg>
+      </a>
+    </div>
     <p data-i18n-html="footer.line">TwoBreath &mdash; One breath. Two souls. Every morning. &nbsp;&middot;&nbsp;
        <a href="index.html">Home</a> &nbsp;&middot;&nbsp;
        <a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
