@@ -550,9 +550,165 @@
     }
     footer a:hover { color: var(--accent-teal); }
 
+    /* Language switcher */
+    .lang-switcher {
+      display: flex;
+      gap: 4px;
+      margin-left: 12px;
+    }
+    .lang-btn {
+      background: transparent;
+      border: 0.5px solid rgba(255,255,255,0.15);
+      color: var(--warm-white-60);
+      padding: 5px 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .lang-btn:hover { color: var(--warm-white); border-color: rgba(255,255,255,0.3); }
+    .lang-btn.active {
+      background: var(--accent-teal);
+      color: #1a1a2e;
+      border-color: var(--accent-teal);
+    }
+
+    /* Voice player FAB */
+    .voice-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 150;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px 12px 14px;
+      background: rgba(26,23,20,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 0.5px solid rgba(45,158,138,0.35);
+      border-radius: 50px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      transition: padding 0.3s ease, gap 0.3s ease;
+      max-width: calc(100vw - 48px);
+    }
+
+    .voice-btn {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent-teal);
+      color: #1a1a2e;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .voice-btn:hover { background: var(--accent-teal-light); }
+    .voice-btn:active { transform: scale(0.96); }
+    .voice-btn svg { width: 18px; height: 18px; fill: currentColor; }
+    .voice-btn .pause-icon { display: none; }
+    .voice-fab.playing .voice-btn .play-icon { display: none; }
+    .voice-fab.playing .voice-btn .pause-icon { display: block; }
+
+    .voice-meta {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .voice-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .voice-title {
+      font-size: 13px;
+      color: var(--warm-white);
+      font-weight: 500;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .voice-progress {
+      height: 2px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 1px;
+      margin-top: 5px;
+      overflow: hidden;
+    }
+    .voice-progress .bar {
+      height: 100%;
+      width: 0;
+      background: var(--accent-teal);
+      transition: width 0.2s linear;
+    }
+
+    .voice-skip {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: transparent;
+      border: 0.5px solid rgba(255,255,255,0.15);
+      color: var(--warm-white-60);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .voice-skip:hover { color: var(--warm-white); border-color: rgba(255,255,255,0.3); }
+    .voice-skip svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* Active technique highlight (read-along) */
+    .technique { position: relative; }
+    .technique.is-narrating {
+      border-color: rgba(45,158,138,0.6);
+      background: rgba(45,158,138,0.05);
+      box-shadow: 0 0 0 2px rgba(45,158,138,0.15), 0 8px 32px rgba(45,158,138,0.08);
+    }
+    .technique.is-narrating .technique-name {
+      color: var(--accent-teal);
+    }
+    .technique.is-narrating::before {
+      content: '';
+      position: absolute;
+      left: -12px;
+      top: 24px;
+      width: 4px;
+      height: calc(100% - 48px);
+      background: var(--accent-teal);
+      border-radius: 2px;
+    }
+
+    /* Has-audio indicator */
+    .technique[data-has-audio="true"] .technique-name::after {
+      content: '🎧';
+      font-size: 14px;
+      margin-left: 8px;
+      opacity: 0.55;
+      vertical-align: middle;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       nav#navbar { padding: 12px 24px; }
+      .voice-fab { bottom: 16px; right: 16px; padding: 10px 14px 10px 10px; gap: 10px; }
+      .voice-title { max-width: 140px; font-size: 12px; }
+      .voice-skip { width: 28px; height: 28px; }
+      .lang-switcher { margin-left: 6px; }
+      .lang-btn { padding: 4px 8px; font-size: 10px; }
+      .technique.is-narrating::before { left: -8px; }
 
       .nav-links {
         display: none;
@@ -602,12 +758,17 @@
       <img src="images/twobreath_icon.svg" alt="" class="nav-logo-img">Two<span>Breath</span>
     </a>
     <ul class="nav-links" id="navLinks" role="list">
-      <li><a href="index.html#story" onclick="closeNav()">Our Story</a></li>
-      <li><a href="index.html#science" onclick="closeNav()">Science</a></li>
-      <li><a href="index.html#ritual" onclick="closeNav()">The Ritual</a></li>
-      <li><a href="techniques.html" class="active" onclick="closeNav()">Techniques</a></li>
-      <li><a href="index.html#vision" onclick="closeNav()">Vision</a></li>
+      <li><a href="index.html#story" onclick="closeNav()" data-i18n="nav.story">Our Story</a></li>
+      <li><a href="index.html#science" onclick="closeNav()" data-i18n="nav.science">Science</a></li>
+      <li><a href="index.html#ritual" onclick="closeNav()" data-i18n="nav.ritual">The Ritual</a></li>
+      <li><a href="techniques.html" class="active" onclick="closeNav()" data-i18n="nav.techniques">Techniques</a></li>
+      <li><a href="index.html#vision" onclick="closeNav()" data-i18n="nav.vision">Vision</a></li>
     </ul>
+    <div class="lang-switcher" role="group" aria-label="Language selector">
+      <button class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+      <button class="lang-btn" data-lang="de" aria-pressed="false">DE</button>
+      <button class="lang-btn" data-lang="ja" aria-pressed="false">JA</button>
+    </div>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
@@ -618,23 +779,23 @@
     <!-- Page header -->
     <div class="page-header-wrap">
     <header class="page-header">
-      <div class="header-pill">Evidence-Based Catalog · 30 Patterns</div>
-      <h1 class="page-title">All breathing <em>techniques</em>, explained</h1>
-      <p class="page-sub">
+      <div class="header-pill" data-i18n="header.pill">Evidence-Based Catalog · 30 Patterns</div>
+      <h1 class="page-title" data-i18n-html="header.title">All breathing <em>techniques</em>, explained</h1>
+      <p class="page-sub" data-i18n="header.sub">
         Every breathing pattern in TwoBreath, with its physiological mechanism and
         peer-reviewed citations. From acute panic relief to walking meditation,
         from couples co-regulation to high-altitude training — each technique here
         is backed by published research.
       </p>
-      <p class="page-meta">
-        <strong>30 techniques</strong> · 9 categories · 25+ peer-reviewed studies · Updated 2026-05-09
+      <p class="page-meta" data-i18n-html="header.meta">
+        <strong>30 techniques</strong> · 9 categories · 25+ peer-reviewed studies · Updated 2026-05-10
       </p>
     </header>
     </div>
 
     <!-- Safety -->
     <section class="safety" aria-label="Safety notice">
-      <div class="safety-box">
+      <div class="safety-box" data-i18n-html="safety.box">
         <strong>Important safety notice:</strong> Breathing techniques do not replace medical
         care. For acute panic with chest pain, severe shortness of breath, or altered consciousness,
         call emergency services first (112 in the EU, 911 in the US). For chronic symptoms
@@ -645,25 +806,25 @@
 
     <!-- Table of contents -->
     <nav class="toc" aria-label="Sections on this page">
-      <span class="toc-tag">Jump to category</span>
+      <span class="toc-tag" data-i18n="toc.tag">Jump to category</span>
       <ul class="toc-list">
-        <li><a href="#acute-panic">Acute panic & anxiety</a></li>
-        <li><a href="#pranayama">Pranayama / yoga breathing</a></li>
-        <li><a href="#walking">Walking meditation</a></li>
-        <li><a href="#gi">Heartburn & GI relief</a></li>
-        <li><a href="#sleep">Sleep & deep relaxation</a></li>
-        <li><a href="#coherence">Coherence & vagus nerve</a></li>
-        <li><a href="#performance">Performance & focus</a></li>
-        <li><a href="#altitude">Altitude & stamina</a></li>
-        <li><a href="#couples">Couples breathing</a></li>
+        <li><a href="#acute-panic" data-i18n="toc.acute">Acute panic & anxiety</a></li>
+        <li><a href="#pranayama" data-i18n="toc.pranayama">Pranayama / yoga breathing</a></li>
+        <li><a href="#walking" data-i18n="toc.walking">Walking meditation</a></li>
+        <li><a href="#gi" data-i18n="toc.gi">Heartburn & GI relief</a></li>
+        <li><a href="#sleep" data-i18n="toc.sleep">Sleep & deep relaxation</a></li>
+        <li><a href="#coherence" data-i18n="toc.coherence">Coherence & vagus nerve</a></li>
+        <li><a href="#performance" data-i18n="toc.performance">Performance & focus</a></li>
+        <li><a href="#altitude" data-i18n="toc.altitude">Altitude & stamina</a></li>
+        <li><a href="#couples" data-i18n="toc.couples">Couples breathing</a></li>
       </ul>
     </nav>
 
     <!-- Category 1: Acute panic -->
     <section class="category" id="acute-panic">
-      <span class="category-tag">Category 1</span>
-      <h2 class="category-title">Acute panic & <em>anxiety</em></h2>
-      <p class="category-intro">
+      <span class="category-tag" data-i18n="cat.acute-panic.tag">Category 1</span>
+      <h2 class="category-title" data-i18n-html="cat.acute-panic.title">Acute panic & <em>anxiety</em></h2>
+      <p class="category-intro" data-i18n-html="cat.acute-panic.intro">
         Common mechanism: <strong>extended exhalation plus post-inspiratory and post-expiratory pauses</strong>
         activate the vagus nerve (cranial nerve X) → parasympathetic → heart rate drops →
         hyperventilation stops. The longer-than-inhale exhale dominates respiratory sinus arrhythmia.
@@ -672,9 +833,9 @@
       <div class="technique-grid fade-in">
 
         <!-- panic-relief -->
-        <article class="technique">
+        <article class="technique" data-tid="panic-relief">
           <header class="technique-head">
-            <h3 class="technique-name">Panic Relief <span class="id-tag">panic-relief</span></h3>
+            <h3 class="technique-name" data-i18n-html="t.panic-relief.name">Panic Relief <span class="id-tag">panic-relief</span></h3>
             <div class="technique-meta">
               <span class="meta-level">Level 1</span>
               <span class="meta-duration">5 min</span>
@@ -686,7 +847,7 @@
             <span class="phase-pill exhale"><span class="dot"></span>Exhale <span class="secs">8s</span></span>
             <span class="phase-pill rest"><span class="dot"></span>Rest <span class="secs">2s</span></span>
           </div>
-          <p class="technique-desc">
+          <p class="technique-desc" data-i18n-html="t.panic-relief.desc">
             Acute panic relief with explicit post-inspiratory and post-expiratory pauses.
             The 1:0.5:2:0.5 ratio with extended exhale and dual pauses maximally activates
             the vagus nerve and parasympathetic nervous system. CO₂ accumulation during the
@@ -703,7 +864,7 @@
         </article>
 
         <!-- 4-7-8 -->
-        <article class="technique">
+        <article class="technique" data-tid="4-7-8-breathing">
           <header class="technique-head">
             <h3 class="technique-name">4-7-8 Relaxing Breath <span class="id-tag">4-7-8-breathing</span></h3>
             <div class="technique-meta">
@@ -730,7 +891,7 @@
         </article>
 
         <!-- cyclic-sighing -->
-        <article class="technique">
+        <article class="technique" data-tid="cyclic-sighing">
           <header class="technique-head">
             <h3 class="technique-name">Cyclic Sighing <span class="id-tag">cyclic-sighing</span></h3>
             <div class="technique-meta">
@@ -760,9 +921,9 @@
 
     <!-- Category 2: Pranayama -->
     <section class="category" id="pranayama">
-      <span class="category-tag">Category 2</span>
-      <h2 class="category-title">Pranayama / <em>yoga</em> breathing</h2>
-      <p class="category-intro">
+      <span class="category-tag" data-i18n="cat.pranayama.tag">Category 2</span>
+      <h2 class="category-title" data-i18n-html="cat.pranayama.title">Pranayama / <em>yoga</em> breathing</h2>
+      <p class="category-intro" data-i18n-html="cat.pranayama.intro">
         Yogic breath techniques with thousands of years of tradition, now confirmed by
         modern autonomic-nervous-system research. <strong>Alternate-nostril breathing</strong>
         balances sympathetic and parasympathetic tone; <strong>Bhramari</strong> stimulates
@@ -772,9 +933,9 @@
       <div class="technique-grid fade-in">
 
         <!-- nadi-shodhana-panic -->
-        <article class="technique">
+        <article class="technique" data-tid="nadi-shodhana-panic">
           <header class="technique-head">
-            <h3 class="technique-name">Alternate Nostril Calming <span class="id-tag">nadi-shodhana-panic</span></h3>
+            <h3 class="technique-name" data-i18n-html="t.nadi-shodhana-panic.name">Alternate Nostril Calming <span class="id-tag">nadi-shodhana-panic</span></h3>
             <div class="technique-meta">
               <span class="meta-level">Level 2</span>
               <span class="meta-duration">6 min</span>
@@ -786,12 +947,12 @@
             <span class="phase-pill exhale"><span class="dot"></span>Exhale (right) <span class="secs">8s</span></span>
             <span class="phase-pill rest"><span class="dot"></span>Rest <span class="secs">2s</span></span>
           </div>
-          <div class="practice-note">
+          <div class="practice-note" data-i18n-html="t.nadi-shodhana-panic.practice">
             <strong>Practice:</strong> Close right nostril with thumb, inhale left for 6s.
             Pause. Close left nostril with ring finger, exhale right for 8s. Pause. Reverse
             for the next cycle. The continuous side-switching is the technique.
           </div>
-          <p class="technique-desc">
+          <p class="technique-desc" data-i18n-html="t.nadi-shodhana-panic.desc">
             Nadi Shodhana variant tuned for panic. Extended exhalation calms the autonomic
             nervous system, balances brain hemispheres via differential vasculature in nasal
             mucosa, and measurably lowers cortisol and blood pressure.
@@ -807,7 +968,7 @@
         </article>
 
         <!-- alternate-nostril -->
-        <article class="technique">
+        <article class="technique" data-tid="alternate-nostril">
           <header class="technique-head">
             <h3 class="technique-name">Alternate Nostril (Standard) <span class="id-tag">alternate-nostril</span></h3>
             <div class="technique-meta">
@@ -834,9 +995,9 @@
         </article>
 
         <!-- bhramari -->
-        <article class="technique">
+        <article class="technique" data-tid="bhramari-humming">
           <header class="technique-head">
-            <h3 class="technique-name">Humming Bee Breath / Bhramari <span class="id-tag">bhramari-humming</span></h3>
+            <h3 class="technique-name" data-i18n-html="t.bhramari-humming.name">Humming Bee Breath / Bhramari <span class="id-tag">bhramari-humming</span></h3>
             <div class="technique-meta">
               <span class="meta-level">Level 1</span>
               <span class="meta-duration">4 min</span>
@@ -846,12 +1007,12 @@
             <span class="phase-pill inhale"><span class="dot"></span>Inhale (nose) <span class="secs">4s</span></span>
             <span class="phase-pill exhale"><span class="dot"></span>Exhale + hum <span class="secs">8s</span></span>
           </div>
-          <div class="practice-note">
+          <div class="practice-note" data-i18n-html="t.bhramari-humming.practice">
             <strong>Practice:</strong> Lips lightly closed, teeth not clenched. While exhaling, hum
             audibly ("mmm"). Vibration is felt in skull and chest. Optional: cover ears with thumbs
             (classical Bhramari mudra) for the full effect.
           </div>
-          <p class="technique-desc">
+          <p class="technique-desc" data-i18n-html="t.bhramari-humming.desc">
             The humming vibration directly stimulates afferent vagal fibers in the pharynx and
             inner ear. Several RCTs show reduced cortisol, blood pressure, and subjective tension.
             Particularly effective for <strong>tension headaches</strong> through direct
@@ -872,9 +1033,9 @@
 
     <!-- Category 3: Walking meditation -->
     <section class="category" id="walking">
-      <span class="category-tag">Category 3</span>
-      <h2 class="category-title">Walking <em>meditation</em></h2>
-      <p class="category-intro">
+      <span class="category-tag" data-i18n="cat.walking.tag">Category 3</span>
+      <h2 class="category-title" data-i18n-html="cat.walking.title">Walking <em>meditation</em></h2>
+      <p class="category-intro" data-i18n-html="cat.walking.intro">
         Combine rhythmic breathing with sanfte movement. Particularly useful when panic
         starts during a walk: <strong>the open environment reduces agoraphobic perception</strong>
         and step-counting interrupts catastrophic thought loops. Tradition: Thich Nhat Hanh's
@@ -884,9 +1045,9 @@
       <div class="technique-grid fade-in">
 
         <!-- walking-breath-simple -->
-        <article class="technique">
+        <article class="technique" data-tid="walking-breath-simple">
           <header class="technique-head">
-            <h3 class="technique-name">Walking Breath <span class="id-tag">walking-breath-simple</span></h3>
+            <h3 class="technique-name" data-i18n-html="t.walking-breath-simple.name">Walking Breath <span class="id-tag">walking-breath-simple</span></h3>
             <div class="technique-meta">
               <span class="meta-level">Level 1</span>
               <span class="meta-duration">5 min</span>
@@ -896,11 +1057,11 @@
             <span class="phase-pill inhale"><span class="dot"></span>Inhale <span class="secs">4s</span></span>
             <span class="phase-pill exhale"><span class="dot"></span>Exhale <span class="secs">4s</span></span>
           </div>
-          <div class="practice-note">
+          <div class="practice-note" data-i18n-html="t.walking-breath-simple.practice">
             <strong>Practice:</strong> Walk comfortably (~one breath per 4 steps). No counting —
             simply attend to breath and footsteps.
           </div>
-          <p class="technique-desc">
+          <p class="technique-desc" data-i18n-html="t.walking-breath-simple.desc">
             Combines rhythmic breathing, proprioceptive grounding, and gentle movement.
             During panic, walking interrupts catastrophic thought spirals; the open setting
             reduces agoraphobic perception.
@@ -916,9 +1077,9 @@
         </article>
 
         <!-- walking-breath-counted -->
-        <article class="technique">
+        <article class="technique" data-tid="walking-breath-counted">
           <header class="technique-head">
-            <h3 class="technique-name">Walking Breath 3-6 (counted) <span class="id-tag">walking-breath-counted</span></h3>
+            <h3 class="technique-name" data-i18n-html="t.walking-breath-counted.name">Walking Breath 3-6 (counted) <span class="id-tag">walking-breath-counted</span></h3>
             <div class="technique-meta">
               <span class="meta-level">Level 2</span>
               <span class="meta-duration">6 min</span>
@@ -928,11 +1089,11 @@
             <span class="phase-pill inhale"><span class="dot"></span>3 steps in <span class="secs">3s</span></span>
             <span class="phase-pill exhale"><span class="dot"></span>6 steps out <span class="secs">6s</span></span>
           </div>
-          <div class="practice-note">
+          <div class="practice-note" data-i18n-html="t.walking-breath-counted.practice">
             <strong>Practice:</strong> Inhale for 3 steps, exhale for 6 steps. Optionally count
             steps half-aloud — this most effectively interrupts panic ideation.
           </div>
-          <p class="technique-desc">
+          <p class="technique-desc" data-i18n-html="t.walking-breath-counted.desc">
             The 1:2 ratio activates the parasympathetic system even during movement. Counted
             steps occupy enough cognitive bandwidth to block rumination. Tradition: Burmese
             Vipassana, Sayadaw U Pandita.
@@ -950,9 +1111,9 @@
 
     <!-- Category 4: GI / heartburn -->
     <section class="category" id="gi">
-      <span class="category-tag">Category 4</span>
-      <h2 class="category-title">Heartburn & <em class="rose">GI</em> relief</h2>
-      <p class="category-intro">
+      <span class="category-tag" data-i18n="cat.gi.tag">Category 4</span>
+      <h2 class="category-title" data-i18n-html="cat.gi.title">Heartburn & <em class="rose">GI</em> relief</h2>
+      <p class="category-intro" data-i18n-html="cat.gi.intro">
         For functional gastrointestinal complaints (heartburn, IBS, anxiety-driven diarrhea),
         breathing patterns work via the vagus nerve, which directly innervates the esophagus,
         stomach, and small intestine. <strong>Cooling breath (Sitali)</strong> and
@@ -962,9 +1123,9 @@
       <div class="technique-grid fade-in">
 
         <!-- sitali -->
-        <article class="technique">
+        <article class="technique" data-tid="sitali-cooling">
           <header class="technique-head">
-            <h3 class="technique-name">Cooling Breath / Sitali <span class="id-tag">sitali-cooling</span></h3>
+            <h3 class="technique-name" data-i18n-html="t.sitali-cooling.name">Cooling Breath / Sitali <span class="id-tag">sitali-cooling</span></h3>
             <div class="technique-meta">
               <span class="meta-level">Level 1</span>
               <span class="meta-duration">4 min</span>
@@ -974,12 +1135,12 @@
             <span class="phase-pill inhale"><span class="dot"></span>Inhale (rolled tongue) <span class="secs">4s</span></span>
             <span class="phase-pill exhale"><span class="dot"></span>Exhale (nose) <span class="secs">6s</span></span>
           </div>
-          <div class="practice-note">
+          <div class="practice-note" data-i18n-html="t.sitali-cooling.practice">
             <strong>Practice:</strong> Curl the tongue (or purse lips if not possible — the
             "Sheetkari" variant). Inhale through the curled tongue feels cool. Close mouth,
             exhale through the nose.
           </div>
-          <p class="technique-desc">
+          <p class="technique-desc" data-i18n-html="t.sitali-cooling.desc">
             Evaporative cooling of the tongue lowers temperature in mouth and pharynx. Activates
             parasympathetic vagal fibers that travel directly to the esophagus and upper stomach
             → reduces acid reflux, gastric cramps, and heat sensation. Particularly effective
@@ -996,9 +1157,9 @@
         </article>
 
         <!-- buteyko -->
-        <article class="technique">
+        <article class="technique" data-tid="buteyko-reduced">
           <header class="technique-head">
-            <h3 class="technique-name">Buteyko Reduced Breath <span class="id-tag">buteyko-reduced</span></h3>
+            <h3 class="technique-name" data-i18n-html="t.buteyko-reduced.name">Buteyko Reduced Breath <span class="id-tag">buteyko-reduced</span></h3>
             <div class="technique-meta">
               <span class="meta-level">Level 2</span>
               <span class="meta-duration">5 min</span>
@@ -1009,12 +1170,12 @@
             <span class="phase-pill exhale"><span class="dot"></span>Exhale (soft) <span class="secs">3s</span></span>
             <span class="phase-pill hold"><span class="dot"></span>Control pause <span class="secs">4s</span></span>
           </div>
-          <div class="practice-note">
+          <div class="practice-note" data-i18n-html="t.buteyko-reduced.practice">
             <strong>Practice:</strong> Breathe very quietly and lightly through the nose — less
             volume than usual. The "control pause" is not held breath, but a gentle wait without
             air hunger.
           </div>
-          <p class="technique-desc">
+          <p class="technique-desc" data-i18n-html="t.buteyko-reduced.desc">
             Corrects chronic hyperventilation that underlies many panic and IBS symptoms.
             Increases CO₂ tolerance → reduces Bohr-effect-driven vasospasm → gastrointestinal
             tract relaxes. Multiple RCTs show efficacy in asthma and irritable bowel syndrome.
@@ -1034,16 +1195,16 @@
 
     <!-- Category 5: Sleep -->
     <section class="category" id="sleep">
-      <span class="category-tag">Category 5</span>
-      <h2 class="category-title">Sleep & <em class="gold">deep relaxation</em></h2>
-      <p class="category-intro">
+      <span class="category-tag" data-i18n="cat.sleep.tag">Category 5</span>
+      <h2 class="category-title" data-i18n-html="cat.sleep.title">Sleep & <em class="gold">deep relaxation</em></h2>
+      <p class="category-intro" data-i18n-html="cat.sleep.intro">
         Patterns with strongly extended exhalation (2:1 exhale-to-inhale ratio) for the
         transition into sleep.
       </p>
 
       <div class="technique-grid fade-in">
 
-        <article class="technique">
+        <article class="technique" data-tid="sleep-breath">
           <header class="technique-head">
             <h3 class="technique-name">Sleep Breath <span class="id-tag">sleep-breath</span></h3>
             <div class="technique-meta">
@@ -1072,16 +1233,16 @@
 
     <!-- Category 6: Coherence -->
     <section class="category" id="coherence">
-      <span class="category-tag">Category 6</span>
-      <h2 class="category-title">Coherence & <em>vagus nerve</em></h2>
-      <p class="category-intro">
+      <span class="category-tag" data-i18n="cat.coherence.tag">Category 6</span>
+      <h2 class="category-title" data-i18n-html="cat.coherence.title">Coherence & <em>vagus nerve</em></h2>
+      <p class="category-intro" data-i18n-html="cat.coherence.intro">
         At ~5.5 breaths per minute, humans reach the resonance frequency of heart rate, breathing,
         and the blood-pressure baroreflex — <strong>maximizing heart rate variability (HRV)</strong>.
       </p>
 
       <div class="technique-grid fade-in">
 
-        <article class="technique">
+        <article class="technique" data-tid="resonant-breathing">
           <header class="technique-head">
             <h3 class="technique-name">Resonant Breathing <span class="id-tag">resonant-breathing</span></h3>
             <div class="technique-meta">
@@ -1106,7 +1267,7 @@
           </div>
         </article>
 
-        <article class="technique">
+        <article class="technique" data-tid="physiological-sigh">
           <header class="technique-head">
             <h3 class="technique-name">Physiological Sigh <span class="id-tag">physiological-sigh</span></h3>
             <div class="technique-meta">
@@ -1136,9 +1297,9 @@
 
     <!-- Category 7: Performance -->
     <section class="category" id="performance">
-      <span class="category-tag">Category 7</span>
-      <h2 class="category-title">Performance & <em>focus</em></h2>
-      <p class="category-intro">
+      <span class="category-tag" data-i18n="cat.performance.tag">Category 7</span>
+      <h2 class="category-title" data-i18n-html="cat.performance.title">Performance & <em>focus</em></h2>
+      <p class="category-intro" data-i18n-html="cat.performance.intro">
         Patterns for stress regulation under pressure. Used by Navy SEALs, first responders,
         athletes, and ice-bath practitioners. <strong>Box breathing</strong> regulates the
         fight-or-flight response; <strong>Power Breathing</strong> increases cold tolerance
@@ -1147,7 +1308,7 @@
 
       <div class="technique-grid fade-in">
 
-        <article class="technique">
+        <article class="technique" data-tid="box-breathing">
           <header class="technique-head">
             <h3 class="technique-name">Box Breathing <span class="id-tag">box-breathing</span></h3>
             <div class="technique-meta">
@@ -1174,7 +1335,7 @@
           </div>
         </article>
 
-        <article class="technique">
+        <article class="technique" data-tid="combat-breathing">
           <header class="technique-head">
             <h3 class="technique-name">Tactical Breathing <span class="id-tag">combat-breathing</span></h3>
             <div class="technique-meta">
@@ -1194,7 +1355,7 @@
           </p>
         </article>
 
-        <article class="technique">
+        <article class="technique" data-tid="power-breathing">
           <header class="technique-head">
             <h3 class="technique-name">Power Breathing <span class="id-tag">power-breathing</span></h3>
             <div class="technique-meta">
@@ -1219,7 +1380,7 @@
           </div>
         </article>
 
-        <article class="technique">
+        <article class="technique" data-tid="energizing-breath">
           <header class="technique-head">
             <h3 class="technique-name">Energizing Breath <span class="id-tag">energizing-breath</span></h3>
             <div class="technique-meta">
@@ -1249,16 +1410,16 @@
 
     <!-- Category 8: Altitude -->
     <section class="category" id="altitude">
-      <span class="category-tag">Category 8</span>
-      <h2 class="category-title">Altitude & <em>stamina</em></h2>
-      <p class="category-intro">
+      <span class="category-tag" data-i18n="cat.altitude.tag">Category 8</span>
+      <h2 class="category-title" data-i18n-html="cat.altitude.title">Altitude & <em>stamina</em></h2>
+      <p class="category-intro" data-i18n-html="cat.altitude.intro">
         Progressive hold training builds CO₂ tolerance for athletic performance and altitude
         acclimatization. Five levels each, from foundation (Level 1) to master protocol (Level 5).
       </p>
 
       <div class="technique-grid fade-in">
 
-        <article class="technique">
+        <article class="technique" data-tid="stamina-1">
           <header class="technique-head">
             <h3 class="technique-name">Stamina 1-5 <span class="id-tag">stamina-1 … stamina-5</span></h3>
             <div class="technique-meta">
@@ -1277,7 +1438,7 @@
           </p>
         </article>
 
-        <article class="technique">
+        <article class="technique" data-tid="high-altitude-1">
           <header class="technique-head">
             <h3 class="technique-name">High Altitude 1-5 <span class="id-tag">high-altitude-1 … high-altitude-5</span></h3>
             <div class="technique-meta">
@@ -1307,9 +1468,9 @@
 
     <!-- Category 9: Couples -->
     <section class="category" id="couples">
-      <span class="category-tag">Category 9</span>
-      <h2 class="category-title">Couples <em>breathing</em></h2>
-      <p class="category-intro">
+      <span class="category-tag" data-i18n="cat.couples.tag">Category 9</span>
+      <h2 class="category-title" data-i18n-html="cat.couples.title">Couples <em>breathing</em></h2>
+      <p class="category-intro" data-i18n-html="cat.couples.intro">
         Synchronized breathing between partners promotes <strong>physiological coherence</strong>:
         heart rate variability and autonomic nervous system function align. The TwoBreath app's
         signature ritual.
@@ -1317,7 +1478,7 @@
 
       <div class="technique-grid fade-in">
 
-        <article class="technique">
+        <article class="technique" data-tid="morning-together-1">
           <header class="technique-head">
             <h3 class="technique-name">Morning Together 1-3 <span class="id-tag">morning-together-1 … morning-together-3</span></h3>
             <div class="technique-meta">
@@ -1348,21 +1509,37 @@
 
     <!-- CTA -->
     <section class="cta-section fade-in">
-      <h2>Try these on your <em>iPhone</em> & Apple Watch</h2>
-      <p>
+      <h2 data-i18n-html="cta.heading">Try these on your <em>iPhone</em> & Apple Watch</h2>
+      <p data-i18n="cta.body">
         Every technique here is built into TwoBreath with audio pacing in English, German, and
         Japanese. Synchronized for couples or solo.
       </p>
       <div class="cta-buttons">
-        <a href="https://testflight.apple.com/join/ChJc5vVx" class="btn btn-primary" target="_blank" rel="noopener">Join the public beta</a>
-        <a href="index.html#science" class="btn btn-outline">Read the science</a>
+        <a href="https://testflight.apple.com/join/ChJc5vVx" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="cta.beta">Join the public beta</a>
+        <a href="index.html#science" class="btn btn-outline" data-i18n="cta.science">Read the science</a>
       </div>
     </section>
 
   </main>
 
+  <!-- Voice player FAB -->
+  <div class="voice-fab" id="voiceFab" role="region" aria-label="Technique narration player">
+    <button class="voice-btn" id="voiceBtn" aria-label="Play technique narration">
+      <svg class="play-icon" viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+      <svg class="pause-icon" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+    </button>
+    <div class="voice-meta">
+      <span class="voice-label" id="voiceLabel" data-i18n="player.label">Tap play · Matthi & Dascha read</span>
+      <span class="voice-title" id="voiceTitle" data-i18n="player.idle">7 anti-panic techniques</span>
+      <div class="voice-progress"><div class="bar" id="voiceBar"></div></div>
+    </div>
+    <button class="voice-skip" id="voiceSkip" aria-label="Skip to next technique">
+      <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+    </button>
+  </div>
+
   <footer role="contentinfo">
-    <p>TwoBreath &mdash; One breath. Two souls. Every morning. &nbsp;&middot;&nbsp;
+    <p data-i18n-html="footer.line">TwoBreath &mdash; One breath. Two souls. Every morning. &nbsp;&middot;&nbsp;
        <a href="index.html">Home</a> &nbsp;&middot;&nbsp;
        <a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
        <a href="impressum.html">Impressum</a> &nbsp;&middot;&nbsp;
@@ -1370,9 +1547,9 @@
   </footer>
 
   <script>
-    // Mobile nav toggle
+    // ────────── Mobile nav toggle ──────────
     const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
+    const navLinks  = document.getElementById('navLinks');
     navToggle.addEventListener('click', () => {
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
       navToggle.setAttribute('aria-expanded', String(!expanded));
@@ -1385,8 +1562,7 @@
       navLinks.classList.remove('open');
     }
 
-    // Fade-in on scroll (matches index.html behavior)
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    // ────────── Fade-in on scroll ──────────
     const fadeObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1394,8 +1570,459 @@
           fadeObserver.unobserve(entry.target);
         }
       });
-    }, observerOptions);
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+    // ────────── i18n dictionary ──────────
+    const I18N = {
+      en: {
+        'nav.story': 'Our Story',
+        'nav.science': 'Science',
+        'nav.ritual': 'The Ritual',
+        'nav.techniques': 'Techniques',
+        'nav.vision': 'Vision',
+        'header.pill': 'Evidence-Based Catalog · 30 Patterns',
+        'header.title': 'All breathing <em>techniques</em>, explained',
+        'header.sub': 'Every breathing pattern in TwoBreath, with its physiological mechanism and peer-reviewed citations. From acute panic relief to walking meditation, from couples co-regulation to high-altitude training — each technique here is backed by published research.',
+        'header.meta': '<strong>30 techniques</strong> · 9 categories · 25+ peer-reviewed studies · Updated 2026-05-10',
+        'safety.box': '<strong>Important safety notice:</strong> Breathing techniques do not replace medical care. For acute panic with chest pain, severe shortness of breath, or altered consciousness, call emergency services first (112 in the EU, 911 in the US). For chronic symptoms (heartburn, diarrhea, headaches, panic disorder), consult a physician before relying on breathwork alone.',
+        'toc.tag': 'Jump to category',
+        'toc.acute': 'Acute panic & anxiety',
+        'toc.pranayama': 'Pranayama / yoga breathing',
+        'toc.walking': 'Walking meditation',
+        'toc.gi': 'Heartburn & GI relief',
+        'toc.sleep': 'Sleep & deep relaxation',
+        'toc.coherence': 'Coherence & vagus nerve',
+        'toc.performance': 'Performance & focus',
+        'toc.altitude': 'Altitude & stamina',
+        'toc.couples': 'Couples breathing',
+
+        'cat.acute-panic.tag': 'Category 1',
+        'cat.acute-panic.title': 'Acute panic & <em>anxiety</em>',
+        'cat.acute-panic.intro': 'Common mechanism: <strong>extended exhalation plus post-inspiratory and post-expiratory pauses</strong> activate the vagus nerve (cranial nerve X) → parasympathetic → heart rate drops → hyperventilation stops. The longer-than-inhale exhale dominates respiratory sinus arrhythmia.',
+        'cat.pranayama.tag': 'Category 2',
+        'cat.pranayama.title': 'Pranayama / <em>yoga</em> breathing',
+        'cat.pranayama.intro': 'Yogic breath techniques with thousands of years of tradition, now confirmed by modern autonomic-nervous-system research. <strong>Alternate-nostril breathing</strong> balances sympathetic and parasympathetic tone; <strong>Bhramari</strong> stimulates the vagus nerve directly via humming vibration.',
+        'cat.walking.tag': 'Category 3',
+        'cat.walking.title': 'Walking <em>meditation</em>',
+        'cat.walking.intro': 'Combine rhythmic breathing with gentle movement. Particularly useful when panic starts on a walk: <strong>the open environment reduces agoraphobic perception</strong> and step-counting interrupts catastrophic thought loops. Tradition: Thich Nhat Hanh\'s Vietnamese Zen, Burmese Vipassana.',
+        'cat.gi.tag': 'Category 4',
+        'cat.gi.title': 'Heartburn & <em class="rose">GI</em> relief',
+        'cat.gi.intro': 'For functional gastrointestinal complaints (heartburn, IBS, anxiety-driven diarrhea), breathing patterns work via the vagus nerve, which directly innervates the esophagus, stomach, and small intestine. <strong>Cooling breath (Sitali)</strong> and <strong>Buteyko reduced breathing</strong> normalize sympathetic overdrive.',
+        'cat.sleep.tag': 'Category 5',
+        'cat.sleep.title': 'Sleep & <em class="gold">deep relaxation</em>',
+        'cat.sleep.intro': 'Patterns with strongly extended exhalation (2:1 exhale-to-inhale ratio) for the transition into sleep.',
+        'cat.coherence.tag': 'Category 6',
+        'cat.coherence.title': 'Coherence & <em>vagus nerve</em>',
+        'cat.coherence.intro': 'At ~5.5 breaths per minute, humans reach the resonance frequency of heart rate, breathing, and the blood-pressure baroreflex — <strong>maximizing heart rate variability (HRV)</strong>.',
+        'cat.performance.tag': 'Category 7',
+        'cat.performance.title': 'Performance & <em>focus</em>',
+        'cat.performance.intro': 'Patterns for stress regulation under pressure. Used by Navy SEALs, first responders, athletes, and ice-bath practitioners. <strong>Box breathing</strong> regulates the fight-or-flight response; <strong>Power Breathing</strong> increases cold tolerance via controlled hyperventilation.',
+        'cat.altitude.tag': 'Category 8',
+        'cat.altitude.title': 'Altitude & <em>stamina</em>',
+        'cat.altitude.intro': 'Progressive hold training builds CO₂ tolerance for athletic performance and altitude acclimatization. Five levels each, from foundation (Level 1) to master protocol (Level 5).',
+        'cat.couples.tag': 'Category 9',
+        'cat.couples.title': 'Couples <em>breathing</em>',
+        'cat.couples.intro': 'Synchronized breathing between partners promotes <strong>physiological coherence</strong>: heart rate variability and autonomic nervous system function align. The TwoBreath app\'s signature ritual.',
+
+        't.panic-relief.name': 'Panic Relief <span class="id-tag">panic-relief</span>',
+        't.panic-relief.desc': 'Acute panic relief with explicit post-inspiratory and post-expiratory pauses. The 1:0.5:2:0.5 ratio with extended exhale and dual pauses maximally activates the vagus nerve and parasympathetic nervous system. CO₂ accumulation during the pauses additionally calms central respiratory control.',
+        't.nadi-shodhana-panic.name': 'Alternate Nostril Calming <span class="id-tag">nadi-shodhana-panic</span>',
+        't.nadi-shodhana-panic.desc': 'Nadi Shodhana variant tuned for panic. Extended exhalation calms the autonomic nervous system, balances brain hemispheres via differential vasculature in nasal mucosa, and measurably lowers cortisol and blood pressure.',
+        't.nadi-shodhana-panic.practice': '<strong>Practice:</strong> Close right nostril with thumb, inhale left for 6s. Pause. Close left nostril with ring finger, exhale right for 8s. Pause. Reverse for the next cycle. The continuous side-switching is the technique.',
+        't.walking-breath-simple.name': 'Walking Breath <span class="id-tag">walking-breath-simple</span>',
+        't.walking-breath-simple.desc': 'Combines rhythmic breathing, proprioceptive grounding, and gentle movement. During panic, walking interrupts catastrophic thought spirals; the open setting reduces agoraphobic perception.',
+        't.walking-breath-simple.practice': '<strong>Practice:</strong> Walk comfortably (~one breath per 4 steps). No counting — simply attend to breath and footsteps.',
+        't.walking-breath-counted.name': 'Walking Breath 3-6 (counted) <span class="id-tag">walking-breath-counted</span>',
+        't.walking-breath-counted.desc': 'The 1:2 ratio activates the parasympathetic system even during movement. Counted steps occupy enough cognitive bandwidth to block rumination. Tradition: Burmese Vipassana, Sayadaw U Pandita.',
+        't.walking-breath-counted.practice': '<strong>Practice:</strong> Inhale for 3 steps, exhale for 6 steps. Optionally count steps half-aloud — this most effectively interrupts panic ideation.',
+        't.bhramari-humming.name': 'Humming Bee Breath / Bhramari <span class="id-tag">bhramari-humming</span>',
+        't.bhramari-humming.desc': 'The humming vibration directly stimulates afferent vagal fibers in the pharynx and inner ear. Several RCTs show reduced cortisol, blood pressure, and subjective tension. Particularly effective for <strong>tension headaches</strong> through direct parasympathetic reflex.',
+        't.bhramari-humming.practice': '<strong>Practice:</strong> Lips lightly closed, teeth not clenched. While exhaling, hum audibly ("mmm"). Vibration is felt in skull and chest. Optional: cover ears with thumbs (classical Bhramari mudra) for the full effect.',
+        't.sitali-cooling.name': 'Cooling Breath / Sitali <span class="id-tag">sitali-cooling</span>',
+        't.sitali-cooling.desc': 'Evaporative cooling of the tongue lowers temperature in mouth and pharynx. Activates parasympathetic vagal fibers that travel directly to the esophagus and upper stomach → reduces acid reflux, gastric cramps, and heat sensation. Particularly effective <strong>postprandial for heartburn</strong>.',
+        't.sitali-cooling.practice': '<strong>Practice:</strong> Curl the tongue (or purse lips if not possible — the "Sheetkari" variant). Inhale through the curled tongue feels cool. Close mouth, exhale through the nose.',
+        't.buteyko-reduced.name': 'Buteyko Reduced Breath <span class="id-tag">buteyko-reduced</span>',
+        't.buteyko-reduced.desc': 'Corrects chronic hyperventilation that underlies many panic and IBS symptoms. Increases CO₂ tolerance → reduces Bohr-effect-driven vasospasm → gastrointestinal tract relaxes. Multiple RCTs show efficacy in asthma and irritable bowel syndrome.',
+        't.buteyko-reduced.practice': '<strong>Practice:</strong> Breathe very quietly and lightly through the nose — less volume than usual. The "control pause" is not held breath, but a gentle wait without air hunger.',
+
+        'cta.heading': 'Try these on your <em>iPhone</em> & Apple Watch',
+        'cta.body': 'Every technique here is built into TwoBreath with audio pacing in English, German, and Japanese. Synchronized for couples or solo.',
+        'cta.beta': 'Join the public beta',
+        'cta.science': 'Read the science',
+        'footer.line': 'TwoBreath &mdash; One breath. Two souls. Every morning. &nbsp;&middot;&nbsp; <a href="index.html">Home</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="impressum.html">Impressum</a> &nbsp;&middot;&nbsp; <a href="contact.html">Contact</a>',
+
+        'player.label': 'Tap play · Matthi & Dascha read',
+        'player.idle': '7 anti-panic techniques',
+        'player.playing': 'Now playing',
+        'player.done': 'Done · tap to replay',
+      },
+
+      de: {
+        'nav.story': 'Unsere Geschichte',
+        'nav.science': 'Wissenschaft',
+        'nav.ritual': 'Das Ritual',
+        'nav.techniques': 'Techniken',
+        'nav.vision': 'Vision',
+        'header.pill': 'Evidenzbasierter Katalog · 30 Muster',
+        'header.title': 'Alle Atem<em>techniken</em>, erklärt',
+        'header.sub': 'Jedes Atemmuster in TwoBreath, mit physiologischem Wirkmechanismus und peer-reviewed Quellen. Von akuter Panikhilfe über Geh-Meditation, von Paar-Koregulation bis zu Höhentraining — jede Technik hier ist durch publizierte Forschung belegt.',
+        'header.meta': '<strong>30 Techniken</strong> · 9 Kategorien · 25+ peer-reviewed Studien · Aktualisiert 2026-05-10',
+        'safety.box': '<strong>Wichtiger Sicherheitshinweis:</strong> Atemtechniken ersetzen keine ärztliche Behandlung. Bei akuter Panik mit Brustschmerz, Atemnot oder Bewusstseinsveränderung sofort den Notarzt rufen (112 in der EU, 911 in den USA). Bei chronischen Beschwerden (Sodbrennen, Durchfall, Kopfschmerzen, Panikstörung) bitte einen Arzt konsultieren, bevor du dich allein auf Atemarbeit verlässt.',
+        'toc.tag': 'Zur Kategorie springen',
+        'toc.acute': 'Akute Panik & Angst',
+        'toc.pranayama': 'Pranayama / Yoga-Atmung',
+        'toc.walking': 'Geh-Atemmeditation',
+        'toc.gi': 'Sodbrennen & Magen-Darm',
+        'toc.sleep': 'Schlaf & Tiefenentspannung',
+        'toc.coherence': 'Kohärenz & Vagusnerv',
+        'toc.performance': 'Performance & Fokus',
+        'toc.altitude': 'Höhe & Ausdauer',
+        'toc.couples': 'Paaratmung',
+
+        'cat.acute-panic.tag': 'Kategorie 1',
+        'cat.acute-panic.title': 'Akute Panik & <em>Angst</em>',
+        'cat.acute-panic.intro': 'Gemeinsamer Mechanismus: <strong>verlängerte Ausatmung plus post-inspiratorische und post-expiratorische Pausen</strong> aktivieren den Vagusnerv (X. Hirnnerv) → parasympathisch → Herzrate sinkt → Hyperventilation stoppt. Die Aus-länger-als-Ein dominiert die respiratorische Sinusarrhythmie.',
+        'cat.pranayama.tag': 'Kategorie 2',
+        'cat.pranayama.title': 'Pranayama / <em>Yoga</em>-Atmung',
+        'cat.pranayama.intro': 'Yogische Atemtechniken mit jahrtausendealter Tradition, durch moderne autonom-nervöse Forschung bestätigt. <strong>Wechselseitige Nasenatmung</strong> balanciert sympathischen und parasympathischen Tonus; <strong>Bhramari</strong> stimuliert den Vagusnerv direkt durch summende Vibration.',
+        'cat.walking.tag': 'Kategorie 3',
+        'cat.walking.title': 'Geh-<em>Meditation</em>',
+        'cat.walking.intro': 'Kombiniert rhythmische Atmung mit sanfter Bewegung. Besonders nützlich, wenn Panik beim Gehen einsetzt: <strong>die offene Umgebung mindert agoraphobe Wahrnehmung</strong> und Schritte zählen unterbricht katastrophierende Gedankenkreise. Tradition: Thich Nhat Hanhs vietnamesischer Zen, burmesische Vipassana.',
+        'cat.gi.tag': 'Kategorie 4',
+        'cat.gi.title': 'Sodbrennen & <em class="rose">Magen-Darm</em>',
+        'cat.gi.intro': 'Bei funktionellen Magen-Darm-Beschwerden (Sodbrennen, IBS, angstgetriebener Durchfall) wirken Atemmuster über den Vagusnerv, der Speiseröhre, Magen und Dünndarm direkt innerviert. <strong>Kühlatmung (Sitali)</strong> und <strong>Buteyko-Reduktionsatmung</strong> normalisieren sympathische Überaktivität.',
+        'cat.sleep.tag': 'Kategorie 5',
+        'cat.sleep.title': 'Schlaf & <em class="gold">Tiefenentspannung</em>',
+        'cat.sleep.intro': 'Muster mit stark verlängerter Ausatmung (2:1-Verhältnis) für den Übergang in den Schlaf.',
+        'cat.coherence.tag': 'Kategorie 6',
+        'cat.coherence.title': 'Kohärenz & <em>Vagusnerv</em>',
+        'cat.coherence.intro': 'Bei ~5,5 Atemzügen pro Minute erreichen Menschen die Resonanzfrequenz von Herzrate, Atmung und Blutdruck-Baroreflex — <strong>maximale Herzfrequenzvariabilität (HRV)</strong>.',
+        'cat.performance.tag': 'Kategorie 7',
+        'cat.performance.title': 'Performance & <em>Fokus</em>',
+        'cat.performance.intro': 'Muster zur Stressregulation unter Druck. Genutzt von Navy SEALs, Notärzten, Athleten und Eisbad-Praktizierenden. <strong>Box-Atmung</strong> reguliert die Kampf-oder-Flucht-Reaktion; <strong>Power-Breathing</strong> erhöht die Kältetoleranz durch kontrollierte Hyperventilation.',
+        'cat.altitude.tag': 'Kategorie 8',
+        'cat.altitude.title': 'Höhe & <em>Ausdauer</em>',
+        'cat.altitude.intro': 'Progressives Halte-Training baut CO₂-Toleranz für athletische Leistung und Höhenakklimatisation auf. Je fünf Stufen, von Grundlage (Stufe 1) bis Meister-Protokoll (Stufe 5).',
+        'cat.couples.tag': 'Kategorie 9',
+        'cat.couples.title': 'Paar-<em>Atmung</em>',
+        'cat.couples.intro': 'Synchrones Atmen zwischen Partnern fördert <strong>physiologische Kohärenz</strong>: Herzfrequenzvariabilität und autonomes Nervensystem gleichen sich an. Das Signature-Ritual der TwoBreath-App.',
+
+        't.panic-relief.name': 'Panik-Sofortlinderung <span class="id-tag">panic-relief</span>',
+        't.panic-relief.desc': 'Akute Panikhilfe mit expliziten post-inspiratorischen und post-expiratorischen Pausen. Das 1:0,5:2:0,5-Verhältnis mit verlängerter Ausatmung und beiden Pausen aktiviert den Vagusnerv und das parasympathische Nervensystem maximal. CO₂-Akkumulation in den Pausen beruhigt zusätzlich die zentrale Atemkontrolle.',
+        't.nadi-shodhana-panic.name': 'Wechselatmung beruhigend <span class="id-tag">nadi-shodhana-panic</span>',
+        't.nadi-shodhana-panic.desc': 'Nadi-Shodhana-Variante für Panik. Verlängerte Ausatmung beruhigt das autonome Nervensystem, balanciert die Hirnhälften über die unterschiedliche Innervation der Nasenmuscheln und senkt messbar Cortisol und Blutdruck.',
+        't.nadi-shodhana-panic.practice': '<strong>Praxis:</strong> Mit dem Daumen das rechte Nasenloch schließen, links 6 Sek. einatmen. Pause. Mit dem Ringfinger links schließen, rechts 8 Sek. ausatmen. Pause. Im nächsten Zyklus umkehren. Der ständige Seitenwechsel ist die Technik.',
+        't.walking-breath-simple.name': 'Geh-Atmung <span class="id-tag">walking-breath-simple</span>',
+        't.walking-breath-simple.desc': 'Kombiniert rhythmische Atmung, propriozeptive Erdung und sanfte Bewegung. Bei Panik unterbricht das Gehen katastrophierende Gedankenspiralen; die offene Umgebung mindert agoraphobe Wahrnehmung.',
+        't.walking-breath-simple.practice': '<strong>Praxis:</strong> Gemütlich gehen (~ein Atemzug auf 4 Schritte). Kein Zählen — einfach Aufmerksamkeit auf Atem und Schritte richten.',
+        't.walking-breath-counted.name': 'Geh-Atmung 3-6 (gezählt) <span class="id-tag">walking-breath-counted</span>',
+        't.walking-breath-counted.desc': 'Das 1:2-Verhältnis aktiviert das parasympathische System auch in Bewegung. Gezählte Schritte beanspruchen genug kognitive Bandbreite, um Gedankenkreise zu blockieren. Tradition: burmesische Vipassana, Sayadaw U Pandita.',
+        't.walking-breath-counted.practice': '<strong>Praxis:</strong> 3 Schritte einatmen, 6 Schritte ausatmen. Optional Schritte halblaut zählen — das unterbricht Panik-Gedanken besonders effektiv.',
+        't.bhramari-humming.name': 'Bienensumm-Atmung / Bhramari <span class="id-tag">bhramari-humming</span>',
+        't.bhramari-humming.desc': 'Die summende Vibration stimuliert afferente Vagusfasern in Rachen und Innenohr direkt. Mehrere RCTs zeigen reduziertes Cortisol, niedrigeren Blutdruck und subjektive Entspannung. Besonders wirksam bei <strong>Spannungskopfschmerzen</strong> über den direkten parasympathischen Reflex.',
+        't.bhramari-humming.practice': '<strong>Praxis:</strong> Lippen leicht geschlossen, Zähne nicht zusammengepresst. Beim Ausatmen hörbar "mmm" summen. Vibration ist im Schädel und Brustkorb spürbar. Optional: Ohren mit den Daumen verschließen (klassisches Bhramari-Mudra) für die volle Wirkung.',
+        't.sitali-cooling.name': 'Kühlatmung / Sitali <span class="id-tag">sitali-cooling</span>',
+        't.sitali-cooling.desc': 'Verdunstungskühlung der Zunge senkt die Temperatur in Mund und Rachen. Aktiviert parasympathische Vagusfasern, die direkt zu Speiseröhre und oberem Magen ziehen → reduziert Säurereflux, Magenkrämpfe und Hitzegefühl. Besonders wirksam <strong>nach dem Essen bei Sodbrennen</strong>.',
+        't.sitali-cooling.practice': '<strong>Praxis:</strong> Zunge rollen (oder Lippen spitzen, wenn nicht möglich — die "Sheetkari"-Variante). Einatmen durch die gerollte Zunge fühlt sich kühl an. Mund schließen, durch die Nase ausatmen.',
+        't.buteyko-reduced.name': 'Buteyko-Reduktionsatmung <span class="id-tag">buteyko-reduced</span>',
+        't.buteyko-reduced.desc': 'Korrigiert chronische Hyperventilation, die vielen Panik- und Reizdarm-Symptomen zugrunde liegt. Erhöht CO₂-Toleranz → reduziert Bohr-Effekt-getriebenen Vasospasmus → Magen-Darm-Trakt entspannt. Mehrere RCTs zeigen Wirksamkeit bei Asthma und Reizdarmsyndrom.',
+        't.buteyko-reduced.practice': '<strong>Praxis:</strong> Sehr leise und leicht durch die Nase atmen — weniger Volumen als gewohnt. Die "Kontrollpause" ist kein Anhalten, sondern ein sanftes Abwarten ohne Lufthunger.',
+
+        'cta.heading': 'Probier sie auf deinem <em>iPhone</em> & der Apple Watch',
+        'cta.body': 'Jede Technik hier ist in TwoBreath integriert mit Audio-Anleitung in Englisch, Deutsch und Japanisch. Synchronisiert für Paare oder allein.',
+        'cta.beta': 'Zur öffentlichen Beta',
+        'cta.science': 'Mehr Wissenschaft lesen',
+        'footer.line': 'TwoBreath &mdash; Ein Atem. Zwei Seelen. Jeden Morgen. &nbsp;&middot;&nbsp; <a href="index.html">Startseite</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Datenschutz</a> &nbsp;&middot;&nbsp; <a href="impressum.html">Impressum</a> &nbsp;&middot;&nbsp; <a href="contact.html">Kontakt</a>',
+
+        'player.label': 'Play drücken · Matthi & Dascha lesen vor',
+        'player.idle': '7 Anti-Panik-Techniken',
+        'player.playing': 'Spielt jetzt',
+        'player.done': 'Fertig · zum Wiederholen tippen',
+      },
+
+      ja: {
+        'nav.story': '私たちの物語',
+        'nav.science': '科学',
+        'nav.ritual': '儀式',
+        'nav.techniques': 'テクニック',
+        'nav.vision': 'ビジョン',
+        'header.pill': 'エビデンスベースのカタログ · 30パターン',
+        'header.title': 'すべての呼吸<em>テクニック</em>を解説',
+        'header.sub': 'TwoBreathに搭載されたすべての呼吸パターンを、生理学的メカニズムと査読済み引用とともに紹介します。急性パニック緩和から歩く瞑想、カップルの相互調整から高地トレーニングまで、ここで紹介する各テクニックは公開された研究に裏付けられています。',
+        'header.meta': '<strong>30テクニック</strong> · 9カテゴリ · 25以上の査読済み研究 · 更新 2026-05-10',
+        'safety.box': '<strong>重要な安全に関する注意:</strong> 呼吸法は医療の代替にはなりません。胸の痛み、重度の息切れ、意識の変化を伴う急性パニックの場合は、まず救急サービスに連絡してください（EU では 112、米国では 911）。慢性的な症状（胸焼け、下痢、頭痛、パニック障害）の場合は、呼吸法だけに頼る前に医師に相談してください。',
+        'toc.tag': 'カテゴリへジャンプ',
+        'toc.acute': '急性パニックと不安',
+        'toc.pranayama': 'プラーナーヤーマ／ヨガ呼吸',
+        'toc.walking': '歩く瞑想',
+        'toc.gi': '胸焼けと消化器症状',
+        'toc.sleep': '睡眠と深いリラクゼーション',
+        'toc.coherence': 'コヒーレンスと迷走神経',
+        'toc.performance': 'パフォーマンスと集中',
+        'toc.altitude': '高度とスタミナ',
+        'toc.couples': 'カップル呼吸',
+
+        'cat.acute-panic.tag': 'カテゴリ 1',
+        'cat.acute-panic.title': '急性パニックと<em>不安</em>',
+        'cat.acute-panic.intro': '共通のメカニズム：<strong>長い呼気と吸気後・呼気後の両方の休止</strong>が迷走神経（第X脳神経）を活性化 → 副交感神経 → 心拍数が下がる → 過呼吸が止まる。吸気より長い呼気が呼吸性洞性不整脈を支配します。',
+        'cat.pranayama.tag': 'カテゴリ 2',
+        'cat.pranayama.title': 'プラーナーヤーマ／<em>ヨガ</em>呼吸',
+        'cat.pranayama.intro': '何千年もの伝統を持つヨガの呼吸法、現代の自律神経系研究によって確認されています。<strong>片鼻呼吸</strong>は交感神経と副交感神経のバランスを取り、<strong>ブラーマリー</strong>はハミングの振動で迷走神経を直接刺激します。',
+        'cat.walking.tag': 'カテゴリ 3',
+        'cat.walking.title': '歩く<em>瞑想</em>',
+        'cat.walking.intro': 'リズミカルな呼吸と穏やかな動きを組み合わせます。特に歩いている時にパニックが始まった場合に役立ちます：<strong>開放的な環境が広場恐怖症的な知覚を軽減し</strong>、歩数を数えることで破滅的な思考のループを遮断します。伝統：ティク・ナット・ハンのベトナム禅、ビルマのヴィパッサナー。',
+        'cat.gi.tag': 'カテゴリ 4',
+        'cat.gi.title': '胸焼けと<em class="rose">消化器</em>症状',
+        'cat.gi.intro': '機能性胃腸症状（胸焼け、過敏性腸症候群、不安駆動性下痢）に対し、呼吸パターンは食道、胃、小腸を直接支配する迷走神経を介して作用します。<strong>冷却呼吸（シータリー）</strong>と<strong>ブテイコ縮小呼吸</strong>は交感神経の過剰活動を正常化します。',
+        'cat.sleep.tag': 'カテゴリ 5',
+        'cat.sleep.title': '睡眠と<em class="gold">深いリラクゼーション</em>',
+        'cat.sleep.intro': '睡眠への移行のために、強く長い呼気（2:1の呼気対吸気比）を持つパターン。',
+        'cat.coherence.tag': 'カテゴリ 6',
+        'cat.coherence.title': 'コヒーレンスと<em>迷走神経</em>',
+        'cat.coherence.intro': '毎分約5.5回の呼吸で、人は心拍、呼吸、血圧バロレフレックスの共鳴周波数に達します — <strong>心拍変動（HRV）が最大化</strong>します。',
+        'cat.performance.tag': 'カテゴリ 7',
+        'cat.performance.title': 'パフォーマンスと<em>集中</em>',
+        'cat.performance.intro': '圧力下でのストレス調整のためのパターン。海軍特殊部隊、救急隊員、アスリート、氷風呂愛好者が使用しています。<strong>ボックス呼吸</strong>は闘争・逃走反応を調整し、<strong>パワー呼吸</strong>は制御された過呼吸により寒冷耐性を高めます。',
+        'cat.altitude.tag': 'カテゴリ 8',
+        'cat.altitude.title': '高度と<em>スタミナ</em>',
+        'cat.altitude.intro': '段階的な保持トレーニングは、運動パフォーマンスと高度順応のためのCO₂耐性を構築します。基礎（レベル1）からマスタープロトコル（レベル5）まで、それぞれ5レベル。',
+        'cat.couples.tag': 'カテゴリ 9',
+        'cat.couples.title': 'カップル<em>呼吸</em>',
+        'cat.couples.intro': 'パートナー間の同期した呼吸は<strong>生理的コヒーレンス</strong>を促進します：心拍変動と自律神経系の機能が一致します。TwoBreathアプリの代表的な儀式。',
+
+        't.panic-relief.name': 'パニック緩和呼吸 <span class="id-tag">panic-relief</span>',
+        't.panic-relief.desc': '吸気後と呼気後の両方の休止を明示した急性パニック緩和。1:0.5:2:0.5の比率と長い呼気、二つの休止が迷走神経と副交感神経系を最大限に活性化します。休止中のCO₂蓄積がさらに中枢呼吸制御を鎮めます。',
+        't.nadi-shodhana-panic.name': '落ち着き片鼻呼吸 <span class="id-tag">nadi-shodhana-panic</span>',
+        't.nadi-shodhana-panic.desc': 'パニック向けに調整されたナーディ・ショーダナ。長い呼気が自律神経系を鎮め、鼻粘膜の異なる血管系を介して両脳半球のバランスを取り、コルチゾールと血圧を測定可能なレベルで下げます。',
+        't.nadi-shodhana-panic.practice': '<strong>実践：</strong>親指で右の鼻孔を閉じ、左から6秒で吸う。休止。薬指で左の鼻孔を閉じ、右から8秒で吐く。休止。次のサイクルで反転。連続した左右の切り替えがテクニックです。',
+        't.walking-breath-simple.name': '歩く呼吸 <span class="id-tag">walking-breath-simple</span>',
+        't.walking-breath-simple.desc': 'リズミカルな呼吸、固有受容感覚的な接地、穏やかな動きを組み合わせます。パニック時、歩くことで破滅的な思考の渦が断ち切られ、開放的な環境は広場恐怖症的な知覚を軽減します。',
+        't.walking-breath-simple.practice': '<strong>実践：</strong>心地よく歩く（4歩ごとに1回の呼吸が目安）。数えない — ただ呼吸と足音に意識を向ける。',
+        't.walking-breath-counted.name': '歩く呼吸 三六（数える） <span class="id-tag">walking-breath-counted</span>',
+        't.walking-breath-counted.desc': '1対2の比率は、動いている時でも副交感神経系を活性化します。数えられた歩数は、反芻思考を遮断するのに十分な認知的余裕を占めます。伝統：ビルマのヴィパッサナー、サヤドー・ウ・パンディタ。',
+        't.walking-breath-counted.practice': '<strong>実践：</strong>3歩で吸って、6歩で吐く。任意で歩数を小声で数える — これがパニックの考えを最も効果的に遮断します。',
+        't.bhramari-humming.name': 'ハチの羽音呼吸 / ブラーマリー <span class="id-tag">bhramari-humming</span>',
+        't.bhramari-humming.desc': 'ハミングの振動が咽頭と内耳の求心性迷走神経線維を直接刺激します。複数のRCTがコルチゾール、血圧、主観的緊張の減少を示しています。直接の副交感神経反射を介して<strong>緊張性頭痛</strong>に特に効果的。',
+        't.bhramari-humming.practice': '<strong>実践：</strong>唇は軽く閉じ、歯は噛みしめません。吐きながら、聞こえる「ンンン」とハミング。振動が頭蓋骨と胸に感じられます。任意：完全な効果を得るために、親指で耳を覆う（古典的なブラーマリー・ムドラー）。',
+        't.sitali-cooling.name': '冷却呼吸 / シータリー <span class="id-tag">sitali-cooling</span>',
+        't.sitali-cooling.desc': '舌の蒸発冷却が口と咽頭の温度を下げます。食道と上部胃に直接向かう副交感神経の迷走神経線維を活性化 → 酸逆流、胃のけいれん、熱感を軽減します。<strong>食後の胸焼けに特に効果的</strong>。',
+        't.sitali-cooling.practice': '<strong>実践：</strong>舌を丸める（できなければ唇をすぼめる — 「シートカリ」のバリエーション）。丸めた舌から吸うと冷たく感じます。口を閉じ、鼻から吐きます。',
+        't.buteyko-reduced.name': 'ブテイコ縮小呼吸 <span class="id-tag">buteyko-reduced</span>',
+        't.buteyko-reduced.desc': '多くのパニックや過敏性腸症候群の症状の根底にある慢性過呼吸を修正します。CO₂耐性を高める → ボーア効果による血管けいれんを軽減 → 消化管がリラックス。複数のRCTが喘息と過敏性腸症候群での有効性を示しています。',
+        't.buteyko-reduced.practice': '<strong>実践：</strong>鼻から非常に静かに、軽く呼吸する — いつもより少ない量。「コントロール一時停止」は息止めではなく、空気飢餓感のない穏やかな待機。',
+
+        'cta.heading': '<em>iPhone</em>と Apple Watch で試してみよう',
+        'cta.body': 'ここで紹介するすべてのテクニックは、英語、ドイツ語、日本語の音声ペーシングとともに TwoBreath に組み込まれています。カップルでもソロでも同期できます。',
+        'cta.beta': '公開ベータに参加する',
+        'cta.science': '科学を読む',
+        'footer.line': 'TwoBreath &mdash; ひとつの息。ふたつの魂。毎朝。 &nbsp;&middot;&nbsp; <a href="index.html">ホーム</a> &nbsp;&middot;&nbsp; <a href="privacy.html">プライバシーポリシー</a> &nbsp;&middot;&nbsp; <a href="impressum.html">Impressum</a> &nbsp;&middot;&nbsp; <a href="contact.html">お問い合わせ</a>',
+
+        'player.label': 'タップして再生 · マッティーとダーシャが朗読',
+        'player.idle': '抗パニック呼吸法 7種',
+        'player.playing': '再生中',
+        'player.done': '完了 · 再生にはタップ',
+      },
+    };
+
+    // ────────── i18n: apply translations ──────────
+    function applyTranslations(lang) {
+      const dict = I18N[lang] || I18N.en;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] != null) el.textContent = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (dict[key] != null) el.innerHTML = dict[key];
+      });
+    }
+
+    function setLang(lang) {
+      if (!I18N[lang]) lang = 'en';
+      applyTranslations(lang);
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        const isActive = btn.getAttribute('data-lang') === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
+      });
+      try { localStorage.setItem('twobreath.lang', lang); } catch (e) {}
+      // Restart player metadata if currently visible
+      if (window.__voicePlayer) window.__voicePlayer.refreshLang(lang);
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang')));
+    });
+
+    // Initialize language: stored > browser > en
+    (function initLang() {
+      let lang = 'en';
+      try { lang = localStorage.getItem('twobreath.lang') || lang; } catch (e) {}
+      if (!I18N[lang]) {
+        const browser = (navigator.language || 'en').slice(0,2).toLowerCase();
+        lang = I18N[browser] ? browser : 'en';
+      }
+      setLang(lang);
+    })();
+
+    // ────────── Voice player ──────────
+    // Plays the 7 newly-narrated anti-panic techniques in sequence.
+    // Voices alternate Matthi/Dascha by technique id (defined in manifest).
+    const NARRATED_IDS = [
+      'panic-relief',
+      'nadi-shodhana-panic',
+      'walking-breath-simple',
+      'walking-breath-counted',
+      'bhramari-humming',
+      'sitali-cooling',
+      'buteyko-reduced',
+    ];
+
+    // Mark cards that have audio (visual 🎧 indicator)
+    NARRATED_IDS.forEach(id => {
+      const card = document.querySelector(`article.technique[data-tid="${id}"]`);
+      if (card) card.setAttribute('data-has-audio', 'true');
+    });
+
+    const voiceFab   = document.getElementById('voiceFab');
+    const voiceBtn   = document.getElementById('voiceBtn');
+    const voiceSkip  = document.getElementById('voiceSkip');
+    const voiceLabel = document.getElementById('voiceLabel');
+    const voiceTitle = document.getElementById('voiceTitle');
+    const voiceBar   = document.getElementById('voiceBar');
+
+    const audio = new Audio();
+    let currentIndex = -1;       // -1 = not started
+    let isPlaying = false;
+    let currentLang = 'en';
+
+    function clipUrl(id, lang) {
+      // Audio files exist for all 3 languages
+      return `audio/techniques/${id}-${lang}.mp3`;
+    }
+
+    function highlightCard(id) {
+      document.querySelectorAll('.technique.is-narrating').forEach(el => el.classList.remove('is-narrating'));
+      if (!id) return;
+      const card = document.querySelector(`article.technique[data-tid="${id}"]`);
+      if (card) {
+        card.classList.add('is-narrating');
+        // Scroll into view, anchored ~1/4 from top
+        const rect = card.getBoundingClientRect();
+        const target = window.scrollY + rect.top - (window.innerHeight * 0.25);
+        window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+      }
+    }
+
+    function getCurrentTechniqueName(id) {
+      const card = document.querySelector(`article.technique[data-tid="${id}"]`);
+      if (!card) return id;
+      const nameEl = card.querySelector('.technique-name');
+      if (!nameEl) return id;
+      // Strip the inner id-tag span content
+      const clone = nameEl.cloneNode(true);
+      clone.querySelectorAll('.id-tag').forEach(s => s.remove());
+      return clone.textContent.trim();
+    }
+
+    function updateMeta() {
+      const dict = I18N[currentLang] || I18N.en;
+      if (currentIndex < 0) {
+        voiceLabel.textContent = dict['player.label'];
+        voiceTitle.textContent = dict['player.idle'];
+        voiceBar.style.width = '0%';
+      } else if (currentIndex >= NARRATED_IDS.length) {
+        voiceLabel.textContent = dict['player.done'] || 'Done';
+        voiceTitle.textContent = dict['player.idle'];
+        voiceBar.style.width = '100%';
+      } else {
+        const id = NARRATED_IDS[currentIndex];
+        voiceLabel.textContent = `${dict['player.playing']} · ${currentIndex + 1}/${NARRATED_IDS.length}`;
+        voiceTitle.textContent = getCurrentTechniqueName(id);
+      }
+    }
+
+    function loadAndPlay(index) {
+      if (index < 0 || index >= NARRATED_IDS.length) {
+        // End of sequence
+        currentIndex = NARRATED_IDS.length;
+        isPlaying = false;
+        voiceFab.classList.remove('playing');
+        highlightCard(null);
+        updateMeta();
+        return;
+      }
+      currentIndex = index;
+      const id = NARRATED_IDS[index];
+      audio.src = clipUrl(id, currentLang);
+      audio.play().then(() => {
+        isPlaying = true;
+        voiceFab.classList.add('playing');
+        highlightCard(id);
+        updateMeta();
+      }).catch(err => {
+        console.warn('Audio play failed:', err);
+        isPlaying = false;
+        voiceFab.classList.remove('playing');
+      });
+    }
+
+    voiceBtn.addEventListener('click', () => {
+      if (!isPlaying) {
+        // Resume or start fresh
+        if (currentIndex < 0 || currentIndex >= NARRATED_IDS.length) {
+          loadAndPlay(0);
+        } else if (audio.src && audio.paused) {
+          audio.play();
+          isPlaying = true;
+          voiceFab.classList.add('playing');
+        } else {
+          loadAndPlay(currentIndex);
+        }
+      } else {
+        audio.pause();
+        isPlaying = false;
+        voiceFab.classList.remove('playing');
+      }
+    });
+
+    voiceSkip.addEventListener('click', () => {
+      audio.pause();
+      loadAndPlay(currentIndex + 1);
+    });
+
+    audio.addEventListener('ended', () => {
+      loadAndPlay(currentIndex + 1);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration > 0) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        voiceBar.style.width = pct + '%';
+      }
+    });
+
+    // If language changes mid-playback, swap audio source for current technique
+    window.__voicePlayer = {
+      refreshLang(lang) {
+        currentLang = lang;
+        if (currentIndex >= 0 && currentIndex < NARRATED_IDS.length) {
+          const wasPlaying = isPlaying;
+          const t = audio.currentTime;
+          audio.src = clipUrl(NARRATED_IDS[currentIndex], lang);
+          // Try to keep position; will restart if duration differs significantly
+          audio.addEventListener('loadedmetadata', () => {
+            if (Number.isFinite(t) && t < audio.duration) audio.currentTime = t;
+            if (wasPlaying) audio.play();
+          }, { once: true });
+        }
+        updateMeta();
+      },
+    };
+    currentLang = document.documentElement.lang || 'en';
+    updateMeta();
   </script>
 
 </body>

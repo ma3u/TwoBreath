@@ -1,0 +1,103 @@
+{
+  "generated": "2026-05-10T07:12:27.250Z",
+  "techniques": [
+    {
+      "id": "panic-relief",
+      "voice": "matthi",
+      "names": {
+        "en": "Panic Relief",
+        "de": "Panik-Sofortlinderung",
+        "ja": "パニック緩和呼吸"
+      },
+      "audioByLang": {
+        "en": "audio/techniques/panic-relief-en.mp3",
+        "de": "audio/techniques/panic-relief-de.mp3",
+        "ja": "audio/techniques/panic-relief-ja.mp3"
+      }
+    },
+    {
+      "id": "nadi-shodhana-panic",
+      "voice": "dascha",
+      "names": {
+        "en": "Alternate Nostril Calming",
+        "de": "Wechselatmung beruhigend",
+        "ja": "落ち着き片鼻呼吸"
+      },
+      "audioByLang": {
+        "en": "audio/techniques/nadi-shodhana-panic-en.mp3",
+        "de": "audio/techniques/nadi-shodhana-panic-de.mp3",
+        "ja": "audio/techniques/nadi-shodhana-panic-ja.mp3"
+      }
+    },
+    {
+      "id": "walking-breath-simple",
+      "voice": "matthi",
+      "names": {
+        "en": "Walking Breath",
+        "de": "Geh-Atmung",
+        "ja": "歩く呼吸"
+      },
+      "audioByLang": {
+        "en": "audio/techniques/walking-breath-simple-en.mp3",
+        "de": "audio/techniques/walking-breath-simple-de.mp3",
+        "ja": "audio/techniques/walking-breath-simple-ja.mp3"
+      }
+    },
+    {
+      "id": "walking-breath-counted",
+      "voice": "dascha",
+      "names": {
+        "en": "Walking Breath three-six",
+        "de": "Geh-Atmung drei-sechs",
+        "ja": "歩く呼吸 三六"
+      },
+      "audioByLang": {
+        "en": "audio/techniques/walking-breath-counted-en.mp3",
+        "de": "audio/techniques/walking-breath-counted-de.mp3",
+        "ja": "audio/techniques/walking-breath-counted-ja.mp3"
+      }
+    },
+    {
+      "id": "bhramari-humming",
+      "voice": "matthi",
+      "names": {
+        "en": "Humming Bee Breath",
+        "de": "Bienensumm-Atmung",
+        "ja": "ハチの羽音呼吸"
+      },
+      "audioByLang": {
+        "en": "audio/techniques/bhramari-humming-en.mp3",
+        "de": "audio/techniques/bhramari-humming-de.mp3",
+        "ja": "audio/techniques/bhramari-humming-ja.mp3"
+      }
+    },
+    {
+      "id": "sitali-cooling",
+      "voice": "dascha",
+      "names": {
+        "en": "Cooling Breath Sitali",
+        "de": "Kühlatmung Sitali",
+        "ja": "冷却呼吸シータリー"
+      },
+      "audioByLang": {
+        "en": "audio/techniques/sitali-cooling-en.mp3",
+        "de": "audio/techniques/sitali-cooling-de.mp3",
+        "ja": "audio/techniques/sitali-cooling-ja.mp3"
+      }
+    },
+    {
+      "id": "buteyko-reduced",
+      "voice": "matthi",
+      "names": {
+        "en": "Buteyko Reduced Breath",
+        "de": "Buteyko-Reduktionsatmung",
+        "ja": "ブテイコ縮小呼吸"
+      },
+      "audioByLang": {
+        "en": "audio/techniques/buteyko-reduced-en.mp3",
+        "de": "audio/techniques/buteyko-reduced-de.mp3",
+        "ja": "audio/techniques/buteyko-reduced-ja.mp3"
+      }
+    }
+  ]
+}
