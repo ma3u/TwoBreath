@@ -14,7 +14,7 @@
 | **BSI / Referat DI 24** | [`BSI_BERICHT.md`](BSI_BERICHT.md) — formaler Bericht mit 5 Empfehlungen + [`BSI_TOOL_EMPFEHLUNGEN.md`](BSI_TOOL_EMPFEHLUNGEN.md) (pro Anforderung) |
 | **Prüfstelle bei Beauftragung** | [`BSI_ASSESSMENT.md`](BSI_ASSESSMENT.md) — **Hersteller-Selbstdeklaration** (12 Abschnitte, alle Anhänge verlinkt) |
 | **Grundschutz++ / Zero-Trust-Diskussion** | [`BSI_GRUNDSCHUTZ_ZT.md`](BSI_GRUNDSCHUTZ_ZT.md) — Eignungs-Analyse: methodisch ja, strukturell nein |
-| **Patient:in, Ärzt:in, Krankenkasse, Hersteller** | [`LINKEDIN_ARTIKEL.md`](LINKEDIN_ARTIKEL.md) — der LinkedIn-Beitrag |
+| **Patient:in, Ärzt:in, Krankenkasse, Hersteller** | [`LINKEDIN_POST`](https://www.linkedin.com/feed/update/urn:li:activity:7456450836899135488/) — der LinkedIn-Beitrag |
 | **Prüfstelle / Auditor:in** | [`COMPLIANCE_MATRIX_TR1_OFFICIAL.md`](COMPLIANCE_MATRIX_TR1_OFFICIAL.md) — alle 127 Anforderungen mit Status, Klasse und Quelle |
 | **DevSecOps-interessiert** | [`CI_CD_SECURITY.md`](CI_CD_SECURITY.md) — SAST/DAST-Status und konkreter `security.yml`-Erweiterungs-Vorschlag |
 | **Hersteller (Code-Vorlage)** | [`patches/PATCHES.md`](patches/PATCHES.md) — 10 PR-fertige Swift-Snippets |
